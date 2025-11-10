@@ -1095,10 +1095,13 @@
                 .filter(d => d.length > 10) // Filter out very short entries
             )].slice(0, 5); // Limit to top 5 unique
             
-            // Get unique, specific deliverables with context
-            const deliverables = [...new Set(tasks
-                .map(t => t['End of Week Deliverable / Milestone'])
-                .filter(d => d && d.trim())
+            // Get unique, specific deliverables combining Key Results and Milestones
+            const allDeliverablesSources = [
+                ...tasks.map(t => t['Key Results']).filter(d => d && d.trim()),
+                ...tasks.map(t => t['End of Week Deliverable / Milestone']).filter(d => d && d.trim())
+            ];
+            
+            const deliverables = [...new Set(allDeliverablesSources
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {
                     let clean = d.trim();
@@ -1106,6 +1109,8 @@
                     clean = clean.split('\n')[0];
                     // Remove bullet points and numbers
                     clean = clean.replace(/^[-•]\s*/, '').replace(/^\d+\.\s*/, '').trim();
+                    // Remove "KR" prefix if present
+                    clean = clean.replace(/^KR\s*\d+:\s*/i, '').trim();
                     // Take first sentence if too long
                     if (clean.includes('.')) {
                         const sentences = clean.split('.');

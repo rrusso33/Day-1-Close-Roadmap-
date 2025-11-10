@@ -1313,66 +1313,71 @@
                 });
             });
             
-            // Get specific dependencies from actual CSV data
+            // Get specific dependencies from actual CSV data - now more contextual per OKR+Category
             const dependencies = [...new Set(tasks
                 .map(t => t['Dependencies'])
-                .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
+                .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a' && d.toLowerCase() !== 'none')
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {
                     let clean = d.trim();
+                    // Take first sentence for clarity
                     const sentences = clean.split(/[.;]/);
                     clean = sentences[0].trim();
                     
-                    // Add strategic context based on dependency type
-                    const lower = clean.toLowerCase();
-                    if (lower.includes('vendor') || lower.includes('tool') || lower.includes('onboard')) {
-                        clean += ' to prevent automation delays';
-                    } else if (lower.includes('system') || lower.includes('integration') || lower.includes('netsuite')) {
-                        clean += ' for real-time data access';
-                    } else if (lower.includes('team') || lower.includes('resource')) {
-                        clean += ' to avoid bottlenecks';
-                    } else if (lower.includes('data') || lower.includes('report')) {
-                        clean += ' to enable accurate reconciliation';
+                    // Ensure grammatically correct with proper ending
+                    if (!clean.endsWith('.') && !clean.endsWith('?') && !clean.endsWith('!')) {
+                        clean += ' is required';
                     }
                     
                     return capitalizeFirstLetter(clean);
                 })
             )].slice(0, 4);
             
-            // Get specific deliverables from "End of Week Deliverable / Milestone" column
-            const deliverables = [...new Set(tasks
-                .map(t => t['End of Week Deliverable / Milestone'])
+            // Get specific deliverables from "End of Week Deliverable / Milestone" and "Week Focus and Tasks"
+            const allDeliverables = [];
+            
+            // Combine milestones and focused tasks for comprehensive view
+            tasks.forEach(t => {
+                const milestone = t['End of Week Deliverable / Milestone'];
+                const focus = t['Week Focus and Tasks'];
+                
+                if (milestone && milestone.trim()) {
+                    allDeliverables.push(milestone);
+                }
+                // Add focus if milestone is empty or very short
+                if (focus && focus.trim() && (!milestone || milestone.length < 30)) {
+                    allDeliverables.push(focus);
+                }
+            });
+            
+            const deliverables = [...new Set(allDeliverables
                 .filter(d => d && d.trim())
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {
                     let clean = d.trim();
-                    // Remove bullet points
-                    clean = clean.replace(/^[-•]\s*/, '').trim();
+                    // Remove bullet points and numbers
+                    clean = clean.replace(/^[-•*]\s*/, '').replace(/^\d+\.\s*/, '').trim();
                     // Take first line if multi-line
-                    const lines = clean.split('\n');
+                    const lines = clean.split('\n').filter(l => l.trim());
                     clean = lines[0].trim();
-                    // Take first sentence if too long
-                    if (clean.length > 120) {
-                        const sentences = clean.split(/[.;]/);
+                    // Take first sentence if too long (>150 chars)
+                    if (clean.length > 150) {
+                        const sentences = clean.split(/\.\s+/);
                         clean = sentences[0].trim();
                     }
                     
-                    // Add Day 1 impact context based on deliverable type
-                    const lower = clean.toLowerCase();
-                    if (lower.includes('automat') || lower.includes('ai') || lower.includes('tool')) {
-                        clean += ' to reduce manual effort';
-                    } else if (lower.includes('accuracy') || lower.includes('quality') || lower.includes('review')) {
-                        clean += ' to accelerate review cycles';
-                    } else if (lower.includes('process') || lower.includes('workflow') || lower.includes('streamlin')) {
-                        clean += ' to eliminate bottlenecks';
-                    } else if (lower.includes('integration') || lower.includes('system') || lower.includes('connect')) {
-                        clean += ' for real-time visibility';
-                    } else if (lower.includes('reconcil') || lower.includes('cash') || lower.includes('intercompany')) {
-                        clean += ' to eliminate delays';
+                    // Ensure proper sentence ending
+                    if (!clean.endsWith('.') && !clean.endsWith('?') && !clean.endsWith('!')) {
+                        // Add context if it's a fragment
+                        const lower = clean.toLowerCase();
+                        if (!lower.includes('will') && !lower.includes('complete') && !lower.includes('implement')) {
+                            clean = 'Complete: ' + clean.charAt(0).toLowerCase() + clean.slice(1);
+                        }
                     }
                     
                     return capitalizeFirstLetter(clean);
                 })
+                .filter(d => d.length > 15) // Filter out very short/meaningless entries
             )].slice(0, 4);
             
             // Create executive summary from OKR and category

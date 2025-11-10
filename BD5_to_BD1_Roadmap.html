@@ -249,13 +249,13 @@
         <div class="content" id="mainContent">
             <div style="text-align: center; padding: 40px; color: #6c757d;">
                 <div style="font-size: 2em; margin-bottom: 20px;">📊</div>
-                <div>Loading roadmap data from Google Sheets...</div>
+                <div>Loading roadmap data...</div>
             </div>
         </div>
     </div>
 
     <script>
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=1318783716&single=true&output=csv';
+        const SHEET_URL = 'roadmap_data.csv.csv';  // Local CSV file
         const CORS_PROXY = 'https://corsproxy.io/?';
 
         async function loadData() {

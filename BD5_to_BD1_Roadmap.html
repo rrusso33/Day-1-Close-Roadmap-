@@ -1145,11 +1145,6 @@
                 summary = tasks[0]['Week Focus and Tasks'] || 'Multiple initiatives';
             }
             
-            // Make it more concise for executives
-            if (summary.length > 100) {
-                summary = summary.substring(0, 97) + '...';
-            }
-            
             return {
                 total: tasks.length,
                 completed,
@@ -1163,7 +1158,7 @@
                 totalTools: allTools.length,
                 dependencies: dependencies, // Already consolidated to 5 themes
                 deliverables: deliverables, // Already consolidated to 5 themes
-                summary: summary.length > 150 ? summary.substring(0, 147) + '...' : summary
+                summary: summary // Let CSS handle text wrapping
             };
         }
 
@@ -1178,11 +1173,6 @@
             
             // Remove KR prefix
             cleaned = cleaned.replace(/^KR\s*\d+:\s*/i, '');
-            
-            // Limit length for better readability
-            if (cleaned.length > 80) {
-                cleaned = cleaned.substring(0, 77) + '...';
-            }
             
             // Capitalize first letter
             cleaned = capitalizeFirstLetter(cleaned);

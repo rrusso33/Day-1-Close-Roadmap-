@@ -1103,10 +1103,6 @@
                     clean = sentences[0].trim();
                     // Capitalize first letter
                     clean = capitalizeFirstLetter(clean);
-                    // Limit to 85 chars for readability with context
-                    if (clean.length > 85) {
-                        clean = clean.substring(0, 82) + '...';
-                    }
                     return clean;
                 })
                 .filter(d => d.length > 10) // Filter out very short entries
@@ -1135,10 +1131,6 @@
                     }
                     // Capitalize first letter
                     clean = capitalizeFirstLetter(clean);
-                    // Limit to 85 chars for readability with context
-                    if (clean.length > 85) {
-                        clean = clean.substring(0, 82) + '...';
-                    }
                     return clean;
                 })
                 .filter(d => d.length > 10) // Filter out very short entries

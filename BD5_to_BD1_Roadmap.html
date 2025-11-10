@@ -724,9 +724,14 @@
                 headers.forEach((header, index) => {
                     row[header] = values[index] || '';
                 });
-                data.push(row);
+                
+                // Filter for Corporate Accounting team only
+                if (row.Team && row.Team.includes('Corporate Accounting')) {
+                    data.push(row);
+                }
             }
             
+            console.log(`Filtered to ${data.length} Corporate Accounting tasks`);
             return data;
         }
 
@@ -1009,9 +1014,9 @@
                                     </div>
                                     <div class="task-title">Master Accrual Workbook Analysis</div>
                                     <div class="task-hours">7.0 hrs</div>
-                                    <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
-                                    <div class="task-tool">🤖 accruals.ai</div>
-                                    <div class="task-notes">✅ Trial active - awaiting legal approval. Auto-analyze vendor accruals with AI pattern recognition.</div>
+                                    <div class="task-assignee">👤 ${getSheetAssignee('Master Accrual') || 'Aileen Costa → Justine O\'Sullivan'}</div>
+                                    <div class="task-tool">🤖 ${getSheetTool('Master Accrual') || 'accruals.ai'}</div>
+                                    <div class="task-notes">${getSheetNotes('Master Accrual') || '✅ Trial active - awaiting legal approval. Auto-analyze vendor accruals with AI pattern recognition.'}</div>
                                 </div>
                                 <div class="task-card ${getTaskClass('SURL')}">
                                     <div class="task-status-indicator">
@@ -1362,7 +1367,8 @@
                 if (status === 'In Progress') stats.inProgressTasks++;
                 if (status === 'Blocked') stats.blockedTasks++;
                 
-                const hours = parseFloat(row['Hours Saved'] || row.hours || 0);
+                // Use "Prep Hrs" column from your sheet
+                const hours = parseFloat(row['Prep Hrs'] || row['Hours Saved'] || row.hours || 0);
                 if (!isNaN(hours)) {
                     stats.totalHoursSaved += hours;
                 }
@@ -1393,6 +1399,66 @@
             return 'Not Started';
         }
 
+        function extractPhaseFromMilestone(milestone) {
+            // Extract "M1", "M3", "M4", etc. from strings like "M1 - No Automation Necessary"
+            if (!milestone) return '';
+            const match = milestone.match(/M\d+/i);
+            return match ? match[0].toUpperCase() : '';
+        }
+
+        function getAssignee(row) {
+            // Combine Preparer and Reviewer from your sheet
+            const preparer = row.Preparer || '';
+            const reviewer = row.Reviewer || '';
+            if (preparer && reviewer) return `${preparer} → ${reviewer}`;
+            return preparer || reviewer || '';
+        }
+
+        function getTool(row) {
+            // Use AI Type column from your sheet
+            return row['AI Type'] || row.Tool || '';
+        }
+
+        function getHours(row) {
+            // Use Prep Hrs column from your sheet
+            return row['Prep Hrs'] || row['Hours Saved'] || '';
+        }
+
+        function getSheetAssignee(taskKeyword) {
+            if (!sheetDataLoaded) return '';
+            const task = allData.find(row => {
+                const name = (row['Task Name'] || '').toLowerCase();
+                return name.includes(taskKeyword.toLowerCase());
+            });
+            if (!task) return '';
+            return getAssignee(task);
+        }
+
+        function getSheetTool(taskKeyword) {
+            if (!sheetDataLoaded) return '';
+            const task = allData.find(row => {
+                const name = (row['Task Name'] || '').toLowerCase();
+                return name.includes(taskKeyword.toLowerCase());
+            });
+            if (!task) return '';
+            return getTool(task);
+        }
+
+        function getSheetNotes(taskKeyword) {
+            if (!sheetDataLoaded) return '';
+            const task = allData.find(row => {
+                const name = (row['Task Name'] || '').toLowerCase();
+                return name.includes(taskKeyword.toLowerCase());
+            });
+            if (!task) return '';
+            // Combine relevant notes from your sheet
+            const notes = [];
+            if (task['Status Notes']) notes.push(task['Status Notes']);
+            if (task['Next Steps']) notes.push('Next: ' + task['Next Steps']);
+            if (task['Hard Blocker?'] === 'Yes' && task['Blocker Notes']) notes.push('⚠️ ' + task['Blocker Notes']);
+            return notes.join(' | ');
+        }
+
         function getPhaseProgress(phase) {
             if (!sheetDataLoaded) {
                 if (phase === 'M3-M4') return 15;
@@ -1402,15 +1468,15 @@
             }
             
             const phaseTasks = allData.filter(row => {
-                const p = row.Phase || row.phase || '';
-                if (phase === 'M3-M4') return p === 'M3' || p === 'M4';
-                return p === phase;
+                const milestone = extractPhaseFromMilestone(row.Milestone || '');
+                if (phase === 'M3-M4') return milestone === 'M3' || milestone === 'M4';
+                return milestone === phase;
             });
             
             if (phaseTasks.length === 0) return 0;
             
             const completed = phaseTasks.filter(task => 
-                normalizeStatus(task.Status || task.status || '') === 'Complete'
+                normalizeStatus(task.Status || '') === 'Complete'
             ).length;
             
             return (completed / phaseTasks.length) * 100;

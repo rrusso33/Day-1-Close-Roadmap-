@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BD5 to BD1 Close Acceleration Roadmap - Live Progress</title>
+    <title>BD5 to BD1 Close Acceleration Roadmap - Executive Presentation</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -221,40 +221,184 @@
             color: #721c24;
         }
         
-        /* Phase Sections */
-        .phase-section {
+        /* Executive Dashboard */
+        .exec-dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
             margin-bottom: 40px;
-            border: 2px solid #e9ecef;
+        }
+        .dashboard-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
+        }
+        .dashboard-card:hover { transform: translateY(-5px); }
+        .dashboard-card .number { font-size: 3em; font-weight: 700; margin-bottom: 10px; }
+        .dashboard-card .label { font-size: 1em; opacity: 0.95; }
+        
+        /* Interactive Timeline */
+        .timeline-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 40px 0;
+        }
+        .timeline-section h2 {
+            color: #1e3c72;
+            font-size: 2em;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .timeline-container {
+            background: white;
             border-radius: 12px;
+            padding: 30px;
+        }
+        .timeline-axis {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 20px;
+        }
+        .timeline-month {
+            flex: 1;
+            text-align: center;
+            font-size: 0.8em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .timeline-bar-container {
+            position: relative;
+            height: 60px;
+            background: #e9ecef;
+            border-radius: 30px;
             overflow: hidden;
+            margin-bottom: 30px;
         }
-        .phase-section.complete {
-            border-color: #28a745;
-        }
-        .phase-header {
-            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
-            padding: 25px 30px;
+        .timeline-segment {
+            position: absolute;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 0.85em;
             cursor: pointer;
             transition: all 0.3s ease;
         }
-        .phase-header:hover {
+        .timeline-segment:hover {
+            filter: brightness(1.1);
+            transform: scaleY(1.1);
+        }
+        .segment-m1 { left: 0%; width: 6.67%; background: #28a745; }
+        .segment-m3 { left: 33.33%; width: 33.33%; background: #667eea; }
+        .segment-m5 { left: 66.67%; width: 20%; background: #f093fb; }
+        .segment-m6 { left: 86.67%; width: 13.33%; background: #ff6a00; }
+        
+        .timeline-legend {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.9em;
+        }
+        .legend-color {
+            width: 25px;
+            height: 25px;
+            border-radius: 5px;
+        }
+        
+        /* Impact Section */
+        .impact-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+        .impact-section h2 { font-size: 2em; margin-bottom: 25px; text-align: center; }
+        .impact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+        }
+        .impact-card {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .impact-card:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: translateY(-5px);
+        }
+        .impact-status {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+        }
+        .impact-card h3 { font-size: 1.3em; margin-bottom: 10px; }
+        .impact-hours { font-size: 2em; font-weight: 700; margin-top: 10px; }
+        
+        /* Collapsible Phases */
+        .phase-collapsible {
+            margin-bottom: 25px;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            overflow: hidden;
+            transition: all 0.3s ease;
+        }
+        .phase-collapsible:hover {
+            border-color: #667eea;
+        }
+        .phase-collapsible.complete {
+            border-color: #28a745;
+        }
+        .phase-header-click {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            padding: 25px 30px;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s ease;
+        }
+        .phase-header-click:hover {
             background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
         }
-        .phase-header.active {
+        .phase-header-click.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        .phase-section.complete .phase-header {
+        .phase-collapsible.complete .phase-header-click {
             background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
             color: #155724;
         }
-        .phase-section.complete .phase-header.active {
+        .phase-collapsible.complete .phase-header-click.active {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
         }
+        .phase-info { flex: 1; }
         .phase-name {
             font-size: 1.5em;
             font-weight: 700;
+            margin-bottom: 8px;
+        }
+        .phase-dates {
+            font-size: 0.9em;
+            opacity: 0.8;
             margin-bottom: 10px;
         }
         .phase-progress-bar {
@@ -269,8 +413,15 @@
             height: 100%;
             transition: width 0.5s ease;
         }
-        .phase-section.complete .phase-progress-fill {
+        .phase-collapsible.complete .phase-progress-fill {
             background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+        }
+        .phase-toggle {
+            font-size: 2em;
+            transition: transform 0.3s ease;
+        }
+        .phase-header-click.active .phase-toggle {
+            transform: rotate(180deg);
         }
         .phase-content {
             max-height: 0;
@@ -281,6 +432,25 @@
         .phase-content.active {
             max-height: 10000px;
             padding: 30px;
+        }
+        
+        /* Category Sections within Phases */
+        .category-section {
+            margin-bottom: 35px;
+        }
+        .category-header {
+            color: #1e3c72;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 3px solid #667eea;
+        }
+        .category-summary {
+            color: #6c757d;
+            font-size: 0.95em;
+            margin-bottom: 20px;
+            font-weight: 600;
         }
         
         /* Task Cards */
@@ -352,28 +522,23 @@
             font-size: 0.85em;
             color: #6c757d;
             margin-top: 10px;
+            padding: 10px;
+            background: #f8f9fa;
+            border-radius: 6px;
             font-style: italic;
         }
         
-        /* Executive Dashboard */
-        .exec-dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
-            margin-bottom: 40px;
-        }
-        .dashboard-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        /* Milestone */
+        .milestone {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
-            padding: 30px;
+            padding: 30px 40px;
             border-radius: 15px;
+            margin: 40px 0;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
+            font-size: 1.5em;
+            font-weight: 700;
         }
-        .dashboard-card:hover { transform: translateY(-5px); }
-        .dashboard-card .number { font-size: 3em; font-weight: 700; margin-bottom: 10px; }
-        .dashboard-card .label { font-size: 1em; opacity: 0.95; }
         
         @media print {
             body { background: white; padding: 0; }
@@ -441,8 +606,6 @@
 
     <script>
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=263457723&single=true&output=csv';
-        
-        // Use CORS proxy to bypass CORS restrictions
         const CORS_PROXY = 'https://corsproxy.io/?';
 
         let allData = [];
@@ -451,7 +614,6 @@
             try {
                 document.getElementById('loadingOverlay').classList.remove('hidden');
                 
-                // Try direct fetch first, then fall back to CORS proxy
                 let csvText;
                 try {
                     const response = await fetch(SHEET_URL);
@@ -477,9 +639,6 @@
                         <div style="font-size: 2em; margin-bottom: 20px;">⚠️</div>
                         <div>Error loading data from Google Sheets</div>
                         <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.8;">${error.message}</div>
-                        <div style="font-size: 0.75em; margin-top: 15px; opacity: 0.7; max-width: 400px; margin-left: auto; margin-right: auto;">
-                            This may be a CORS issue. Try opening this file by double-clicking it directly or hosting it on a web server.
-                        </div>
                         <button onclick="loadSheetData()" style="margin-top: 20px; padding: 10px 20px; border: none; background: white; color: #667eea; border-radius: 5px; cursor: pointer; font-weight: 600;">
                             Retry
                         </button>
@@ -530,8 +689,9 @@
         }
 
         function renderRoadmap(data) {
-            const phases = groupByPhase(data);
+            const phaseData = groupByPhase(data);
             const stats = calculateStats(data);
+            const categoryTotals = calculateCategoryTotals(data);
             
             let html = `
                 <!-- Overall Progress Tracker -->
@@ -556,7 +716,7 @@
                             <div>Blocked</div>
                         </div>
                         <div class="progress-stat">
-                            <div class="progress-stat-value">${stats.totalHoursSaved}</div>
+                            <div class="progress-stat-value">${Math.round(stats.totalHoursSaved)}</div>
                             <div>Hours to Save/Month</div>
                         </div>
                     </div>
@@ -576,11 +736,11 @@
                         <div class="label">Tasks Completed</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">
-                        <div class="number">${stats.totalHoursSaved}</div>
+                        <div class="number">${Math.round(stats.totalHoursSaved)}</div>
                         <div class="label">Hours to Save Monthly</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);">
-                        <div class="number">${Object.keys(phases).length}</div>
+                        <div class="number">${Object.keys(phaseData).length}</div>
                         <div class="label">Implementation Phases</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%);">
@@ -589,61 +749,140 @@
                     </div>
                 </div>
 
+                <!-- Interactive Timeline -->
+                <div class="timeline-section">
+                    <h2>📅 Interactive 15-Month Timeline (Click Phases to View Details)</h2>
+                    <div class="timeline-container">
+                        <div class="timeline-axis">
+                            <div class="timeline-month">Nov '25</div>
+                            <div class="timeline-month">Jan '26</div>
+                            <div class="timeline-month">Mar '26</div>
+                            <div class="timeline-month">May '26</div>
+                            <div class="timeline-month">Jul '26</div>
+                            <div class="timeline-month">Sep '26</div>
+                            <div class="timeline-month">Nov '26</div>
+                            <div class="timeline-month">Jan '27</div>
+                            <div class="timeline-month">Feb '27</div>
+                        </div>
+                        
+                        <div class="timeline-bar-container">
+                            <div class="timeline-segment segment-m1" onclick="scrollToPhase('phase-M1')" title="M1: Foundation">
+                                M1
+                            </div>
+                            <div class="timeline-segment segment-m3" onclick="scrollToPhase('phase-M3')" title="M3-M4: Core Automations">
+                                M3-M4
+                            </div>
+                            <div class="timeline-segment segment-m5" onclick="scrollToPhase('phase-M5')" title="M5: Pre-Close">
+                                M5
+                            </div>
+                            <div class="timeline-segment segment-m6" onclick="scrollToPhase('phase-M6')" title="M6: BD1 Final">
+                                M6
+                            </div>
+                        </div>
+                        
+                        <div class="timeline-legend" id="timelineLegend">
+                            <!-- Will be populated dynamically -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- High Impact Opportunities -->
+                <div class="impact-section">
+                    <h2>🎯 Highest Impact Opportunities by Category</h2>
+                    <div class="impact-grid" id="impactCards">
+                        <!-- Will be populated dynamically -->
+                    </div>
+                </div>
+
                 <!-- Phases -->
                 <h2 style="color: #1e3c72; font-size: 2em; margin: 50px 0 30px 0; text-align: center;">
-                    📋 Implementation Phases (Click to Expand)
+                    📋 Implementation Phases - Organized by Theme (Click to Expand)
                 </h2>
             `;
             
-            Object.keys(phases).sort().forEach(phaseName => {
-                const phaseTasks = phases[phaseName];
+            // Render phases
+            const phaseOrder = ['M1', 'M3', 'M4', 'M5', 'M6'];
+            phaseOrder.forEach(phaseName => {
+                if (!phaseData[phaseName]) return;
+                
+                const phaseTasks = phaseData[phaseName];
                 const phaseStats = calculatePhaseStats(phaseTasks);
-                const phaseId = phaseName.replace(/[^a-zA-Z0-9]/g, '');
+                const categories = groupByCategory(phaseTasks);
                 const isComplete = phaseStats.progress === 100;
                 
                 html += `
-                    <div class="phase-section ${isComplete ? 'complete' : ''}" id="phase-${phaseId}">
-                        <div class="phase-header" onclick="togglePhase('${phaseId}')">
-                            <div>
+                    <div class="phase-collapsible ${isComplete ? 'complete' : ''}" id="phase-${phaseName}">
+                        <div class="phase-header-click" onclick="togglePhase('${phaseName}')">
+                            <div class="phase-info">
                                 <div class="phase-name">
-                                    ${phaseName}
+                                    ${getPhaseFullName(phaseName)}
                                     <span class="status-badge status-${getPhaseStatus(phaseStats.progress)}">${getPhaseStatusText(phaseStats.progress)}</span>
                                 </div>
-                                <div style="font-size: 0.9em; opacity: 0.8; margin-bottom: 10px;">
-                                    ${phaseStats.completed}/${phaseStats.total} tasks complete • ${phaseStats.hoursSaved} hours/month
+                                <div class="phase-dates">
+                                    ${getPhaseDescription(phaseName)} | ${phaseStats.completed}/${phaseStats.total} tasks complete • ${Math.round(phaseStats.hoursSaved)} hours/month
                                 </div>
                                 <div class="phase-progress-bar">
                                     <div class="phase-progress-fill" style="width: ${phaseStats.progress}%;"></div>
                                 </div>
                             </div>
+                            <div class="phase-toggle">▼</div>
                         </div>
-                        <div class="phase-content" id="content-${phaseId}">
-                            <div class="task-grid">
+                        <div class="phase-content" id="content-${phaseName}">
                 `;
                 
-                phaseTasks.forEach(task => {
-                    const status = normalizeStatus(task.Status || task.status || 'Not Started');
-                    const statusClass = status.toLowerCase().replace(/\s+/g, '-');
+                // Render categories within each phase
+                Object.keys(categories).sort().forEach(categoryName => {
+                    const categoryTasks = categories[categoryName];
+                    const categoryStats = calculateCategoryStats(categoryTasks);
                     
                     html += `
-                        <div class="task-card ${statusClass}">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-${statusClass}">${status}</span>
+                        <div class="category-section">
+                            <div class="category-header">${getCategoryIcon(categoryName)} ${categoryName}</div>
+                            <div class="category-summary">
+                                ${categoryStats.total} tasks • ${categoryStats.completed} complete • ${Math.round(categoryStats.hoursSaved)} hours/month
                             </div>
-                            <div class="task-title">${task['Task Name'] || task.Task || 'Unnamed Task'}</div>
-                            ${task['Hours Saved'] ? `<div class="task-hours">${task['Hours Saved']} hrs</div>` : ''}
-                            ${task.Assignee ? `<div class="task-assignee">👤 ${task.Assignee}</div>` : ''}
-                            ${task.Tool ? `<div class="task-tool">🤖 ${task.Tool}</div>` : ''}
-                            ${task.Notes ? `<div class="task-notes">${task.Notes}</div>` : ''}
+                            <div class="task-grid">
+                    `;
+                    
+                    categoryTasks.forEach(task => {
+                        const status = normalizeStatus(task.Status || task.status || 'Not Started');
+                        const statusClass = status.toLowerCase().replace(/\s+/g, '-');
+                        
+                        html += `
+                            <div class="task-card ${statusClass}">
+                                <div class="task-status-indicator">
+                                    <span class="status-badge status-${statusClass}">${status}</span>
+                                </div>
+                                <div class="task-title">${task['Task Name'] || task.Task || 'Unnamed Task'}</div>
+                                ${task['Hours Saved'] ? `<div class="task-hours">${task['Hours Saved']} hrs</div>` : ''}
+                                ${task.Assignee ? `<div class="task-assignee">👤 ${task.Assignee}</div>` : ''}
+                                ${task.Tool ? `<div class="task-tool">🤖 ${task.Tool}</div>` : ''}
+                                ${task.Notes ? `<div class="task-notes">${task.Notes}</div>` : ''}
+                            </div>
+                        `;
+                    });
+                    
+                    html += `
+                            </div>
                         </div>
                     `;
                 });
                 
                 html += `
-                            </div>
                         </div>
                     </div>
                 `;
+                
+                // Add milestone after certain phases
+                if (phaseName === 'M1') {
+                    html += `<div class="milestone">✨ M1 Complete - Foundation Established</div>`;
+                } else if (phaseName === 'M4') {
+                    html += `<div class="milestone">🎯 Target: BD3 Close Achievement | September 30, 2026</div>`;
+                } else if (phaseName === 'M5') {
+                    html += `<div class="milestone">✨ Target: BD2 Close Achievement | December 31, 2026</div>`;
+                } else if (phaseName === 'M6') {
+                    html += `<div class="milestone">🎊 ULTIMATE GOAL: First BD1 Close - February 1, 2027</div>`;
+                }
             });
             
             html += `
@@ -651,15 +890,24 @@
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 50px 0;">
                     <h3 style="font-size: 1.5em; margin-bottom: 15px;">🔄 This Roadmap Updates Automatically</h3>
                     <p style="line-height: 1.8; opacity: 0.95;">
-                        Your team can update the <strong>Accounting Roadmap</strong> tab in Google Sheets, and this page will reflect changes when refreshed.
+                        Your team updates the <strong>Accounting Roadmap</strong> tab in Google Sheets, and this page reflects changes when refreshed.
                     </p>
                     <p style="margin-top: 15px; line-height: 1.8; opacity: 0.95;">
-                        Click the <strong>🔄 Refresh Data</strong> button to see the latest updates from your team!
+                        Click the <strong>🔄 Refresh Data</strong> button or reload the page to see the latest updates!
+                    </p>
+                    <p style="margin-top: 15px; line-height: 1.8; opacity: 0.95; font-size: 0.9em;">
+                        <strong>Auto-refresh:</strong> This page automatically refreshes data every 5 minutes.
                     </p>
                 </div>
             `;
             
             document.getElementById('mainContent').innerHTML = html;
+            
+            // Populate impact cards
+            renderImpactCards(categoryTotals);
+            
+            // Populate timeline legend
+            renderTimelineLegend(phaseData);
         }
 
         function groupByPhase(data) {
@@ -672,6 +920,18 @@
                 phases[phase].push(row);
             });
             return phases;
+        }
+
+        function groupByCategory(tasks) {
+            const categories = {};
+            tasks.forEach(task => {
+                const category = task.Category || task.category || 'Other';
+                if (!categories[category]) {
+                    categories[category] = [];
+                }
+                categories[category].push(task);
+            });
+            return categories;
         }
 
         function calculateStats(data) {
@@ -724,6 +984,124 @@
             return stats;
         }
 
+        function calculateCategoryStats(tasks) {
+            return calculatePhaseStats(tasks); // Same calculation
+        }
+
+        function calculateCategoryTotals(data) {
+            const categories = {};
+            data.forEach(row => {
+                const category = row.Category || row.category || 'Other';
+                if (!categories[category]) {
+                    categories[category] = { total: 0, completed: 0, hours: 0 };
+                }
+                
+                categories[category].total++;
+                const status = normalizeStatus(row.Status || row.status || '');
+                if (status === 'Complete') categories[category].completed++;
+                
+                const hours = parseFloat(row['Hours Saved'] || row.hours || 0);
+                if (!isNaN(hours)) {
+                    categories[category].hours += hours;
+                }
+            });
+            return categories;
+        }
+
+        function renderImpactCards(categoryTotals) {
+            const sortedCategories = Object.entries(categoryTotals)
+                .sort((a, b) => b[1].hours - a[1].hours)
+                .slice(0, 4);
+            
+            let html = '';
+            sortedCategories.forEach(([category, stats]) => {
+                const progress = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+                const statusClass = progress === 100 ? 'complete' : (progress > 0 ? 'in-progress' : 'not-started');
+                const statusText = progress === 100 ? 'Complete' : (progress > 0 ? 'In Progress' : 'Not Started');
+                
+                html += `
+                    <div class="impact-card">
+                        <div class="impact-status">
+                            <span class="status-badge status-${statusClass}">${statusText}</span>
+                        </div>
+                        <h3>${getCategoryIcon(category)} ${category}</h3>
+                        <p>${stats.total} tasks | ${stats.completed} complete</p>
+                        <div class="impact-hours">~${Math.round(stats.hours)} hrs/mo</div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('impactCards').innerHTML = html;
+        }
+
+        function renderTimelineLegend(phaseData) {
+            const phaseOrder = ['M1', 'M3', 'M4', 'M5', 'M6'];
+            let html = '';
+            
+            phaseOrder.forEach(phase => {
+                if (!phaseData[phase]) return;
+                const stats = calculatePhaseStats(phaseData[phase]);
+                const color = getPhaseColor(phase);
+                
+                html += `
+                    <div class="legend-item">
+                        <div class="legend-color" style="background: ${color};"></div>
+                        <span>${getPhaseFullName(phase)} (${stats.progress.toFixed(0)}% Complete)</span>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('timelineLegend').innerHTML = html;
+        }
+
+        function getCategoryIcon(category) {
+            const icons = {
+                'Accruals': '🔍',
+                'Cash': '💰',
+                'Payroll': '👥',
+                'Financial Reporting': '📊',
+                'Reconciliations': '🔄',
+                'Intercompany': '🔗',
+                'Fixed Assets': '🏢',
+                'Leases': '📝',
+                'Prepaid': '💳'
+            };
+            return icons[category] || '📌';
+        }
+
+        function getPhaseColor(phase) {
+            const colors = {
+                'M1': '#28a745',
+                'M3': '#667eea',
+                'M4': '#667eea',
+                'M5': '#f093fb',
+                'M6': '#ff6a00'
+            };
+            return colors[phase] || '#6c757d';
+        }
+
+        function getPhaseFullName(phase) {
+            const names = {
+                'M1': 'M1: Foundation & Assessment',
+                'M3': 'M3: Core Automations',
+                'M4': 'M4: System Integration',
+                'M5': 'M5: Pre-Close Shifts & Continuous Close',
+                'M6': 'M6: BD1 Subsystems & Final Push'
+            };
+            return names[phase] || phase;
+        }
+
+        function getPhaseDescription(phase) {
+            const descriptions = {
+                'M1': 'October 2025 | Status: Complete',
+                'M3': 'April - June 2026 | Goal: BD5 → BD4',
+                'M4': 'July - September 2026 | Goal: BD4 → BD3',
+                'M5': 'October - December 2026 | Goal: BD3 → BD2',
+                'M6': 'January - February 2027 | Goal: BD2 → BD1'
+            };
+            return descriptions[phase] || '';
+        }
+
         function normalizeStatus(status) {
             const s = status.toLowerCase().trim();
             if (s.includes('complete') || s.includes('done')) return 'Complete';
@@ -741,16 +1119,27 @@
 
         function getPhaseStatusText(progress) {
             if (progress === 100) return '✓ Complete';
-            if (progress > 0) return 'In Progress';
+            if (progress > 0) return `${progress.toFixed(0)}% Complete`;
             return 'Not Started';
         }
 
         function togglePhase(phaseId) {
-            const header = document.querySelector(`#phase-${phaseId} .phase-header`);
+            const header = document.querySelector(`#phase-${phaseId} .phase-header-click`);
             const content = document.getElementById(`content-${phaseId}`);
             
             header.classList.toggle('active');
             content.classList.toggle('active');
+        }
+
+        function scrollToPhase(phaseId) {
+            const element = document.getElementById(phaseId);
+            if (element) {
+                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                const header = element.querySelector('.phase-header-click');
+                if (header && !header.classList.contains('active')) {
+                    setTimeout(() => header.click(), 500);
+                }
+            }
         }
 
         // Load data on page load

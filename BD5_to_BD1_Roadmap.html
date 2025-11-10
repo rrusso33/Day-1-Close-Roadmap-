@@ -1329,7 +1329,7 @@
             
             // Get Key Results only - show actual results, not themes
             const deliverables = [...new Set(tasks
-                .map(t => t['Key Results'])
+                .map(t => t['Key Result'])  // Column name is singular "Key Result"
                 .filter(d => d && d.trim())
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {

@@ -291,7 +291,10 @@
             const lines = csv.split('\n');
             const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
             
-            const data = [];
+            console.log('📋 Headers found:', headers);
+            console.log('📊 Total lines in CSV:', lines.length);
+            
+            const allRows = [];
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
                 
@@ -301,13 +304,17 @@
                     row[header] = (values[index] || '').trim().replace(/^"|"$/g, '');
                 });
                 
-                // Only include rows with actual task data
-                if (row['Week Focus and Tasks'] || row['End of Week Deliverable / Milestone']) {
-                    data.push(row);
+                // Include any row with Sprint Set or any task-related data
+                if (row['Sprint Set'] || row['Week Focus and Tasks'] || row['OKR']) {
+                    allRows.push(row);
                 }
             }
             
-            return data;
+            console.log(`✅ Parsed ${allRows.length} rows with data`);
+            console.log('📝 Sample row:', allRows[0]);
+            console.log('🔍 Sprint Sets found:', [...new Set(allRows.map(r => r['Sprint Set']))]);
+            
+            return allRows;
         }
 
         function parseCSVLine(line) {

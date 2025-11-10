@@ -304,15 +304,22 @@
                     row[header] = (values[index] || '').trim().replace(/^"|"$/g, '');
                 });
                 
-                // Include any row with Sprint Set or any task-related data
-                if (row['Sprint Set'] || row['Week Focus and Tasks'] || row['OKR']) {
-                    allRows.push(row);
-                }
+                // TEMPORARY: Include ALL rows for debugging
+                allRows.push(row);
             }
             
             console.log(`✅ Parsed ${allRows.length} rows with data`);
-            console.log('📝 Sample row:', allRows[0]);
-            console.log('🔍 Sprint Sets found:', [...new Set(allRows.map(r => r['Sprint Set']))]);
+            
+            if (allRows.length > 0) {
+                console.log('📝 First row all data:', allRows[0]);
+                console.log('🔑 Keys in first row:', Object.keys(allRows[0]));
+                console.log('📌 Checking key columns:');
+                console.log('  - Sprint Set:', allRows[0]['Sprint Set']);
+                console.log('  - Week Focus and Tasks:', allRows[0]['Week Focus and Tasks']);
+                console.log('  - OKR:', allRows[0]['OKR']);
+                console.log('  - Status:', allRows[0]['Status']);
+                console.log('🔍 Sprint Sets found:', [...new Set(allRows.map(r => r['Sprint Set']))].filter(s => s));
+            }
             
             return allRows;
         }

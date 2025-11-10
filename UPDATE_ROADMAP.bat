@@ -4,13 +4,6 @@ echo ========================================
 echo   Day 1 Close Roadmap - Quick Update
 echo ========================================
 echo.
-echo Instructions:
-echo 1. Export your Excel file as CSV
-echo 2. Save it as "roadmap_data.csv" in this folder
-echo 3. Run this script
-echo.
-pause
-echo.
 echo Checking for roadmap_data.csv...
 if not exist "roadmap_data.csv" (
     echo ERROR: roadmap_data.csv not found!
@@ -45,4 +38,3 @@ echo Opening roadmap in browser...
 start https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
 echo.
 pause
-

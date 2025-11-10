@@ -1310,62 +1310,67 @@
                 });
             });
             
-            // Analyze dependencies and bucket into strategic themes
-            const allDeps = tasks
+            // Get specific dependencies from actual CSV data
+            const dependencies = [...new Set(tasks
                 .map(t => t['Dependencies'])
                 .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => d.trim().toLowerCase());
+                .map(d => {
+                    let clean = d.trim();
+                    const sentences = clean.split(/[.;]/);
+                    clean = sentences[0].trim();
+                    
+                    // Add strategic context based on dependency type
+                    const lower = clean.toLowerCase();
+                    if (lower.includes('vendor') || lower.includes('tool') || lower.includes('onboard')) {
+                        clean += ' to prevent automation delays';
+                    } else if (lower.includes('system') || lower.includes('integration') || lower.includes('netsuite')) {
+                        clean += ' for real-time data access';
+                    } else if (lower.includes('team') || lower.includes('resource')) {
+                        clean += ' to avoid bottlenecks';
+                    } else if (lower.includes('data') || lower.includes('report')) {
+                        clean += ' to enable accurate reconciliation';
+                    }
+                    
+                    return capitalizeFirstLetter(clean);
+                })
+            )].slice(0, 4);
             
-            const dependencyThemes = [];
-            
-            if (allDeps.some(d => d.includes('vendor') || d.includes('tool') || d.includes('platform') || d.includes('onboard'))) {
-                dependencyThemes.push('Vendor & tool onboarding completion - critical to avoid automation delays that could push close by 1-2 days');
-            }
-            if (allDeps.some(d => d.includes('system') || d.includes('integration') || d.includes('api') || d.includes('netsuite') || d.includes('data'))) {
-                dependencyThemes.push('System integrations & data connectivity - essential for real-time access to prevent 1-2 day close delays');
-            }
-            if (allDeps.some(d => d.includes('team') || d.includes('resource') || d.includes('headcount') || d.includes('capacity'))) {
-                dependencyThemes.push('Team capacity & resource allocation - required to prevent bottlenecks that could add 1+ day to close');
-            }
-            if (allDeps.some(d => d.includes('approval') || d.includes('sign-off') || d.includes('review') || d.includes('stakeholder'))) {
-                dependencyThemes.push('Stakeholder approvals & sign-offs - necessary to prevent end-of-month bottlenecks extending close by 1+ day');
-            }
-            if (allDeps.some(d => d.includes('process') || d.includes('documentation') || d.includes('policy') || d.includes('standard'))) {
-                dependencyThemes.push('Process documentation & standardization - needed to maintain repeatable Day 1 close timeline');
-            }
-            
-            const dependencies = dependencyThemes.slice(0, 4);
-            
-            // Analyze Key Results and bucket into strategic themes
-            const allKRs = tasks
-                .map(t => t['Key Result'])
+            // Get specific deliverables from "End of Week Deliverable / Milestone" column
+            const deliverables = [...new Set(tasks
+                .map(t => t['End of Week Deliverable / Milestone'])
                 .filter(d => d && d.trim())
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => d.trim().toLowerCase());
-            
-            const deliverableThemes = [];
-            
-            if (allKRs.some(d => d.includes('automat') || d.includes('ai') || d.includes('tool') || d.includes('wiselayer') || d.includes('accruals.ai'))) {
-                deliverableThemes.push('Deploy automation & AI tools to eliminate manual work and reduce close by 0.5-1 day');
-            }
-            if (allKRs.some(d => d.includes('accuracy') || d.includes('reliability') || d.includes('quality') || d.includes('opex'))) {
-                deliverableThemes.push('Increase data accuracy & reliability to reduce review cycles and accelerate close by 0.5-1 day');
-            }
-            if (allKRs.some(d => d.includes('process') || d.includes('streamline') || d.includes('optimi') || d.includes('enhance'))) {
-                deliverableThemes.push('Streamline close processes to remove bottlenecks and save 0.5-1 day per close');
-            }
-            if (allKRs.some(d => d.includes('real-time') || d.includes('integration') || d.includes('system') || d.includes('netsuite'))) {
-                deliverableThemes.push('Implement real-time system integrations to eliminate reconciliation delays and save 1-2 days');
-            }
-            if (allKRs.some(d => d.includes('scalab') || d.includes('standard') || d.includes('framework') || d.includes('global'))) {
-                deliverableThemes.push('Build scalable frameworks & standards to protect Day 1 timeline as company grows');
-            }
-            if (allKRs.some(d => d.includes('cash') || d.includes('intercompany') || d.includes('reconcil') || d.includes('i/c'))) {
-                deliverableThemes.push('Automate cash & intercompany processes to eliminate end-of-month delays and save 0.5-1 day');
-            }
-            
-            const deliverables = deliverableThemes.slice(0, 4);
+                .map(d => {
+                    let clean = d.trim();
+                    // Remove bullet points
+                    clean = clean.replace(/^[-•]\s*/, '').trim();
+                    // Take first line if multi-line
+                    const lines = clean.split('\n');
+                    clean = lines[0].trim();
+                    // Take first sentence if too long
+                    if (clean.length > 120) {
+                        const sentences = clean.split(/[.;]/);
+                        clean = sentences[0].trim();
+                    }
+                    
+                    // Add Day 1 impact context based on deliverable type
+                    const lower = clean.toLowerCase();
+                    if (lower.includes('automat') || lower.includes('ai') || lower.includes('tool')) {
+                        clean += ' to reduce manual effort';
+                    } else if (lower.includes('accuracy') || lower.includes('quality') || lower.includes('review')) {
+                        clean += ' to accelerate review cycles';
+                    } else if (lower.includes('process') || lower.includes('workflow') || lower.includes('streamlin')) {
+                        clean += ' to eliminate bottlenecks';
+                    } else if (lower.includes('integration') || lower.includes('system') || lower.includes('connect')) {
+                        clean += ' for real-time visibility';
+                    } else if (lower.includes('reconcil') || lower.includes('cash') || lower.includes('intercompany')) {
+                        clean += ' to eliminate delays';
+                    }
+                    
+                    return capitalizeFirstLetter(clean);
+                })
+            )].slice(0, 4);
             
             // Create executive summary from OKR and category
             let summary = '';

@@ -1327,33 +1327,36 @@
                 .filter(d => d.length > 10) // Filter out very short entries
             )].slice(0, 5); // Limit to top 5 unique
             
-            // Get unique, specific deliverables combining Key Results and Milestones
-            const allDeliverablesSources = [
-                ...tasks.map(t => t['Key Results']).filter(d => d && d.trim()),
-                ...tasks.map(t => t['End of Week Deliverable / Milestone']).filter(d => d && d.trim())
-            ];
-            
-            const deliverables = [...new Set(allDeliverablesSources
+            // Get Key Results only and consolidate into themes
+            const allKeyResults = tasks
+                .map(t => t['Key Results'])
+                .filter(d => d && d.trim())
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => {
-                    let clean = d.trim();
-                    // Take first line if multi-line
-                    clean = clean.split('\n')[0];
-                    // Remove bullet points and numbers
-                    clean = clean.replace(/^[-•]\s*/, '').replace(/^\d+\.\s*/, '').trim();
-                    // Remove "KR" prefix if present
-                    clean = clean.replace(/^KR\s*\d+:\s*/i, '').trim();
-                    // Take first sentence if too long
-                    if (clean.includes('.')) {
-                        const sentences = clean.split('.');
-                        clean = sentences[0].trim();
-                    }
-                    // Capitalize first letter
-                    clean = capitalizeFirstLetter(clean);
-                    return clean;
-                })
-                .filter(d => d.length > 10) // Filter out very short entries
-            )].slice(0, 5); // Limit to top 5 unique
+                .map(d => d.trim().toLowerCase());
+            
+            // Consolidate Key Results into thematic deliverables
+            const deliverableThemes = [];
+            
+            if (allKeyResults.some(d => d.includes('opex') || d.includes('accuracy') || d.includes('reliability') || d.includes('review'))) {
+                deliverableThemes.push('Increase OpEx accuracy and reliability through automation');
+            }
+            if (allKeyResults.some(d => d.includes('process') || d.includes('streamline') || d.includes('optimize') || d.includes('enhance'))) {
+                deliverableThemes.push('Enhance close optimization and streamline financial processes');
+            }
+            if (allKeyResults.some(d => d.includes('quality') || d.includes('control') || d.includes('monitor') || d.includes('coding'))) {
+                deliverableThemes.push('Improve data quality and implement strong financial controls');
+            }
+            if (allKeyResults.some(d => d.includes('system') || d.includes('tool') || d.includes('integration') || d.includes('acquisition'))) {
+                deliverableThemes.push('Integrate new systems and tools to support scalability');
+            }
+            if (allKeyResults.some(d => d.includes('international') || d.includes('global') || d.includes('entity') || d.includes('scalable'))) {
+                deliverableThemes.push('Build scalable accounting function for global growth');
+            }
+            if (allKeyResults.some(d => d.includes('cash') || d.includes('intercompany') || d.includes('settlement') || d.includes('i/c'))) {
+                deliverableThemes.push('Automate cash management and intercompany processes');
+            }
+            
+            const deliverables = deliverableThemes.slice(0, 5);
             
             // Create executive summary from OKR and category
             let summary = '';

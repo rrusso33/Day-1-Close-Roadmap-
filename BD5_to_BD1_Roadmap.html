@@ -672,7 +672,7 @@
     </div>
 
     <script>
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=263457723&single=true&output=csv';
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=1318783716&single=true&output=csv';
         const CORS_PROXY = 'https://corsproxy.io/?';
 
         let allData = [];
@@ -728,23 +728,16 @@
                     row[header] = values[index] || '';
                 });
                 allRows.push(row);
-                
-                // Filter for Corporate Accounting team (case-insensitive, flexible matching)
-                const team = (row.Team || '').toLowerCase().trim();
-                if (team.includes('corporate') && team.includes('accounting')) {
-                    data.push(row);
-                }
             }
             
             console.log(`Total rows parsed: ${allRows.length}`);
-            console.log(`Filtered to ${data.length} Corporate Accounting tasks`);
+            console.log('Sample Task Names:', allRows.slice(0, 3).map(r => r['Task Name']));
+            console.log('Sample Statuses:', allRows.slice(0, 3).map(r => r['Status']));
             if (allRows.length > 0) {
-                console.log('Sample row Team values (strings):', allRows.slice(0, 5).map(r => `"${r.Team}"`));
                 console.log('First row full data:', allRows[0]);
             }
             
-            // TEMPORARY: Return all rows for debugging (remove filter)
-            console.log('⚠️ DEBUG MODE: Showing all tasks regardless of team');
+            // Sheet is already filtered to Corporate Accounting, return all rows
             return allRows;
         }
 

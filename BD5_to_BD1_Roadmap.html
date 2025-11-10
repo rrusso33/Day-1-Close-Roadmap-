@@ -1313,72 +1313,97 @@
                 });
             });
             
-            // Get specific dependencies from actual CSV data - now more contextual per OKR+Category
+            // Get robust dependencies from "Dependencies" column
             const dependencies = [...new Set(tasks
                 .map(t => t['Dependencies'])
-                .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a' && d.toLowerCase() !== 'none')
+                .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a' && d.toLowerCase() !== 'none' && d.toLowerCase() !== 'tbd')
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {
                     let clean = d.trim();
-                    // Take first sentence for clarity
+                    
+                    // Take first meaningful sentence
                     const sentences = clean.split(/[.;]/);
                     clean = sentences[0].trim();
                     
-                    // Ensure grammatically correct with proper ending
-                    if (!clean.endsWith('.') && !clean.endsWith('?') && !clean.endsWith('!')) {
-                        clean += ' is required';
-                    }
+                    // Make robust by adding context about criticality
+                    const lower = clean.toLowerCase();
                     
-                    return capitalizeFirstLetter(clean);
-                })
-            )].slice(0, 4);
-            
-            // Get specific deliverables from "End of Week Deliverable / Milestone" and "Week Focus and Tasks"
-            const allDeliverables = [];
-            
-            // Combine milestones and focused tasks for comprehensive view
-            tasks.forEach(t => {
-                const milestone = t['End of Week Deliverable / Milestone'];
-                const focus = t['Week Focus and Tasks'];
-                
-                if (milestone && milestone.trim()) {
-                    allDeliverables.push(milestone);
-                }
-                // Add focus if milestone is empty or very short
-                if (focus && focus.trim() && (!milestone || milestone.length < 30)) {
-                    allDeliverables.push(focus);
-                }
-            });
-            
-            const deliverables = [...new Set(allDeliverables
-                .filter(d => d && d.trim())
-                .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => {
-                    let clean = d.trim();
-                    // Remove bullet points and numbers
-                    clean = clean.replace(/^[-•*]\s*/, '').replace(/^\d+\.\s*/, '').trim();
-                    // Take first line if multi-line
-                    const lines = clean.split('\n').filter(l => l.trim());
-                    clean = lines[0].trim();
-                    // Take first sentence if too long (>150 chars)
-                    if (clean.length > 150) {
-                        const sentences = clean.split(/\.\s+/);
-                        clean = sentences[0].trim();
-                    }
-                    
-                    // Ensure proper sentence ending
-                    if (!clean.endsWith('.') && !clean.endsWith('?') && !clean.endsWith('!')) {
-                        // Add context if it's a fragment
-                        const lower = clean.toLowerCase();
-                        if (!lower.includes('will') && !lower.includes('complete') && !lower.includes('implement')) {
-                            clean = 'Complete: ' + clean.charAt(0).toLowerCase() + clean.slice(1);
+                    // Ensure it's a complete, robust statement
+                    if (!clean.match(/\b(required|needed|necessary|critical|essential|must|depends on)\b/i)) {
+                        // Add criticality context
+                        if (lower.includes('vendor') || lower.includes('onboard') || lower.includes('partner')) {
+                            clean += ' - critical for successful implementation';
+                        } else if (lower.includes('data') || lower.includes('integration') || lower.includes('system')) {
+                            clean += ' - essential for accurate reporting';
+                        } else if (lower.includes('approval') || lower.includes('sign-off') || lower.includes('review')) {
+                            clean += ' - required before proceeding';
+                        } else if (lower.includes('team') || lower.includes('resource') || lower.includes('capacity')) {
+                            clean += ' - necessary to execute deliverables';
+                        } else {
+                            clean += ' - required for project success';
                         }
                     }
                     
+                    // Ensure proper ending
+                    if (!clean.endsWith('.')) {
+                        clean += '.';
+                    }
+                    
                     return capitalizeFirstLetter(clean);
                 })
-                .filter(d => d.length > 15) // Filter out very short/meaningless entries
-            )].slice(0, 4);
+            )].slice(0, 5);
+            
+            // Get robust deliverables from "Key Result" column with hours saved context
+            const deliverables = [...new Set(tasks
+                .map(t => {
+                    const kr = t['Key Result'];
+                    const hours = parseFloat(t['Hours Saved'] || 0);
+                    return { text: kr, hours: hours };
+                })
+                .filter(d => d.text && d.text.trim())
+                .filter(d => !d.text.includes('#NAME') && !d.text.includes('#REF') && !d.text.includes('#VALUE') && !d.text.includes('#DIV') && !d.text.includes('#N/A'))
+                .map(d => {
+                    let clean = d.text.trim();
+                    
+                    // Remove "KR #:" prefix
+                    clean = clean.replace(/^KR\s*\d+:\s*/i, '').trim();
+                    
+                    // Remove bullet points
+                    clean = clean.replace(/^[-•*]\s*/, '').trim();
+                    
+                    // Make robust by adding value context
+                    const lower = clean.toLowerCase();
+                    let valueAdd = '';
+                    
+                    // Add hours saved if available and meaningful
+                    if (d.hours > 0) {
+                        valueAdd = ` (saves ${d.hours} hours per close)`;
+                    }
+                    // If no hours, add qualitative value based on content
+                    else if (lower.includes('automat') || lower.includes('ai')) {
+                        valueAdd = ' to eliminate manual processes';
+                    } else if (lower.includes('accuracy') || lower.includes('quality') || lower.includes('reliability')) {
+                        valueAdd = ' to improve data quality and reduce errors';
+                    } else if (lower.includes('streamline') || lower.includes('optimi') || lower.includes('enhance')) {
+                        valueAdd = ' to accelerate close timeline';
+                    } else if (lower.includes('scalab') || lower.includes('framework') || lower.includes('standard')) {
+                        valueAdd = ' to support sustainable growth';
+                    } else if (lower.includes('monitor') || lower.includes('track') || lower.includes('visibility')) {
+                        valueAdd = ' to enable proactive issue resolution';
+                    } else {
+                        valueAdd = ' to drive Day 1 close';
+                    }
+                    
+                    clean += valueAdd;
+                    
+                    // Ensure proper ending
+                    if (!clean.endsWith('.')) {
+                        clean += '.';
+                    }
+                    
+                    return capitalizeFirstLetter(clean);
+                })
+            )].slice(0, 5);
             
             // Create executive summary from OKR and category
             let summary = '';

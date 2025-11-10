@@ -739,9 +739,13 @@
             console.log(`Total rows parsed: ${allRows.length}`);
             console.log(`Filtered to ${data.length} Corporate Accounting tasks`);
             if (allRows.length > 0) {
-                console.log('Sample row Team values:', allRows.slice(0, 3).map(r => r.Team));
+                console.log('Sample row Team values (strings):', allRows.slice(0, 5).map(r => `"${r.Team}"`));
+                console.log('First row full data:', allRows[0]);
             }
-            return data;
+            
+            // TEMPORARY: Return all rows for debugging (remove filter)
+            console.log('⚠️ DEBUG MODE: Showing all tasks regardless of team');
+            return allRows;
         }
 
         function parseCSVLine(line) {

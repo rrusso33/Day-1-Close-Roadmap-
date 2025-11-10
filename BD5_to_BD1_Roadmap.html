@@ -441,6 +441,9 @@
 
     <script>
         const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=263457723&single=true&output=csv';
+        
+        // Use CORS proxy to bypass CORS restrictions
+        const CORS_PROXY = 'https://corsproxy.io/?';
 
         let allData = [];
 
@@ -448,8 +451,16 @@
             try {
                 document.getElementById('loadingOverlay').classList.remove('hidden');
                 
-                const response = await fetch(SHEET_URL);
-                const csvText = await response.text();
+                // Try direct fetch first, then fall back to CORS proxy
+                let csvText;
+                try {
+                    const response = await fetch(SHEET_URL);
+                    csvText = await response.text();
+                } catch (corsError) {
+                    console.log('Direct fetch failed, trying CORS proxy...');
+                    const response = await fetch(CORS_PROXY + encodeURIComponent(SHEET_URL));
+                    csvText = await response.text();
+                }
                 
                 allData = parseCSV(csvText);
                 console.log('Loaded data:', allData);
@@ -466,6 +477,9 @@
                         <div style="font-size: 2em; margin-bottom: 20px;">⚠️</div>
                         <div>Error loading data from Google Sheets</div>
                         <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.8;">${error.message}</div>
+                        <div style="font-size: 0.75em; margin-top: 15px; opacity: 0.7; max-width: 400px; margin-left: auto; margin-right: auto;">
+                            This may be a CORS issue. Try opening this file by double-clicking it directly or hosting it on a web server.
+                        </div>
                         <button onclick="loadSheetData()" style="margin-top: 20px; padding: 10px 20px; border: none; background: white; color: #667eea; border-radius: 5px; cursor: pointer; font-weight: 600;">
                             Retry
                         </button>

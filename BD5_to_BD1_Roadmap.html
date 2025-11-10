@@ -347,6 +347,30 @@
             align-items: center;
             margin-bottom: 20px;
         }
+        .sprint-header.collapsible-header {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        .sprint-header.collapsible-header:hover {
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+        .sprint-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .collapse-arrow {
+            font-size: 1em;
+            color: #667eea;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            min-width: 20px;
+        }
+        .collapse-arrow.collapsed {
+            transform: rotate(-90deg);
+        }
         .sprint-title {
             font-size: 1.4em;
             font-weight: 700;
@@ -364,6 +388,16 @@
         .initiative-cards {
             display: grid;
             gap: 20px;
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+            opacity: 1;
+        }
+        .initiative-cards.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
         }
         
         .initiative-card {
@@ -1127,18 +1161,22 @@
                 `;
                 
                 // Consolidate initiatives by category/OKR
-                Object.entries(initiatives).forEach(([initiativeName, tasks]) => {
+                Object.entries(initiatives).forEach(([initiativeName, tasks], idx) => {
                     const consolidated = consolidateInitiative(tasks, initiativeName);
                     const statusClass = consolidated.status.toLowerCase().replace(/\s+/g, '-');
+                    const initiativeId = `initiative-${themeId}-${idx}`;
                     
                     html += `
                         <div class="sprint-group">
                             <div class="sprint-marker ${consolidated.markerClass}"></div>
-                            <div class="sprint-header">
-                                <div class="sprint-title">${cleanInitiativeName(initiativeName)}</div>
+                            <div class="sprint-header collapsible-header" onclick="toggleInitiative('${initiativeId}')">
+                                <div class="sprint-title-wrapper">
+                                    <span class="collapse-arrow" id="arrow-${initiativeId}">▼</span>
+                                    <div class="sprint-title">${cleanInitiativeName(initiativeName)}</div>
+                                </div>
                                 <div class="sprint-date">Target: ${consolidated.targetDate}</div>
                             </div>
-                            <div class="initiative-cards">
+                            <div class="initiative-cards" id="${initiativeId}">
                                 <div class="initiative-card ${statusClass}">
                                     <div class="initiative-header">
                                         <div class="initiative-title-group">
@@ -1494,6 +1532,19 @@
             if (timeline && header) {
                 timeline.classList.toggle('collapsed');
                 header.classList.toggle('collapsed');
+            }
+        }
+
+        function toggleInitiative(initiativeId) {
+            const initiativeCards = document.getElementById(initiativeId);
+            const arrow = document.getElementById(`arrow-${initiativeId}`);
+            
+            if (initiativeCards) {
+                initiativeCards.classList.toggle('collapsed');
+            }
+            
+            if (arrow) {
+                arrow.classList.toggle('collapsed');
             }
         }
 

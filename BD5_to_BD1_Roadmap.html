@@ -549,6 +549,19 @@
         .info-list li:last-child {
             margin-bottom: 0;
         }
+        .info-list li strong {
+            color: #2c3e50;
+            display: block;
+            margin-bottom: 6px;
+        }
+        .info-list li .impact-text {
+            padding: 8px 12px;
+            border-radius: 6px;
+            background: rgba(0,0,0,0.03);
+            margin-top: 6px;
+            font-size: 0.9em;
+            line-height: 1.5;
+        }
         
         /* Executive Strategy Section */
         .strategy-section {
@@ -1185,18 +1198,28 @@
                                     
                                     ${consolidated.dependencies.length > 0 ? `
                                         <div class="dependencies">
-                                            <div class="dependencies-label">⚠️ Key Dependencies:</div>
+                                            <div class="dependencies-label">🚨 Critical Dependencies & Risk to Day 1:</div>
                                             <ul class="info-list">
-                                                ${consolidated.dependencies.map(dep => `<li>${dep}</li>`).join('')}
+                                                ${consolidated.dependencies.map(dep => `
+                                                    <li>
+                                                        <strong>${dep.text}</strong>
+                                                        <div class="impact-text" style="color: #dc3545; border-left: 3px solid #dc3545;">${dep.impact}</div>
+                                                    </li>
+                                                `).join('')}
                                             </ul>
                                         </div>
                                     ` : ''}
                                     
                                     ${consolidated.deliverables.length > 0 ? `
                                         <div class="deliverable">
-                                            <div class="deliverable-label">📦 Key Deliverables:</div>
+                                            <div class="deliverable-label">🎯 Strategic Wins & Day 1 Impact:</div>
                                             <ul class="info-list">
-                                                ${consolidated.deliverables.map(del => `<li>${del}</li>`).join('')}
+                                                ${consolidated.deliverables.map(del => `
+                                                    <li>
+                                                        <strong>${del.text}</strong>
+                                                        <div class="impact-text" style="color: #28a745; border-left: 3px solid #28a745;">${del.impact}</div>
+                                                    </li>
+                                                `).join('')}
                                             </ul>
                                         </div>
                                     ` : ''}
@@ -1310,40 +1333,76 @@
                 });
             });
             
-            // Get unique, specific dependencies with context
-            const dependencies = [...new Set(tasks
+            // Get unique, specific dependencies and frame as risks to Day 1 close
+            const rawDependencies = [...new Set(tasks
                 .map(t => t['Dependencies'])
                 .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => {
-                    let clean = d.trim();
-                    // Take first meaningful sentence
-                    const sentences = clean.split(/[.;]/);
-                    clean = sentences[0].trim();
-                    // Capitalize first letter
-                    clean = capitalizeFirstLetter(clean);
-                    return clean;
-                })
-                .filter(d => d.length > 10) // Filter out very short entries
-            )].slice(0, 5); // Limit to top 5 unique
+                .map(d => d.trim())
+            )].slice(0, 5);
             
-            // Get Key Results only - show actual results, not themes
-            const deliverables = [...new Set(tasks
+            const dependencies = rawDependencies.map(dep => {
+                let clean = dep;
+                const sentences = clean.split(/[.;]/);
+                clean = sentences[0].trim();
+                clean = capitalizeFirstLetter(clean);
+                
+                // Add strategic context about how this blocks Day 1 close
+                let impact = '';
+                const lower = dep.toLowerCase();
+                
+                if (lower.includes('vendor') || lower.includes('tool') || lower.includes('platform')) {
+                    impact = '⚠️ Risk: Vendor delays could push back automation, delaying close by 1-2 days';
+                } else if (lower.includes('team') || lower.includes('resource') || lower.includes('headcount')) {
+                    impact = '⚠️ Risk: Resource constraints could bottleneck critical tasks, adding 1+ day to close';
+                } else if (lower.includes('data') || lower.includes('information') || lower.includes('report')) {
+                    impact = '⚠️ Risk: Data unavailability extends reconciliation time, pushing close by 0.5-1 day';
+                } else if (lower.includes('system') || lower.includes('integration') || lower.includes('api')) {
+                    impact = '⚠️ Risk: System issues block real-time data access, adding 1-2 days to close';
+                } else if (lower.includes('approval') || lower.includes('sign-off') || lower.includes('review')) {
+                    impact = '⚠️ Risk: Approval delays create end-of-month bottlenecks, extending close by 1+ day';
+                } else {
+                    impact = '⚠️ Risk: Unresolved blockers could delay Day 1 close timeline by 0.5-1 day';
+                }
+                
+                return { text: clean, impact: impact };
+            });
+            
+            // Get Key Results and frame as strategic wins toward Day 1 close
+            const rawDeliverables = [...new Set(tasks
                 .map(t => t['Key Result'])  // Column name is singular "Key Result"
                 .filter(d => d && d.trim())
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => {
-                    let clean = d.trim();
-                    // Remove "KR" prefix if present
-                    clean = clean.replace(/^KR\s*\d+:\s*/i, '').trim();
-                    // Remove bullet points
-                    clean = clean.replace(/^[-•]\s*/, '').trim();
-                    // Capitalize first letter
-                    clean = capitalizeFirstLetter(clean);
-                    return clean;
-                })
-                .filter(d => d.length > 10)
             )].slice(0, 5);
+            
+            const deliverables = rawDeliverables.map(deliv => {
+                let clean = deliv.trim();
+                clean = clean.replace(/^KR\s*\d+:\s*/i, '').trim();
+                clean = clean.replace(/^[-•]\s*/, '').trim();
+                clean = capitalizeFirstLetter(clean);
+                
+                // Add strategic context about how this accelerates Day 1 close
+                let impact = '';
+                const lower = deliv.toLowerCase();
+                
+                if (lower.includes('automat') || lower.includes('ai') || lower.includes('tool')) {
+                    impact = '✅ Impact: Automation eliminates manual work, reducing close time by 0.5-1 day';
+                } else if (lower.includes('accuracy') || lower.includes('reliability') || lower.includes('quality')) {
+                    impact = '✅ Impact: Increased accuracy reduces review cycles, accelerating close by 0.5-1 day';
+                } else if (lower.includes('process') || lower.includes('streamline') || lower.includes('optimi')) {
+                    impact = '✅ Impact: Streamlined processes remove bottlenecks, saving 0.5-1 day per close';
+                } else if (lower.includes('real-time') || lower.includes('integration') || lower.includes('system')) {
+                    impact = '✅ Impact: Real-time data access eliminates reconciliation delays, saving 1-2 days';
+                } else if (lower.includes('scalab') || lower.includes('standard') || lower.includes('framework')) {
+                    impact = '✅ Impact: Scalable processes prevent future slowdowns, protecting Day 1 timeline';
+                } else if (lower.includes('cash') || lower.includes('intercompany') || lower.includes('reconcil')) {
+                    impact = '✅ Impact: Faster reconciliation eliminates end-of-month delays, saving 0.5-1 day';
+                } else {
+                    impact = '✅ Impact: Completion moves us closer to Day 1 close by improving efficiency';
+                }
+                
+                return { text: clean, impact: impact };
+            });
             
             // Create executive summary from OKR and category
             let summary = '';

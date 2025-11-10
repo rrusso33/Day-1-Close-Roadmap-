@@ -887,7 +887,7 @@
                                     
                                     ${consolidated.tools.length > 0 ? `
                                         <div class="tech-stack">
-                                            <div class="tech-label">🔧 Tech Stack & Automation:</div>
+                                            <div class="tech-label">🔧 Tech Stack & Automation:${consolidated.totalTools > 5 ? ` <span style="font-weight: normal; font-size: 0.9em; opacity: 0.8;">(showing 5 of ${consolidated.totalTools})</span>` : ''}</div>
                                             <div class="tech-tags">
                                                 ${consolidated.tools.map(tool => `<span class="tech-tag ${tool.isAutomation ? 'automation' : ''}">${tool.name}</span>`).join('')}
                                             </div>
@@ -899,6 +899,7 @@
                                             <div class="dependencies-label">⚠️ Key Dependencies:</div>
                                             <ul class="info-list">
                                                 ${consolidated.dependencies.map(dep => `<li>${dep}</li>`).join('')}
+                                                ${consolidated.totalDependencies > 3 ? `<li style="font-style: italic; color: #856404; opacity: 0.8;">...and ${consolidated.totalDependencies - 3} more</li>` : ''}
                                             </ul>
                                         </div>
                                     ` : ''}
@@ -908,6 +909,7 @@
                                             <div class="deliverable-label">📦 Key Deliverables:</div>
                                             <ul class="info-list">
                                                 ${consolidated.deliverables.map(del => `<li>${del}</li>`).join('')}
+                                                ${consolidated.totalDeliverables > 3 ? `<li style="font-style: italic; color: #004085; opacity: 0.8;">...and ${consolidated.totalDeliverables - 3} more</li>` : ''}
                                             </ul>
                                         </div>
                                     ` : ''}
@@ -1024,12 +1026,12 @@
                     let clean = d.trim();
                     // Take first sentence or limit length
                     const firstSentence = clean.split(/[.;]/).filter(s => s.trim())[0];
-                    if (firstSentence && firstSentence.length < 100) {
+                    if (firstSentence && firstSentence.length < 70) {
                         return firstSentence.trim();
                     }
-                    // Otherwise limit to 100 chars
-                    if (clean.length > 100) {
-                        clean = clean.substring(0, 97) + '...';
+                    // Otherwise limit to 70 chars for readability
+                    if (clean.length > 70) {
+                        clean = clean.substring(0, 67) + '...';
                     }
                     return clean;
                 })
@@ -1046,9 +1048,11 @@
                     let clean = d.trim().split('\n')[0];
                     // Remove bullet points and extra characters
                     clean = clean.replace(/^[-•]\s*/, '').trim();
-                    // Limit length
-                    if (clean.length > 100) {
-                        clean = clean.substring(0, 97) + '...';
+                    // Remove numbered prefixes like "1.", "2."
+                    clean = clean.replace(/^\d+\.\s*/, '').trim();
+                    // Limit length for readability
+                    if (clean.length > 70) {
+                        clean = clean.substring(0, 67) + '...';
                     }
                     return clean;
                 })
@@ -1067,9 +1071,12 @@
                 owners: owners.slice(0, 3), // Limit to top 3
                 hours: Math.round(hours),
                 targetDate,
-                tools: allTools,
+                tools: allTools.slice(0, 5), // Limit to top 5 tools
+                totalTools: allTools.length,
                 dependencies: dependencies.slice(0, 3), // Top 3
                 deliverables: deliverables.slice(0, 3), // Top 3
+                totalDependencies: dependencies.length,
+                totalDeliverables: deliverables.length,
                 summary: summary.length > 150 ? summary.substring(0, 147) + '...' : summary
             };
         }
@@ -1081,9 +1088,9 @@
             // Remove KR prefix
             cleaned = cleaned.replace(/^KR\s*\d+:\s*/i, '');
             
-            // Limit length
-            if (cleaned.length > 100) {
-                cleaned = cleaned.substring(0, 97) + '...';
+            // Limit length for better readability
+            if (cleaned.length > 80) {
+                cleaned = cleaned.substring(0, 77) + '...';
             }
             
             return cleaned || name;

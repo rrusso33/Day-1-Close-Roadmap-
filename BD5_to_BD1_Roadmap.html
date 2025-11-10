@@ -672,7 +672,7 @@
     </div>
 
     <script>
-        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=767522780&single=true&output=csv';
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=1318783716&single=true&output=csv';
         const CORS_PROXY = 'https://corsproxy.io/?';
 
         let allData = [];
@@ -731,13 +731,41 @@
             }
             
             console.log(`Total rows parsed: ${allRows.length}`);
-            console.log('Sample Task Names:', allRows.slice(0, 3).map(r => r['Task Name']));
-            console.log('Sample Statuses:', allRows.slice(0, 3).map(r => r['Status']));
+            console.log('📋 Column Headers:', headers);
+            
             if (allRows.length > 0) {
-                console.log('First row full data:', allRows[0]);
+                console.log('📊 First row sample:', {
+                    'All Keys': Object.keys(allRows[0]),
+                    'First 5 values': Object.entries(allRows[0]).slice(0, 5)
+                });
             }
             
-            // Sheet is already filtered to Corporate Accounting, return all rows
+            // Log what we're finding for key columns
+            const taskColumn = headers.find(h => h.toLowerCase().includes('task'));
+            const deliverableColumn = headers.find(h => h.toLowerCase().includes('deliverable'));
+            const dateColumn = headers.find(h => h.toLowerCase().includes('target') && h.toLowerCase().includes('end'));
+            const sprintColumn = headers.find(h => h.toLowerCase().includes('sprint'));
+            const okrColumn = headers.find(h => h.toLowerCase().includes('okr'));
+            
+            console.log('🔍 Key columns found:', {
+                'Task column': taskColumn,
+                'Deliverable column': deliverableColumn,
+                'Date column': dateColumn,
+                'Sprint column': sprintColumn,
+                'OKR column': okrColumn
+            });
+            
+            // Show sample data from key columns
+            if (allRows.length > 0) {
+                console.log('📝 Sample data from first 3 rows:', allRows.slice(0, 3).map(r => ({
+                    'Sprint': r[sprintColumn],
+                    'OKR': r[okrColumn],
+                    'Task': r[taskColumn],
+                    'Deliverable': r[deliverableColumn],
+                    'Target End': r[dateColumn]
+                })));
+            }
+            
             return allRows;
         }
 

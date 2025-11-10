@@ -966,6 +966,12 @@
                                             </ul>
                                         </div>
                                     ` : ''}
+                                    
+                                    ${consolidated.tools.length === 0 && consolidated.dependencies.length === 0 && consolidated.deliverables.length === 0 ? `
+                                        <div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic; background: #f8f9fa; border-radius: 8px; margin-top: 15px;">
+                                            📋 Additional details to be defined
+                                        </div>
+                                    ` : ''}
                                 </div>
                             </div>
                         </div>

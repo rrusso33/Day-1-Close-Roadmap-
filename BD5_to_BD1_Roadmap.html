@@ -536,21 +536,36 @@
 
         async function loadData() {
             try {
+                console.log('🔍 Attempting to load:', SHEET_URL);
                 const response = await fetch(SHEET_URL);
-                const csvText = await response.text();
-                const data = parseCSV(csvText);
+                console.log('📡 Response status:', response.status, response.statusText);
                 
-                console.log(`✅ Loaded ${data.length} tasks`);
+                if (!response.ok) {
+                    throw new Error(`HTTP error! status: ${response.status}`);
+                }
+                
+                const csvText = await response.text();
+                console.log('📄 CSV length:', csvText.length, 'characters');
+                console.log('📄 First 200 chars:', csvText.substring(0, 200));
+                
+                const data = parseCSV(csvText);
+                console.log(`✅ Parsed ${data.length} tasks`);
+                
+                if (data.length === 0) {
+                    throw new Error('No data parsed from CSV');
+                }
                 
                 renderRoadmap(data);
                 document.getElementById('lastUpdated').innerHTML = `📅 Updated: ${new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}`;
                 
             } catch (error) {
-                console.error('Error:', error);
+                console.error('❌ Error details:', error);
                 document.getElementById('mainContent').innerHTML = `
                     <div style="text-align: center; padding: 60px; color: #dc3545;">
                         <div style="font-size: 3em; margin-bottom: 25px;">⚠️</div>
                         <div style="font-size: 1.5em; margin-bottom: 20px;">Error loading data</div>
+                        <div style="font-size: 1em; margin-bottom: 20px; color: #6c757d;">Error: ${error.message}</div>
+                        <div style="font-size: 0.9em; margin-bottom: 20px; color: #6c757d;">Check browser console (F12) for details</div>
                         <button onclick="loadData()" style="padding: 15px 30px; border: none; background: #667eea; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1em;">Retry</button>
                     </div>
                 `;

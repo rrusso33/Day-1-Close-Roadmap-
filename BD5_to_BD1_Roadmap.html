@@ -29,6 +29,7 @@
             bottom: 0;
             background: rgba(102, 126, 234, 0.95);
             display: flex;
+            flex-direction: column;
             align-items: center;
             justify-content: center;
             z-index: 10000;
@@ -44,7 +45,7 @@
             width: 50px;
             height: 50px;
             animation: spin 1s linear infinite;
-            margin-right: 20px;
+            margin-bottom: 20px;
         }
         @keyframes spin {
             0% { transform: rotate(0deg); }
@@ -146,7 +147,6 @@
         .timeline-value { font-size: 1.8em; font-weight: 700; }
         .content { padding: 50px 40px; }
         
-        /* Overall Progress Section */
         .overall-progress {
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             color: white;
@@ -194,7 +194,6 @@
             margin-bottom: 5px;
         }
         
-        /* Status Badges */
         .status-badge {
             display: inline-block;
             padding: 6px 14px;
@@ -221,7 +220,6 @@
             color: #721c24;
         }
         
-        /* Executive Dashboard */
         .exec-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
@@ -241,7 +239,6 @@
         .dashboard-card .number { font-size: 3em; font-weight: 700; margin-bottom: 10px; }
         .dashboard-card .label { font-size: 1em; opacity: 0.95; }
         
-        /* Interactive Timeline */
         .timeline-section {
             background: #f8f9fa;
             padding: 40px;
@@ -318,7 +315,6 @@
             border-radius: 5px;
         }
         
-        /* Impact Section */
         .impact-section {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -352,7 +348,6 @@
         .impact-card h3 { font-size: 1.3em; margin-bottom: 10px; }
         .impact-hours { font-size: 2em; font-weight: 700; margin-top: 10px; }
         
-        /* Collapsible Phases */
         .phase-collapsible {
             margin-bottom: 25px;
             border: 2px solid #e9ecef;
@@ -430,17 +425,16 @@
             background: white;
         }
         .phase-content.active {
-            max-height: 10000px;
+            max-height: 15000px;
             padding: 30px;
         }
         
-        /* Category Sections within Phases */
         .category-section {
-            margin-bottom: 35px;
+            margin-bottom: 40px;
         }
         .category-header {
             color: #1e3c72;
-            font-size: 1.3em;
+            font-size: 1.4em;
             font-weight: 700;
             margin-bottom: 15px;
             padding-bottom: 10px;
@@ -453,7 +447,6 @@
             font-weight: 600;
         }
         
-        /* Task Cards */
         .task-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -525,10 +518,17 @@
             padding: 10px;
             background: #f8f9fa;
             border-radius: 6px;
-            font-style: italic;
+        }
+        .warning-box {
+            background: #fff3cd;
+            padding: 10px;
+            border-radius: 6px;
+            font-size: 0.85em;
+            color: #856404;
+            margin-top: 10px;
+            border-left: 4px solid #ffc107;
         }
         
-        /* Milestone */
         .milestone {
             background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             color: white;
@@ -540,6 +540,70 @@
             font-weight: 700;
         }
         
+        .tools-section {
+            background: #f8f9fa;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+        .tools-section h2 { color: #1e3c72; font-size: 2em; margin-bottom: 30px; text-align: center; }
+        .tools-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+        .tool-card {
+            background: white;
+            padding: 25px;
+            border-radius: 12px;
+            border: 2px solid #e9ecef;
+            transition: all 0.3s ease;
+        }
+        .tool-card:hover {
+            border-color: #667eea;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        .tool-name { font-size: 1.3em; font-weight: 700; color: #2c3e50; margin-bottom: 10px; }
+        
+        .risks-section {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+            border: 3px solid #ffc107;
+        }
+        .risks-section h2 { color: #1e3c72; font-size: 2em; margin-bottom: 30px; text-align: center; }
+        .risk-item {
+            background: #fff3cd;
+            border-left: 5px solid #ffc107;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 15px;
+        }
+        
+        .roi-section {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 40px;
+            border-radius: 15px;
+            margin: 50px 0;
+        }
+        .roi-section h2 { font-size: 2em; margin-bottom: 25px; text-align: center; }
+        .roi-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmin(200px, 1fr));
+            gap: 20px;
+            text-align: center;
+        }
+        .roi-metric {
+            background: rgba(255, 255, 255, 0.15);
+            padding: 25px;
+            border-radius: 12px;
+        }
+        .roi-value { font-size: 2.5em; font-weight: 700; margin-bottom: 10px; }
+        .roi-label { font-size: 1em; opacity: 0.95; }
+        
         @media print {
             body { background: white; padding: 0; }
             .print-btn, .refresh-btn, .live-indicator { display: none; }
@@ -550,7 +614,9 @@
         @media (max-width: 768px) {
             .header h1 { font-size: 2em; }
             .task-grid { grid-template-columns: 1fr; }
-            .print-btn, .refresh-btn { top: 10px; right: 10px; padding: 8px 16px; font-size: 0.9em; }
+            .print-btn, .refresh-btn { top: 10px; padding: 8px 16px; font-size: 0.9em; }
+            .refresh-btn { right: 10px; }
+            .print-btn { right: 120px; }
             .last-updated { position: static; margin-bottom: 15px; }
         }
     </style>
@@ -559,6 +625,7 @@
     <div class="loading-overlay" id="loadingOverlay">
         <div class="spinner"></div>
         <div>Loading live data from Google Sheets...</div>
+        <div style="font-size: 0.7em; opacity: 0.8; margin-top: 10px;">Detailed roadmap will display momentarily</div>
     </div>
     
     <button class="refresh-btn" onclick="loadSheetData()">🔄 Refresh Data</button>
@@ -600,7 +667,7 @@
         </div>
 
         <div class="content" id="mainContent">
-            <!-- Content will be dynamically loaded from Google Sheets -->
+            <!-- Will be populated with detailed content + live data -->
         </div>
     </div>
 
@@ -609,6 +676,7 @@
         const CORS_PROXY = 'https://corsproxy.io/?';
 
         let allData = [];
+        let sheetDataLoaded = false;
 
         async function loadSheetData() {
             try {
@@ -625,25 +693,21 @@
                 }
                 
                 allData = parseCSV(csvText);
-                console.log('Loaded data:', allData);
+                console.log('Loaded data from Google Sheets:', allData);
+                sheetDataLoaded = true;
                 
-                renderRoadmap(allData);
+                renderDetailedRoadmap();
                 
                 document.getElementById('lastUpdated').innerHTML = `📅 Last Updated: ${new Date().toLocaleString()}`;
                 document.getElementById('loadingOverlay').classList.add('hidden');
                 
             } catch (error) {
                 console.error('Error loading sheet data:', error);
-                document.getElementById('loadingOverlay').innerHTML = `
-                    <div style="text-align: center;">
-                        <div style="font-size: 2em; margin-bottom: 20px;">⚠️</div>
-                        <div>Error loading data from Google Sheets</div>
-                        <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.8;">${error.message}</div>
-                        <button onclick="loadSheetData()" style="margin-top: 20px; padding: 10px 20px; border: none; background: white; color: #667eea; border-radius: 5px; cursor: pointer; font-weight: 600;">
-                            Retry
-                        </button>
-                    </div>
-                `;
+                // Fall back to static content
+                sheetDataLoaded = false;
+                renderDetailedRoadmap();
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                document.getElementById('lastUpdated').innerHTML = `📅 Last Updated: ${new Date().toLocaleString()} (Static View)`;
             }
         }
 
@@ -688,10 +752,8 @@
             return values;
         }
 
-        function renderRoadmap(data) {
-            const phaseData = groupByPhase(data);
-            const stats = calculateStats(data);
-            const categoryTotals = calculateCategoryTotals(data);
+        function renderDetailedRoadmap() {
+            const stats = sheetDataLoaded ? calculateStats(allData) : getDefaultStats();
             
             let html = `
                 <!-- Overall Progress Tracker -->
@@ -728,24 +790,24 @@
                 </h2>
                 <div class="exec-dashboard">
                     <div class="dashboard-card">
-                        <div class="number">${stats.totalTasks}</div>
-                        <div class="label">Total Tasks</div>
+                        <div class="number">${stats.totalTasks}+</div>
+                        <div class="label">Tasks Analyzed</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
-                        <div class="number">${stats.completedTasks}</div>
-                        <div class="label">Tasks Completed</div>
+                        <div class="number">90+</div>
+                        <div class="label">High-Impact Automations</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">
-                        <div class="number">${Math.round(stats.totalHoursSaved)}</div>
-                        <div class="label">Hours to Save Monthly</div>
+                        <div class="number">100+</div>
+                        <div class="label">Hours Saved Monthly</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);">
-                        <div class="number">${Object.keys(phaseData).length}</div>
-                        <div class="label">Implementation Phases</div>
+                        <div class="number">4 Days</div>
+                        <div class="label">Close Reduction</div>
                     </div>
                     <div class="dashboard-card" style="background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%);">
-                        <div class="number">${stats.overallProgress.toFixed(0)}%</div>
-                        <div class="label">Overall Progress</div>
+                        <div class="number">80%</div>
+                        <div class="label">Time Savings</div>
                     </div>
                 </div>
 
@@ -766,126 +828,135 @@
                         </div>
                         
                         <div class="timeline-bar-container">
-                            <div class="timeline-segment segment-m1" onclick="scrollToPhase('phase-M1')" title="M1: Foundation">
-                                M1
+                            <div class="timeline-segment segment-m1" onclick="scrollToPhase('phase-m1')" title="M1: Foundation (Complete)">
+                                M1 ✓
                             </div>
-                            <div class="timeline-segment segment-m3" onclick="scrollToPhase('phase-M3')" title="M3-M4: Core Automations">
-                                M3-M4
+                            <div class="timeline-segment segment-m3" onclick="scrollToPhase('phase-m3')" title="M3-M4: Core Automations">
+                                M3-M4: Core Automations
                             </div>
-                            <div class="timeline-segment segment-m5" onclick="scrollToPhase('phase-M5')" title="M5: Pre-Close">
-                                M5
+                            <div class="timeline-segment segment-m5" onclick="scrollToPhase('phase-m5')" title="M5: Pre-Close">
+                                M5: Pre-Close
                             </div>
-                            <div class="timeline-segment segment-m6" onclick="scrollToPhase('phase-M6')" title="M6: BD1 Final">
-                                M6
+                            <div class="timeline-segment segment-m6" onclick="scrollToPhase('phase-m6')" title="M6: BD1 Final">
+                                M6: BD1
                             </div>
                         </div>
                         
-                        <div class="timeline-legend" id="timelineLegend">
-                            <!-- Will be populated dynamically -->
+                        <div class="timeline-legend">
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #28a745;"></div>
+                                <span>M1: Foundation (100% Complete)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #667eea;"></div>
+                                <span>M3-M4: Core Automations (${getPhaseProgress('M3-M4')}% Complete)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #f093fb;"></div>
+                                <span>M5: Pre-Close Shifts (${getPhaseProgress('M5')}% Complete)</span>
+                            </div>
+                            <div class="legend-item">
+                                <div class="legend-color" style="background: #ff6a00;"></div>
+                                <span>M6: BD1 Final Push (${getPhaseProgress('M6')}% Complete)</span>
+                            </div>
                         </div>
                     </div>
                 </div>
 
                 <!-- High Impact Opportunities -->
                 <div class="impact-section">
-                    <h2>🎯 Highest Impact Opportunities by Category</h2>
-                    <div class="impact-grid" id="impactCards">
-                        <!-- Will be populated dynamically -->
+                    <h2>🎯 Highest Impact Opportunities</h2>
+                    <div class="impact-grid">
+                        <div class="impact-card">
+                            <div class="impact-status">
+                                <span class="status-badge ${getTaskStatus('accruals.ai')}">${getTaskStatusText('accruals.ai')}</span>
+                            </div>
+                            <h3>🔍 Accruals Automation</h3>
+                            <p>Implement accruals.ai for vendor accrual analysis, SURL tracking, PO/PR analysis</p>
+                            <div class="impact-hours">~45 hrs/mo</div>
+                            <p style="margin-top: 10px; font-size: 0.9em;">45+ tasks automated</p>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-status">
+                                <span class="status-badge ${getTaskStatus('cash')}">${getTaskStatusText('cash')}</span>
+                            </div>
+                            <h3>💰 Cash Reconciliations</h3>
+                            <p>Automate 60+ bank account reconciliations across Chase, PNC, SVB, NBKC</p>
+                            <div class="impact-hours">~20 hrs/mo</div>
+                            <p style="margin-top: 10px; font-size: 0.9em;">70+ accounts automated</p>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-status">
+                                <span class="status-badge ${getTaskStatus('payroll')}">${getTaskStatusText('payroll')}</span>
+                            </div>
+                            <h3>👥 Payroll Processing</h3>
+                            <p>API-driven payroll reconciliation with automated GL mapping</p>
+                            <div class="impact-hours">~25 hrs/mo</div>
+                            <p style="margin-top: 10px; font-size: 0.9em;">30+ reconciliations</p>
+                        </div>
+                        <div class="impact-card">
+                            <div class="impact-status">
+                                <span class="status-badge ${getTaskStatus('reporting')}">${getTaskStatusText('reporting')}</span>
+                            </div>
+                            <h3>📊 Financial Reporting</h3>
+                            <p>Automate cash flux, close deck, MTL reporting</p>
+                            <div class="impact-hours">~15 hrs/mo</div>
+                            <p style="margin-top: 10px; font-size: 0.9em;">Tool: Numeric + Cursor</p>
+                        </div>
                     </div>
                 </div>
 
-                <!-- Phases -->
+                <!-- Phases with Detailed Content -->
                 <h2 style="color: #1e3c72; font-size: 2em; margin: 50px 0 30px 0; text-align: center;">
-                    📋 Implementation Phases - Organized by Theme (Click to Expand)
+                    📋 Implementation Phases (Click to Expand Details)
                 </h2>
-            `;
-            
-            // Render phases
-            const phaseOrder = ['M1', 'M3', 'M4', 'M5', 'M6'];
-            phaseOrder.forEach(phaseName => {
-                if (!phaseData[phaseName]) return;
-                
-                const phaseTasks = phaseData[phaseName];
-                const phaseStats = calculatePhaseStats(phaseTasks);
-                const categories = groupByCategory(phaseTasks);
-                const isComplete = phaseStats.progress === 100;
-                
-                html += `
-                    <div class="phase-collapsible ${isComplete ? 'complete' : ''}" id="phase-${phaseName}">
-                        <div class="phase-header-click" onclick="togglePhase('${phaseName}')">
-                            <div class="phase-info">
-                                <div class="phase-name">
-                                    ${getPhaseFullName(phaseName)}
-                                    <span class="status-badge status-${getPhaseStatus(phaseStats.progress)}">${getPhaseStatusText(phaseStats.progress)}</span>
-                                </div>
-                                <div class="phase-dates">
-                                    ${getPhaseDescription(phaseName)} | ${phaseStats.completed}/${phaseStats.total} tasks complete • ${Math.round(phaseStats.hoursSaved)} hours/month
-                                </div>
-                                <div class="phase-progress-bar">
-                                    <div class="phase-progress-fill" style="width: ${phaseStats.progress}%;"></div>
-                                </div>
+
+                <!-- M1 Phase -->
+                <div class="phase-collapsible complete" id="phase-m1">
+                    <div class="phase-header-click" onclick="togglePhase('m1')">
+                        <div class="phase-info">
+                            <div class="phase-name">
+                                M1: Foundation & Assessment ✓
+                                <span class="status-badge status-complete">Complete</span>
                             </div>
-                            <div class="phase-toggle">▼</div>
-                        </div>
-                        <div class="phase-content" id="content-${phaseName}">
-                `;
-                
-                // Render categories within each phase
-                Object.keys(categories).sort().forEach(categoryName => {
-                    const categoryTasks = categories[categoryName];
-                    const categoryStats = calculateCategoryStats(categoryTasks);
-                    
-                    html += `
-                        <div class="category-section">
-                            <div class="category-header">${getCategoryIcon(categoryName)} ${categoryName}</div>
-                            <div class="category-summary">
-                                ${categoryStats.total} tasks • ${categoryStats.completed} complete • ${Math.round(categoryStats.hoursSaved)} hours/month
-                            </div>
-                            <div class="task-grid">
-                    `;
-                    
-                    categoryTasks.forEach(task => {
-                        const status = normalizeStatus(task.Status || task.status || 'Not Started');
-                        const statusClass = status.toLowerCase().replace(/\s+/g, '-');
-                        
-                        html += `
-                            <div class="task-card ${statusClass}">
-                                <div class="task-status-indicator">
-                                    <span class="status-badge status-${statusClass}">${status}</span>
-                                </div>
-                                <div class="task-title">${task['Task Name'] || task.Task || 'Unnamed Task'}</div>
-                                ${task['Hours Saved'] ? `<div class="task-hours">${task['Hours Saved']} hrs</div>` : ''}
-                                ${task.Assignee ? `<div class="task-assignee">👤 ${task.Assignee}</div>` : ''}
-                                ${task.Tool ? `<div class="task-tool">🤖 ${task.Tool}</div>` : ''}
-                                ${task.Notes ? `<div class="task-notes">${task.Notes}</div>` : ''}
-                            </div>
-                        `;
-                    });
-                    
-                    html += `
+                            <div class="phase-dates">October 2025</div>
+                            <div class="phase-progress-bar">
+                                <div class="phase-progress-fill" style="width: 100%;"></div>
                             </div>
                         </div>
-                    `;
-                });
-                
-                html += `
+                        <div class="phase-toggle">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-m1">
+                        <p style="color: #6c757d; margin-bottom: 20px; line-height: 1.8;">
+                            <strong>Objective:</strong> Assess current state and identify automation opportunities<br>
+                            <strong>Outcome:</strong> Identified 180+ tasks, categorized 50+ as no automation required, established baseline for BD5 close<br>
+                            <strong>Key Deliverables:</strong> Process maps, pain point analysis, automation priority matrix
+                        </p>
+                        <div style="background: #d4edda; padding: 20px; border-radius: 10px; border-left: 5px solid #28a745;">
+                            <strong style="color: #155724;">✓ PHASE COMPLETE</strong>
+                            <p style="color: #155724; margin-top: 10px;">Foundation established. Ready for core automation phase.</p>
                         </div>
                     </div>
-                `;
+                </div>
+
+                ${generateM3M4Content()}
                 
-                // Add milestone after certain phases
-                if (phaseName === 'M1') {
-                    html += `<div class="milestone">✨ M1 Complete - Foundation Established</div>`;
-                } else if (phaseName === 'M4') {
-                    html += `<div class="milestone">🎯 Target: BD3 Close Achievement | September 30, 2026</div>`;
-                } else if (phaseName === 'M5') {
-                    html += `<div class="milestone">✨ Target: BD2 Close Achievement | December 31, 2026</div>`;
-                } else if (phaseName === 'M6') {
-                    html += `<div class="milestone">🎊 ULTIMATE GOAL: First BD1 Close - February 1, 2027</div>`;
-                }
-            });
-            
-            html += `
+                <div class="milestone">🎯 Target: BD3 Close Achievement | September 30, 2026</div>
+
+                ${generateM5Content()}
+                
+                <div class="milestone">✨ Target: BD2 Close Achievement | December 31, 2026</div>
+
+                ${generateM6Content()}
+                
+                <div class="milestone">🎊 ULTIMATE GOAL: First BD1 Close - February 1, 2027</div>
+
+                ${generateToolsSection()}
+
+                ${generateRisksSection()}
+
+                ${generateROISection()}
+
                 <!-- Instructions -->
                 <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 50px 0;">
                     <h3 style="font-size: 1.5em; margin-bottom: 15px;">🔄 This Roadmap Updates Automatically</h3>
@@ -893,45 +964,386 @@
                         Your team updates the <strong>Accounting Roadmap</strong> tab in Google Sheets, and this page reflects changes when refreshed.
                     </p>
                     <p style="margin-top: 15px; line-height: 1.8; opacity: 0.95;">
-                        Click the <strong>🔄 Refresh Data</strong> button or reload the page to see the latest updates!
+                        <strong>Static content</strong> provides the detailed framework while <strong>live data</strong> tracks progress and status updates.
                     </p>
                     <p style="margin-top: 15px; line-height: 1.8; opacity: 0.95; font-size: 0.9em;">
-                        <strong>Auto-refresh:</strong> This page automatically refreshes data every 5 minutes.
+                        <strong>Auto-refresh:</strong> This page automatically refreshes data every 5 minutes. Click 🔄 Refresh Data for immediate updates.
                     </p>
                 </div>
             `;
             
             document.getElementById('mainContent').innerHTML = html;
-            
-            // Populate impact cards
-            renderImpactCards(categoryTotals);
-            
-            // Populate timeline legend
-            renderTimelineLegend(phaseData);
         }
 
-        function groupByPhase(data) {
-            const phases = {};
-            data.forEach(row => {
-                const phase = row.Phase || row.phase || 'Uncategorized';
-                if (!phases[phase]) {
-                    phases[phase] = [];
-                }
-                phases[phase].push(row);
-            });
-            return phases;
+        function generateM3M4Content() {
+            return `
+                <!-- M3-M4 Phase -->
+                <div class="phase-collapsible" id="phase-m3">
+                    <div class="phase-header-click" onclick="togglePhase('m3')">
+                        <div class="phase-info">
+                            <div class="phase-name">
+                                M3-M4: Core Automations & System Integrations
+                                <span class="status-badge ${getPhaseStatusBadge('M3-M4')}">${getPhaseStatusText('M3-M4')}</span>
+                            </div>
+                            <div class="phase-dates">April 1 - September 30, 2026 | Goal: BD5 → BD3</div>
+                            <div class="phase-progress-bar">
+                                <div class="phase-progress-fill" style="width: ${getPhaseProgress('M3-M4')}%;"></div>
+                            </div>
+                        </div>
+                        <div class="phase-toggle">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-m3">
+                        <p style="color: #6c757d; margin-bottom: 25px; line-height: 1.8;">
+                            <strong>Objective:</strong> Deploy high-impact automations across accruals, cash, payroll, and reconciliations<br>
+                            <strong>Target Savings:</strong> 80+ hours monthly<br>
+                            <strong>Key Tools:</strong> accruals.ai, Cursor, NetSuite enhancements, API integrations
+                        </p>
+
+                        <div class="category-section">
+                            <div class="category-header">💼 Accruals Automation (M4: System Integration)</div>
+                            <div class="category-summary">45 tasks • ~45 hrs/mo savings • accruals.ai implementation</div>
+                            <div class="task-grid">
+                                <div class="task-card ${getTaskClass('Master Accrual')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('Master Accrual')}">${getSpecificTaskStatusText('Master Accrual')}</span>
+                                    </div>
+                                    <div class="task-title">Master Accrual Workbook Analysis</div>
+                                    <div class="task-hours">7.0 hrs</div>
+                                    <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
+                                    <div class="task-tool">🤖 accruals.ai</div>
+                                    <div class="task-notes">✅ Trial active - awaiting legal approval. Auto-analyze vendor accruals with AI pattern recognition.</div>
+                                </div>
+                                <div class="task-card ${getTaskClass('SURL')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('SURL')}">${getSpecificTaskStatusText('SURL')}</span>
+                                    </div>
+                                    <div class="task-title">Monthly SURL Analysis</div>
+                                    <div class="task-hours">5.0 hrs</div>
+                                    <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
+                                    <div class="task-tool">🤖 accruals.ai</div>
+                                    <div class="task-notes">Automated tracking of service unbilled revenue liabilities with ML predictions.</div>
+                                </div>
+                                <div class="task-card ${getTaskClass('BD Accrual')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('BD Accrual')}">${getSpecificTaskStatusText('BD Accrual')}</span>
+                                    </div>
+                                    <div class="task-title">BD1/BD3/BD5 Accrual Analysis</div>
+                                    <div class="task-hours">7.5 hrs</div>
+                                    <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
+                                    <div class="task-tool">🤖 accruals.ai</div>
+                                    <div class="task-notes">Critical path: Multi-day analysis consolidated into automated daily runs.</div>
+                                </div>
+                                <div class="task-card ${getTaskClass('PO PR')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('PO PR')}">${getSpecificTaskStatusText('PO PR')}</span>
+                                    </div>
+                                    <div class="task-title">PO & PR Analysis</div>
+                                    <div class="task-hours">4.0 hrs</div>
+                                    <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
+                                    <div class="task-tool">🤖 accruals.ai</div>
+                                    <div class="task-notes">Automated review of purchase orders and purchase requisitions for accrual completeness.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="category-section">
+                            <div class="category-header">💰 Cash & Cash Equivalents (M3: Core Automations)</div>
+                            <div class="category-summary">70+ bank accounts • ~20 hrs/mo savings • AI reconciliation tools</div>
+                            <div class="task-grid">
+                                <div class="task-card ${getTaskClass('Chase Recon')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('Chase Recon')}">${getSpecificTaskStatusText('Chase Recon')}</span>
+                                    </div>
+                                    <div class="task-title">Chase Month End Reconciliation</div>
+                                    <div class="task-hours">4.0 hrs</div>
+                                    <div class="task-assignee">👤 Jecah Cabaling → Charles Sikazwe</div>
+                                    <div class="task-tool">🤖 Cursor / AI Reconciliation</div>
+                                    <div class="warning-box">⚠️ Blocker: Need budget for AI reconciliation platform</div>
+                                </div>
+                                <div class="task-card ${getTaskClass('PNC SVB')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('PNC SVB')}">${getSpecificTaskStatusText('PNC SVB')}</span>
+                                    </div>
+                                    <div class="task-title">PNC, NBKC, SVB Reconciliations</div>
+                                    <div class="task-hours">5.0 hrs</div>
+                                    <div class="task-assignee">👤 Minerva Suarez → Charles Sikazwe</div>
+                                    <div class="task-tool">🤖 Cursor</div>
+                                    <div class="task-notes">Multiple bank accounts automated with unified reconciliation engine.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="category-section">
+                            <div class="category-header">👥 Payroll Processing (M3: Core Automations)</div>
+                            <div class="category-summary">30+ reconciliations • ~25 hrs/mo savings • Cursor + API integration</div>
+                            <div class="task-grid">
+                                <div class="task-card ${getTaskClass('Canada Payroll')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('Canada Payroll')}">${getSpecificTaskStatusText('Canada Payroll')}</span>
+                                    </div>
+                                    <div class="task-title">Canada Payroll (Mid-Month)</div>
+                                    <div class="task-hours">4.0 hrs</div>
+                                    <div class="task-assignee">👤 Selena Ochoa → Rachele Russo</div>
+                                    <div class="task-tool">🤖 AI Agent Tool</div>
+                                    <div class="task-notes">Agent to map BDO payroll to GL by dept/class/location automatically.</div>
+                                </div>
+                                <div class="task-card ${getTaskClass('US Payroll')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('US Payroll')}">${getSpecificTaskStatusText('US Payroll')}</span>
+                                    </div>
+                                    <div class="task-title">US Payroll Reconciliation</div>
+                                    <div class="task-hours">6.0 hrs</div>
+                                    <div class="task-assignee">👤 Selena Ochoa → Rachele Russo</div>
+                                    <div class="task-tool">🤖 Cursor - API Integration</div>
+                                    <div class="warning-box">⚠️ Prerequisite: Ensure payroll earning codes mapped to GL first</div>
+                                </div>
+                                <div class="task-card ${getTaskClass('Payroll GL')}">
+                                    <div class="task-status-indicator">
+                                        <span class="status-badge ${getSpecificTaskStatus('Payroll GL')}">${getSpecificTaskStatusText('Payroll GL')}</span>
+                                    </div>
+                                    <div class="task-title">Payroll GL Reconciliations (15 accounts)</div>
+                                    <div class="task-hours">30.0 hrs</div>
+                                    <div class="task-assignee">👤 Selena Ochoa → Rachele Russo</div>
+                                    <div class="task-tool">🤖 Cursor</div>
+                                    <div class="task-notes">401k, HSA, FSA, PTO, Taxes, Bonuses, Commissions, etc. - full automation suite.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #0066cc;">
+                            <strong style="color: #0066cc;">🎯 Milestone Target: BD3 Close by September 30, 2026</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
-        function groupByCategory(tasks) {
-            const categories = {};
-            tasks.forEach(task => {
-                const category = task.Category || task.category || 'Other';
-                if (!categories[category]) {
-                    categories[category] = [];
-                }
-                categories[category].push(task);
-            });
-            return categories;
+        function generateM5Content() {
+            return `
+                <!-- M5 Phase -->
+                <div class="phase-collapsible" id="phase-m5">
+                    <div class="phase-header-click" onclick="togglePhase('m5')">
+                        <div class="phase-info">
+                            <div class="phase-name">
+                                M5: Pre-Close Shifts & Continuous Close
+                                <span class="status-badge ${getPhaseStatusBadge('M5')}">${getPhaseStatusText('M5')}</span>
+                            </div>
+                            <div class="phase-dates">October 1 - December 31, 2026 | Goal: BD3 → BD2</div>
+                            <div class="phase-progress-bar">
+                                <div class="phase-progress-fill" style="width: ${getPhaseProgress('M5')}%;"></div>
+                            </div>
+                        </div>
+                        <div class="phase-toggle">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-m5">
+                        <p style="color: #6c757d; margin-bottom: 25px; line-height: 1.8;">
+                            <strong>Objective:</strong> Shift quarterly tasks forward and implement continuous close principles<br>
+                            <strong>Focus:</strong> Timing optimization and dependency elimination<br>
+                            <strong>Impact:</strong> Reduce critical path duration by moving routine activities to pre-close periods
+                        </p>
+                        <div style="background: #f8f9fa; padding: 25px; border-radius: 10px;">
+                            <h4 style="color: #1e3c72; margin-bottom: 15px;">Key Initiatives:</h4>
+                            <ul style="line-height: 2; color: #495057; margin-left: 20px;">
+                                <li>Move quarterly accruals (Sabbatical, IBNR) from BD1 to BD-3</li>
+                                <li>Implement daily reconciliation discipline for cash and key BS accounts</li>
+                                <li>Shift routine journal entries to weekly cadence vs month-end</li>
+                                <li>Resequence close calendar for parallel processing</li>
+                                <li>Eliminate sequential dependencies on critical path</li>
+                            </ul>
+                        </div>
+                        <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid #0066cc;">
+                            <strong style="color: #0066cc;">🎯 Milestone Target: BD2 Close by December 31, 2026</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateM6Content() {
+            return `
+                <!-- M6 Phase -->
+                <div class="phase-collapsible" id="phase-m6">
+                    <div class="phase-header-click" onclick="togglePhase('m6')">
+                        <div class="phase-info">
+                            <div class="phase-name">
+                                M6: BD1 Subsystems & Final Push
+                                <span class="status-badge ${getPhaseStatusBadge('M6')}">${getPhaseStatusText('M6')}</span>
+                            </div>
+                            <div class="phase-dates">January 1 - February 1, 2027 | Goal: BD2 → BD1</div>
+                            <div class="phase-progress-bar">
+                                <div class="phase-progress-fill" style="width: ${getPhaseProgress('M6')}%;"></div>
+                            </div>
+                        </div>
+                        <div class="phase-toggle">▼</div>
+                    </div>
+                    <div class="phase-content" id="content-m6">
+                        <p style="color: #6c757d; margin-bottom: 25px; line-height: 1.8;">
+                            <strong>Objective:</strong> Final automation wave and BD1 readiness validation<br>
+                            <strong>Focus:</strong> System fine-tuning, parallel testing, team training<br>
+                            <strong>Success Criteria:</strong> Complete first BD1 close by February 1, 2027
+                        </p>
+                        <div class="task-grid">
+                            <div class="task-card ${getTaskClass('Prepaid')}">
+                                <div class="task-status-indicator">
+                                    <span class="status-badge ${getSpecificTaskStatus('Prepaid')}">${getSpecificTaskStatusText('Prepaid')}</span>
+                                </div>
+                                <div class="task-title">Prepaid Automation Completion</div>
+                                <div class="task-hours">7.5 hrs</div>
+                                <div class="task-assignee">👤 Aileen Costa & Jecah Cabaling</div>
+                                <div class="task-tool">🤖 Cursor + Gemini/ChatGPT</div>
+                            </div>
+                            <div class="task-card ${getTaskClass('Test Close')}">
+                                <div class="task-status-indicator">
+                                    <span class="status-badge ${getSpecificTaskStatus('Test Close')}">${getSpecificTaskStatusText('Test Close')}</span>
+                                </div>
+                                <div class="task-title">Parallel BD1 Test Closes</div>
+                                <div class="task-hours">Project</div>
+                                <div class="task-assignee">👤 Full Corporate Accounting Team</div>
+                                <div class="task-notes">Run multiple simulations to validate automation and timing.</div>
+                            </div>
+                            <div class="task-card ${getTaskClass('QC Framework')}">
+                                <div class="task-status-indicator">
+                                    <span class="status-badge ${getSpecificTaskStatus('QC Framework')}">${getSpecificTaskStatusText('QC Framework')}</span>
+                                </div>
+                                <div class="task-title">BD1 Quality Control Framework</div>
+                                <div class="task-hours">Project</div>
+                                <div class="task-assignee">👤 Rachele Russo & Charles Sikazwe</div>
+                                <div class="task-notes">Automated quality checks for compressed timeline.</div>
+                            </div>
+                            <div class="task-card ${getTaskClass('Playbook')}">
+                                <div class="task-status-indicator">
+                                    <span class="status-badge ${getSpecificTaskStatus('Playbook')}">${getSpecificTaskStatusText('Playbook')}</span>
+                                </div>
+                                <div class="task-title">BD1 Close Playbook & Training</div>
+                                <div class="task-hours">Training</div>
+                                <div class="task-assignee">👤 All Team Leads</div>
+                                <div class="task-notes">Full team training on BD1 procedures and timing.</div>
+                            </div>
+                        </div>
+                        <div style="background: #d4edda; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #28a745;">
+                            <strong style="color: #155724; font-size: 1.2em;">🎊 ULTIMATE GOAL: First BD1 Close - February 1, 2027</strong>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateToolsSection() {
+            return `
+                <div class="tools-section">
+                    <h2>🛠️ Technology & Tools Stack</h2>
+                    <div class="tools-grid">
+                        <div class="tool-card">
+                            <div class="tool-name">accruals.ai</div>
+                            <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
+                                <strong>Use:</strong> Comprehensive accrual automation<br>
+                                <strong>Tasks:</strong> 45+ tasks (~45 hrs/mo)<br>
+                                <strong>Status:</strong> Trial - awaiting legal approval
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-name">Cursor</div>
+                            <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
+                                <strong>Use:</strong> Custom automation development<br>
+                                <strong>Tasks:</strong> Reconciliations, payroll, APIs<br>
+                                <strong>Features:</strong> API integration, web portals
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-name">NetSuite</div>
+                            <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
+                                <strong>Use:</strong> ERP automation & workflows<br>
+                                <strong>Tasks:</strong> IC markup, leases, prepaid<br>
+                                <strong>Status:</strong> Enhanced modules in development
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-name">AI Agent Tools</div>
+                            <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
+                                <strong>Use:</strong> Intelligent data mapping<br>
+                                <strong>Tasks:</strong> Canada payroll GL mapping<br>
+                                <strong>Features:</strong> Auto-map by dept/class/location
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-name">Numeric</div>
+                            <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
+                                <strong>Use:</strong> Close management & reporting<br>
+                                <strong>Tasks:</strong> Close deck, MTL reporting<br>
+                                <strong>Status:</strong> Existing platform
+                            </div>
+                        </div>
+                        <div class="tool-card">
+                            <div class="tool-name">Gemini/ChatGPT</div>
+                            <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
+                                <strong>Use:</strong> Ad-hoc automation & analysis<br>
+                                <strong>Tasks:</strong> One-off scripts, data analysis<br>
+                                <strong>Features:</strong> Quick automation prototypes
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateRisksSection() {
+            return `
+                <div class="risks-section">
+                    <h2>⚠️ Critical Risks & Dependencies</h2>
+                    <div class="risk-item">
+                        <strong>Cash Reconciliation Budget:</strong> Need to identify and secure budget for robust AI-powered cash reconciliation platform to automate 60+ bank account reconciliations. Estimated cost: $15-30K annually.
+                    </div>
+                    <div class="risk-item">
+                        <strong>accruals.ai Legal Approval:</strong> Trial is ready but awaiting legal approval. This blocks the largest time-saving opportunity (~45 hours/month). Recommend expediting approval process with legal team.
+                    </div>
+                    <div class="risk-item">
+                        <strong>Payroll GL Mapping Cleanup:</strong> Must ensure payroll earning codes are correctly mapped to GL accounts before beginning payroll automation. Data quality is prerequisite for successful automation. Est. 2-3 weeks cleanup.
+                    </div>
+                    <div class="risk-item">
+                        <strong>Cross-Functional Dependencies:</strong> FNT bandwidth required for Symmetry reclass automation. PeopleTech bandwidth needed for payroll API integration. Head of Sales must input timely Salesforce data for commission accruals.
+                    </div>
+                    <div class="risk-item">
+                        <strong>Change Management:</strong> Team must adopt new tools and processes across 6-month automation build phase. Require dedicated training time (est. 2-3 hours per person per tool) and change management support.
+                    </div>
+                    <div class="risk-item">
+                        <strong>Lease System Updates:</strong> Must add Guideline and Gusto Inc leases to SB (lease management system). Blocker for lease automation workstream.
+                    </div>
+                </div>
+            `;
+        }
+
+        function generateROISection() {
+            return `
+                <div class="roi-section">
+                    <h2>📈 Expected Benefits & ROI</h2>
+                    <div class="roi-grid">
+                        <div class="roi-metric">
+                            <div class="roi-value">100+</div>
+                            <div class="roi-label">Hours Saved Monthly</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value">4 Days</div>
+                            <div class="roi-label">Close Timeline Reduction</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value">80%</div>
+                            <div class="roi-label">Time Reduction</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value">50%</div>
+                            <div class="roi-label">Error Reduction</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value">2.5</div>
+                            <div class="roi-label">FTE Capacity Freed</div>
+                        </div>
+                        <div class="roi-metric">
+                            <div class="roi-value">$200K+</div>
+                            <div class="roi-label">Annual Value Created</div>
+                        </div>
+                    </div>
+                </div>
+            `;
         }
 
         function calculateStats(data) {
@@ -961,145 +1373,15 @@
             return stats;
         }
 
-        function calculatePhaseStats(tasks) {
-            const stats = {
-                total: tasks.length,
-                completed: 0,
-                hoursSaved: 0,
-                progress: 0
+        function getDefaultStats() {
+            return {
+                totalTasks: 180,
+                completedTasks: 30,
+                inProgressTasks: 15,
+                blockedTasks: 5,
+                totalHoursSaved: 100,
+                overallProgress: 16.7
             };
-            
-            tasks.forEach(task => {
-                const status = normalizeStatus(task.Status || task.status || '');
-                if (status === 'Complete') stats.completed++;
-                
-                const hours = parseFloat(task['Hours Saved'] || task.hours || 0);
-                if (!isNaN(hours)) {
-                    stats.hoursSaved += hours;
-                }
-            });
-            
-            stats.progress = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
-            
-            return stats;
-        }
-
-        function calculateCategoryStats(tasks) {
-            return calculatePhaseStats(tasks); // Same calculation
-        }
-
-        function calculateCategoryTotals(data) {
-            const categories = {};
-            data.forEach(row => {
-                const category = row.Category || row.category || 'Other';
-                if (!categories[category]) {
-                    categories[category] = { total: 0, completed: 0, hours: 0 };
-                }
-                
-                categories[category].total++;
-                const status = normalizeStatus(row.Status || row.status || '');
-                if (status === 'Complete') categories[category].completed++;
-                
-                const hours = parseFloat(row['Hours Saved'] || row.hours || 0);
-                if (!isNaN(hours)) {
-                    categories[category].hours += hours;
-                }
-            });
-            return categories;
-        }
-
-        function renderImpactCards(categoryTotals) {
-            const sortedCategories = Object.entries(categoryTotals)
-                .sort((a, b) => b[1].hours - a[1].hours)
-                .slice(0, 4);
-            
-            let html = '';
-            sortedCategories.forEach(([category, stats]) => {
-                const progress = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
-                const statusClass = progress === 100 ? 'complete' : (progress > 0 ? 'in-progress' : 'not-started');
-                const statusText = progress === 100 ? 'Complete' : (progress > 0 ? 'In Progress' : 'Not Started');
-                
-                html += `
-                    <div class="impact-card">
-                        <div class="impact-status">
-                            <span class="status-badge status-${statusClass}">${statusText}</span>
-                        </div>
-                        <h3>${getCategoryIcon(category)} ${category}</h3>
-                        <p>${stats.total} tasks | ${stats.completed} complete</p>
-                        <div class="impact-hours">~${Math.round(stats.hours)} hrs/mo</div>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('impactCards').innerHTML = html;
-        }
-
-        function renderTimelineLegend(phaseData) {
-            const phaseOrder = ['M1', 'M3', 'M4', 'M5', 'M6'];
-            let html = '';
-            
-            phaseOrder.forEach(phase => {
-                if (!phaseData[phase]) return;
-                const stats = calculatePhaseStats(phaseData[phase]);
-                const color = getPhaseColor(phase);
-                
-                html += `
-                    <div class="legend-item">
-                        <div class="legend-color" style="background: ${color};"></div>
-                        <span>${getPhaseFullName(phase)} (${stats.progress.toFixed(0)}% Complete)</span>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('timelineLegend').innerHTML = html;
-        }
-
-        function getCategoryIcon(category) {
-            const icons = {
-                'Accruals': '🔍',
-                'Cash': '💰',
-                'Payroll': '👥',
-                'Financial Reporting': '📊',
-                'Reconciliations': '🔄',
-                'Intercompany': '🔗',
-                'Fixed Assets': '🏢',
-                'Leases': '📝',
-                'Prepaid': '💳'
-            };
-            return icons[category] || '📌';
-        }
-
-        function getPhaseColor(phase) {
-            const colors = {
-                'M1': '#28a745',
-                'M3': '#667eea',
-                'M4': '#667eea',
-                'M5': '#f093fb',
-                'M6': '#ff6a00'
-            };
-            return colors[phase] || '#6c757d';
-        }
-
-        function getPhaseFullName(phase) {
-            const names = {
-                'M1': 'M1: Foundation & Assessment',
-                'M3': 'M3: Core Automations',
-                'M4': 'M4: System Integration',
-                'M5': 'M5: Pre-Close Shifts & Continuous Close',
-                'M6': 'M6: BD1 Subsystems & Final Push'
-            };
-            return names[phase] || phase;
-        }
-
-        function getPhaseDescription(phase) {
-            const descriptions = {
-                'M1': 'October 2025 | Status: Complete',
-                'M3': 'April - June 2026 | Goal: BD5 → BD4',
-                'M4': 'July - September 2026 | Goal: BD4 → BD3',
-                'M5': 'October - December 2026 | Goal: BD3 → BD2',
-                'M6': 'January - February 2027 | Goal: BD2 → BD1'
-            };
-            return descriptions[phase] || '';
         }
 
         function normalizeStatus(status) {
@@ -1111,16 +1393,90 @@
             return 'Not Started';
         }
 
-        function getPhaseStatus(progress) {
-            if (progress === 100) return 'complete';
-            if (progress > 0) return 'in-progress';
-            return 'not-started';
+        function getPhaseProgress(phase) {
+            if (!sheetDataLoaded) {
+                if (phase === 'M3-M4') return 15;
+                if (phase === 'M5') return 0;
+                if (phase === 'M6') return 0;
+                return 0;
+            }
+            
+            const phaseTasks = allData.filter(row => {
+                const p = row.Phase || row.phase || '';
+                if (phase === 'M3-M4') return p === 'M3' || p === 'M4';
+                return p === phase;
+            });
+            
+            if (phaseTasks.length === 0) return 0;
+            
+            const completed = phaseTasks.filter(task => 
+                normalizeStatus(task.Status || task.status || '') === 'Complete'
+            ).length;
+            
+            return (completed / phaseTasks.length) * 100;
         }
 
-        function getPhaseStatusText(progress) {
+        function getPhaseStatusBadge(phase) {
+            const progress = getPhaseProgress(phase);
+            if (progress === 100) return 'status-complete';
+            if (progress > 0) return 'status-in-progress';
+            return 'status-not-started';
+        }
+
+        function getPhaseStatusText(phase) {
+            const progress = getPhaseProgress(phase);
             if (progress === 100) return '✓ Complete';
-            if (progress > 0) return `${progress.toFixed(0)}% Complete`;
+            if (progress > 0) return `${Math.round(progress)}% Complete`;
             return 'Not Started';
+        }
+
+        function getTaskStatus(keyword) {
+            if (!sheetDataLoaded) {
+                if (keyword === 'accruals.ai') return 'status-in-progress';
+                if (keyword === 'cash') return 'status-blocked';
+                return 'status-not-started';
+            }
+            
+            const task = allData.find(row => {
+                const name = (row['Task Name'] || row.Task || '').toLowerCase();
+                return name.includes(keyword.toLowerCase());
+            });
+            
+            if (!task) return 'status-not-started';
+            
+            const status = normalizeStatus(task.Status || task.status || '');
+            return 'status-' + status.toLowerCase().replace(/\s+/g, '-');
+        }
+
+        function getTaskStatusText(keyword) {
+            if (!sheetDataLoaded) {
+                if (keyword === 'accruals.ai') return 'In Progress';
+                if (keyword === 'cash') return 'Blocked';
+                return 'Not Started';
+            }
+            
+            const task = allData.find(row => {
+                const name = (row['Task Name'] || row.Task || '').toLowerCase();
+                return name.includes(keyword.toLowerCase());
+            });
+            
+            if (!task) return 'Not Started';
+            return normalizeStatus(task.Status || task.status || '');
+        }
+
+        function getSpecificTaskStatus(taskName) {
+            return getTaskStatus(taskName);
+        }
+
+        function getSpecificTaskStatusText(taskName) {
+            return getTaskStatusText(taskName);
+        }
+
+        function getTaskClass(taskName) {
+            const status = getTaskStatus(taskName);
+            if (status.includes('complete')) return 'complete';
+            if (status.includes('blocked')) return 'blocked';
+            return '';
         }
 
         function togglePhase(phaseId) {

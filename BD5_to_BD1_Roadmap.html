@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BD5 to BD1 Close Acceleration Roadmap - Progress Tracker</title>
+    <title>BD5 to BD1 Close Acceleration Roadmap - Live Progress</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -20,6 +20,55 @@
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
+        }
+        .loading-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(102, 126, 234, 0.95);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 10000;
+            color: white;
+            font-size: 1.5em;
+            font-weight: 600;
+        }
+        .loading-overlay.hidden { display: none; }
+        .spinner {
+            border: 4px solid rgba(255, 255, 255, 0.3);
+            border-top: 4px solid white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            animation: spin 1s linear infinite;
+            margin-right: 20px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        .refresh-btn {
+            position: fixed;
+            top: 30px;
+            right: 150px;
+            background: #28a745;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 25px;
+            font-weight: 600;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            border: none;
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+        .refresh-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+            background: #218838;
         }
         .print-btn {
             position: fixed;
@@ -39,6 +88,32 @@
         .print-btn:hover {
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(0,0,0,0.3);
+        }
+        .live-indicator {
+            position: fixed;
+            top: 90px;
+            right: 30px;
+            background: #28a745;
+            color: white;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 600;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .live-dot {
+            width: 10px;
+            height: 10px;
+            background: white;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.3; }
         }
         .header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
@@ -129,15 +204,15 @@
             text-transform: uppercase;
             letter-spacing: 0.5px;
         }
-        .status-complete {
+        .status-complete, .status-done {
             background: #d4edda;
             color: #155724;
         }
-        .status-in-progress {
+        .status-in-progress, .status-inprogress {
             background: #cce5ff;
             color: #004085;
         }
-        .status-not-started {
+        .status-not-started, .status-notstarted {
             background: #f8f9fa;
             color: #6c757d;
         }
@@ -146,150 +221,40 @@
             color: #721c24;
         }
         
-        /* Executive Dashboard */
-        .exec-dashboard {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 20px;
+        /* Phase Sections */
+        .phase-section {
             margin-bottom: 40px;
-        }
-        .dashboard-card {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
-            transition: transform 0.3s ease;
-        }
-        .dashboard-card:hover { transform: translateY(-5px); }
-        .dashboard-card .number { font-size: 3em; font-weight: 700; margin-bottom: 10px; }
-        .dashboard-card .label { font-size: 1em; opacity: 0.95; }
-        
-        /* Interactive Timeline */
-        .timeline-section {
-            background: #f8f9fa;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 40px 0;
-        }
-        .timeline-section h2 {
-            color: #1e3c72;
-            font-size: 2em;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .timeline-container {
-            background: white;
-            border-radius: 12px;
-            padding: 30px;
-        }
-        .timeline-axis {
-            display: flex;
-            justify-content: space-between;
-            margin-bottom: 20px;
-        }
-        .timeline-month {
-            flex: 1;
-            text-align: center;
-            font-size: 0.8em;
-            color: #6c757d;
-            font-weight: 600;
-        }
-        .timeline-bar-container {
-            position: relative;
-            height: 60px;
-            background: #e9ecef;
-            border-radius: 30px;
-            overflow: hidden;
-            margin-bottom: 30px;
-        }
-        .timeline-segment {
-            position: absolute;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-weight: 700;
-            font-size: 0.85em;
-            cursor: pointer;
-            transition: all 0.3s ease;
-        }
-        .timeline-segment:hover {
-            filter: brightness(1.1);
-            transform: scaleY(1.1);
-        }
-        .segment-m1 { left: 0%; width: 6.67%; background: #28a745; }
-        .segment-m3 { left: 33.33%; width: 33.33%; background: #667eea; }
-        .segment-m5 { left: 66.67%; width: 20%; background: #f093fb; }
-        .segment-m6 { left: 86.67%; width: 13.33%; background: #ff6a00; }
-        
-        .timeline-legend {
-            display: flex;
-            justify-content: center;
-            gap: 20px;
-            flex-wrap: wrap;
-        }
-        .legend-item {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-size: 0.9em;
-        }
-        .legend-color {
-            width: 25px;
-            height: 25px;
-            border-radius: 5px;
-        }
-        
-        /* Collapsible Phases */
-        .phase-collapsible {
-            margin-bottom: 25px;
             border: 2px solid #e9ecef;
             border-radius: 12px;
             overflow: hidden;
-            transition: all 0.3s ease;
         }
-        .phase-collapsible:hover {
-            border-color: #667eea;
-        }
-        .phase-collapsible.complete {
+        .phase-section.complete {
             border-color: #28a745;
         }
-        .phase-header-click {
+        .phase-header {
             background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
             padding: 25px 30px;
             cursor: pointer;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
             transition: all 0.3s ease;
         }
-        .phase-header-click:hover {
+        .phase-header:hover {
             background: linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%);
         }
-        .phase-header-click.active {
+        .phase-header.active {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
         }
-        .phase-collapsible.complete .phase-header-click {
+        .phase-section.complete .phase-header {
             background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
             color: #155724;
         }
-        .phase-collapsible.complete .phase-header-click.active {
+        .phase-section.complete .phase-header.active {
             background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
             color: white;
         }
-        .phase-info { flex: 1; }
         .phase-name {
             font-size: 1.5em;
             font-weight: 700;
-            margin-bottom: 8px;
-        }
-        .phase-dates {
-            font-size: 0.9em;
-            opacity: 0.8;
             margin-bottom: 10px;
         }
         .phase-progress-bar {
@@ -304,15 +269,8 @@
             height: 100%;
             transition: width 0.5s ease;
         }
-        .phase-collapsible.complete .phase-progress-fill {
+        .phase-section.complete .phase-progress-fill {
             background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
-        }
-        .phase-toggle {
-            font-size: 2em;
-            transition: transform 0.3s ease;
-        }
-        .phase-header-click.active .phase-toggle {
-            transform: rotate(180deg);
         }
         .phase-content {
             max-height: 0;
@@ -321,43 +279,9 @@
             background: white;
         }
         .phase-content.active {
-            max-height: 8000px;
+            max-height: 10000px;
             padding: 30px;
         }
-        
-        /* Impact Cards */
-        .impact-section {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 50px 0;
-        }
-        .impact-section h2 { font-size: 2em; margin-bottom: 25px; text-align: center; }
-        .impact-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-        }
-        .impact-card {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
-            border-radius: 12px;
-            backdrop-filter: blur(10px);
-            transition: all 0.3s ease;
-            position: relative;
-        }
-        .impact-card:hover {
-            background: rgba(255, 255, 255, 0.25);
-            transform: translateY(-5px);
-        }
-        .impact-status {
-            position: absolute;
-            top: 15px;
-            right: 15px;
-        }
-        .impact-card h3 { font-size: 1.3em; margin-bottom: 10px; }
-        .impact-hours { font-size: 2em; font-weight: 700; margin-top: 10px; }
         
         /* Task Cards */
         .task-grid {
@@ -392,7 +316,13 @@
             top: 15px;
             right: 15px;
         }
-        .task-title { font-size: 1.1em; font-weight: 600; color: #2c3e50; margin-bottom: 10px; padding-right: 80px; }
+        .task-title { 
+            font-size: 1.1em; 
+            font-weight: 600; 
+            color: #2c3e50; 
+            margin-bottom: 10px; 
+            padding-right: 100px; 
+        }
         .task-hours {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             color: white;
@@ -418,67 +348,36 @@
             display: inline-block;
             margin-top: 8px;
         }
-        .warning-box {
-            background: #fff3cd;
-            padding: 10px;
-            border-radius: 6px;
+        .task-notes {
             font-size: 0.85em;
-            color: #856404;
+            color: #6c757d;
             margin-top: 10px;
-            border-left: 4px solid #ffc107;
+            font-style: italic;
         }
         
-        /* ROI Section */
-        .roi-section {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-            color: white;
-            padding: 40px;
-            border-radius: 15px;
-            margin: 50px 0;
-        }
-        .roi-section h2 { font-size: 2em; margin-bottom: 25px; text-align: center; }
-        .roi-grid {
+        /* Executive Dashboard */
+        .exec-dashboard {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
             gap: 20px;
-            text-align: center;
+            margin-bottom: 40px;
         }
-        .roi-metric {
-            background: rgba(255, 255, 255, 0.15);
-            padding: 25px;
-            border-radius: 12px;
-        }
-        .roi-value { font-size: 2.5em; font-weight: 700; margin-bottom: 10px; }
-        .roi-label { font-size: 1em; opacity: 0.95; }
-        
-        /* Risks Section */
-        .risks-section {
-            background: white;
-            padding: 40px;
+        .dashboard-card {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
             border-radius: 15px;
-            margin: 50px 0;
-            border: 3px solid #ffc107;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.15);
+            transition: transform 0.3s ease;
         }
-        .risks-section h2 { color: #1e3c72; font-size: 2em; margin-bottom: 30px; text-align: center; }
-        .risk-item {
-            background: #fff3cd;
-            border-left: 5px solid #ffc107;
-            padding: 20px;
-            border-radius: 8px;
-            margin-bottom: 15px;
-            position: relative;
-            padding-right: 100px;
-        }
-        .risk-status {
-            position: absolute;
-            right: 20px;
-            top: 50%;
-            transform: translateY(-50%);
-        }
+        .dashboard-card:hover { transform: translateY(-5px); }
+        .dashboard-card .number { font-size: 3em; font-weight: 700; margin-bottom: 10px; }
+        .dashboard-card .label { font-size: 1em; opacity: 0.95; }
         
         @media print {
             body { background: white; padding: 0; }
-            .print-btn { display: none; }
+            .print-btn, .refresh-btn, .live-indicator { display: none; }
             .phase-content { max-height: none !important; }
             .container { box-shadow: none; }
         }
@@ -486,18 +385,28 @@
         @media (max-width: 768px) {
             .header h1 { font-size: 2em; }
             .task-grid { grid-template-columns: 1fr; }
-            .print-btn { top: 10px; right: 10px; padding: 8px 16px; font-size: 0.9em; }
+            .print-btn, .refresh-btn { top: 10px; right: 10px; padding: 8px 16px; font-size: 0.9em; }
             .last-updated { position: static; margin-bottom: 15px; }
         }
     </style>
 </head>
 <body>
+    <div class="loading-overlay" id="loadingOverlay">
+        <div class="spinner"></div>
+        <div>Loading live data from Google Sheets...</div>
+    </div>
+    
+    <button class="refresh-btn" onclick="loadSheetData()">🔄 Refresh Data</button>
     <button class="print-btn" onclick="window.print()">🖨️ Print / Export PDF</button>
+    <div class="live-indicator">
+        <div class="live-dot"></div>
+        <span>LIVE DATA</span>
+    </div>
     
     <div class="container">
         <div class="header">
-            <div class="last-updated">
-                📅 Last Updated: November 7, 2025
+            <div class="last-updated" id="lastUpdated">
+                📅 Loading...
             </div>
             <h1>🚀 BD5 to BD1 Close Acceleration Roadmap</h1>
             <div class="subtitle">Strategic Transformation Plan | Corporate Accounting Team</div>
@@ -525,583 +434,316 @@
             </div>
         </div>
 
-        <div class="content">
-            <!-- Overall Progress Tracker -->
-            <div class="overall-progress">
-                <h2>🎯 Overall Roadmap Progress</h2>
-                <div class="overall-progress-bar">
-                    <div class="overall-progress-fill" style="width: 16.7%;">
-                        16.7% Complete
-                    </div>
-                </div>
-                <div class="progress-stats">
-                    <div class="progress-stat">
-                        <div class="progress-stat-value">1/6</div>
-                        <div>Phases Complete</div>
-                    </div>
-                    <div class="progress-stat">
-                        <div class="progress-stat-value">0/90+</div>
-                        <div>Automations Live</div>
-                    </div>
-                    <div class="progress-stat">
-                        <div class="progress-stat-value">BD5</div>
-                        <div>Current Close</div>
-                    </div>
-                    <div class="progress-stat">
-                        <div class="progress-stat-value">456</div>
-                        <div>Days Remaining</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Executive Dashboard -->
-            <h2 style="color: #1e3c72; font-size: 2em; margin-bottom: 25px; text-align: center;">
-                📊 Executive Summary Dashboard
-            </h2>
-            <div class="exec-dashboard">
-                <div class="dashboard-card">
-                    <div class="number">180+</div>
-                    <div class="label">Tasks Analyzed</div>
-                </div>
-                <div class="dashboard-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
-                    <div class="number">90+</div>
-                    <div class="label">High-Impact Automations</div>
-                </div>
-                <div class="dashboard-card" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">
-                    <div class="number">100+</div>
-                    <div class="label">Hours Saved Monthly</div>
-                </div>
-                <div class="dashboard-card" style="background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);">
-                    <div class="number">4 Days</div>
-                    <div class="label">Close Reduction</div>
-                </div>
-                <div class="dashboard-card" style="background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%);">
-                    <div class="number">80%</div>
-                    <div class="label">Time Savings</div>
-                </div>
-            </div>
-
-            <!-- Interactive Timeline -->
-            <div class="timeline-section">
-                <h2>📅 Interactive 15-Month Timeline (Click Phases to View Details)</h2>
-                <div class="timeline-container">
-                    <div class="timeline-axis">
-                        <div class="timeline-month">Nov '25</div>
-                        <div class="timeline-month">Jan '26</div>
-                        <div class="timeline-month">Mar '26</div>
-                        <div class="timeline-month">May '26</div>
-                        <div class="timeline-month">Jul '26</div>
-                        <div class="timeline-month">Sep '26</div>
-                        <div class="timeline-month">Nov '26</div>
-                        <div class="timeline-month">Jan '27</div>
-                        <div class="timeline-month">Feb '27</div>
-                    </div>
-                    
-                    <div class="timeline-bar-container">
-                        <div class="timeline-segment segment-m1" onclick="scrollToPhase('phase-m1')" title="M1: Foundation (Complete)">
-                            M1 ✓
-                        </div>
-                        <div class="timeline-segment segment-m3" onclick="scrollToPhase('phase-m3')" title="M3-M4: Core Automations">
-                            M3-M4: Core Automations
-                        </div>
-                        <div class="timeline-segment segment-m5" onclick="scrollToPhase('phase-m5')" title="M5: Pre-Close">
-                            M5: Pre-Close
-                        </div>
-                        <div class="timeline-segment segment-m6" onclick="scrollToPhase('phase-m6')" title="M6: BD1 Final">
-                            M6: BD1
-                        </div>
-                    </div>
-                    
-                    <div class="timeline-legend">
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #28a745;"></div>
-                            <span>M1: Foundation (100% Complete)</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #667eea;"></div>
-                            <span>M3-M4: Core Automations (0% Complete)</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #f093fb;"></div>
-                            <span>M5: Pre-Close Shifts (0% Complete)</span>
-                        </div>
-                        <div class="legend-item">
-                            <div class="legend-color" style="background: #ff6a00;"></div>
-                            <span>M6: BD1 Final Push (0% Complete)</span>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Highest Impact Opportunities -->
-            <div class="impact-section">
-                <h2>🎯 Highest Impact Opportunities</h2>
-                <div class="impact-grid">
-                    <div class="impact-card">
-                        <div class="impact-status">
-                            <span class="status-badge status-in-progress">In Progress</span>
-                        </div>
-                        <h3>🔍 Accruals Automation</h3>
-                        <p>Implement accruals.ai for vendor accrual analysis, SURL tracking, PO/PR analysis</p>
-                        <div class="impact-hours">~45 hrs/mo</div>
-                        <p style="margin-top: 10px; font-size: 0.9em;">Status: Trial - awaiting legal approval</p>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-status">
-                            <span class="status-badge status-blocked">Blocked</span>
-                        </div>
-                        <h3>💰 Cash Reconciliations</h3>
-                        <p>Automate 60+ bank account reconciliations across Chase, PNC, SVB, NBKC</p>
-                        <div class="impact-hours">~20 hrs/mo</div>
-                        <p style="margin-top: 10px; font-size: 0.9em;">Blocker: Need AI platform budget</p>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-status">
-                            <span class="status-badge status-not-started">Not Started</span>
-                        </div>
-                        <h3>👥 Payroll Processing</h3>
-                        <p>API-driven payroll reconciliation with automated GL mapping</p>
-                        <div class="impact-hours">~25 hrs/mo</div>
-                        <p style="margin-top: 10px; font-size: 0.9em;">Tool: Cursor + AI Agent</p>
-                    </div>
-                    <div class="impact-card">
-                        <div class="impact-status">
-                            <span class="status-badge status-not-started">Not Started</span>
-                        </div>
-                        <h3>📊 Financial Reporting</h3>
-                        <p>Automate cash flux, close deck, MTL reporting</p>
-                        <div class="impact-hours">~15 hrs/mo</div>
-                        <p style="margin-top: 10px; font-size: 0.9em;">Tool: Numeric + Cursor</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Collapsible Phases -->
-            <h2 style="color: #1e3c72; font-size: 2em; margin: 50px 0 30px 0; text-align: center;">
-                📋 Implementation Phases (Click to Expand Details)
-            </h2>
-
-            <!-- M1 Phase -->
-            <div class="phase-collapsible complete" id="phase-m1">
-                <div class="phase-header-click" onclick="togglePhaseContent('m1')">
-                    <div class="phase-info">
-                        <div class="phase-name">
-                            M1: Foundation & Assessment 
-                            <span class="status-badge status-complete">✓ Complete</span>
-                        </div>
-                        <div class="phase-dates">October 2025</div>
-                        <div class="phase-progress-bar">
-                            <div class="phase-progress-fill" style="width: 100%;"></div>
-                        </div>
-                    </div>
-                    <div class="phase-toggle">▼</div>
-                </div>
-                <div class="phase-content" id="content-m1">
-                    <p style="color: #6c757d; margin-bottom: 20px; line-height: 1.8;">
-                        <strong>Objective:</strong> Assess current state and identify automation opportunities<br>
-                        <strong>Outcome:</strong> Identified 180+ tasks, categorized 50+ as no automation required, established baseline for BD5 close<br>
-                        <strong>Key Deliverables:</strong> Process maps, pain point analysis, automation priority matrix
-                    </p>
-                    <div style="background: #d4edda; padding: 20px; border-radius: 10px; border-left: 5px solid #28a745;">
-                        <strong style="color: #155724;">✓ PHASE COMPLETE</strong>
-                        <p style="color: #155724; margin-top: 10px;">Foundation established. Ready for core automation phase.</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- M3-M4 Phase -->
-            <div class="phase-collapsible" id="phase-m3">
-                <div class="phase-header-click" onclick="togglePhaseContent('m3')">
-                    <div class="phase-info">
-                        <div class="phase-name">
-                            M3-M4: Core Automations & System Integrations 
-                            <span class="status-badge status-not-started">Not Started</span>
-                        </div>
-                        <div class="phase-dates">April 1 - September 30, 2026 | Goal: BD5 → BD3</div>
-                        <div class="phase-progress-bar">
-                            <div class="phase-progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    <div class="phase-toggle">▼</div>
-                </div>
-                <div class="phase-content" id="content-m3">
-                    <p style="color: #6c757d; margin-bottom: 25px; line-height: 1.8;">
-                        <strong>Objective:</strong> Deploy high-impact automations across accruals, cash, payroll, and reconciliations<br>
-                        <strong>Target Savings:</strong> 80+ hours monthly<br>
-                        <strong>Key Tools:</strong> accruals.ai, Cursor, NetSuite enhancements, API integrations
-                    </p>
-
-                    <h3 style="color: #1e3c72; margin: 30px 0 15px 0;">💼 Accruals Automation (M4: System Integration)</h3>
-                    <p style="color: #6c757d; margin-bottom: 15px;"><strong>45 tasks • ~45 hrs/mo savings • accruals.ai implementation</strong></p>
-                    <div class="task-grid">
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-in-progress">In Progress</span>
-                            </div>
-                            <div class="task-title">Master Accrual Workbook Analysis</div>
-                            <div class="task-hours">7.0 hrs</div>
-                            <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
-                            <div class="task-tool">🤖 accruals.ai</div>
-                            <div class="warning-box">✅ Trial active - awaiting legal approval</div>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">Monthly SURL Analysis</div>
-                            <div class="task-hours">5.0 hrs</div>
-                            <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
-                            <div class="task-tool">🤖 accruals.ai</div>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">BD1/BD3/BD5 Accrual Analysis</div>
-                            <div class="task-hours">7.5 hrs</div>
-                            <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
-                            <div class="task-tool">🤖 accruals.ai</div>
-                            <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">Critical path: Multi-day analysis consolidated</p>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">PO & PR Analysis</div>
-                            <div class="task-hours">4.0 hrs</div>
-                            <div class="task-assignee">👤 Aileen Costa → Justine O'Sullivan</div>
-                            <div class="task-tool">🤖 accruals.ai</div>
-                        </div>
-                    </div>
-
-                    <h3 style="color: #1e3c72; margin: 30px 0 15px 0;">💰 Cash Reconciliations (M3: Core Automations)</h3>
-                    <p style="color: #6c757d; margin-bottom: 15px;"><strong>70+ bank accounts • ~20 hrs/mo savings • AI reconciliation tools</strong></p>
-                    <div class="task-grid">
-                        <div class="task-card blocked">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-blocked">Blocked</span>
-                            </div>
-                            <div class="task-title">Chase Month End Reconciliation</div>
-                            <div class="task-hours">4.0 hrs</div>
-                            <div class="task-assignee">👤 Jecah Cabaling → Charles Sikazwe</div>
-                            <div class="task-tool">🤖 Cursor / AI Reconciliation</div>
-                            <div class="warning-box">⚠️ Blocker: Need budget for AI reconciliation platform</div>
-                        </div>
-                        <div class="task-card blocked">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-blocked">Blocked</span>
-                            </div>
-                            <div class="task-title">PNC, NBKC, SVB Reconciliations</div>
-                            <div class="task-hours">5.0 hrs</div>
-                            <div class="task-assignee">👤 Minerva Suarez → Charles Sikazwe</div>
-                            <div class="task-tool">🤖 Cursor</div>
-                            <div class="warning-box">⚠️ Blocker: Need budget approval</div>
-                        </div>
-                    </div>
-
-                    <h3 style="color: #1e3c72; margin: 30px 0 15px 0;">👥 Payroll Processing (M3: Core Automations)</h3>
-                    <p style="color: #6c757d; margin-bottom: 15px;"><strong>30+ reconciliations • ~25 hrs/mo savings • Cursor + API integration</strong></p>
-                    <div class="task-grid">
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">Canada Payroll (Mid-Month)</div>
-                            <div class="task-hours">4.0 hrs</div>
-                            <div class="task-assignee">👤 Selena Ochoa → Rachele Russo</div>
-                            <div class="task-tool">🤖 AI Agent Tool</div>
-                            <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">Map BDO payroll to GL by dept/class/location</p>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">US Payroll Reconciliation</div>
-                            <div class="task-hours">6.0 hrs</div>
-                            <div class="task-assignee">👤 Selena Ochoa → Rachele Russo</div>
-                            <div class="task-tool">🤖 Cursor - API Integration</div>
-                            <div class="warning-box">⚠️ Prerequisite: Ensure payroll earning codes mapped to GL first</div>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">Payroll GL Reconciliations (15 accounts)</div>
-                            <div class="task-hours">30.0 hrs</div>
-                            <div class="task-assignee">👤 Selena Ochoa → Rachele Russo</div>
-                            <div class="task-tool">🤖 Cursor</div>
-                            <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">401k, HSA, FSA, PTO, Taxes, Bonuses, etc.</p>
-                        </div>
-                    </div>
-
-                    <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #0066cc;">
-                        <strong style="color: #0066cc;">🎯 Milestone Target: BD3 Close by September 30, 2026</strong>
-                    </div>
-                </div>
-            </div>
-
-            <!-- M5 Phase -->
-            <div class="phase-collapsible" id="phase-m5">
-                <div class="phase-header-click" onclick="togglePhaseContent('m5')">
-                    <div class="phase-info">
-                        <div class="phase-name">
-                            M5: Pre-Close Shifts & Continuous Close 
-                            <span class="status-badge status-not-started">Not Started</span>
-                        </div>
-                        <div class="phase-dates">October 1 - December 31, 2026 | Goal: BD3 → BD2</div>
-                        <div class="phase-progress-bar">
-                            <div class="phase-progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    <div class="phase-toggle">▼</div>
-                </div>
-                <div class="phase-content" id="content-m5">
-                    <p style="color: #6c757d; margin-bottom: 25px; line-height: 1.8;">
-                        <strong>Objective:</strong> Shift quarterly tasks forward and implement continuous close principles<br>
-                        <strong>Focus:</strong> Timing optimization and dependency elimination<br>
-                        <strong>Impact:</strong> Reduce critical path duration by moving routine activities to pre-close periods
-                    </p>
-                    <div style="background: #f8f9fa; padding: 25px; border-radius: 10px;">
-                        <h4 style="color: #1e3c72; margin-bottom: 15px;">Key Initiatives:</h4>
-                        <ul style="line-height: 2; color: #495057; margin-left: 20px;">
-                            <li>Move quarterly accruals (Sabbatical, IBNR) from BD1 to BD-3</li>
-                            <li>Implement daily reconciliation discipline for cash and key BS accounts</li>
-                            <li>Shift routine journal entries to weekly cadence vs month-end</li>
-                            <li>Resequence close calendar for parallel processing</li>
-                            <li>Eliminate sequential dependencies on critical path</li>
-                        </ul>
-                    </div>
-                    <div style="background: #e7f3ff; padding: 20px; border-radius: 10px; margin-top: 20px; border-left: 5px solid #0066cc;">
-                        <strong style="color: #0066cc;">🎯 Milestone Target: BD2 Close by December 31, 2026</strong>
-                    </div>
-                </div>
-            </div>
-
-            <!-- M6 Phase -->
-            <div class="phase-collapsible" id="phase-m6">
-                <div class="phase-header-click" onclick="togglePhaseContent('m6')">
-                    <div class="phase-info">
-                        <div class="phase-name">
-                            M6: BD1 Subsystems & Final Push 
-                            <span class="status-badge status-not-started">Not Started</span>
-                        </div>
-                        <div class="phase-dates">January 1 - February 1, 2027 | Goal: BD2 → BD1</div>
-                        <div class="phase-progress-bar">
-                            <div class="phase-progress-fill" style="width: 0%;"></div>
-                        </div>
-                    </div>
-                    <div class="phase-toggle">▼</div>
-                </div>
-                <div class="phase-content" id="content-m6">
-                    <p style="color: #6c757d; margin-bottom: 25px; line-height: 1.8;">
-                        <strong>Objective:</strong> Final automation wave and BD1 readiness validation<br>
-                        <strong>Focus:</strong> System fine-tuning, parallel testing, team training<br>
-                        <strong>Success Criteria:</strong> Complete first BD1 close by February 1, 2027
-                    </p>
-                    <div class="task-grid">
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">Prepaid Automation Completion</div>
-                            <div class="task-hours">7.5 hrs</div>
-                            <div class="task-assignee">👤 Aileen Costa & Jecah Cabaling</div>
-                            <div class="task-tool">🤖 Cursor + Gemini/ChatGPT</div>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">Parallel BD1 Test Closes</div>
-                            <div class="task-hours">Project</div>
-                            <div class="task-assignee">👤 Full Corporate Accounting Team</div>
-                            <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">Run multiple simulations to validate automation</p>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">BD1 Quality Control Framework</div>
-                            <div class="task-hours">Project</div>
-                            <div class="task-assignee">👤 Rachele Russo & Charles Sikazwe</div>
-                            <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">Automated quality checks for compressed timeline</p>
-                        </div>
-                        <div class="task-card">
-                            <div class="task-status-indicator">
-                                <span class="status-badge status-not-started">Not Started</span>
-                            </div>
-                            <div class="task-title">BD1 Close Playbook & Training</div>
-                            <div class="task-hours">Training</div>
-                            <div class="task-assignee">👤 All Team Leads</div>
-                            <p style="font-size: 0.85em; color: #6c757d; margin-top: 8px;">Full team training on BD1 procedures and timing</p>
-                        </div>
-                    </div>
-                    <div style="background: #d4edda; padding: 20px; border-radius: 10px; margin-top: 30px; border-left: 5px solid #28a745;">
-                        <strong style="color: #155724; font-size: 1.2em;">🎊 ULTIMATE GOAL: First BD1 Close - February 1, 2027</strong>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Critical Risks -->
-            <div class="risks-section">
-                <h2>⚠️ Critical Risks & Dependencies</h2>
-                <div class="risk-item">
-                    <div class="risk-status">
-                        <span class="status-badge status-blocked">Active Risk</span>
-                    </div>
-                    <strong>Cash Reconciliation Budget:</strong> Need to identify and secure budget for robust AI-powered cash reconciliation platform to automate 60+ bank account reconciliations.
-                </div>
-                <div class="risk-item">
-                    <div class="risk-status">
-                        <span class="status-badge status-in-progress">In Progress</span>
-                    </div>
-                    <strong>accruals.ai Legal Approval:</strong> Trial is ready but awaiting legal approval. This blocks the largest time-saving opportunity (~45 hours/month). Recommend expediting approval process.
-                </div>
-                <div class="risk-item">
-                    <div class="risk-status">
-                        <span class="status-badge status-not-started">Active Risk</span>
-                    </div>
-                    <strong>Payroll GL Mapping Cleanup:</strong> Must ensure payroll earning codes are correctly mapped to GL accounts before beginning payroll automation. Data quality is prerequisite for successful automation.
-                </div>
-                <div class="risk-item">
-                    <div class="risk-status">
-                        <span class="status-badge status-not-started">Active Risk</span>
-                    </div>
-                    <strong>Cross-Functional Dependencies:</strong> FNT bandwidth required for Symmetry reclass. PeopleTech bandwidth needed for payroll automation. Head of Sales must input timely Salesforce data for commission accruals.
-                </div>
-                <div class="risk-item">
-                    <div class="risk-status">
-                        <span class="status-badge status-not-started">Active Risk</span>
-                    </div>
-                    <strong>Change Management:</strong> Team must adopt new tools and processes across 6-month automation build phase. Require dedicated training time and change management support.
-                </div>
-            </div>
-
-            <!-- ROI Section -->
-            <div class="roi-section">
-                <h2>📈 Expected Benefits & ROI</h2>
-                <div class="roi-grid">
-                    <div class="roi-metric">
-                        <div class="roi-value">100+</div>
-                        <div class="roi-label">Hours Saved Monthly</div>
-                    </div>
-                    <div class="roi-metric">
-                        <div class="roi-value">4 Days</div>
-                        <div class="roi-label">Close Timeline Reduction</div>
-                    </div>
-                    <div class="roi-metric">
-                        <div class="roi-value">80%</div>
-                        <div class="roi-label">Time Reduction</div>
-                    </div>
-                    <div class="roi-metric">
-                        <div class="roi-value">50%</div>
-                        <div class="roi-label">Error Reduction</div>
-                    </div>
-                    <div class="roi-metric">
-                        <div class="roi-value">2.5</div>
-                        <div class="roi-label">FTE Capacity Freed</div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Technology Stack -->
-            <div style="background: #f8f9fa; padding: 40px; border-radius: 15px; margin: 50px 0;">
-                <h2 style="color: #1e3c72; font-size: 2em; margin-bottom: 30px; text-align: center;">🛠️ Technology & Tools Stack</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
-                    <div style="background: white; padding: 25px; border-radius: 12px; border: 2px solid #e9ecef;">
-                        <div style="font-size: 1.3em; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">
-                            accruals.ai
-                            <span class="status-badge status-in-progress" style="float: right; font-size: 0.6em;">Trial</span>
-                        </div>
-                        <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
-                            <strong>Use:</strong> Comprehensive accrual automation<br>
-                            <strong>Tasks:</strong> 45+ tasks (~45 hrs/mo)<br>
-                            <strong>Status:</strong> Trial - awaiting legal approval
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 25px; border-radius: 12px; border: 2px solid #e9ecef;">
-                        <div style="font-size: 1.3em; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">
-                            Cursor
-                            <span class="status-badge status-not-started" style="float: right; font-size: 0.6em;">Planned</span>
-                        </div>
-                        <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
-                            <strong>Use:</strong> Custom automation development<br>
-                            <strong>Tasks:</strong> Reconciliations, payroll, APIs<br>
-                            <strong>Features:</strong> API integration, web portals
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 25px; border-radius: 12px; border: 2px solid #e9ecef;">
-                        <div style="font-size: 1.3em; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">
-                            NetSuite
-                            <span class="status-badge status-not-started" style="float: right; font-size: 0.6em;">Planned</span>
-                        </div>
-                        <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
-                            <strong>Use:</strong> ERP automation & workflows<br>
-                            <strong>Tasks:</strong> IC markup, leases, prepaid<br>
-                            <strong>Status:</strong> Enhanced modules in development
-                        </div>
-                    </div>
-                    <div style="background: white; padding: 25px; border-radius: 12px; border: 2px solid #e9ecef;">
-                        <div style="font-size: 1.3em; font-weight: 700; color: #2c3e50; margin-bottom: 10px;">
-                            AI Agent Tools
-                            <span class="status-badge status-not-started" style="float: right; font-size: 0.6em;">Planned</span>
-                        </div>
-                        <div style="color: #6c757d; font-size: 0.95em; line-height: 1.6;">
-                            <strong>Use:</strong> Intelligent data mapping<br>
-                            <strong>Tasks:</strong> Canada payroll GL mapping<br>
-                            <strong>Features:</strong> Auto-map by dept/class/location
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Update Instructions -->
-            <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 50px 0;">
-                <h3 style="font-size: 1.5em; margin-bottom: 15px;">💬 How to Update This Roadmap</h3>
-                <p style="line-height: 1.8; opacity: 0.95;">
-                    Simply tell me what you've completed or what's changed, and I'll update this roadmap automatically! 
-                </p>
-                <p style="margin-top: 15px; line-height: 1.8; opacity: 0.95;">
-                    <strong>Example updates:</strong><br>
-                    • "We got accruals.ai legal approval - mark it as complete"<br>
-                    • "We finished 5 cash reconciliation automations"<br>
-                    • "Update the roadmap - we're 25% through M3-M4 phase"<br>
-                    • "Mark the payroll GL mapping as blocked - waiting on data cleanup"
-                </p>
-            </div>
+        <div class="content" id="mainContent">
+            <!-- Content will be dynamically loaded from Google Sheets -->
         </div>
     </div>
 
     <script>
-        function togglePhaseContent(phaseId) {
-            const header = document.querySelector(`#content-${phaseId}`).previousElementSibling;
+        const SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vQTowGCMikQdonVVVw-_DWmbBWAz2R-94qOemHxwDVWOxFgNWD60MSPrFH6ESfNnQ/pub?gid=263457723&single=true&output=csv';
+
+        let allData = [];
+
+        async function loadSheetData() {
+            try {
+                document.getElementById('loadingOverlay').classList.remove('hidden');
+                
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
+                
+                allData = parseCSV(csvText);
+                console.log('Loaded data:', allData);
+                
+                renderRoadmap(allData);
+                
+                document.getElementById('lastUpdated').innerHTML = `📅 Last Updated: ${new Date().toLocaleString()}`;
+                document.getElementById('loadingOverlay').classList.add('hidden');
+                
+            } catch (error) {
+                console.error('Error loading sheet data:', error);
+                document.getElementById('loadingOverlay').innerHTML = `
+                    <div style="text-align: center;">
+                        <div style="font-size: 2em; margin-bottom: 20px;">⚠️</div>
+                        <div>Error loading data from Google Sheets</div>
+                        <div style="font-size: 0.8em; margin-top: 10px; opacity: 0.8;">${error.message}</div>
+                        <button onclick="loadSheetData()" style="margin-top: 20px; padding: 10px 20px; border: none; background: white; color: #667eea; border-radius: 5px; cursor: pointer; font-weight: 600;">
+                            Retry
+                        </button>
+                    </div>
+                `;
+            }
+        }
+
+        function parseCSV(csv) {
+            const lines = csv.split('\n');
+            const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
+            
+            const data = [];
+            for (let i = 1; i < lines.length; i++) {
+                if (!lines[i].trim()) continue;
+                
+                const values = parseCSVLine(lines[i]);
+                const row = {};
+                headers.forEach((header, index) => {
+                    row[header] = values[index] || '';
+                });
+                data.push(row);
+            }
+            
+            return data;
+        }
+
+        function parseCSVLine(line) {
+            const values = [];
+            let current = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < line.length; i++) {
+                const char = line[i];
+                
+                if (char === '"') {
+                    inQuotes = !inQuotes;
+                } else if (char === ',' && !inQuotes) {
+                    values.push(current.trim().replace(/^"|"$/g, ''));
+                    current = '';
+                } else {
+                    current += char;
+                }
+            }
+            values.push(current.trim().replace(/^"|"$/g, ''));
+            
+            return values;
+        }
+
+        function renderRoadmap(data) {
+            const phases = groupByPhase(data);
+            const stats = calculateStats(data);
+            
+            let html = `
+                <!-- Overall Progress Tracker -->
+                <div class="overall-progress">
+                    <h2>🎯 Overall Roadmap Progress</h2>
+                    <div class="overall-progress-bar">
+                        <div class="overall-progress-fill" style="width: ${stats.overallProgress}%;">
+                            ${stats.overallProgress.toFixed(1)}% Complete
+                        </div>
+                    </div>
+                    <div class="progress-stats">
+                        <div class="progress-stat">
+                            <div class="progress-stat-value">${stats.completedTasks}/${stats.totalTasks}</div>
+                            <div>Tasks Complete</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="progress-stat-value">${stats.inProgressTasks}</div>
+                            <div>In Progress</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="progress-stat-value">${stats.blockedTasks}</div>
+                            <div>Blocked</div>
+                        </div>
+                        <div class="progress-stat">
+                            <div class="progress-stat-value">${stats.totalHoursSaved}</div>
+                            <div>Hours to Save/Month</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Executive Dashboard -->
+                <h2 style="color: #1e3c72; font-size: 2em; margin-bottom: 25px; text-align: center;">
+                    📊 Executive Summary Dashboard
+                </h2>
+                <div class="exec-dashboard">
+                    <div class="dashboard-card">
+                        <div class="number">${stats.totalTasks}</div>
+                        <div class="label">Total Tasks</div>
+                    </div>
+                    <div class="dashboard-card" style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);">
+                        <div class="number">${stats.completedTasks}</div>
+                        <div class="label">Tasks Completed</div>
+                    </div>
+                    <div class="dashboard-card" style="background: linear-gradient(135deg, #ee0979 0%, #ff6a00 100%);">
+                        <div class="number">${stats.totalHoursSaved}</div>
+                        <div class="label">Hours to Save Monthly</div>
+                    </div>
+                    <div class="dashboard-card" style="background: linear-gradient(135deg, #f2994a 0%, #f2c94c 100%);">
+                        <div class="number">${Object.keys(phases).length}</div>
+                        <div class="label">Implementation Phases</div>
+                    </div>
+                    <div class="dashboard-card" style="background: linear-gradient(135deg, #c94b4b 0%, #4b134f 100%);">
+                        <div class="number">${stats.overallProgress.toFixed(0)}%</div>
+                        <div class="label">Overall Progress</div>
+                    </div>
+                </div>
+
+                <!-- Phases -->
+                <h2 style="color: #1e3c72; font-size: 2em; margin: 50px 0 30px 0; text-align: center;">
+                    📋 Implementation Phases (Click to Expand)
+                </h2>
+            `;
+            
+            Object.keys(phases).sort().forEach(phaseName => {
+                const phaseTasks = phases[phaseName];
+                const phaseStats = calculatePhaseStats(phaseTasks);
+                const phaseId = phaseName.replace(/[^a-zA-Z0-9]/g, '');
+                const isComplete = phaseStats.progress === 100;
+                
+                html += `
+                    <div class="phase-section ${isComplete ? 'complete' : ''}" id="phase-${phaseId}">
+                        <div class="phase-header" onclick="togglePhase('${phaseId}')">
+                            <div>
+                                <div class="phase-name">
+                                    ${phaseName}
+                                    <span class="status-badge status-${getPhaseStatus(phaseStats.progress)}">${getPhaseStatusText(phaseStats.progress)}</span>
+                                </div>
+                                <div style="font-size: 0.9em; opacity: 0.8; margin-bottom: 10px;">
+                                    ${phaseStats.completed}/${phaseStats.total} tasks complete • ${phaseStats.hoursSaved} hours/month
+                                </div>
+                                <div class="phase-progress-bar">
+                                    <div class="phase-progress-fill" style="width: ${phaseStats.progress}%;"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="phase-content" id="content-${phaseId}">
+                            <div class="task-grid">
+                `;
+                
+                phaseTasks.forEach(task => {
+                    const status = normalizeStatus(task.Status || task.status || 'Not Started');
+                    const statusClass = status.toLowerCase().replace(/\s+/g, '-');
+                    
+                    html += `
+                        <div class="task-card ${statusClass}">
+                            <div class="task-status-indicator">
+                                <span class="status-badge status-${statusClass}">${status}</span>
+                            </div>
+                            <div class="task-title">${task['Task Name'] || task.Task || 'Unnamed Task'}</div>
+                            ${task['Hours Saved'] ? `<div class="task-hours">${task['Hours Saved']} hrs</div>` : ''}
+                            ${task.Assignee ? `<div class="task-assignee">👤 ${task.Assignee}</div>` : ''}
+                            ${task.Tool ? `<div class="task-tool">🤖 ${task.Tool}</div>` : ''}
+                            ${task.Notes ? `<div class="task-notes">${task.Notes}</div>` : ''}
+                        </div>
+                    `;
+                });
+                
+                html += `
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                <!-- Instructions -->
+                <div style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 30px; border-radius: 15px; margin: 50px 0;">
+                    <h3 style="font-size: 1.5em; margin-bottom: 15px;">🔄 This Roadmap Updates Automatically</h3>
+                    <p style="line-height: 1.8; opacity: 0.95;">
+                        Your team can update the <strong>Accounting Roadmap</strong> tab in Google Sheets, and this page will reflect changes when refreshed.
+                    </p>
+                    <p style="margin-top: 15px; line-height: 1.8; opacity: 0.95;">
+                        Click the <strong>🔄 Refresh Data</strong> button to see the latest updates from your team!
+                    </p>
+                </div>
+            `;
+            
+            document.getElementById('mainContent').innerHTML = html;
+        }
+
+        function groupByPhase(data) {
+            const phases = {};
+            data.forEach(row => {
+                const phase = row.Phase || row.phase || 'Uncategorized';
+                if (!phases[phase]) {
+                    phases[phase] = [];
+                }
+                phases[phase].push(row);
+            });
+            return phases;
+        }
+
+        function calculateStats(data) {
+            const stats = {
+                totalTasks: data.length,
+                completedTasks: 0,
+                inProgressTasks: 0,
+                blockedTasks: 0,
+                totalHoursSaved: 0,
+                overallProgress: 0
+            };
+            
+            data.forEach(row => {
+                const status = normalizeStatus(row.Status || row.status || '');
+                if (status === 'Complete') stats.completedTasks++;
+                if (status === 'In Progress') stats.inProgressTasks++;
+                if (status === 'Blocked') stats.blockedTasks++;
+                
+                const hours = parseFloat(row['Hours Saved'] || row.hours || 0);
+                if (!isNaN(hours)) {
+                    stats.totalHoursSaved += hours;
+                }
+            });
+            
+            stats.overallProgress = stats.totalTasks > 0 ? (stats.completedTasks / stats.totalTasks) * 100 : 0;
+            
+            return stats;
+        }
+
+        function calculatePhaseStats(tasks) {
+            const stats = {
+                total: tasks.length,
+                completed: 0,
+                hoursSaved: 0,
+                progress: 0
+            };
+            
+            tasks.forEach(task => {
+                const status = normalizeStatus(task.Status || task.status || '');
+                if (status === 'Complete') stats.completed++;
+                
+                const hours = parseFloat(task['Hours Saved'] || task.hours || 0);
+                if (!isNaN(hours)) {
+                    stats.hoursSaved += hours;
+                }
+            });
+            
+            stats.progress = stats.total > 0 ? (stats.completed / stats.total) * 100 : 0;
+            
+            return stats;
+        }
+
+        function normalizeStatus(status) {
+            const s = status.toLowerCase().trim();
+            if (s.includes('complete') || s.includes('done')) return 'Complete';
+            if (s.includes('progress') || s.includes('inprogress')) return 'In Progress';
+            if (s.includes('blocked')) return 'Blocked';
+            if (s.includes('not') || s.includes('notstarted')) return 'Not Started';
+            return 'Not Started';
+        }
+
+        function getPhaseStatus(progress) {
+            if (progress === 100) return 'complete';
+            if (progress > 0) return 'in-progress';
+            return 'not-started';
+        }
+
+        function getPhaseStatusText(progress) {
+            if (progress === 100) return '✓ Complete';
+            if (progress > 0) return 'In Progress';
+            return 'Not Started';
+        }
+
+        function togglePhase(phaseId) {
+            const header = document.querySelector(`#phase-${phaseId} .phase-header`);
             const content = document.getElementById(`content-${phaseId}`);
             
             header.classList.toggle('active');
             content.classList.toggle('active');
         }
 
-        function scrollToPhase(phaseId) {
-            const element = document.getElementById(phaseId);
-            if (element) {
-                element.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                const header = element.querySelector('.phase-header-click');
-                if (header && !header.classList.contains('active')) {
-                    setTimeout(() => header.click(), 500);
-                }
-            }
-        }
-
-        // Auto-open first incomplete phase on load
-        window.addEventListener('load', function() {
-            setTimeout(() => {
-                // Open the M3-M4 phase since M1 is complete
-                const m3Header = document.querySelector('#phase-m3 .phase-header-click');
-                if (m3Header) {
-                    m3Header.click();
-                }
-            }, 500);
-        });
+        // Load data on page load
+        window.addEventListener('load', loadSheetData);
+        
+        // Auto-refresh every 5 minutes
+        setInterval(loadSheetData, 5 * 60 * 1000);
     </script>
 </body>
 </html>

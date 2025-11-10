@@ -1,50 +1,54 @@
-# BD5 to BD1 Close Acceleration Roadmap
+# 🚀 Day 1 Close Roadmap - Corporate Accounting
 
-## 🔗 Live Integration with Google Sheets
-
-This roadmap pulls real-time data from your Google Sheet: [Accounting Roadmap](https://docs.google.com/spreadsheets/d/1OksIlKgk7mgRNd6mdijk7Fzi8-4BMYzH/edit?gid=263457723#gid=263457723)
-
-### Setup Instructions:
-
-#### Step 1: Publish Your Google Sheet
-1. Open your Google Sheet
-2. Go to **File → Share → Publish to web**
-3. Select **"Accounting Roadmap"** tab
-4. Choose **"Comma-separated values (.csv)"** or **"Web page"**
-5. Click **Publish**
-6. Copy the published URL
-
-#### Step 2: Update the Roadmap Configuration
-The roadmap is configured to read from your sheet automatically.
-
-### How It Works:
-- Your team updates the Google Sheet
-- The roadmap fetches latest data every time it loads
-- Progress bars, status badges, and completion % update automatically
-- No manual HTML editing needed!
-
-### Column Structure Expected:
-- **Phase**: M1, M3, M4, M5, M6
-- **Task Name**: Name of the task
-- **Status**: Complete, In Progress, Not Started, Blocked
-- **Hours Saved**: Number of hours
-- **Assignee**: Person responsible
-- **Tool**: Technology being used
-- **Notes**: Additional context
+Visual roadmap tracking the journey from BD5 to BD1 close by February 1, 2027.
 
 ---
 
-## 📝 How to Update:
+## 📊 Live Roadmap
 
-1. Update tasks in Google Sheet "Accounting Roadmap" tab
-2. Refresh the roadmap HTML in browser
-3. See changes reflected immediately!
+**View Live:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
 
 ---
 
-## 🚀 Deployment:
+## 🔄 How to Update the Roadmap
 
-The roadmap is synced to GitHub: https://github.com/rrusso33/Day-1-Close-Roadmap-
+### Simple 3-Step Process:
 
-Every update is automatically committed and pushed.
+1. **Export** your Excel/Google Sheet as CSV
+2. **Save** as `roadmap_data.csv` in this folder (overwrite the existing file)
+3. **Double-click** `UPDATE_ROADMAP.bat` to deploy automatically
 
+Your roadmap will be live in 2-3 minutes! ✨
+
+---
+
+## 📁 Files in This Repository
+
+- **`BD5_to_BD1_Roadmap.html`** - Main roadmap file
+- **`roadmap_data.csv`** - Data source (135 tasks)
+- **`UPDATE_ROADMAP.bat`** - Quick update script
+- **`README.md`** - This file
+
+---
+
+## 🎯 Features
+
+- ✅ 5 Strategic Themes (Automation & AI, Process Optimization, Systems & Tools, Risk & Controls, Cash & Intercompany)
+- ✅ Visual Timeline (BD5 → BD1 Journey)
+- ✅ Progress Tracking by Theme
+- ✅ Collapsible Sections
+- ✅ Hours Saved Metrics
+- ✅ Tech Stack & Dependencies
+- ✅ Mobile Responsive
+
+---
+
+## 📞 Need Help?
+
+Questions about updating or customizing the roadmap? Ask in the chat!
+
+---
+
+**Last Updated:** November 10, 2025  
+**Fiscal Year End:** April 30  
+**Target Close Date:** February 1, 2027

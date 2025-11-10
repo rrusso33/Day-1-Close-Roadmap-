@@ -372,6 +372,9 @@
             border-radius: 12px;
             padding: 25px;
             transition: all 0.3s ease;
+            max-width: 100%;
+            overflow: hidden;
+            box-sizing: border-box;
         }
         .initiative-card:hover {
             border-color: #667eea;
@@ -489,12 +492,16 @@
             background: #fff3cd;
             border-left: 4px solid #ffc107;
             border-radius: 8px;
+            max-width: 100%;
+            overflow: hidden;
         }
         .dependencies-label {
             font-weight: 700;
             color: #856404;
             margin-bottom: 10px;
             display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         .deliverable {
@@ -503,18 +510,23 @@
             background: #e7f3ff;
             border-left: 4px solid #007bff;
             border-radius: 8px;
+            max-width: 100%;
+            overflow: hidden;
         }
         .deliverable-label {
             font-weight: 700;
             color: #004085;
             margin-bottom: 10px;
             display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
         }
         
         .info-list {
             margin: 0;
             padding-left: 20px;
             list-style-type: disc;
+            max-width: 100%;
         }
         .dependencies .info-list {
             color: #856404;
@@ -524,12 +536,15 @@
         }
         .info-list li {
             font-size: 0.95em;
-            line-height: 1.6;
-            margin-bottom: 8px;
+            line-height: 1.7;
+            margin-bottom: 10px;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: normal;
             padding-left: 5px;
+            padding-right: 10px;
+            max-width: 100%;
+            hyphens: auto;
         }
         .info-list li:last-child {
             margin-bottom: 0;
@@ -1086,6 +1101,8 @@
                     // Take first meaningful sentence
                     const sentences = clean.split(/[.;]/);
                     clean = sentences[0].trim();
+                    // Capitalize first letter
+                    clean = capitalizeFirstLetter(clean);
                     // Limit to 85 chars for readability with context
                     if (clean.length > 85) {
                         clean = clean.substring(0, 82) + '...';
@@ -1116,6 +1133,8 @@
                         const sentences = clean.split('.');
                         clean = sentences[0].trim();
                     }
+                    // Capitalize first letter
+                    clean = capitalizeFirstLetter(clean);
                     // Limit to 85 chars for readability with context
                     if (clean.length > 85) {
                         clean = clean.substring(0, 82) + '...';
@@ -1156,6 +1175,11 @@
             };
         }
 
+        function capitalizeFirstLetter(str) {
+            if (!str) return str;
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+
         function cleanInitiativeName(name) {
             // Remove "C.A. #" prefix
             let cleaned = name.replace(/^C\.A\.\s*\d+\s*/i, '');
@@ -1167,6 +1191,9 @@
             if (cleaned.length > 80) {
                 cleaned = cleaned.substring(0, 77) + '...';
             }
+            
+            // Capitalize first letter
+            cleaned = capitalizeFirstLetter(cleaned);
             
             return cleaned || name;
         }

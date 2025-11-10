@@ -951,20 +951,18 @@
                                     
                                     ${consolidated.dependencies.length > 0 ? `
                                         <div class="dependencies">
-                                            <div class="dependencies-label">⚠️ Key Dependencies:${consolidated.totalDependencies > 3 ? ` <span style="font-weight: normal; font-size: 0.9em; opacity: 0.8;">(${consolidated.totalDependencies} total)</span>` : ''}</div>
+                                            <div class="dependencies-label">⚠️ Key Dependencies:</div>
                                             <ul class="info-list">
                                                 ${consolidated.dependencies.map(dep => `<li>${dep}</li>`).join('')}
-                                                ${consolidated.totalDependencies > 3 ? `<li style="font-style: italic; color: #856404; opacity: 0.7; font-size: 0.9em;">+ ${consolidated.totalDependencies - 3} additional cross-functional dependencies</li>` : ''}
                                             </ul>
                                         </div>
                                     ` : ''}
                                     
                                     ${consolidated.deliverables.length > 0 ? `
                                         <div class="deliverable">
-                                            <div class="deliverable-label">📦 Key Deliverables:${consolidated.totalDeliverables > 3 ? ` <span style="font-weight: normal; font-size: 0.9em; opacity: 0.8;">(${consolidated.totalDeliverables} total)</span>` : ''}</div>
+                                            <div class="deliverable-label">📦 Key Deliverables:</div>
                                             <ul class="info-list">
                                                 ${consolidated.deliverables.map(del => `<li>${del}</li>`).join('')}
-                                                ${consolidated.totalDeliverables > 3 ? `<li style="font-style: italic; color: #004085; opacity: 0.7; font-size: 0.9em;">+ ${consolidated.totalDeliverables - 3} additional milestones and reports</li>` : ''}
                                             </ul>
                                         </div>
                                     ` : ''}
@@ -1072,47 +1070,63 @@
                 });
             });
             
-            // Get unique dependencies - clean and format them
-            const dependencies = [...new Set(tasks
+            // Consolidate dependencies into themes
+            const allDeps = tasks
                 .map(t => t['Dependencies'])
                 .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => {
-                    let clean = d.trim();
-                    // Take first sentence or limit length
-                    const firstSentence = clean.split(/[.;]/).filter(s => s.trim())[0];
-                    if (firstSentence && firstSentence.length < 70) {
-                        return firstSentence.trim();
-                    }
-                    // Otherwise limit to 70 chars for readability
-                    if (clean.length > 70) {
-                        clean = clean.substring(0, 67) + '...';
-                    }
-                    return clean;
-                })
-                .filter(d => d.length > 3) // Filter out very short entries
-            )];
+                .map(d => d.trim().toLowerCase());
             
-            // Get unique deliverables - clean and format them
-            const deliverables = [...new Set(tasks
+            const depThemes = [];
+            if (allDeps.some(d => d.includes('fnt') || d.includes('finance') || d.includes('close'))) {
+                depThemes.push('FNT and Finance team alignment on close timing');
+            }
+            if (allDeps.some(d => d.includes('d&v') || d.includes('capacity') || d.includes('partner'))) {
+                depThemes.push('Cross-functional capacity and D&V partnership');
+            }
+            if (allDeps.some(d => d.includes('legal') || d.includes('tax') || d.includes('compliance'))) {
+                depThemes.push('Legal, Tax, and Compliance team coordination');
+            }
+            if (allDeps.some(d => d.includes('system') || d.includes('netsuite') || d.includes('numeric') || d.includes('tool'))) {
+                depThemes.push('System implementations and tool integrations');
+            }
+            if (allDeps.some(d => d.includes('sales') || d.includes('john') || d.includes('rep') || d.includes('test'))) {
+                depThemes.push('Sales comp team testing and validation');
+            }
+            if (allDeps.some(d => d.includes('september') || d.includes('october') || d.includes('timing'))) {
+                depThemes.push('Q3/Q4 close milestones and timing dependencies');
+            }
+            
+            const dependencies = depThemes.slice(0, 5);
+            
+            // Consolidate deliverables into themes
+            const allDeliverables = tasks
                 .map(t => t['End of Week Deliverable / Milestone'])
                 .filter(d => d && d.trim())
                 .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
-                .map(d => {
-                    // Take first line and clean it
-                    let clean = d.trim().split('\n')[0];
-                    // Remove bullet points and extra characters
-                    clean = clean.replace(/^[-•]\s*/, '').trim();
-                    // Remove numbered prefixes like "1.", "2."
-                    clean = clean.replace(/^\d+\.\s*/, '').trim();
-                    // Limit length for readability
-                    if (clean.length > 70) {
-                        clean = clean.substring(0, 67) + '...';
-                    }
-                    return clean;
-                })
-                .filter(d => d.length > 5) // Filter out very short entries
-            )];
+                .map(d => d.trim().toLowerCase());
+            
+            const delThemes = [];
+            if (allDeliverables.some(d => d.includes('report') || d.includes('custom') || d.includes('template'))) {
+                delThemes.push('Custom reports and templates deployed');
+            }
+            if (allDeliverables.some(d => d.includes('netsuite') || d.includes('numeric') || d.includes('system') || d.includes('integration'))) {
+                delThemes.push('System integrations and configurations complete');
+            }
+            if (allDeliverables.some(d => d.includes('test') || d.includes('sandbox') || d.includes('validation') || d.includes('review'))) {
+                delThemes.push('Testing, validation, and sign-offs complete');
+            }
+            if (allDeliverables.some(d => d.includes('onboard') || d.includes('train') || d.includes('document') || d.includes('process'))) {
+                delThemes.push('Team onboarding and process documentation finalized');
+            }
+            if (allDeliverables.some(d => d.includes('close') || d.includes('week') || d.includes('month') || d.includes('fy'))) {
+                delThemes.push('Close milestone completions and reporting');
+            }
+            if (allDeliverables.some(d => d.includes('ai') || d.includes('bot') || d.includes('automat') || d.includes('accrual'))) {
+                delThemes.push('AI and automation implementations launched');
+            }
+            
+            const deliverables = delThemes.slice(0, 5);
             
             // Create executive summary from OKR and category
             let summary = '';
@@ -1139,10 +1153,8 @@
                 targetDate,
                 tools: allTools.slice(0, 5), // Limit to top 5 tools
                 totalTools: allTools.length,
-                dependencies: dependencies.slice(0, 3), // Top 3
-                deliverables: deliverables.slice(0, 3), // Top 3
-                totalDependencies: dependencies.length,
-                totalDeliverables: deliverables.length,
+                dependencies: dependencies, // Already consolidated to 5 themes
+                deliverables: deliverables, // Already consolidated to 5 themes
                 summary: summary.length > 150 ? summary.substring(0, 147) + '...' : summary
             };
         }

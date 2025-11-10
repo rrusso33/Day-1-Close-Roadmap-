@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>BD5 to BD1 Close Acceleration Roadmap</title>
+    <title>Journey to Day 1 Close | Executive Roadmap</title>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body { 
@@ -11,10 +11,9 @@
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             padding: 20px;
             color: #333;
-            line-height: 1.6;
         }
         .container { 
-            max-width: 1900px;
+            max-width: 1600px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
@@ -26,507 +25,374 @@
         .header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 60px 40px;
-            text-align: center;
-            position: relative;
-        }
-        .header h1 { font-size: 3.5em; margin-bottom: 20px; font-weight: 700; }
-        .header .subtitle { font-size: 1.5em; opacity: 0.95; margin-bottom: 15px; }
-        .last-updated {
-            position: absolute;
-            top: 20px;
-            left: 20px;
-            background: rgba(255, 255, 255, 0.2);
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-size: 0.9em;
-        }
-        .refresh-btn {
-            position: fixed;
-            top: 30px;
-            right: 30px;
-            background: #28a745;
-            color: white;
-            padding: 15px 30px;
-            border-radius: 30px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
-            border: none;
-            z-index: 1000;
-            font-size: 1.1em;
-        }
-        .refresh-btn:hover { transform: scale(1.05); }
-        
-        /* Journey Path - BD5 to BD1 */
-        .journey-path {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
             padding: 50px 40px;
+            text-align: center;
+        }
+        .header h1 { font-size: 3em; margin-bottom: 10px; font-weight: 700; }
+        .header .subtitle { font-size: 1.3em; opacity: 0.95; }
+        
+        /* Hero Stats */
+        .hero-stats {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            padding: 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
             color: white;
         }
-        .journey-title {
+        .stat-box {
+            text-align: center;
+            padding: 20px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+        .stat-number {
+            font-size: 3.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .stat-label {
+            font-size: 1.1em;
+            opacity: 0.95;
+        }
+        
+        /* Timeline Journey */
+        .timeline-section {
+            padding: 50px 40px;
+            background: #f8f9fa;
+        }
+        .timeline-title {
             text-align: center;
             font-size: 2.5em;
-            font-weight: 700;
+            color: #1e3c72;
             margin-bottom: 40px;
+            font-weight: 700;
         }
-        .journey-steps {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            max-width: 1400px;
-            margin: 0 auto;
+        .timeline-track {
             position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 40px 0;
         }
-        .journey-line {
+        .timeline-line {
             position: absolute;
-            top: 50px;
-            left: 10%;
-            right: 10%;
-            height: 6px;
-            background: rgba(255,255,255,0.3);
-            z-index: 0;
+            top: 80px;
+            left: 5%;
+            right: 5%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
         }
-        .journey-progress {
+        .timeline-progress-bar {
             position: absolute;
             top: 0;
             left: 0;
             height: 100%;
-            background: white;
+            background: linear-gradient(to right, #11998e, #38ef7d);
+            border-radius: 4px;
             transition: width 1s ease;
         }
-        .journey-step {
+        .timeline-phases {
+            display: flex;
+            justify-content: space-between;
             position: relative;
             z-index: 1;
-            text-align: center;
-            flex: 1;
         }
-        .journey-circle {
-            width: 100px;
-            height: 100px;
+        .phase {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .phase-marker {
+            width: 120px;
+            height: 120px;
             border-radius: 50%;
-            background: rgba(255,255,255,0.3);
+            background: white;
+            border: 6px solid #e9ecef;
             margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 2em;
             font-weight: 700;
-            border: 5px solid transparent;
+            color: #6c757d;
             transition: all 0.5s ease;
         }
-        .journey-step.complete .journey-circle {
-            background: white;
-            color: #f5576c;
-            border-color: white;
-            box-shadow: 0 10px 30px rgba(255,255,255,0.4);
+        .phase.active .phase-marker {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-color: #667eea;
+            transform: scale(1.1);
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
         }
-        .journey-step.current .journey-circle {
-            background: #ffd700;
-            color: #f5576c;
-            border-color: #ffd700;
-            animation: pulse 2s infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-        }
-        .journey-label {
-            font-size: 1.3em;
-            font-weight: 700;
-            margin-bottom: 5px;
-        }
-        .journey-status {
-            font-size: 0.9em;
-            opacity: 0.9;
-        }
-        
-        /* Executive Summary */
-        .exec-summary {
+        .phase.complete .phase-marker {
             background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
             color: white;
-            padding: 50px 40px;
+            border-color: #11998e;
         }
-        .exec-summary h2 {
-            font-size: 2.5em;
-            margin-bottom: 30px;
-            text-align: center;
-        }
-        .summary-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 25px;
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-        .summary-card {
-            background: rgba(255, 255, 255, 0.2);
-            padding: 30px;
-            border-radius: 15px;
-            text-align: center;
-            backdrop-filter: blur(10px);
-        }
-        .summary-icon {
-            font-size: 3em;
-            margin-bottom: 15px;
-        }
-        .summary-value {
-            font-size: 3em;
+        .phase-label {
+            font-size: 1.3em;
             font-weight: 700;
-            margin-bottom: 10px;
+            color: #2c3e50;
+            margin-bottom: 5px;
         }
-        .summary-label {
-            font-size: 1.2em;
-            opacity: 0.95;
+        .phase-date {
+            font-size: 0.95em;
+            color: #6c757d;
         }
         
         /* Strategic Themes */
-        .content { padding: 50px 40px; }
-        .themes-header {
-            text-align: center;
-            margin-bottom: 50px;
+        .themes-section {
+            padding: 50px 40px;
         }
-        .themes-header h2 {
-            font-size: 2.8em;
+        .section-title {
+            text-align: center;
+            font-size: 2.5em;
             color: #1e3c72;
             margin-bottom: 15px;
+            font-weight: 700;
         }
-        .themes-header p {
-            font-size: 1.3em;
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2em;
             color: #6c757d;
+            margin-bottom: 40px;
         }
         
-        .theme-section {
-            margin-bottom: 50px;
+        .theme-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 30px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .theme-card {
+            background: white;
             border-radius: 20px;
             overflow: hidden;
             box-shadow: 0 10px 40px rgba(0,0,0,0.1);
-        }
-        .theme-header {
-            padding: 40px;
-            color: white;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            cursor: pointer;
             transition: all 0.3s ease;
         }
-        .theme-header:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
-        }
-        .theme-header.automation {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-        .theme-header.process {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-        .theme-header.tools {
-            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
-        }
-        .theme-header.risk {
-            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        }
-        .theme-header.integration {
-            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        .theme-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.15);
         }
         
-        .theme-title-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
+        .theme-header {
+            padding: 30px;
+            color: white;
+            position: relative;
+            overflow: hidden;
         }
+        .theme-header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            width: 200px;
+            height: 200px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            transform: translate(50%, -50%);
+        }
+        .theme-header.automation { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .theme-header.process { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .theme-header.tools { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .theme-header.risk { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .theme-header.integration { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        
         .theme-icon {
             font-size: 3em;
-            margin-right: 20px;
+            margin-bottom: 15px;
         }
-        .theme-title {
-            font-size: 2.5em;
+        .theme-name {
+            font-size: 1.8em;
             font-weight: 700;
-            flex: 1;
+            margin-bottom: 20px;
         }
-        .theme-impact {
-            background: rgba(255,255,255,0.2);
-            padding: 15px 30px;
-            border-radius: 15px;
-            font-size: 1.2em;
-            font-weight: 700;
+        
+        .theme-progress {
+            background: rgba(255,255,255,0.3);
+            height: 10px;
+            border-radius: 5px;
+            overflow: hidden;
+            margin-bottom: 10px;
+        }
+        .theme-progress-fill {
+            height: 100%;
+            background: white;
+            transition: width 1s ease;
         }
         .theme-stats {
             display: flex;
-            gap: 40px;
-            font-size: 1.2em;
+            justify-content: space-between;
+            font-size: 0.95em;
             opacity: 0.95;
         }
-        .theme-stat-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
         
-        /* Timeline View */
         .theme-body {
-            background: #f8f9fa;
-            padding: 40px;
-        }
-        .timeline-container {
-            background: white;
-            border-radius: 15px;
             padding: 30px;
-            margin-bottom: 30px;
         }
-        .timeline-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 25px;
-            padding-bottom: 15px;
-            border-bottom: 3px solid #e9ecef;
-        }
-        .timeline-title {
-            font-size: 1.5em;
-            font-weight: 700;
-            color: #2c3e50;
-        }
-        .timeline-dates {
-            color: #6c757d;
-            font-weight: 600;
-        }
-        
-        /* Task Cards with Timeline */
-        .task-timeline {
+        .theme-impact {
             display: grid;
-            gap: 20px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 25px;
         }
-        .task-item {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 25px;
-            transition: all 0.3s ease;
-            position: relative;
+        .impact-item {
+            background: #f8f9fa;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
         }
-        .task-item:hover {
-            border-color: #667eea;
-            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
-            transform: translateX(5px);
+        .impact-value {
+            font-size: 2em;
+            font-weight: 700;
+            color: #667eea;
+            margin-bottom: 5px;
         }
-        .task-item.complete {
-            border-color: #28a745;
-            background: linear-gradient(to right, #f8fff9 0%, white 20%);
-        }
-        .task-item.in-progress {
-            border-color: #007bff;
-            background: linear-gradient(to right, #f0f8ff 0%, white 20%);
-        }
-        .task-item.blocked {
-            border-color: #dc3545;
-            background: linear-gradient(to right, #fff5f5 0%, white 20%);
+        .impact-label {
+            font-size: 0.9em;
+            color: #6c757d;
         }
         
-        .task-header-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: start;
-            margin-bottom: 15px;
+        .key-initiatives {
+            margin-top: 20px;
         }
-        .task-info {
-            flex: 1;
-        }
-        .task-title {
-            font-size: 1.3em;
+        .key-initiatives-title {
             font-weight: 700;
             color: #2c3e50;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
+            font-size: 1.1em;
         }
-        .task-deliverable {
-            background: #e7f3ff;
-            padding: 12px;
-            border-radius: 8px;
-            margin: 15px 0;
-            border-left: 4px solid #007bff;
+        .initiative-list {
+            list-style: none;
         }
-        .task-deliverable strong {
+        .initiative-list li {
+            padding: 8px 0 8px 25px;
+            position: relative;
+            color: #495057;
+            line-height: 1.5;
+        }
+        .initiative-list li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #28a745;
+            font-weight: 700;
+            font-size: 1.2em;
+        }
+        .initiative-list li.in-progress::before {
+            content: '⟳';
             color: #007bff;
         }
         
-        .task-badges {
-            display: flex;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 15px;
-        }
-        .badge {
-            padding: 6px 15px;
-            border-radius: 20px;
-            font-size: 0.85em;
-            font-weight: 700;
-        }
-        .badge-status {
-            background: #28a745;
-            color: white;
-        }
-        .badge-status.in-progress {
-            background: #007bff;
-        }
-        .badge-status.not-started {
-            background: #6c757d;
-        }
-        .badge-status.blocked {
-            background: #dc3545;
-        }
-        .badge-category {
-            background: #667eea;
-            color: white;
-        }
-        
-        .task-meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 15px;
+        .target-completion {
+            margin-top: 25px;
             padding: 20px;
-            background: #f8f9fa;
+            background: linear-gradient(135deg, #e3f2fd 0%, #f3e5f5 100%);
             border-radius: 10px;
-            margin-top: 15px;
+            text-align: center;
         }
-        .meta-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.95em;
-        }
-        .meta-icon {
-            font-size: 1.3em;
-        }
-        .meta-label {
+        .target-label {
+            font-size: 0.9em;
             color: #6c757d;
-            font-weight: 600;
+            margin-bottom: 8px;
         }
-        .meta-value {
-            color: #2c3e50;
+        .target-date {
+            font-size: 1.5em;
             font-weight: 700;
-        }
-        
-        /* Dependencies */
-        .dependencies {
-            background: #fff3cd;
-            border-left: 4px solid #ffc107;
-            padding: 12px;
-            border-radius: 8px;
-            margin-top: 15px;
-        }
-        .dependencies strong {
-            color: #856404;
-        }
-        
-        /* Visual Timeline Bar */
-        .timeline-bar {
-            height: 8px;
-            background: #e9ecef;
-            border-radius: 4px;
-            margin-top: 15px;
-            overflow: hidden;
-        }
-        .timeline-progress {
-            height: 100%;
-            background: linear-gradient(to right, #28a745, #20c997);
-            transition: width 1s ease;
-        }
-        
-        @media print {
-            .refresh-btn { display: none; }
-            body { background: white; padding: 0; }
-            .theme-section { page-break-inside: avoid; }
+            color: #667eea;
         }
         
         @media (max-width: 768px) {
+            .theme-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 2em; }
-            .journey-steps { flex-direction: column; gap: 30px; }
-            .journey-line { display: none; }
-            .summary-grid { grid-template-columns: 1fr; }
-            .task-meta-grid { grid-template-columns: 1fr; }
+            .timeline-phases { flex-direction: column; gap: 20px; }
+            .timeline-line { display: none; }
         }
     </style>
 </head>
 <body>
-    <button class="refresh-btn" onclick="loadData()">🔄 Refresh Data</button>
-    
     <div class="container">
         <div class="header">
-            <div class="last-updated" id="lastUpdated">📅 Loading...</div>
-            <h1>🚀 Journey to BD1 Close</h1>
+            <h1>🚀 Journey to Day 1 Close</h1>
             <div class="subtitle">Strategic Transformation Roadmap | Corporate Accounting</div>
-            <div style="opacity: 0.85; font-style: italic; margin-top: 10px;">
-                Timeline: November 2025 - February 2027 | Fiscal Year End: April 30
+        </div>
+
+        <!-- Hero Stats -->
+        <div class="hero-stats" id="heroStats">
+            <div class="stat-box">
+                <div class="stat-number" id="totalInitiatives">0</div>
+                <div class="stat-label">Total Initiatives</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="completedCount">0</div>
+                <div class="stat-label">Completed</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="progressPercent">0%</div>
+                <div class="stat-label">Progress to BD1</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="hoursSaved">0</div>
+                <div class="stat-label">Hours to Save</div>
+            </div>
+            <div class="stat-box">
+                <div class="stat-number" id="daysRemaining">0</div>
+                <div class="stat-label">Days to Target</div>
             </div>
         </div>
 
-        <!-- BD5 to BD1 Journey -->
-        <div class="journey-path">
-            <div class="journey-title">📍 Our Path to Day 1 Close</div>
-            <div class="journey-steps">
-                <div class="journey-line">
-                    <div class="journey-progress" id="journeyProgress"></div>
+        <!-- Timeline -->
+        <div class="timeline-section">
+            <div class="timeline-title">📍 Our Path from BD5 to BD1</div>
+            <div class="timeline-track">
+                <div class="timeline-line">
+                    <div class="timeline-progress-bar" id="timelineProgress"></div>
                 </div>
-                <div class="journey-step" id="step-bd5">
-                    <div class="journey-circle">BD5</div>
-                    <div class="journey-label">Current State</div>
-                    <div class="journey-status">Starting Point</div>
-                </div>
-                <div class="journey-step" id="step-bd4">
-                    <div class="journey-circle">BD4</div>
-                    <div class="journey-label">Foundation</div>
-                    <div class="journey-status">Automation Setup</div>
-                </div>
-                <div class="journey-step" id="step-bd3">
-                    <div class="journey-circle">BD3</div>
-                    <div class="journey-label">Optimization</div>
-                    <div class="journey-status">Process Streamlining</div>
-                </div>
-                <div class="journey-step" id="step-bd2">
-                    <div class="journey-circle">BD2</div>
-                    <div class="journey-label">Scale</div>
-                    <div class="journey-status">Integration Complete</div>
-                </div>
-                <div class="journey-step" id="step-bd1">
-                    <div class="journey-circle">BD1</div>
-                    <div class="journey-label">Target State</div>
-                    <div class="journey-status">Feb 2027</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Executive Summary -->
-        <div class="exec-summary">
-            <h2>📊 Executive Summary</h2>
-            <div class="summary-grid" id="summaryGrid">
-                <div class="summary-card">
-                    <div class="summary-icon">✅</div>
-                    <div class="summary-value" id="totalTasks">0</div>
-                    <div class="summary-label">Total Initiatives</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-icon">⏱️</div>
-                    <div class="summary-value" id="hoursSaved">0</div>
-                    <div class="summary-label">Hours to Save</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-icon">📈</div>
-                    <div class="summary-value" id="progressPercent">0%</div>
-                    <div class="summary-label">Complete</div>
-                </div>
-                <div class="summary-card">
-                    <div class="summary-icon">🎯</div>
-                    <div class="summary-value" id="daysLeft">0</div>
-                    <div class="summary-label">Days to BD1</div>
+                <div class="timeline-phases">
+                    <div class="phase" id="phase-bd5">
+                        <div class="phase-marker">BD5</div>
+                        <div class="phase-label">Starting Point</div>
+                        <div class="phase-date">Nov 2025</div>
+                    </div>
+                    <div class="phase" id="phase-bd4">
+                        <div class="phase-marker">BD4</div>
+                        <div class="phase-label">Automation</div>
+                        <div class="phase-date">Q1 2026</div>
+                    </div>
+                    <div class="phase" id="phase-bd3">
+                        <div class="phase-marker">BD3</div>
+                        <div class="phase-label">Integration</div>
+                        <div class="phase-date">Q2 2026</div>
+                    </div>
+                    <div class="phase" id="phase-bd2">
+                        <div class="phase-marker">BD2</div>
+                        <div class="phase-label">Optimization</div>
+                        <div class="phase-date">Q3 2026</div>
+                    </div>
+                    <div class="phase" id="phase-bd1">
+                        <div class="phase-marker">BD1</div>
+                        <div class="phase-label">Target State</div>
+                        <div class="phase-date">Feb 2027</div>
+                    </div>
                 </div>
             </div>
         </div>
 
         <!-- Strategic Themes -->
-        <div class="content" id="mainContent">
-            <div style="text-align: center; padding: 60px; color: #6c757d;">
-                <div style="font-size: 3em; margin-bottom: 25px;">📊</div>
-                <div style="font-size: 1.5em;">Loading strategic roadmap...</div>
+        <div class="themes-section">
+            <div class="section-title">🎯 Strategic Initiatives</div>
+            <div class="section-subtitle">Five key themes driving us to Day 1 close</div>
+            
+            <div class="theme-grid" id="themeGrid">
+                <div style="text-align: center; padding: 60px; color: #6c757d; grid-column: 1 / -1;">
+                    <div style="font-size: 2em; margin-bottom: 20px;">📊</div>
+                    <div style="font-size: 1.3em;">Loading strategic initiatives...</div>
+                </div>
             </div>
         </div>
     </div>
@@ -535,22 +401,48 @@
         const SHEET_URL = 'roadmap_data.csv';
         const GITHUB_URL = 'https://rrusso33.github.io/Day-1-Close-Roadmap-/roadmap_data.csv';
 
+        const THEME_CONFIG = {
+            'Automation & AI': {
+                icon: '🤖',
+                class: 'automation',
+                keywords: ['ai', 'automat', 'bot', 'wiselayer', 'accruals.ai'],
+                description: 'Implementing AI-powered tools to eliminate manual work'
+            },
+            'Process Optimization': {
+                icon: '⚡',
+                class: 'process',
+                keywords: ['process', 'streamline', 'optimize', 'flux', 'confluence', 'numeric'],
+                description: 'Streamlining workflows and reducing cycle times'
+            },
+            'Systems Integration': {
+                icon: '🛠️',
+                class: 'tools',
+                keywords: ['integration', 'system', 'netsuite', 'tool', 'spacebase', 'xactly', 'guideline', 'acquisition'],
+                description: 'Connecting systems for seamless data flow'
+            },
+            'Risk & Controls': {
+                icon: '🛡️',
+                class: 'risk',
+                keywords: ['risk', 'compliance', 'control', 'monitor', 'accuracy'],
+                description: 'Enhancing accuracy and maintaining compliance'
+            },
+            'Cash & Intercompany': {
+                icon: '💰',
+                class: 'integration',
+                keywords: ['cash', 'intercompany', 'settlement', 'billing'],
+                description: 'Accelerating cash close and intercompany processes'
+            }
+        };
+
         async function loadData() {
             try {
-                console.log('🔍 Loading roadmap data...');
-                
-                let csvText;
                 const isLocal = window.location.protocol === 'file:';
                 
                 if (isLocal) {
-                    // Show friendly message for local viewing
-                    document.getElementById('mainContent').innerHTML = `
-                        <div style="text-align: center; padding: 60px;">
+                    document.getElementById('themeGrid').innerHTML = `
+                        <div style="text-align: center; padding: 60px; grid-column: 1 / -1;">
                             <div style="font-size: 3em; margin-bottom: 25px;">🌐</div>
                             <div style="font-size: 2em; margin-bottom: 20px; color: #1e3c72;">Please Use the Live URL</div>
-                            <div style="font-size: 1.2em; margin-bottom: 30px; color: #6c757d; max-width: 600px; margin-left: auto; margin-right: auto;">
-                                For security reasons, this roadmap must be viewed through the web, not opened as a local file.
-                            </div>
                             <a href="https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html" 
                                style="display: inline-block; padding: 20px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
                                       color: white; text-decoration: none; border-radius: 10px; font-size: 1.3em; font-weight: 700;">
@@ -561,40 +453,27 @@
                     return;
                 }
                 
-                // Try primary URL first
+                let csvText;
                 try {
                     const response = await fetch(SHEET_URL);
                     csvText = await response.text();
-                    console.log('✅ Loaded from primary URL');
                 } catch (err) {
-                    // Fallback to GitHub direct URL
-                    console.log('⚠️ Primary failed, trying GitHub URL...');
                     const response = await fetch(GITHUB_URL);
                     csvText = await response.text();
-                    console.log('✅ Loaded from GitHub URL');
                 }
-                
-                console.log('📄 CSV length:', csvText.length, 'characters');
                 
                 const data = parseCSV(csvText);
-                console.log(`✅ Parsed ${data.length} tasks`);
+                console.log(`✅ Loaded ${data.length} tasks`);
                 
-                if (data.length === 0) {
-                    throw new Error('No data parsed from CSV');
-                }
-                
-                renderRoadmap(data);
-                document.getElementById('lastUpdated').innerHTML = `📅 Updated: ${new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}`;
+                renderDashboard(data);
                 
             } catch (error) {
-                console.error('❌ Error details:', error);
-                document.getElementById('mainContent').innerHTML = `
-                    <div style="text-align: center; padding: 60px; color: #dc3545;">
+                console.error('Error:', error);
+                document.getElementById('themeGrid').innerHTML = `
+                    <div style="text-align: center; padding: 60px; color: #dc3545; grid-column: 1 / -1;">
                         <div style="font-size: 3em; margin-bottom: 25px;">⚠️</div>
-                        <div style="font-size: 1.5em; margin-bottom: 20px;">Error loading data</div>
-                        <div style="font-size: 1em; margin-bottom: 20px; color: #6c757d;">Error: ${error.message}</div>
-                        <div style="font-size: 0.9em; margin-bottom: 20px; color: #6c757d;">Please use the live URL: <a href="https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html" style="color: #667eea;">Click here</a></div>
-                        <button onclick="loadData()" style="padding: 15px 30px; border: none; background: #667eea; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1em;">Retry</button>
+                        <div style="font-size: 1.5em;">Error loading data</div>
+                        <div style="margin-top: 20px;"><a href="https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html" style="color: #667eea;">Use live URL</a></div>
                     </div>
                 `;
             }
@@ -612,25 +491,19 @@
                 
                 if (char === '"') {
                     if (inQuotes && nextChar === '"') {
-                        // Escaped quote
                         currentField += '"';
-                        i++; // Skip next quote
+                        i++;
                     } else {
-                        // Toggle quote state
                         inQuotes = !inQuotes;
                     }
                 } else if (char === ',' && !inQuotes) {
-                    // End of field
                     currentRow.push(currentField.trim());
                     currentField = '';
                 } else if ((char === '\n' || char === '\r') && !inQuotes) {
-                    // End of row (handle both \n and \r\n)
-                    if (char === '\r' && nextChar === '\n') {
-                        i++; // Skip \n in \r\n
-                    }
+                    if (char === '\r' && nextChar === '\n') i++;
                     if (currentField || currentRow.length > 0) {
                         currentRow.push(currentField.trim());
-                        if (currentRow.some(field => field)) { // Only add non-empty rows
+                        if (currentRow.some(field => field)) {
                             rows.push(currentRow);
                         }
                         currentRow = [];
@@ -641,7 +514,6 @@
                 }
             }
             
-            // Add last field and row if exists
             if (currentField || currentRow.length > 0) {
                 currentRow.push(currentField.trim());
                 if (currentRow.some(field => field)) {
@@ -651,12 +523,7 @@
             
             if (rows.length === 0) return [];
             
-            // First row is headers
             const headers = rows[0].map(h => h.replace(/^"|"$/g, '').trim());
-            console.log('📋 Headers:', headers);
-            console.log('📊 Total rows (including header):', rows.length);
-            
-            // Convert remaining rows to objects
             const data = [];
             for (let i = 1; i < rows.length; i++) {
                 const row = {};
@@ -666,323 +533,173 @@
                 data.push(row);
             }
             
-            console.log(`✅ Parsed ${data.length} data rows`);
-            if (data.length > 0) {
-                console.log('📝 First row sample:', data[0]);
-            }
-            
             return data;
         }
 
-        function renderRoadmap(data) {
-            // Calculate stats
-            const stats = calculateStats(data);
-            updateExecutiveSummary(stats);
-            updateJourneyPath(stats.progress);
+        function categorizeTask(task) {
+            const text = (task['Week Focus and Tasks'] + ' ' + task['OKR'] + ' ' + task['Close Category']).toLowerCase();
             
-            // Group by strategic themes
-            const themes = categorizeByTheme(data);
-            
-            // Render themes
-            let html = `
-                <div class="themes-header">
-                    <h2>🎯 Strategic Themes to BD1</h2>
-                    <p>Key initiatives organized by strategic impact areas</p>
-                </div>
-            `;
-            
-            const themeOrder = ['Automation & AI', 'Process Optimization', 'Systems & Tools', 'Risk & Compliance', 'Integration & Acquisition'];
-            const themeIcons = {
-                'Automation & AI': '🤖',
-                'Process Optimization': '⚡',
-                'Systems & Tools': '🛠️',
-                'Risk & Compliance': '🛡️',
-                'Integration & Acquisition': '🔗'
-            };
-            const themeClasses = {
-                'Automation & AI': 'automation',
-                'Process Optimization': 'process',
-                'Systems & Tools': 'tools',
-                'Risk & Compliance': 'risk',
-                'Integration & Acquisition': 'integration'
-            };
-            
-            themeOrder.forEach(themeName => {
-                if (!themes[themeName] || themes[themeName].length === 0) return;
-                
-                const tasks = themes[themeName];
-                const themeStats = calculateThemeStats(tasks);
-                const sprintGroups = groupBySprint(tasks);
-                
-                html += `
-                    <div class="theme-section">
-                        <div class="theme-header ${themeClasses[themeName]}">
-                            <div class="theme-title-row">
-                                <div style="display: flex; align-items: center;">
-                                    <div class="theme-icon">${themeIcons[themeName]}</div>
-                                    <div class="theme-title">${themeName}</div>
-                                </div>
-                                <div class="theme-impact">
-                                    ${themeStats.hours} Hours Saved
-                                </div>
-                            </div>
-                            <div class="theme-stats">
-                                <div class="theme-stat-item">
-                                    <span>📋</span>
-                                    <span>${themeStats.completed}/${themeStats.total} Complete</span>
-                                </div>
-                                <div class="theme-stat-item">
-                                    <span>📅</span>
-                                    <span>${themeStats.dateRange}</span>
-                                </div>
-                                <div class="theme-stat-item">
-                                    <span>📈</span>
-                                    <span>${themeStats.progress.toFixed(0)}% Progress</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="theme-body">
-                `;
-                
-                // Render by Sprint within each theme
-                Object.keys(sprintGroups).sort().forEach(sprintName => {
-                    const sprintTasks = sprintGroups[sprintName];
-                    const sprintStats = calculateSprintStats(sprintTasks);
-                    
-                    html += `
-                        <div class="timeline-container">
-                            <div class="timeline-header">
-                                <div class="timeline-title">🎯 ${sprintName || 'Planning Phase'}</div>
-                                <div class="timeline-dates">
-                                    Target: ${sprintStats.targetDate} | 
-                                    ${sprintStats.completed}/${sprintStats.total} tasks | 
-                                    ${sprintStats.hours}hrs saved
-                                </div>
-                            </div>
-                            <div class="task-timeline">
-                    `;
-                    
-                    sprintTasks.forEach(task => {
-                        const status = normalizeStatus(task['Status']);
-                        const statusClass = status.toLowerCase().replace(/\s+/g, '-');
-                        
-                        html += `
-                            <div class="task-item ${statusClass}">
-                                <div class="task-header-row">
-                                    <div class="task-info">
-                                        <div class="task-badges">
-                                            <span class="badge badge-status ${statusClass}">${status}</span>
-                                            ${task['Close Category'] ? `<span class="badge badge-category">${task['Close Category']}</span>` : ''}
-                                        </div>
-                                        <div class="task-title">${task['Week Focus and Tasks'] || 'Task'}</div>
-                                    </div>
-                                </div>
-                                
-                                ${task['End of Week Deliverable / Milestone'] ? `
-                                    <div class="task-deliverable">
-                                        <strong>📦 Deliverable:</strong> ${task['End of Week Deliverable / Milestone']}
-                                    </div>
-                                ` : ''}
-                                
-                                <div class="task-meta-grid">
-                                    ${task['Day 1 Close Target End Date'] ? `
-                                        <div class="meta-item">
-                                            <span class="meta-icon">📅</span>
-                                            <div>
-                                                <div class="meta-label">Target Date</div>
-                                                <div class="meta-value">${task['Day 1 Close Target End Date']}</div>
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                    ${task['Hours Saved'] && task['Hours Saved'] !== '0' ? `
-                                        <div class="meta-item">
-                                            <span class="meta-icon">⏱️</span>
-                                            <div>
-                                                <div class="meta-label">Time Impact</div>
-                                                <div class="meta-value">${task['Hours Saved']} hours</div>
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                    ${task['Owner(s)'] ? `
-                                        <div class="meta-item">
-                                            <span class="meta-icon">👤</span>
-                                            <div>
-                                                <div class="meta-label">Owner</div>
-                                                <div class="meta-value">${task['Owner(s)']}</div>
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                    ${task['Key Result'] ? `
-                                        <div class="meta-item">
-                                            <span class="meta-icon">🎯</span>
-                                            <div>
-                                                <div class="meta-label">Key Result</div>
-                                                <div class="meta-value">${task['Key Result']}</div>
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                </div>
-                                
-                                ${task['Dependencies'] ? `
-                                    <div class="dependencies">
-                                        <strong>⚠️ Dependencies:</strong> ${task['Dependencies']}
-                                    </div>
-                                ` : ''}
-                                
-                                ${status === 'Complete' ? `
-                                    <div class="timeline-bar">
-                                        <div class="timeline-progress" style="width: 100%;"></div>
-                                    </div>
-                                ` : ''}
-                            </div>
-                        `;
-                    });
-                    
-                    html += `
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                html += `
-                        </div>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('mainContent').innerHTML = html;
-        }
-
-        function categorizeByTheme(data) {
-            const themes = {
-                'Automation & AI': [],
-                'Process Optimization': [],
-                'Systems & Tools': [],
-                'Risk & Compliance': [],
-                'Integration & Acquisition': []
-            };
-            
-            data.forEach(row => {
-                const task = row['Week Focus and Tasks'] || '';
-                const okr = row['OKR'] || '';
-                const category = row['Close Category'] || '';
-                const combined = (task + ' ' + okr + ' ' + category).toLowerCase();
-                
-                if (combined.includes('ai') || combined.includes('automat') || combined.includes('bot') || combined.includes('wiselayer')) {
-                    themes['Automation & AI'].push(row);
-                } else if (combined.includes('acquisition') || combined.includes('guideline') || combined.includes('integration') || combined.includes('intercompany')) {
-                    themes['Integration & Acquisition'].push(row);
-                } else if (combined.includes('system') || combined.includes('tool') || combined.includes('numeric') || combined.includes('netsuite') || combined.includes('spacebase')) {
-                    themes['Systems & Tools'].push(row);
-                } else if (combined.includes('risk') || combined.includes('compliance') || combined.includes('control') || combined.includes('monitor')) {
-                    themes['Risk & Compliance'].push(row);
-                } else {
-                    themes['Process Optimization'].push(row);
+            for (const [theme, config] of Object.entries(THEME_CONFIG)) {
+                if (config.keywords.some(keyword => text.includes(keyword))) {
+                    return theme;
                 }
-            });
-            
-            return themes;
+            }
+            return 'Process Optimization'; // Default
         }
 
-        function groupBySprint(data) {
-            const groups = {};
-            data.forEach(row => {
-                const sprint = row['Sprint Set'] || 'Unassigned';
-                if (!groups[sprint]) groups[sprint] = [];
-                groups[sprint].push(row);
-            });
-            return groups;
-        }
-
-        function calculateStats(data) {
-            let completed = 0, inProgress = 0, totalHours = 0;
-            data.forEach(row => {
-                const status = normalizeStatus(row['Status']);
-                if (status === 'Complete') completed++;
-                if (status === 'In Progress') inProgress++;
-                const hours = parseFloat(row['Hours Saved'] || 0);
-                if (!isNaN(hours)) totalHours += hours;
-            });
+        function renderDashboard(data) {
+            // Calculate overall stats
+            const totalTasks = data.length;
+            const completed = data.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+            const progress = totalTasks > 0 ? (completed / totalTasks) * 100 : 0;
+            const totalHours = data.reduce((sum, t) => {
+                const hours = parseFloat(t['Hours Saved'] || 0);
+                return sum + (isNaN(hours) ? 0 : hours);
+            }, 0);
             
             const targetDate = new Date('2027-02-01');
             const today = new Date();
             const daysLeft = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
             
-            return {
-                total: data.length,
-                completed,
-                inProgress,
-                progress: data.length > 0 ? (completed / data.length) * 100 : 0,
-                totalHours: Math.round(totalHours),
-                daysLeft
-            };
-        }
-
-        function calculateThemeStats(tasks) {
-            let completed = 0, hours = 0;
-            const dates = [];
+            // Update hero stats
+            document.getElementById('totalInitiatives').textContent = totalTasks;
+            document.getElementById('completedCount').textContent = completed;
+            document.getElementById('progressPercent').textContent = progress.toFixed(0) + '%';
+            document.getElementById('hoursSaved').textContent = Math.round(totalHours);
+            document.getElementById('daysRemaining').textContent = daysLeft;
             
-            tasks.forEach(task => {
-                if (normalizeStatus(task['Status']) === 'Complete') completed++;
-                const h = parseFloat(task['Hours Saved'] || 0);
-                if (!isNaN(h)) hours += h;
-                if (task['Day 1 Close Target End Date']) dates.push(task['Day 1 Close Target End Date']);
+            // Update timeline
+            document.getElementById('timelineProgress').style.width = progress + '%';
+            updatePhases(progress);
+            
+            // Group by themes
+            const themes = {};
+            Object.keys(THEME_CONFIG).forEach(theme => {
+                themes[theme] = [];
             });
             
-            const dateRange = dates.length > 0 ? `${dates[0]} - ${dates[dates.length - 1]}` : 'TBD';
-            
-            return {
-                total: tasks.length,
-                completed,
-                progress: tasks.length > 0 ? (completed / tasks.length) * 100 : 0,
-                hours: Math.round(hours),
-                dateRange
-            };
-        }
-
-        function calculateSprintStats(tasks) {
-            let completed = 0, hours = 0;
-            const dates = [];
-            
-            tasks.forEach(task => {
-                if (normalizeStatus(task['Status']) === 'Complete') completed++;
-                const h = parseFloat(task['Hours Saved'] || 0);
-                if (!isNaN(h)) hours += h;
-                if (task['Day 1 Close Target End Date']) dates.push(task['Day 1 Close Target End Date']);
+            data.forEach(task => {
+                const theme = categorizeTask(task);
+                themes[theme].push(task);
             });
             
-            return {
-                total: tasks.length,
-                completed,
-                hours: Math.round(hours),
-                targetDate: dates[dates.length - 1] || 'TBD'
-            };
-        }
-
-        function updateExecutiveSummary(stats) {
-            document.getElementById('totalTasks').textContent = stats.total;
-            document.getElementById('hoursSaved').textContent = stats.totalHours;
-            document.getElementById('progressPercent').textContent = stats.progress.toFixed(0) + '%';
-            document.getElementById('daysLeft').textContent = stats.daysLeft;
-        }
-
-        function updateJourneyPath(progress) {
-            document.getElementById('journeyProgress').style.width = progress + '%';
-            
-            // Update journey steps
-            const steps = ['bd5', 'bd4', 'bd3', 'bd2', 'bd1'];
-            steps.forEach((step, index) => {
-                const element = document.getElementById(`step-${step}`);
-                const threshold = (index / steps.length) * 100;
+            // Render theme cards
+            let themeHTML = '';
+            Object.entries(themes).forEach(([themeName, tasks]) => {
+                if (tasks.length === 0) return;
                 
-                if (progress > threshold + 10) {
+                const config = THEME_CONFIG[themeName];
+                const themeCompleted = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                const themeProgress = tasks.length > 0 ? (themeCompleted / tasks.length) * 100 : 0;
+                const themeHours = tasks.reduce((sum, t) => {
+                    const hours = parseFloat(t['Hours Saved'] || 0);
+                    return sum + (isNaN(hours) ? 0 : hours);
+                }, 0);
+                
+                // Get key initiatives (consolidate similar tasks)
+                const initiatives = consolidateInitiatives(tasks);
+                
+                themeHTML += `
+                    <div class="theme-card">
+                        <div class="theme-header ${config.class}">
+                            <div class="theme-icon">${config.icon}</div>
+                            <div class="theme-name">${themeName}</div>
+                            <div class="theme-progress">
+                                <div class="theme-progress-fill" style="width: ${themeProgress}%;"></div>
+                            </div>
+                            <div class="theme-stats">
+                                <span>${themeCompleted}/${tasks.length} Complete</span>
+                                <span>${Math.round(themeHours)} hours saved</span>
+                            </div>
+                        </div>
+                        <div class="theme-body">
+                            <div class="theme-impact">
+                                <div class="impact-item">
+                                    <div class="impact-value">${themeProgress.toFixed(0)}%</div>
+                                    <div class="impact-label">Complete</div>
+                                </div>
+                                <div class="impact-item">
+                                    <div class="impact-value">${tasks.length}</div>
+                                    <div class="impact-label">Initiatives</div>
+                                </div>
+                            </div>
+                            <div class="key-initiatives">
+                                <div class="key-initiatives-title">Key Focus Areas:</div>
+                                <ul class="initiative-list">
+                                    ${initiatives.map(init => `
+                                        <li class="${init.status}">${init.text}</li>
+                                    `).join('')}
+                                </ul>
+                            </div>
+                            <div class="target-completion">
+                                <div class="target-label">Target Completion</div>
+                                <div class="target-date">${getThemeTargetDate(tasks)}</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('themeGrid').innerHTML = themeHTML;
+        }
+
+        function consolidateInitiatives(tasks) {
+            // Group by OKR/Category to create high-level initiatives
+            const groups = {};
+            tasks.forEach(task => {
+                const key = task['OKR'] || task['Close Category'] || 'General';
+                if (!groups[key]) {
+                    groups[key] = { tasks: [], completed: 0, inProgress: 0 };
+                }
+                groups[key].tasks.push(task);
+                const status = normalizeStatus(task['Status']);
+                if (status === 'Complete') groups[key].completed++;
+                if (status === 'In Progress') groups[key].inProgress++;
+            });
+            
+            // Create consolidated initiatives
+            const initiatives = [];
+            for (const [key, group] of Object.entries(groups)) {
+                const total = group.tasks.length;
+                const status = group.completed === total ? 'complete' : (group.inProgress > 0 ? 'in-progress' : 'planned');
+                
+                // Simplify the text
+                let text = key;
+                if (text.startsWith('C.A.')) {
+                    text = text.split(':')[1] || text;
+                    text = text.substring(0, 80).trim();
+                }
+                if (text.startsWith('KR')) {
+                    text = text.split(':')[1] || text;
+                    text = text.substring(0, 80).trim();
+                }
+                
+                initiatives.push({ text, status, count: total });
+            }
+            
+            return initiatives.slice(0, 5); // Top 5
+        }
+
+        function getThemeTargetDate(tasks) {
+            const dates = tasks
+                .map(t => t['Day 1 Close Target End Date'])
+                .filter(d => d && d.trim())
+                .sort();
+            
+            return dates[dates.length - 1] || 'Q1 2027';
+        }
+
+        function updatePhases(progress) {
+            const phases = ['bd5', 'bd4', 'bd3', 'bd2', 'bd1'];
+            phases.forEach((phase, index) => {
+                const element = document.getElementById(`phase-${phase}`);
+                const threshold = (index / phases.length) * 100;
+                
+                element.classList.remove('complete', 'active');
+                if (progress > threshold + 15) {
                     element.classList.add('complete');
-                    element.classList.remove('current');
-                } else if (progress >= threshold) {
-                    element.classList.add('current');
-                    element.classList.remove('complete');
-                } else {
-                    element.classList.remove('complete', 'current');
+                } else if (progress >= threshold - 5) {
+                    element.classList.add('active');
                 }
             });
         }
@@ -991,12 +708,10 @@
             const s = (status || '').toLowerCase().trim();
             if (s.includes('complete') || s.includes('done')) return 'Complete';
             if (s.includes('progress') || s.includes('wip')) return 'In Progress';
-            if (s.includes('blocked')) return 'Blocked';
             return 'Not Started';
         }
 
         window.addEventListener('load', loadData);
-        setInterval(loadData, 5 * 60 * 1000); // Auto-refresh every 5 minutes
     </script>
 </body>
 </html>

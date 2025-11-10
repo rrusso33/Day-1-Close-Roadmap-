@@ -275,6 +275,9 @@
             position: relative;
             color: #495057;
             line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
         }
         .initiative-list li::before {
             content: '✓';
@@ -320,6 +323,9 @@
         <div class="header">
             <h1>🚀 Journey to Day 1 Close</h1>
             <div class="subtitle">Strategic Transformation Roadmap | Corporate Accounting</div>
+            <div style="opacity: 0.85; font-style: italic; margin-top: 10px;">
+                Fiscal Year End: April 30 | Target: February 2027
+            </div>
         </div>
 
         <!-- Hero Stats -->
@@ -357,27 +363,27 @@
                     <div class="phase" id="phase-bd5">
                         <div class="phase-marker">BD5</div>
                         <div class="phase-label">Starting Point</div>
-                        <div class="phase-date">Nov 2025</div>
+                        <div class="phase-date">Q3 FY26</div>
                     </div>
                     <div class="phase" id="phase-bd4">
                         <div class="phase-marker">BD4</div>
                         <div class="phase-label">Automation</div>
-                        <div class="phase-date">Q1 2026</div>
+                        <div class="phase-date">Q4 FY26</div>
                     </div>
                     <div class="phase" id="phase-bd3">
                         <div class="phase-marker">BD3</div>
                         <div class="phase-label">Integration</div>
-                        <div class="phase-date">Q2 2026</div>
+                        <div class="phase-date">Q1 FY27</div>
                     </div>
                     <div class="phase" id="phase-bd2">
                         <div class="phase-marker">BD2</div>
                         <div class="phase-label">Optimization</div>
-                        <div class="phase-date">Q3 2026</div>
+                        <div class="phase-date">Q2 FY27</div>
                     </div>
                     <div class="phase" id="phase-bd1">
                         <div class="phase-marker">BD1</div>
                         <div class="phase-label">Target State</div>
-                        <div class="phase-date">Feb 2027</div>
+                        <div class="phase-date">Q4 FY27</div>
                     </div>
                 </div>
             </div>
@@ -686,7 +692,36 @@
                 .filter(d => d && d.trim())
                 .sort();
             
-            return dates[dates.length - 1] || 'Q1 2027';
+            const latestDate = dates[dates.length - 1];
+            
+            // Convert to fiscal quarter (FY ends 4/30)
+            if (latestDate) {
+                const parts = latestDate.split('/');
+                if (parts.length >= 2) {
+                    const month = parseInt(parts[0]);
+                    const year = parseInt(parts[2] || parts[1]);
+                    
+                    // Determine fiscal year and quarter
+                    let fy, quarter;
+                    if (month >= 5 && month <= 7) {
+                        quarter = 1;
+                        fy = year + 1;
+                    } else if (month >= 8 && month <= 10) {
+                        quarter = 2;
+                        fy = year + 1;
+                    } else if (month >= 11 || month <= 1) {
+                        quarter = 3;
+                        fy = month <= 1 ? year : year + 1;
+                    } else {
+                        quarter = 4;
+                        fy = year;
+                    }
+                    
+                    return `Q${quarter} FY${fy.toString().slice(-2)}`;
+                }
+            }
+            
+            return 'Q4 FY27';
         }
 
         function updatePhases(progress) {

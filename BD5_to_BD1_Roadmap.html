@@ -301,6 +301,9 @@
             font-size: 1.4em;
             font-weight: 700;
             color: #2c3e50;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.4;
         }
         .sprint-date {
             font-size: 1em;
@@ -431,18 +434,23 @@
             background: #fff3cd;
             border-left: 4px solid #ffc107;
             border-radius: 8px;
+            min-height: 50px;
         }
         .dependencies-label {
             font-weight: 700;
             color: #856404;
             margin-bottom: 8px;
+            display: block;
         }
         .dependencies-text {
             color: #856404;
             font-size: 0.95em;
-            line-height: 1.5;
+            line-height: 1.6;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            white-space: normal;
+            display: block;
+            max-width: 100%;
         }
         
         .deliverable {
@@ -451,18 +459,23 @@
             background: #e7f3ff;
             border-left: 4px solid #007bff;
             border-radius: 8px;
+            min-height: 50px;
         }
         .deliverable-label {
             font-weight: 700;
             color: #004085;
             margin-bottom: 8px;
+            display: block;
         }
         .deliverable-text {
             color: #004085;
             font-size: 0.95em;
-            line-height: 1.5;
+            line-height: 1.6;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            white-space: normal;
+            display: block;
+            max-width: 100%;
         }
         
         @media print {
@@ -965,18 +978,42 @@
                 });
             });
             
-            // Get unique dependencies
+            // Get unique dependencies - clean and format them
             const dependencies = [...new Set(tasks
                 .map(t => t['Dependencies'])
                 .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
-                .map(d => d.trim())
+                .map(d => {
+                    let clean = d.trim();
+                    // Take first sentence or limit length
+                    const firstSentence = clean.split(/[.;]/).filter(s => s.trim())[0];
+                    if (firstSentence && firstSentence.length < 100) {
+                        return firstSentence.trim();
+                    }
+                    // Otherwise limit to 100 chars
+                    if (clean.length > 100) {
+                        clean = clean.substring(0, 97) + '...';
+                    }
+                    return clean;
+                })
+                .filter(d => d.length > 3) // Filter out very short entries
             )];
             
-            // Get unique deliverables
+            // Get unique deliverables - clean and format them
             const deliverables = [...new Set(tasks
                 .map(t => t['End of Week Deliverable / Milestone'])
                 .filter(d => d && d.trim())
-                .map(d => d.trim().split('\n')[0]) // Take first line only
+                .map(d => {
+                    // Take first line and clean it
+                    let clean = d.trim().split('\n')[0];
+                    // Remove bullet points and extra characters
+                    clean = clean.replace(/^[-•]\s*/, '').trim();
+                    // Limit length
+                    if (clean.length > 100) {
+                        clean = clean.substring(0, 97) + '...';
+                    }
+                    return clean;
+                })
+                .filter(d => d.length > 5) // Filter out very short entries
             )];
             
             // Create summary from first task

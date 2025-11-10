@@ -988,6 +988,7 @@
             const dependencies = [...new Set(tasks
                 .map(t => t['Dependencies'])
                 .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
+                .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {
                     let clean = d.trim();
                     // Take first sentence or limit length
@@ -1008,6 +1009,7 @@
             const deliverables = [...new Set(tasks
                 .map(t => t['End of Week Deliverable / Milestone'])
                 .filter(d => d && d.trim())
+                .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
                 .map(d => {
                     // Take first line and clean it
                     let clean = d.trim().split('\n')[0];

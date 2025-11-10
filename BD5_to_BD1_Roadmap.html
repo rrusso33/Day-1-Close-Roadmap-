@@ -575,22 +575,23 @@
             document.getElementById('progressPercent').textContent = progress.toFixed(0) + '%';
             document.getElementById('hoursSaved').textContent = Math.round(totalHours);
             
-            // Group by theme and sprint
+            // Group by theme, then consolidate by OKR/Category
             const themeData = {};
             data.forEach(task => {
                 const theme = categorizeTask(task);
                 if (!themeData[theme]) themeData[theme] = {};
                 
-                const sprint = task['Sprint Set'] || 'Future Planning';
-                if (!themeData[theme][sprint]) themeData[theme][sprint] = [];
-                themeData[theme][sprint].push(task);
+                // Group by OKR or Category for consolidation
+                const groupKey = task['OKR'] || task['Close Category'] || 'Other Initiatives';
+                if (!themeData[theme][groupKey]) themeData[theme][groupKey] = [];
+                themeData[theme][groupKey].push(task);
             });
             
             // Render themes
             let html = '';
             Object.entries(THEMES).forEach(([themeName, config]) => {
-                const sprints = themeData[themeName] || {};
-                const allTasks = Object.values(sprints).flat();
+                const initiatives = themeData[themeName] || {};
+                const allTasks = Object.values(initiatives).flat();
                 if (allTasks.length === 0) return;
                 
                 const themeCompleted = allTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
@@ -625,92 +626,73 @@
                         <div class="theme-timeline">
                 `;
                 
-                // Sort sprints
-                const sortedSprints = Object.keys(sprints).sort();
-                sortedSprints.forEach(sprintName => {
-                    const tasks = sprints[sprintName];
-                    const sprintStatus = getSprintStatus(tasks);
-                    const targetDate = getSprintTargetDate(tasks);
+                // Consolidate initiatives by category/OKR
+                Object.entries(initiatives).forEach(([initiativeName, tasks]) => {
+                    const consolidated = consolidateInitiative(tasks);
+                    const statusClass = consolidated.status.toLowerCase().replace(/\s+/g, '-');
                     
                     html += `
                         <div class="sprint-group">
-                            <div class="sprint-marker ${sprintStatus}"></div>
+                            <div class="sprint-marker ${consolidated.markerClass}"></div>
                             <div class="sprint-header">
-                                <div class="sprint-title">${sprintName}</div>
-                                <div class="sprint-date">Target: ${targetDate}</div>
+                                <div class="sprint-title">${cleanInitiativeName(initiativeName)}</div>
+                                <div class="sprint-date">Target: ${consolidated.targetDate}</div>
                             </div>
                             <div class="initiative-cards">
-                    `;
-                    
-                    tasks.forEach(task => {
-                        const status = normalizeStatus(task['Status']);
-                        const statusClass = status.toLowerCase().replace(/\s+/g, '-');
-                        const tools = extractTools(task);
-                        
-                        html += `
-                            <div class="initiative-card ${statusClass}">
-                                <div class="initiative-header">
-                                    <div class="initiative-title-group">
-                                        <div class="initiative-title">${task['Week Focus and Tasks'] || 'Initiative'}</div>
-                                        ${task['OKR'] ? `<div class="initiative-okr">${task['OKR']}</div>` : ''}
+                                <div class="initiative-card ${statusClass}">
+                                    <div class="initiative-header">
+                                        <div class="initiative-title-group">
+                                            <div class="initiative-title">${consolidated.summary}</div>
+                                        </div>
+                                        <div class="initiative-status ${statusClass}">${consolidated.status}</div>
                                     </div>
-                                    <div class="initiative-status ${statusClass}">${status}</div>
+                                    
+                                    <div class="initiative-details">
+                                        <div class="detail-item">
+                                            <div class="detail-label">Sprint Sets</div>
+                                            <div class="detail-value">${consolidated.sprints}</div>
+                                        </div>
+                                        <div class="detail-item">
+                                            <div class="detail-label">Tasks</div>
+                                            <div class="detail-value">${consolidated.completed}/${consolidated.total} Complete</div>
+                                        </div>
+                                        ${consolidated.owners.length > 0 ? `
+                                            <div class="detail-item">
+                                                <div class="detail-label">Owners</div>
+                                                <div class="detail-value">${consolidated.owners.join(', ')}</div>
+                                            </div>
+                                        ` : ''}
+                                        ${consolidated.hours > 0 ? `
+                                            <div class="detail-item">
+                                                <div class="detail-label">Time Impact</div>
+                                                <div class="detail-value">${consolidated.hours} hours saved</div>
+                                            </div>
+                                        ` : ''}
+                                    </div>
+                                    
+                                    ${consolidated.tools.length > 0 ? `
+                                        <div class="tech-stack">
+                                            <div class="tech-label">🔧 Tech Stack & Automation:</div>
+                                            <div class="tech-tags">
+                                                ${consolidated.tools.map(tool => `<span class="tech-tag ${tool.isAutomation ? 'automation' : ''}">${tool.name}</span>`).join('')}
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${consolidated.dependencies.length > 0 ? `
+                                        <div class="dependencies">
+                                            <div class="dependencies-label">⚠️ Key Dependencies:</div>
+                                            <div class="dependencies-text">${consolidated.dependencies.join(' • ')}</div>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    ${consolidated.deliverables.length > 0 ? `
+                                        <div class="deliverable">
+                                            <div class="deliverable-label">📦 Key Deliverables:</div>
+                                            <div class="deliverable-text">${consolidated.deliverables.slice(0, 3).join(' • ')}</div>
+                                        </div>
+                                    ` : ''}
                                 </div>
-                                
-                                <div class="initiative-details">
-                                    ${task['Close Category'] ? `
-                                        <div class="detail-item">
-                                            <div class="detail-label">Category</div>
-                                            <div class="detail-value">${task['Close Category']}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${task['Owner(s)'] ? `
-                                        <div class="detail-item">
-                                            <div class="detail-label">Owner</div>
-                                            <div class="detail-value">${task['Owner(s)']}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${task['Day 1 Close Target End Date'] ? `
-                                        <div class="detail-item">
-                                            <div class="detail-label">Target Date</div>
-                                            <div class="detail-value">${task['Day 1 Close Target End Date']}</div>
-                                        </div>
-                                    ` : ''}
-                                    ${task['Hours Saved'] && task['Hours Saved'] !== '0' && task['Hours Saved'] !== 'n/a' ? `
-                                        <div class="detail-item">
-                                            <div class="detail-label">Time Impact</div>
-                                            <div class="detail-value">${task['Hours Saved']} hours</div>
-                                        </div>
-                                    ` : ''}
-                                </div>
-                                
-                                ${tools.length > 0 ? `
-                                    <div class="tech-stack">
-                                        <div class="tech-label">🔧 Tech Stack & Automation:</div>
-                                        <div class="tech-tags">
-                                            ${tools.map(tool => `<span class="tech-tag ${tool.isAutomation ? 'automation' : ''}">${tool.name}</span>`).join('')}
-                                        </div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${task['Dependencies'] && task['Dependencies'].toLowerCase() !== 'n/a' ? `
-                                    <div class="dependencies">
-                                        <div class="dependencies-label">⚠️ Dependencies:</div>
-                                        <div class="dependencies-text">${task['Dependencies']}</div>
-                                    </div>
-                                ` : ''}
-                                
-                                ${task['End of Week Deliverable / Milestone'] ? `
-                                    <div class="deliverable">
-                                        <div class="deliverable-label">📦 Deliverable:</div>
-                                        <div class="deliverable-text">${task['End of Week Deliverable / Milestone']}</div>
-                                    </div>
-                                ` : ''}
-                            </div>
-                        `;
-                    });
-                    
-                    html += `
                             </div>
                         </div>
                     `;
@@ -768,22 +750,98 @@
             return [...new Map(tools.map(t => [t.name, t])).values()];
         }
 
-        function getSprintStatus(tasks) {
+        function consolidateInitiative(tasks) {
             const completed = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
             const inProgress = tasks.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
             
-            if (completed === tasks.length) return 'complete';
-            if (inProgress > 0 || completed > 0) return 'progress';
-            return 'planned';
-        }
-
-        function getSprintTargetDate(tasks) {
+            // Determine overall status
+            let status = 'Planned';
+            let markerClass = 'planned';
+            if (completed === tasks.length) {
+                status = 'Complete';
+                markerClass = 'complete';
+            } else if (inProgress > 0 || completed > 0) {
+                status = `${completed}/${tasks.length} Complete`;
+                markerClass = 'progress';
+            }
+            
+            // Get unique sprint sets
+            const sprints = [...new Set(tasks.map(t => t['Sprint Set']).filter(s => s))];
+            const sprintsText = sprints.length > 0 ? sprints.join(', ') : 'Ongoing';
+            
+            // Get unique owners
+            const owners = [...new Set(tasks.map(t => t['Owner(s)']).filter(o => o).flatMap(o => o.split(/[,&]/)).map(o => o.trim()))];
+            
+            // Calculate total hours
+            const hours = tasks.reduce((sum, t) => {
+                const h = parseFloat(t['Hours Saved'] || 0);
+                return sum + (isNaN(h) ? 0 : h);
+            }, 0);
+            
+            // Get target date (latest)
             const dates = tasks
                 .map(t => t['Day 1 Close Target End Date'])
                 .filter(d => d && d.trim())
                 .sort();
+            const targetDate = dates[dates.length - 1] || 'TBD';
             
-            return dates[dates.length - 1] || 'TBD';
+            // Extract all tools
+            const allTools = [];
+            tasks.forEach(task => {
+                const tools = extractTools(task);
+                tools.forEach(tool => {
+                    if (!allTools.find(t => t.name === tool.name)) {
+                        allTools.push(tool);
+                    }
+                });
+            });
+            
+            // Get unique dependencies
+            const dependencies = [...new Set(tasks
+                .map(t => t['Dependencies'])
+                .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a')
+                .map(d => d.trim())
+            )];
+            
+            // Get unique deliverables
+            const deliverables = [...new Set(tasks
+                .map(t => t['End of Week Deliverable / Milestone'])
+                .filter(d => d && d.trim())
+                .map(d => d.trim().split('\n')[0]) // Take first line only
+            )];
+            
+            // Create summary from first task
+            const summary = tasks[0]['Week Focus and Tasks'] || 'Multiple initiatives across ' + tasks.length + ' tasks';
+            
+            return {
+                total: tasks.length,
+                completed,
+                status,
+                markerClass,
+                sprints: sprintsText,
+                owners: owners.slice(0, 3), // Limit to top 3
+                hours: Math.round(hours),
+                targetDate,
+                tools: allTools,
+                dependencies: dependencies.slice(0, 3), // Top 3
+                deliverables: deliverables.slice(0, 3), // Top 3
+                summary: summary.length > 150 ? summary.substring(0, 147) + '...' : summary
+            };
+        }
+
+        function cleanInitiativeName(name) {
+            // Remove "C.A. #" prefix
+            let cleaned = name.replace(/^C\.A\.\s*\d+\s*/i, '');
+            
+            // Remove KR prefix
+            cleaned = cleaned.replace(/^KR\s*\d+:\s*/i, '');
+            
+            // Limit length
+            if (cleaned.length > 100) {
+                cleaned = cleaned.substring(0, 97) + '...';
+            }
+            
+            return cleaned || name;
         }
 
         function normalizeStatus(status) {

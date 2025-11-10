@@ -1076,8 +1076,11 @@
                 const theme = categorizeTask(task);
                 if (!themeData[theme]) themeData[theme] = {};
                 
-                // Group by OKR or Category for consolidation
-                const groupKey = task['OKR'] || task['Close Category'] || 'Other Initiatives';
+                // Group by OKR + Close Category for more specific consolidation
+                const okr = task['OKR'] || 'Other';
+                const category = task['Close Category'] || 'General';
+                const groupKey = `${okr} - ${category}`;
+                
                 if (!themeData[theme][groupKey]) themeData[theme][groupKey] = [];
                 themeData[theme][groupKey].push(task);
             });

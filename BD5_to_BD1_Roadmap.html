@@ -715,6 +715,9 @@
             const lines = csv.split('\n');
             const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
             
+            console.log('CSV Headers:', headers);
+            
+            const allRows = [];
             const data = [];
             for (let i = 1; i < lines.length; i++) {
                 if (!lines[i].trim()) continue;
@@ -724,14 +727,20 @@
                 headers.forEach((header, index) => {
                     row[header] = values[index] || '';
                 });
+                allRows.push(row);
                 
-                // Filter for Corporate Accounting team only
-                if (row.Team && row.Team.includes('Corporate Accounting')) {
+                // Filter for Corporate Accounting team (case-insensitive, flexible matching)
+                const team = (row.Team || '').toLowerCase().trim();
+                if (team.includes('corporate') && team.includes('accounting')) {
                     data.push(row);
                 }
             }
             
+            console.log(`Total rows parsed: ${allRows.length}`);
             console.log(`Filtered to ${data.length} Corporate Accounting tasks`);
+            if (allRows.length > 0) {
+                console.log('Sample row Team values:', allRows.slice(0, 3).map(r => r.Team));
+            }
             return data;
         }
 

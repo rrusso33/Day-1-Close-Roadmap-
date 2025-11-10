@@ -898,7 +898,7 @@
                 
                 // Consolidate initiatives by category/OKR
                 Object.entries(initiatives).forEach(([initiativeName, tasks]) => {
-                    const consolidated = consolidateInitiative(tasks);
+                    const consolidated = consolidateInitiative(tasks, initiativeName);
                     const statusClass = consolidated.status.toLowerCase().replace(/\s+/g, '-');
                     
                     html += `
@@ -1026,7 +1026,7 @@
             return [...new Map(tools.map(t => [t.name, t])).values()];
         }
 
-        function consolidateInitiative(tasks) {
+        function consolidateInitiative(tasks, key = '') {
             const completed = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
             const inProgress = tasks.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
             

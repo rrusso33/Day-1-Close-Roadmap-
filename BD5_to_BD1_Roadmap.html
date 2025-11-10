@@ -14,22 +14,24 @@
             line-height: 1.6;
         }
         .container { 
-            max-width: 1800px;
+            max-width: 1900px;
             margin: 0 auto;
             background: white;
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0,0,0,0.3);
             overflow: hidden;
         }
+        
+        /* Header */
         .header {
             background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
             color: white;
-            padding: 50px 40px;
+            padding: 60px 40px;
             text-align: center;
             position: relative;
         }
-        .header h1 { font-size: 3em; margin-bottom: 15px; font-weight: 700; }
-        .header .subtitle { font-size: 1.3em; opacity: 0.95; margin-bottom: 10px; }
+        .header h1 { font-size: 3.5em; margin-bottom: 20px; font-weight: 700; }
+        .header .subtitle { font-size: 1.5em; opacity: 0.95; margin-bottom: 15px; }
         .last-updated {
             position: absolute;
             top: 20px;
@@ -45,172 +47,403 @@
             right: 30px;
             background: #28a745;
             color: white;
-            padding: 12px 24px;
-            border-radius: 25px;
-            font-weight: 600;
+            padding: 15px 30px;
+            border-radius: 30px;
+            font-weight: 700;
             cursor: pointer;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            box-shadow: 0 5px 20px rgba(0,0,0,0.3);
             border: none;
             z-index: 1000;
+            font-size: 1.1em;
         }
-        .timeline-bar {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-            color: white;
-            padding: 30px 40px;
-            display: flex;
-            justify-content: space-between;
-            flex-wrap: wrap;
-            gap: 20px;
-        }
-        .timeline-item { text-align: center; }
-        .timeline-value { font-size: 1.8em; font-weight: 700; }
-        .content { padding: 50px 40px; }
+        .refresh-btn:hover { transform: scale(1.05); }
         
-        .progress-section {
-            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        /* Journey Path - BD5 to BD1 */
+        .journey-path {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            padding: 50px 40px;
             color: white;
-            padding: 40px;
-            border-radius: 15px;
+        }
+        .journey-title {
+            text-align: center;
+            font-size: 2.5em;
+            font-weight: 700;
             margin-bottom: 40px;
         }
-        .progress-section h2 { font-size: 2em; margin-bottom: 20px; text-align: center; }
-        .progress-bar-container {
-            background: rgba(255, 255, 255, 0.3);
-            height: 40px;
-            border-radius: 20px;
-            overflow: hidden;
-            margin-bottom: 20px;
+        .journey-steps {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto;
+            position: relative;
         }
-        .progress-bar-fill {
-            background: white;
+        .journey-line {
+            position: absolute;
+            top: 50px;
+            left: 10%;
+            right: 10%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            z-index: 0;
+        }
+        .journey-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
             height: 100%;
+            background: white;
+            transition: width 1s ease;
+        }
+        .journey-step {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            flex: 1;
+        }
+        .journey-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.3);
+            margin: 0 auto 15px;
             display: flex;
             align-items: center;
             justify-content: center;
+            font-size: 2em;
             font-weight: 700;
-            color: #11998e;
-            transition: width 0.5s ease;
+            border: 5px solid transparent;
+            transition: all 0.5s ease;
         }
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 15px;
+        .journey-step.complete .journey-circle {
+            background: white;
+            color: #f5576c;
+            border-color: white;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.4);
+        }
+        .journey-step.current .journey-circle {
+            background: #ffd700;
+            color: #f5576c;
+            border-color: #ffd700;
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+        }
+        .journey-label {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .journey-status {
+            font-size: 0.9em;
+            opacity: 0.9;
+        }
+        
+        /* Executive Summary */
+        .exec-summary {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 50px 40px;
+        }
+        .exec-summary h2 {
+            font-size: 2.5em;
+            margin-bottom: 30px;
             text-align: center;
         }
-        .stat-card {
+        .summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .summary-card {
             background: rgba(255, 255, 255, 0.2);
-            padding: 15px;
-            border-radius: 10px;
-        }
-        .stat-value { font-size: 2em; font-weight: 700; }
-        
-        .sprint-section {
-            margin-bottom: 40px;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            overflow: hidden;
-        }
-        .sprint-header {
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            color: white;
-            padding: 25px 30px;
-            cursor: pointer;
-        }
-        .sprint-header.complete {
-            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
-        }
-        .sprint-name { font-size: 1.8em; font-weight: 700; margin-bottom: 10px; }
-        .sprint-stats { font-size: 0.95em; opacity: 0.9; }
-        .sprint-progress-bar {
-            background: rgba(255, 255, 255, 0.3);
-            height: 8px;
-            border-radius: 4px;
-            overflow: hidden;
-            margin-top: 10px;
-        }
-        .sprint-progress-fill {
-            background: white;
-            height: 100%;
-            transition: width 0.5s ease;
-        }
-        
-        .sprint-content {
             padding: 30px;
-            background: #f8f9fa;
+            border-radius: 15px;
+            text-align: center;
+            backdrop-filter: blur(10px);
         }
-        
-        .okr-section {
-            margin-bottom: 30px;
-            background: white;
-            border-radius: 12px;
-            padding: 25px;
-            border-left: 5px solid #667eea;
-        }
-        .okr-title {
-            font-size: 1.4em;
-            font-weight: 700;
-            color: #1e3c72;
+        .summary-icon {
+            font-size: 3em;
             margin-bottom: 15px;
         }
-        .okr-stats {
-            color: #6c757d;
-            font-size: 0.9em;
-            margin-bottom: 20px;
-        }
-        
-        .task-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 20px;
-        }
-        .task-card {
-            background: white;
-            border: 2px solid #e9ecef;
-            border-radius: 12px;
-            padding: 20px;
-            transition: all 0.3s ease;
-        }
-        .task-card:hover {
-            border-color: #667eea;
-            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.2);
-            transform: translateY(-3px);
-        }
-        .task-card.complete { border-color: #28a745; background: #f8fff9; }
-        
-        .status-badge {
-            display: inline-block;
-            padding: 5px 12px;
-            border-radius: 15px;
-            font-size: 0.8em;
+        .summary-value {
+            font-size: 3em;
             font-weight: 700;
             margin-bottom: 10px;
         }
-        .status-complete { background: #d4edda; color: #155724; }
-        .status-in-progress { background: #cce5ff; color: #004085; }
-        .status-not-started { background: #f8f9fa; color: #6c757d; }
-        .status-blocked { background: #f8d7da; color: #721c24; }
-        
-        .task-title { font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 1.05em; }
-        .task-deliverable {
-            background: #e7f3ff;
-            padding: 10px;
-            border-radius: 8px;
-            margin: 10px 0;
-            font-size: 0.9em;
+        .summary-label {
+            font-size: 1.2em;
+            opacity: 0.95;
         }
-        .task-meta {
-            display: flex;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin-top: 10px;
-            font-size: 0.85em;
+        
+        /* Strategic Themes */
+        .content { padding: 50px 40px; }
+        .themes-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .themes-header h2 {
+            font-size: 2.8em;
+            color: #1e3c72;
+            margin-bottom: 15px;
+        }
+        .themes-header p {
+            font-size: 1.3em;
             color: #6c757d;
         }
-        .task-meta-item { display: flex; align-items: center; gap: 5px; }
+        
+        .theme-section {
+            margin-bottom: 50px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+        }
+        .theme-header {
+            padding: 40px;
+            color: white;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        .theme-header:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 15px 50px rgba(0,0,0,0.2);
+        }
+        .theme-header.automation {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+        }
+        .theme-header.process {
+            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+        }
+        .theme-header.tools {
+            background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+        }
+        .theme-header.risk {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+        }
+        .theme-header.integration {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+        }
+        
+        .theme-title-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .theme-icon {
+            font-size: 3em;
+            margin-right: 20px;
+        }
+        .theme-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            flex: 1;
+        }
+        .theme-impact {
+            background: rgba(255,255,255,0.2);
+            padding: 15px 30px;
+            border-radius: 15px;
+            font-size: 1.2em;
+            font-weight: 700;
+        }
+        .theme-stats {
+            display: flex;
+            gap: 40px;
+            font-size: 1.2em;
+            opacity: 0.95;
+        }
+        .theme-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        /* Timeline View */
+        .theme-body {
+            background: #f8f9fa;
+            padding: 40px;
+        }
+        .timeline-container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            margin-bottom: 30px;
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 25px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e9ecef;
+        }
+        .timeline-title {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .timeline-dates {
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        /* Task Cards with Timeline */
+        .task-timeline {
+            display: grid;
+            gap: 20px;
+        }
+        .task-item {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        .task-item:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.2);
+            transform: translateX(5px);
+        }
+        .task-item.complete {
+            border-color: #28a745;
+            background: linear-gradient(to right, #f8fff9 0%, white 20%);
+        }
+        .task-item.in-progress {
+            border-color: #007bff;
+            background: linear-gradient(to right, #f0f8ff 0%, white 20%);
+        }
+        .task-item.blocked {
+            border-color: #dc3545;
+            background: linear-gradient(to right, #fff5f5 0%, white 20%);
+        }
+        
+        .task-header-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+        }
+        .task-info {
+            flex: 1;
+        }
+        .task-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 10px;
+        }
+        .task-deliverable {
+            background: #e7f3ff;
+            padding: 12px;
+            border-radius: 8px;
+            margin: 15px 0;
+            border-left: 4px solid #007bff;
+        }
+        .task-deliverable strong {
+            color: #007bff;
+        }
+        
+        .task-badges {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+        .badge {
+            padding: 6px 15px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+        }
+        .badge-status {
+            background: #28a745;
+            color: white;
+        }
+        .badge-status.in-progress {
+            background: #007bff;
+        }
+        .badge-status.not-started {
+            background: #6c757d;
+        }
+        .badge-status.blocked {
+            background: #dc3545;
+        }
+        .badge-category {
+            background: #667eea;
+            color: white;
+        }
+        
+        .task-meta-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        .meta-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.95em;
+        }
+        .meta-icon {
+            font-size: 1.3em;
+        }
+        .meta-label {
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .meta-value {
+            color: #2c3e50;
+            font-weight: 700;
+        }
+        
+        /* Dependencies */
+        .dependencies {
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 15px;
+        }
+        .dependencies strong {
+            color: #856404;
+        }
+        
+        /* Visual Timeline Bar */
+        .timeline-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            margin-top: 15px;
+            overflow: hidden;
+        }
+        .timeline-progress {
+            height: 100%;
+            background: linear-gradient(to right, #28a745, #20c997);
+            transition: width 1s ease;
+        }
+        
+        @media print {
+            .refresh-btn { display: none; }
+            body { background: white; padding: 0; }
+            .theme-section { page-break-inside: avoid; }
+        }
         
         @media (max-width: 768px) {
-            .task-grid { grid-template-columns: 1fr; }
             .header h1 { font-size: 2em; }
+            .journey-steps { flex-direction: column; gap: 30px; }
+            .journey-line { display: none; }
+            .summary-grid { grid-template-columns: 1fr; }
+            .task-meta-grid { grid-template-columns: 1fr; }
         }
     </style>
 </head>
@@ -220,68 +453,105 @@
     <div class="container">
         <div class="header">
             <div class="last-updated" id="lastUpdated">📅 Loading...</div>
-            <h1>🚀 BD5 to BD1 Close Acceleration Roadmap</h1>
-            <div class="subtitle">Strategic Transformation Plan | Corporate Accounting Team</div>
+            <h1>🚀 Journey to BD1 Close</h1>
+            <div class="subtitle">Strategic Transformation Roadmap | Corporate Accounting</div>
             <div style="opacity: 0.85; font-style: italic; margin-top: 10px;">
-                Fiscal Year End: April 30 | Timeline: November 2025 - February 2027
+                Timeline: November 2025 - February 2027 | Fiscal Year End: April 30
             </div>
         </div>
 
-        <div class="timeline-bar">
-            <div class="timeline-item">
-                <div style="opacity: 0.9; margin-bottom: 5px;">Start Date</div>
-                <div class="timeline-value">Nov 7, 2025</div>
-            </div>
-            <div class="timeline-item">
-                <div style="opacity: 0.9; margin-bottom: 5px;">Duration</div>
-                <div class="timeline-value">15 Months</div>
-            </div>
-            <div class="timeline-item">
-                <div style="opacity: 0.9; margin-bottom: 5px;">Target Completion</div>
-                <div class="timeline-value">Feb 1, 2027</div>
-            </div>
-            <div class="timeline-item">
-                <div style="opacity: 0.9; margin-bottom: 5px;">Ultimate Goal</div>
-                <div class="timeline-value">BD1 Close</div>
+        <!-- BD5 to BD1 Journey -->
+        <div class="journey-path">
+            <div class="journey-title">📍 Our Path to Day 1 Close</div>
+            <div class="journey-steps">
+                <div class="journey-line">
+                    <div class="journey-progress" id="journeyProgress"></div>
+                </div>
+                <div class="journey-step" id="step-bd5">
+                    <div class="journey-circle">BD5</div>
+                    <div class="journey-label">Current State</div>
+                    <div class="journey-status">Starting Point</div>
+                </div>
+                <div class="journey-step" id="step-bd4">
+                    <div class="journey-circle">BD4</div>
+                    <div class="journey-label">Foundation</div>
+                    <div class="journey-status">Automation Setup</div>
+                </div>
+                <div class="journey-step" id="step-bd3">
+                    <div class="journey-circle">BD3</div>
+                    <div class="journey-label">Optimization</div>
+                    <div class="journey-status">Process Streamlining</div>
+                </div>
+                <div class="journey-step" id="step-bd2">
+                    <div class="journey-circle">BD2</div>
+                    <div class="journey-label">Scale</div>
+                    <div class="journey-status">Integration Complete</div>
+                </div>
+                <div class="journey-step" id="step-bd1">
+                    <div class="journey-circle">BD1</div>
+                    <div class="journey-label">Target State</div>
+                    <div class="journey-status">Feb 2027</div>
+                </div>
             </div>
         </div>
 
+        <!-- Executive Summary -->
+        <div class="exec-summary">
+            <h2>📊 Executive Summary</h2>
+            <div class="summary-grid" id="summaryGrid">
+                <div class="summary-card">
+                    <div class="summary-icon">✅</div>
+                    <div class="summary-value" id="totalTasks">0</div>
+                    <div class="summary-label">Total Initiatives</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">⏱️</div>
+                    <div class="summary-value" id="hoursSaved">0</div>
+                    <div class="summary-label">Hours to Save</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">📈</div>
+                    <div class="summary-value" id="progressPercent">0%</div>
+                    <div class="summary-label">Complete</div>
+                </div>
+                <div class="summary-card">
+                    <div class="summary-icon">🎯</div>
+                    <div class="summary-value" id="daysLeft">0</div>
+                    <div class="summary-label">Days to BD1</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Strategic Themes -->
         <div class="content" id="mainContent">
-            <div style="text-align: center; padding: 40px; color: #6c757d;">
-                <div style="font-size: 2em; margin-bottom: 20px;">📊</div>
-                <div>Loading roadmap data...</div>
+            <div style="text-align: center; padding: 60px; color: #6c757d;">
+                <div style="font-size: 3em; margin-bottom: 25px;">📊</div>
+                <div style="font-size: 1.5em;">Loading strategic roadmap...</div>
             </div>
         </div>
     </div>
 
     <script>
-        const SHEET_URL = 'roadmap_data.csv.csv';  // Local CSV file
-        const CORS_PROXY = 'https://corsproxy.io/?';
+        const SHEET_URL = 'roadmap_data.csv.csv';
 
         async function loadData() {
             try {
-                let csvText;
-                try {
-                    const response = await fetch(SHEET_URL);
-                    csvText = await response.text();
-                } catch (corsError) {
-                    const response = await fetch(CORS_PROXY + encodeURIComponent(SHEET_URL));
-                    csvText = await response.text();
-                }
-                
+                const response = await fetch(SHEET_URL);
+                const csvText = await response.text();
                 const data = parseCSV(csvText);
-                console.log(`Loaded ${data.length} rows`);
+                
+                console.log(`✅ Loaded ${data.length} tasks`);
                 
                 renderRoadmap(data);
-                document.getElementById('lastUpdated').innerHTML = `📅 Last Updated: ${new Date().toLocaleString()}`;
+                document.getElementById('lastUpdated').innerHTML = `📅 Updated: ${new Date().toLocaleString('en-US', { month: 'short', day: 'numeric', hour: 'numeric', minute: '2-digit' })}`;
                 
             } catch (error) {
                 console.error('Error:', error);
                 document.getElementById('mainContent').innerHTML = `
-                    <div style="text-align: center; padding: 40px; color: #dc3545;">
-                        <div style="font-size: 2em; margin-bottom: 20px;">⚠️</div>
-                        <div>Error loading data</div>
-                        <button onclick="loadData()" style="margin-top: 20px; padding: 10px 20px; border: none; background: #667eea; color: white; border-radius: 5px; cursor: pointer;">Retry</button>
+                    <div style="text-align: center; padding: 60px; color: #dc3545;">
+                        <div style="font-size: 3em; margin-bottom: 25px;">⚠️</div>
+                        <div style="font-size: 1.5em; margin-bottom: 20px;">Error loading data</div>
+                        <button onclick="loadData()" style="padding: 15px 30px; border: none; background: #667eea; color: white; border-radius: 10px; cursor: pointer; font-size: 1.1em;">Retry</button>
                     </div>
                 `;
             }
@@ -290,9 +560,6 @@
         function parseCSV(csv) {
             const lines = csv.split('\n');
             const headers = lines[0].split(',').map(h => h.trim().replace(/"/g, ''));
-            
-            console.log('📋 Headers found:', headers);
-            console.log('📊 Total lines in CSV:', lines.length);
             
             const allRows = [];
             for (let i = 1; i < lines.length; i++) {
@@ -304,21 +571,7 @@
                     row[header] = (values[index] || '').trim().replace(/^"|"$/g, '');
                 });
                 
-                // TEMPORARY: Include ALL rows for debugging
                 allRows.push(row);
-            }
-            
-            console.log(`✅ Parsed ${allRows.length} rows with data`);
-            
-            if (allRows.length > 0) {
-                console.log('📝 First row all data:', allRows[0]);
-                console.log('🔑 Keys in first row:', Object.keys(allRows[0]));
-                console.log('📌 Checking key columns:');
-                console.log('  - Sprint Set:', allRows[0]['Sprint Set']);
-                console.log('  - Week Focus and Tasks:', allRows[0]['Week Focus and Tasks']);
-                console.log('  - OKR:', allRows[0]['OKR']);
-                console.log('  - Status:', allRows[0]['Status']);
-                console.log('🔍 Sprint Sets found:', [...new Set(allRows.map(r => r['Sprint Set']))].filter(s => s));
             }
             
             return allRows;
@@ -345,94 +598,165 @@
         }
 
         function renderRoadmap(data) {
+            // Calculate stats
             const stats = calculateStats(data);
-            const sprintGroups = groupBySprint(data);
+            updateExecutiveSummary(stats);
+            updateJourneyPath(stats.progress);
             
+            // Group by strategic themes
+            const themes = categorizeByTheme(data);
+            
+            // Render themes
             let html = `
-                <div class="progress-section">
-                    <h2>🎯 Overall Progress to BD1 Close</h2>
-                    <div class="progress-bar-container">
-                        <div class="progress-bar-fill" style="width: ${stats.progress}%;">
-                            ${stats.progress.toFixed(1)}% Complete
-                        </div>
-                    </div>
-                    <div class="stats-grid">
-                        <div class="stat-card">
-                            <div class="stat-value">${stats.completed}/${stats.total}</div>
-                            <div>Tasks Complete</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">${stats.inProgress}</div>
-                            <div>In Progress</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">${stats.totalHours}</div>
-                            <div>Hours to Save</div>
-                        </div>
-                        <div class="stat-card">
-                            <div class="stat-value">${stats.sprints}</div>
-                            <div>Sprint Sets</div>
-                        </div>
-                    </div>
+                <div class="themes-header">
+                    <h2>🎯 Strategic Themes to BD1</h2>
+                    <p>Key initiatives organized by strategic impact areas</p>
                 </div>
-
-                <h2 style="color: #1e3c72; font-size: 2em; margin: 40px 0 30px 0; text-align: center;">
-                    📋 Sprint Sets - Path to BD1 Close
-                </h2>
             `;
             
-            Object.keys(sprintGroups).sort().forEach(sprintName => {
-                const sprintTasks = sprintGroups[sprintName];
-                const sprintStats = calculateSprintStats(sprintTasks);
-                const okrGroups = groupByOKR(sprintTasks);
+            const themeOrder = ['Automation & AI', 'Process Optimization', 'Systems & Tools', 'Risk & Compliance', 'Integration & Acquisition'];
+            const themeIcons = {
+                'Automation & AI': '🤖',
+                'Process Optimization': '⚡',
+                'Systems & Tools': '🛠️',
+                'Risk & Compliance': '🛡️',
+                'Integration & Acquisition': '🔗'
+            };
+            const themeClasses = {
+                'Automation & AI': 'automation',
+                'Process Optimization': 'process',
+                'Systems & Tools': 'tools',
+                'Risk & Compliance': 'risk',
+                'Integration & Acquisition': 'integration'
+            };
+            
+            themeOrder.forEach(themeName => {
+                if (!themes[themeName] || themes[themeName].length === 0) return;
+                
+                const tasks = themes[themeName];
+                const themeStats = calculateThemeStats(tasks);
+                const sprintGroups = groupBySprint(tasks);
                 
                 html += `
-                    <div class="sprint-section">
-                        <div class="sprint-header ${sprintStats.progress === 100 ? 'complete' : ''}">
-                            <div class="sprint-name">${sprintName || 'Planning'}</div>
-                            <div class="sprint-stats">
-                                ${sprintStats.completed}/${sprintStats.total} tasks complete • 
-                                ${sprintStats.hours} hours saved • 
-                                Target: ${sprintStats.targetDate}
+                    <div class="theme-section">
+                        <div class="theme-header ${themeClasses[themeName]}">
+                            <div class="theme-title-row">
+                                <div style="display: flex; align-items: center;">
+                                    <div class="theme-icon">${themeIcons[themeName]}</div>
+                                    <div class="theme-title">${themeName}</div>
+                                </div>
+                                <div class="theme-impact">
+                                    ${themeStats.hours} Hours Saved
+                                </div>
                             </div>
-                            <div class="sprint-progress-bar">
-                                <div class="sprint-progress-fill" style="width: ${sprintStats.progress}%;"></div>
+                            <div class="theme-stats">
+                                <div class="theme-stat-item">
+                                    <span>📋</span>
+                                    <span>${themeStats.completed}/${themeStats.total} Complete</span>
+                                </div>
+                                <div class="theme-stat-item">
+                                    <span>📅</span>
+                                    <span>${themeStats.dateRange}</span>
+                                </div>
+                                <div class="theme-stat-item">
+                                    <span>📈</span>
+                                    <span>${themeStats.progress.toFixed(0)}% Progress</span>
+                                </div>
                             </div>
                         </div>
-                        <div class="sprint-content">
+                        <div class="theme-body">
                 `;
                 
-                Object.keys(okrGroups).forEach(okrName => {
-                    const okrTasks = okrGroups[okrName];
-                    const okrStats = calculateOKRStats(okrTasks);
+                // Render by Sprint within each theme
+                Object.keys(sprintGroups).sort().forEach(sprintName => {
+                    const sprintTasks = sprintGroups[sprintName];
+                    const sprintStats = calculateSprintStats(sprintTasks);
                     
                     html += `
-                        <div class="okr-section">
-                            <div class="okr-title">🎯 ${okrName || 'General Tasks'}</div>
-                            <div class="okr-stats">
-                                ${okrStats.completed}/${okrStats.total} complete • ${okrStats.hours} hours saved
+                        <div class="timeline-container">
+                            <div class="timeline-header">
+                                <div class="timeline-title">🎯 ${sprintName || 'Planning Phase'}</div>
+                                <div class="timeline-dates">
+                                    Target: ${sprintStats.targetDate} | 
+                                    ${sprintStats.completed}/${sprintStats.total} tasks | 
+                                    ${sprintStats.hours}hrs saved
+                                </div>
                             </div>
-                            <div class="task-grid">
+                            <div class="task-timeline">
                     `;
                     
-                    okrTasks.forEach(task => {
+                    sprintTasks.forEach(task => {
                         const status = normalizeStatus(task['Status']);
                         const statusClass = status.toLowerCase().replace(/\s+/g, '-');
                         
                         html += `
-                            <div class="task-card ${statusClass}">
-                                <span class="status-badge status-${statusClass}">${status}</span>
-                                <div class="task-title">${task['Week Focus and Tasks'] || 'Task'}</div>
+                            <div class="task-item ${statusClass}">
+                                <div class="task-header-row">
+                                    <div class="task-info">
+                                        <div class="task-badges">
+                                            <span class="badge badge-status ${statusClass}">${status}</span>
+                                            ${task['Close Category'] ? `<span class="badge badge-category">${task['Close Category']}</span>` : ''}
+                                        </div>
+                                        <div class="task-title">${task['Week Focus and Tasks'] || 'Task'}</div>
+                                    </div>
+                                </div>
+                                
                                 ${task['End of Week Deliverable / Milestone'] ? `
                                     <div class="task-deliverable">
                                         <strong>📦 Deliverable:</strong> ${task['End of Week Deliverable / Milestone']}
                                     </div>
                                 ` : ''}
-                                <div class="task-meta">
-                                    ${task['Day 1 Close Target End Date'] ? `<div class="task-meta-item">📅 ${task['Day 1 Close Target End Date']}</div>` : ''}
-                                    ${task['Hours Saved'] ? `<div class="task-meta-item">⏱️ ${task['Hours Saved']} hrs</div>` : ''}
-                                    ${task['Owner(s)'] ? `<div class="task-meta-item">👤 ${task['Owner(s)']}</div>` : ''}
+                                
+                                <div class="task-meta-grid">
+                                    ${task['Day 1 Close Target End Date'] ? `
+                                        <div class="meta-item">
+                                            <span class="meta-icon">📅</span>
+                                            <div>
+                                                <div class="meta-label">Target Date</div>
+                                                <div class="meta-value">${task['Day 1 Close Target End Date']}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                    ${task['Hours Saved'] && task['Hours Saved'] !== '0' ? `
+                                        <div class="meta-item">
+                                            <span class="meta-icon">⏱️</span>
+                                            <div>
+                                                <div class="meta-label">Time Impact</div>
+                                                <div class="meta-value">${task['Hours Saved']} hours</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                    ${task['Owner(s)'] ? `
+                                        <div class="meta-item">
+                                            <span class="meta-icon">👤</span>
+                                            <div>
+                                                <div class="meta-label">Owner</div>
+                                                <div class="meta-value">${task['Owner(s)']}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                    ${task['Key Result'] ? `
+                                        <div class="meta-item">
+                                            <span class="meta-icon">🎯</span>
+                                            <div>
+                                                <div class="meta-label">Key Result</div>
+                                                <div class="meta-value">${task['Key Result']}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
                                 </div>
+                                
+                                ${task['Dependencies'] ? `
+                                    <div class="dependencies">
+                                        <strong>⚠️ Dependencies:</strong> ${task['Dependencies']}
+                                    </div>
+                                ` : ''}
+                                
+                                ${status === 'Complete' ? `
+                                    <div class="timeline-bar">
+                                        <div class="timeline-progress" style="width: 100%;"></div>
+                                    </div>
+                                ` : ''}
                             </div>
                         `;
                     });
@@ -452,22 +776,43 @@
             document.getElementById('mainContent').innerHTML = html;
         }
 
+        function categorizeByTheme(data) {
+            const themes = {
+                'Automation & AI': [],
+                'Process Optimization': [],
+                'Systems & Tools': [],
+                'Risk & Compliance': [],
+                'Integration & Acquisition': []
+            };
+            
+            data.forEach(row => {
+                const task = row['Week Focus and Tasks'] || '';
+                const okr = row['OKR'] || '';
+                const category = row['Close Category'] || '';
+                const combined = (task + ' ' + okr + ' ' + category).toLowerCase();
+                
+                if (combined.includes('ai') || combined.includes('automat') || combined.includes('bot') || combined.includes('wiselayer')) {
+                    themes['Automation & AI'].push(row);
+                } else if (combined.includes('acquisition') || combined.includes('guideline') || combined.includes('integration') || combined.includes('intercompany')) {
+                    themes['Integration & Acquisition'].push(row);
+                } else if (combined.includes('system') || combined.includes('tool') || combined.includes('numeric') || combined.includes('netsuite') || combined.includes('spacebase')) {
+                    themes['Systems & Tools'].push(row);
+                } else if (combined.includes('risk') || combined.includes('compliance') || combined.includes('control') || combined.includes('monitor')) {
+                    themes['Risk & Compliance'].push(row);
+                } else {
+                    themes['Process Optimization'].push(row);
+                }
+            });
+            
+            return themes;
+        }
+
         function groupBySprint(data) {
             const groups = {};
             data.forEach(row => {
                 const sprint = row['Sprint Set'] || 'Unassigned';
                 if (!groups[sprint]) groups[sprint] = [];
                 groups[sprint].push(row);
-            });
-            return groups;
-        }
-
-        function groupByOKR(data) {
-            const groups = {};
-            data.forEach(row => {
-                const okr = row['OKR'] || 'Other';
-                if (!groups[okr]) groups[okr] = [];
-                groups[okr].push(row);
             });
             return groups;
         }
@@ -482,19 +827,46 @@
                 if (!isNaN(hours)) totalHours += hours;
             });
             
+            const targetDate = new Date('2027-02-01');
+            const today = new Date();
+            const daysLeft = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+            
             return {
                 total: data.length,
                 completed,
                 inProgress,
                 progress: data.length > 0 ? (completed / data.length) * 100 : 0,
                 totalHours: Math.round(totalHours),
-                sprints: new Set(data.map(r => r['Sprint Set'])).size
+                daysLeft
+            };
+        }
+
+        function calculateThemeStats(tasks) {
+            let completed = 0, hours = 0;
+            const dates = [];
+            
+            tasks.forEach(task => {
+                if (normalizeStatus(task['Status']) === 'Complete') completed++;
+                const h = parseFloat(task['Hours Saved'] || 0);
+                if (!isNaN(h)) hours += h;
+                if (task['Day 1 Close Target End Date']) dates.push(task['Day 1 Close Target End Date']);
+            });
+            
+            const dateRange = dates.length > 0 ? `${dates[0]} - ${dates[dates.length - 1]}` : 'TBD';
+            
+            return {
+                total: tasks.length,
+                completed,
+                progress: tasks.length > 0 ? (completed / tasks.length) * 100 : 0,
+                hours: Math.round(hours),
+                dateRange
             };
         }
 
         function calculateSprintStats(tasks) {
             let completed = 0, hours = 0;
             const dates = [];
+            
             tasks.forEach(task => {
                 if (normalizeStatus(task['Status']) === 'Complete') completed++;
                 const h = parseFloat(task['Hours Saved'] || 0);
@@ -505,25 +877,37 @@
             return {
                 total: tasks.length,
                 completed,
-                progress: tasks.length > 0 ? (completed / tasks.length) * 100 : 0,
                 hours: Math.round(hours),
                 targetDate: dates[dates.length - 1] || 'TBD'
             };
         }
 
-        function calculateOKRStats(tasks) {
-            let completed = 0, hours = 0;
-            tasks.forEach(task => {
-                if (normalizeStatus(task['Status']) === 'Complete') completed++;
-                const h = parseFloat(task['Hours Saved'] || 0);
-                if (!isNaN(h)) hours += h;
-            });
+        function updateExecutiveSummary(stats) {
+            document.getElementById('totalTasks').textContent = stats.total;
+            document.getElementById('hoursSaved').textContent = stats.totalHours;
+            document.getElementById('progressPercent').textContent = stats.progress.toFixed(0) + '%';
+            document.getElementById('daysLeft').textContent = stats.daysLeft;
+        }
+
+        function updateJourneyPath(progress) {
+            document.getElementById('journeyProgress').style.width = progress + '%';
             
-            return {
-                total: tasks.length,
-                completed,
-                hours: Math.round(hours)
-            };
+            // Update journey steps
+            const steps = ['bd5', 'bd4', 'bd3', 'bd2', 'bd1'];
+            steps.forEach((step, index) => {
+                const element = document.getElementById(`step-${step}`);
+                const threshold = (index / steps.length) * 100;
+                
+                if (progress > threshold + 10) {
+                    element.classList.add('complete');
+                    element.classList.remove('current');
+                } else if (progress >= threshold) {
+                    element.classList.add('current');
+                    element.classList.remove('complete');
+                } else {
+                    element.classList.remove('complete', 'current');
+                }
+            });
         }
 
         function normalizeStatus(status) {

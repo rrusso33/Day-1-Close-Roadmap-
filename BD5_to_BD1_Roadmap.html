@@ -606,6 +606,10 @@
     </div>
 
     <script>
+        // ⚙️ CONFIGURATION - UPDATE THIS WITH YOUR GOOGLE APPS SCRIPT URL
+        const APPS_SCRIPT_URL = ''; // Paste your Web App URL here after deploying the Apps Script
+        
+        // Fallback URLs (used if Apps Script URL is not set)
         const SHEET_URL = 'roadmap_data.csv';
         const GITHUB_URL = 'https://rrusso33.github.io/Day-1-Close-Roadmap-/roadmap_data.csv';
 
@@ -656,26 +660,53 @@
                     return;
                 }
                 
-                let csvText;
-                try {
-                    const response = await fetch(SHEET_URL);
-                    csvText = await response.text();
-                } catch (err) {
-                    const response = await fetch(GITHUB_URL);
-                    csvText = await response.text();
+                let data;
+                
+                // Try Google Apps Script first (real-time from Google Sheets)
+                if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.trim() !== '') {
+                    try {
+                        console.log('📡 Fetching real-time data from Google Sheets...');
+                        const response = await fetch(APPS_SCRIPT_URL);
+                        const jsonData = await response.json();
+                        
+                        if (jsonData.success && jsonData.data) {
+                            data = jsonData.data;
+                            console.log(`✅ Loaded ${data.length} tasks from Google Sheets (Live)`);
+                            console.log(`🕒 Last updated: ${jsonData.lastUpdated}`);
+                        } else {
+                            throw new Error('Invalid response from Apps Script');
+                        }
+                    } catch (err) {
+                        console.warn('⚠️ Apps Script failed, falling back to CSV:', err.message);
+                        // Fall through to CSV fallback
+                    }
                 }
                 
-                const data = parseCSV(csvText);
-                console.log(`✅ Loaded ${data.length} tasks`);
+                // Fallback to CSV if Apps Script not configured or failed
+                if (!data) {
+                    console.log('📄 Loading data from CSV file...');
+                    let csvText;
+                    try {
+                        const response = await fetch(SHEET_URL);
+                        csvText = await response.text();
+                    } catch (err) {
+                        const response = await fetch(GITHUB_URL);
+                        csvText = await response.text();
+                    }
+                    
+                    data = parseCSV(csvText);
+                    console.log(`✅ Loaded ${data.length} tasks from CSV`);
+                }
                 
                 renderRoadmap(data);
                 
             } catch (error) {
-                console.error('Error:', error);
+                console.error('❌ Error:', error);
                 document.getElementById('themeContainer').innerHTML = `
                     <div style="text-align: center; padding: 60px; color: #dc3545;">
                         <div style="font-size: 3em; margin-bottom: 25px;">⚠️</div>
-                        <div style="font-size: 1.5em;">Error loading data</div>
+                        <div style="font-size: 1.5em; margin-bottom: 15px;">Error loading data</div>
+                        <div style="font-size: 1em; color: #6c757d;">${error.message}</div>
                     </div>
                 `;
             }

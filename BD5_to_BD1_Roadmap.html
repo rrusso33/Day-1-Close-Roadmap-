@@ -434,23 +434,12 @@
             background: #fff3cd;
             border-left: 4px solid #ffc107;
             border-radius: 8px;
-            min-height: 50px;
         }
         .dependencies-label {
             font-weight: 700;
             color: #856404;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: block;
-        }
-        .dependencies-text {
-            color: #856404;
-            font-size: 0.95em;
-            line-height: 1.6;
-            word-wrap: break-word;
-            overflow-wrap: break-word;
-            white-space: normal;
-            display: block;
-            max-width: 100%;
         }
         
         .deliverable {
@@ -459,23 +448,36 @@
             background: #e7f3ff;
             border-left: 4px solid #007bff;
             border-radius: 8px;
-            min-height: 50px;
         }
         .deliverable-label {
             font-weight: 700;
             color: #004085;
-            margin-bottom: 8px;
+            margin-bottom: 10px;
             display: block;
         }
-        .deliverable-text {
+        
+        .info-list {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: disc;
+        }
+        .dependencies .info-list {
+            color: #856404;
+        }
+        .deliverable .info-list {
             color: #004085;
+        }
+        .info-list li {
             font-size: 0.95em;
             line-height: 1.6;
+            margin-bottom: 8px;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: normal;
-            display: block;
-            max-width: 100%;
+            padding-left: 5px;
+        }
+        .info-list li:last-child {
+            margin-bottom: 0;
         }
         
         @media print {
@@ -864,14 +866,18 @@
                                     ${consolidated.dependencies.length > 0 ? `
                                         <div class="dependencies">
                                             <div class="dependencies-label">⚠️ Key Dependencies:</div>
-                                            <div class="dependencies-text">${consolidated.dependencies.join(' • ')}</div>
+                                            <ul class="info-list">
+                                                ${consolidated.dependencies.map(dep => `<li>${dep}</li>`).join('')}
+                                            </ul>
                                         </div>
                                     ` : ''}
                                     
                                     ${consolidated.deliverables.length > 0 ? `
                                         <div class="deliverable">
                                             <div class="deliverable-label">📦 Key Deliverables:</div>
-                                            <div class="deliverable-text">${consolidated.deliverables.slice(0, 3).join(' • ')}</div>
+                                            <ul class="info-list">
+                                                ${consolidated.deliverables.map(del => `<li>${del}</li>`).join('')}
+                                            </ul>
                                         </div>
                                     ` : ''}
                                 </div>

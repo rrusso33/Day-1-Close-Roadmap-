@@ -324,6 +324,8 @@
             position: relative;
             padding-left: 40px;
             border-left: 4px solid #e9ecef;
+            min-height: fit-content;
+            overflow: visible;
         }
         .sprint-group:last-child { margin-bottom: 0; }
         
@@ -407,8 +409,9 @@
             padding: 25px;
             transition: all 0.3s ease;
             max-width: 100%;
-            overflow: hidden;
+            overflow: visible;
             box-sizing: border-box;
+            min-height: fit-content;
         }
         .initiative-card:hover {
             border-color: #667eea;
@@ -470,6 +473,8 @@
             padding: 20px;
             background: #f8f9fa;
             border-radius: 10px;
+            min-height: fit-content;
+            overflow: visible;
         }
         .detail-item {
             display: flex;
@@ -493,6 +498,8 @@
         
         .tech-stack {
             margin-top: 15px;
+            min-height: fit-content;
+            overflow: visible;
         }
         .tech-label {
             font-size: 0.85em;
@@ -502,6 +509,7 @@
             word-wrap: break-word;
             overflow-wrap: break-word;
             line-height: 1.4;
+            white-space: normal;
         }
         .tech-tags {
             display: flex;
@@ -527,7 +535,8 @@
             border-left: 4px solid #ffc107;
             border-radius: 8px;
             max-width: 100%;
-            overflow: hidden;
+            overflow: visible;
+            min-height: fit-content;
         }
         .dependencies-label {
             font-weight: 700;
@@ -536,6 +545,7 @@
             display: block;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            white-space: normal;
         }
         
         .deliverable {
@@ -545,7 +555,8 @@
             border-left: 4px solid #007bff;
             border-radius: 8px;
             max-width: 100%;
-            overflow: hidden;
+            overflow: visible;
+            min-height: fit-content;
         }
         .deliverable-label {
             font-weight: 700;
@@ -554,6 +565,7 @@
             display: block;
             word-wrap: break-word;
             overflow-wrap: break-word;
+            white-space: normal;
         }
         
         .info-list {
@@ -570,15 +582,18 @@
         }
         .info-list li {
             font-size: 0.95em;
-            line-height: 1.7;
-            margin-bottom: 10px;
+            line-height: 1.8;
+            margin-bottom: 12px;
             word-wrap: break-word;
             overflow-wrap: break-word;
             white-space: normal;
-            padding-left: 5px;
-            padding-right: 10px;
+            padding-left: 8px;
+            padding-right: 15px;
+            padding-top: 4px;
+            padding-bottom: 4px;
             max-width: 100%;
             hyphens: auto;
+            min-height: fit-content;
         }
         .info-list li:last-child {
             margin-bottom: 0;

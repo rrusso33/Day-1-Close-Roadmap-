@@ -1792,15 +1792,20 @@
             const projectEnd = new Date('2027-02-01');
             const totalDays = (projectEnd - projectStart) / (1000 * 60 * 60 * 24);
             
-            // Generate month headers
+            // Generate month headers (show every 3 months to avoid crowding)
             const months = [];
             let currentDate = new Date(projectStart);
+            let monthCount = 0;
             while (currentDate <= projectEnd) {
-                months.push({
-                    label: currentDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-                    date: new Date(currentDate)
-                });
+                // Show every 3rd month to avoid overlapping
+                if (monthCount % 3 === 0) {
+                    months.push({
+                        label: currentDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                        date: new Date(currentDate)
+                    });
+                }
                 currentDate.setMonth(currentDate.getMonth() + 1);
+                monthCount++;
             }
             
             // Build timeline HTML
@@ -1811,12 +1816,12 @@
                         <div class="timeline-date-range">September 2024 → February 2027</div>
                     </div>
                     <div class="timeline-grid">
-                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px;">
                             <div style="width: 150px; padding-right: 15px;"></div>
-                            <div style="flex: 1; display: flex; position: relative;">
+                            <div style="flex: 1; display: flex; position: relative; height: 25px; border-bottom: 2px solid #dee2e6;">
                                 ${months.map(month => {
                                     const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
-                                    return `<div class="timeline-month" style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.75em; color: #6c757d; font-weight: 600; white-space: nowrap;">${month.label}</div>`;
+                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.8em; color: #495057; font-weight: 700; white-space: nowrap; transform: translateX(-50%);">${month.label}</div>`;
                                 }).join('')}
                             </div>
                         </div>

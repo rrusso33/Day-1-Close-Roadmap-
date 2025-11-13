@@ -14,15 +14,21 @@ if not exist "roadmap_data.csv" (
 
 echo Found roadmap_data.csv!
 echo.
-echo Updating GitHub repository...
-git add roadmap_data.csv
+echo [Step 1/4] Adding changes to git...
+git add .
+
+echo.
+echo [Step 2/4] Committing changes...
 git commit -m "Update roadmap data - %date% %time%"
+
+echo.
+echo [Step 3/4] Pushing to main branch...
 git push origin main
 
 echo.
-echo Deploying to live site...
+echo [Step 4/4] Deploying to live site (gh-pages)...
 git checkout gh-pages
-git merge main
+git merge main -m "Auto-merge from main"
 git push origin gh-pages
 git checkout main
 
@@ -31,7 +37,7 @@ echo ========================================
 echo   SUCCESS! Roadmap Updated
 echo ========================================
 echo.
-echo Your roadmap will be live in 2-3 minutes at:
+echo Your roadmap will be live in 1-2 minutes at:
 echo https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
 echo.
 echo Opening roadmap in browser...

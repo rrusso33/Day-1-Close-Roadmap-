@@ -816,35 +816,40 @@
 
         <!-- Executive Strategy Section -->
         <div class="strategy-section">
-            <div class="strategy-title">📖 Our Day 1 Close Strategy</div>
+            <div class="strategy-title">📖 Our Day 1 Close Strategy by Functional Area</div>
             <div class="strategy-content">
-                We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're executing a comprehensive 5-pronged transformation strategy focused on automation, process optimization, systems integration, and risk mitigation. Each initiative is designed to eliminate manual work, reduce cycle time, and accelerate our close process.
+                We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. Track progress by functional area to see exactly how each accounting process is accelerating toward Day 1.
             </div>
             <div class="strategy-grid">
                 <div class="strategy-card">
-                    <div class="strategy-card-title">🤖 Automation & AI</div>
-                    <div class="strategy-card-impact">-1 Day</div>
-                    <div class="strategy-card-desc">AI-powered accruals and automated flux review eliminate 2+ hours of manual OpEx analysis per close</div>
-                </div>
-                <div class="strategy-card">
-                    <div class="strategy-card-title">⚡ Process Optimization</div>
-                    <div class="strategy-card-impact">-1.5 Days</div>
-                    <div class="strategy-card-desc">Streamlined workflows and root cause analysis remove bottlenecks in financial reporting processes</div>
-                </div>
-                <div class="strategy-card">
-                    <div class="strategy-card-title">🛠️ Systems & Tools</div>
-                    <div class="strategy-card-impact">-1 Day</div>
-                    <div class="strategy-card-desc">Real-time integrations with NetSuite, Numeric, and Spacebase eliminate reconciliation delays</div>
-                </div>
-                <div class="strategy-card">
-                    <div class="strategy-card-title">🛡️ Risk & Controls</div>
-                    <div class="strategy-card-impact">-0.5 Days</div>
-                    <div class="strategy-card-desc">Front-loading reviews and monitoring prevents last-minute surprises and rework</div>
+                    <div class="strategy-card-title">📊 Accruals</div>
+                    <div class="strategy-card-impact">~35 Hours</div>
+                    <div class="strategy-card-desc">AI-powered accruals via WiseLayer eliminate manual vendor analysis and automate prepaid tracking</div>
                 </div>
                 <div class="strategy-card">
                     <div class="strategy-card-title">💰 Cash & Intercompany</div>
-                    <div class="strategy-card-impact">-1 Day</div>
-                    <div class="strategy-card-desc">Automated I/C settlement and cash processes eliminate end-of-month delays</div>
+                    <div class="strategy-card-impact">~13 Hours</div>
+                    <div class="strategy-card-desc">Automated I/C settlement, cash reconciliation, and TP module reduce end-of-month bottlenecks</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">🏢 Leases & Fixed Assets</div>
+                    <div class="strategy-card-impact">~4 Hours</div>
+                    <div class="strategy-card-desc">Spacebase automation and NetSuite FAM integration eliminate manual journal entries</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">💼 Payroll & Commissions</div>
+                    <div class="strategy-card-impact">~19 Hours</div>
+                    <div class="strategy-card-desc">Automated reconciliations and Xactly integration streamline payroll and sales comp processes</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">⚡ Close Management</div>
+                    <div class="strategy-card-impact">~4 Hours</div>
+                    <div class="strategy-card-desc">Numeric AI flux tools, monitors, and process enhancements accelerate overall close cycle</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">🤝 Acquisitions & Other</div>
+                    <div class="strategy-card-impact">Integration</div>
+                    <div class="strategy-card-desc">Guideline integration and PEO entity setup ensure scalable growth without slowing close</div>
                 </div>
             </div>
         </div>
@@ -941,8 +946,8 @@
         <!-- Timeline Content -->
         <div class="timeline-section">
             <div class="section-header">
-                <div class="section-title">📅 Strategic Timeline to BD1</div>
-                <div class="section-subtitle">Organized by theme, sprint, and timeline</div>
+                <div class="section-title">📅 Close Category Progress to BD1</div>
+                <div class="section-subtitle">Organized by functional area, sprint, and timeline</div>
             </div>
             
             <div class="legend">
@@ -988,30 +993,65 @@
         const GITHUB_URL = 'https://rrusso33.github.io/Day-1-Close-Roadmap-/roadmap_data.csv';
 
         const THEMES = {
-            'Automation & AI': {
-                icon: '🤖',
+            'Accruals': {
+                icon: '📊',
                 class: 'automation',
-                keywords: ['ai', 'automat', 'bot', 'wiselayer', 'accruals.ai', 'cursor', 'bolt']
+                keywords: ['accruals']
             },
-            'Process Optimization': {
-                icon: '⚡',
-                class: 'process',
-                keywords: ['process', 'streamline', 'optimize', 'flux', 'confluence', 'numeric', 'enhance']
-            },
-            'Systems & Tools': {
-                icon: '🛠️',
-                class: 'tools',
-                keywords: ['system', 'tool', 'netsuite', 'spacebase', 'xactly', 'guideline', 'acquisition', 'integration']
-            },
-            'Risk & Controls': {
-                icon: '🛡️',
-                class: 'risk',
-                keywords: ['risk', 'compliance', 'control', 'monitor', 'accuracy', 'coding']
-            },
-            'Cash & Intercompany': {
+            'Cash & Cash Equivalents': {
                 icon: '💰',
                 class: 'cash',
-                keywords: ['cash', 'intercompany', 'settlement', 'billing', 'i/c']
+                keywords: ['cash']
+            },
+            'Intercompany': {
+                icon: '🔄',
+                class: 'process',
+                keywords: ['intercompany']
+            },
+            'Leases': {
+                icon: '🏢',
+                class: 'tools',
+                keywords: ['leases']
+            },
+            'Payroll': {
+                icon: '💼',
+                class: 'automation',
+                keywords: ['payroll']
+            },
+            'Sales Commissions': {
+                icon: '💵',
+                class: 'process',
+                keywords: ['sales commission']
+            },
+            'Close Management': {
+                icon: '⚡',
+                class: 'risk',
+                keywords: ['close management']
+            },
+            'Financial Reporting': {
+                icon: '📈',
+                class: 'tools',
+                keywords: ['financial reporting']
+            },
+            'Acquisition': {
+                icon: '🤝',
+                class: 'tools',
+                keywords: ['acquisition']
+            },
+            'Prepaids': {
+                icon: '📋',
+                class: 'automation',
+                keywords: ['prepaids']
+            },
+            'Fixed Assets': {
+                icon: '🏗️',
+                class: 'process',
+                keywords: ['fixed assets']
+            },
+            'PEO': {
+                icon: '🌐',
+                class: 'cash',
+                keywords: ['peo']
             }
         };
 
@@ -1331,14 +1371,23 @@
         }
 
         function categorizeTask(task) {
-            const text = (task['Week Focus and Tasks'] + ' ' + task['OKR'] + ' ' + task['Close Category']).toLowerCase();
+            const category = (task['Close Category'] || '').trim();
             
+            // Direct mapping from CSV Close Category to our THEMES
+            if (category && THEMES[category]) {
+                return category;
+            }
+            
+            // Fallback: try to match based on lowercase keywords
+            const categoryLower = category.toLowerCase();
             for (const [theme, config] of Object.entries(THEMES)) {
-                if (config.keywords.some(keyword => text.includes(keyword))) {
+                if (config.keywords.some(keyword => categoryLower.includes(keyword))) {
                     return theme;
                 }
             }
-            return 'Process Optimization';
+            
+            // Default to Close Management if no match
+            return 'Close Management';
         }
 
         function extractTools(task) {

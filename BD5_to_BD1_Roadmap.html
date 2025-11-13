@@ -1787,8 +1787,8 @@
             
             if (sprints.length === 0) return '';
             
-            // Determine overall date range (now to Feb 1, 2027)
-            const projectStart = new Date('2024-09-01');
+            // Determine overall date range (Nov 2025 to Feb 1, 2027) - focus on future work
+            const projectStart = new Date('2025-11-01');
             const projectEnd = new Date('2027-02-01');
             const totalDays = (projectEnd - projectStart) / (1000 * 60 * 60 * 24);
             
@@ -1796,29 +1796,27 @@
             // Q1: May-Jul, Q2: Aug-Oct, Q3: Nov-Jan, Q4: Feb-Apr
             const fiscalQuarters = [];
             
-            // Define fiscal quarter end months (Jul, Oct, Jan, Apr)
-            const quarterEndMonths = [6, 9, 0, 3]; // July=6, Oct=9, Jan=0, Apr=3
-            const quarterLabels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            // Start from Nov 2025 (Q3 FY26) and show upcoming quarters
+            const quarterMarkers = [
+                { month: 'Nov 2025', quarter: 'Q3 FY26', date: new Date('2025-11-01') },
+                { month: 'Jan 2026', quarter: 'Q3 FY26', date: new Date('2026-01-01') },
+                { month: 'Feb 2026', quarter: 'Q4 FY26', date: new Date('2026-02-01') },
+                { month: 'Apr 2026', quarter: 'Q4 FY26', date: new Date('2026-04-30') },
+                { month: 'May 2026', quarter: 'Q1 FY27', date: new Date('2026-05-01') },
+                { month: 'Jul 2026', quarter: 'Q1 FY27', date: new Date('2026-07-31') },
+                { month: 'Aug 2026', quarter: 'Q2 FY27', date: new Date('2026-08-01') },
+                { month: 'Oct 2026', quarter: 'Q2 FY27', date: new Date('2026-10-31') },
+                { month: 'Nov 2026', quarter: 'Q3 FY27', date: new Date('2026-11-01') },
+                { month: 'Jan 2027', quarter: 'Q3 FY27', date: new Date('2027-01-01') },
+                { month: 'Feb 2027', quarter: 'Q4 FY27', date: new Date('2027-02-01') }
+            ];
             
-            let year = 2024;
-            let currentQuarterDate = new Date(2024, 6, 31); // Start at Jul 31, 2024 (Q1 FY25 end)
-            
-            while (currentQuarterDate <= projectEnd) {
-                const month = currentQuarterDate.getMonth();
-                const quarterIndex = quarterEndMonths.indexOf(month);
-                const fiscalYear = month < 4 ? year : year + 1; // If before April, it's previous FY
-                
+            quarterMarkers.forEach(marker => {
                 fiscalQuarters.push({
-                    label: `${currentQuarterDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} (${quarterLabels[quarterIndex]} FY${String(fiscalYear).slice(-2)})`,
-                    date: new Date(currentQuarterDate)
+                    label: `${marker.month} (${marker.quarter})`,
+                    date: marker.date
                 });
-                
-                // Move to next quarter
-                currentQuarterDate.setMonth(currentQuarterDate.getMonth() + 3);
-                if (currentQuarterDate.getMonth() === 1) { // Moved to Feb, adjust year
-                    year++;
-                }
-            }
+            });
             
             const months = fiscalQuarters;
             
@@ -1827,15 +1825,15 @@
                 <div class="category-timeline">
                     <div class="timeline-header">
                         <div class="timeline-title">📅 ${themeName} Timeline to Day 1 Close</div>
-                        <div class="timeline-date-range">FY25 Q2 → FY27 Q4 (Target: Feb 1, 2027)</div>
+                        <div class="timeline-date-range">Nov 2025 (Q3 FY26) → Feb 2027 (Q4 FY27)</div>
                     </div>
                     <div class="timeline-grid">
                         <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px;">
                             <div style="width: 150px; padding-right: 15px;"></div>
-                            <div style="flex: 1; display: flex; position: relative; height: 25px; border-bottom: 2px solid #dee2e6;">
+                            <div style="flex: 1; display: flex; position: relative; height: 30px; border-bottom: 2px solid #dee2e6;">
                                 ${months.map(month => {
                                     const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
-                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.7em; color: #495057; font-weight: 700; white-space: nowrap; transform: translateX(-50%);">${month.label}</div>`;
+                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.85em; color: #2c3e50; font-weight: 700; white-space: nowrap; transform: translateX(-50%);">${month.label}</div>`;
                                 }).join('')}
                             </div>
                         </div>
@@ -1843,8 +1841,12 @@
             `;
             
             sprints.forEach(sprint => {
-                const startOffset = ((sprint.startDate - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
-                const duration = ((sprint.endDate - sprint.startDate) / (1000 * 60 * 60 * 24) / totalDays) * 100;
+                // Clamp dates to visible range (Nov 2025 - Feb 2027)
+                const visibleStart = sprint.startDate < projectStart ? projectStart : sprint.startDate;
+                const visibleEnd = sprint.endDate > projectEnd ? projectEnd : sprint.endDate;
+                
+                const startOffset = Math.max(0, ((visibleStart - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100);
+                const duration = ((visibleEnd - visibleStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
                 const width = Math.max(duration, 5); // Minimum 5% width for visibility
                 
                 html += `

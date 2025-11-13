@@ -1792,14 +1792,34 @@
             const projectEnd = new Date('2027-02-01');
             const totalDays = (projectEnd - projectStart) / (1000 * 60 * 60 * 24);
             
+            // Generate month headers
+            const months = [];
+            let currentDate = new Date(projectStart);
+            while (currentDate <= projectEnd) {
+                months.push({
+                    label: currentDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
+                    date: new Date(currentDate)
+                });
+                currentDate.setMonth(currentDate.getMonth() + 1);
+            }
+            
             // Build timeline HTML
             let html = `
                 <div class="category-timeline">
                     <div class="timeline-header">
                         <div class="timeline-title">📅 ${themeName} Timeline to Day 1 Close</div>
-                        <div class="timeline-date-range">Now → February 1, 2027</div>
+                        <div class="timeline-date-range">September 2024 → February 2027</div>
                     </div>
                     <div class="timeline-grid">
+                        <div style="display: flex; align-items: center; margin-bottom: 15px;">
+                            <div style="width: 150px; padding-right: 15px;"></div>
+                            <div style="flex: 1; display: flex; position: relative;">
+                                ${months.map(month => {
+                                    const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
+                                    return `<div class="timeline-month" style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.75em; color: #6c757d; font-weight: 600; white-space: nowrap;">${month.label}</div>`;
+                                }).join('')}
+                            </div>
+                        </div>
                         <div class="timeline-bars">
             `;
             

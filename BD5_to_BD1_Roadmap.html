@@ -248,6 +248,149 @@
             transition: all 0.3s ease;
             position: relative;
         }
+        
+        /* Timeline Gantt Chart */
+        .category-timeline {
+            margin: 30px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .timeline-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .timeline-date-range {
+            font-size: 0.95em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .timeline-grid {
+            position: relative;
+            min-height: 100px;
+        }
+        .timeline-months {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .timeline-month {
+            text-align: center;
+            font-size: 0.85em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .timeline-bars {
+            position: relative;
+        }
+        .timeline-bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .timeline-bar-label {
+            width: 150px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #2c3e50;
+            padding-right: 15px;
+        }
+        .timeline-bar-track {
+            flex: 1;
+            height: 36px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+            border: 2px solid #e9ecef;
+        }
+        .timeline-bar-fill {
+            position: absolute;
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .timeline-bar-fill.complete {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+        .timeline-bar-fill.in-progress {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+        }
+        .timeline-bar-fill.planned {
+            background: linear-gradient(135deg, #6c757d 0%, #95a5a6 100%);
+        }
+        .timeline-bar-fill:hover {
+            filter: brightness(1.1);
+            transform: scaleY(1.1);
+        }
+        
+        /* Master Timeline */
+        .master-timeline {
+            background: white;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .master-timeline-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .master-timeline-grid {
+            display: grid;
+            gap: 12px;
+        }
+        .master-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 100px;
+            gap: 15px;
+            align-items: center;
+        }
+        .master-category-name {
+            font-size: 1em;
+            font-weight: 700;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .master-timeline-track {
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .master-timeline-fill {
+            height: 100%;
+            border-radius: 8px;
+            position: relative;
+            transition: width 0.5s ease;
+        }
+        .master-progress-text {
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
         .theme-header-bar:hover { filter: brightness(1.1); }
         .theme-header-bar::after {
             content: '▼';
@@ -946,8 +1089,8 @@
         <!-- Timeline Content -->
         <div class="timeline-section">
             <div class="section-header">
-                <div class="section-title">📅 Close Category Progress to BD1</div>
-                <div class="section-subtitle">Organized by functional area, sprint, and timeline</div>
+                <div class="section-title">📅 Close Category Timelines to BD1</div>
+                <div class="section-subtitle">Master timeline + detailed sprint progress by functional area</div>
             </div>
             
             <div class="legend">
@@ -1227,8 +1370,10 @@
                 themeData[theme][groupKey].push(task);
             });
             
+            // Generate master timeline first
+            let html = generateMasterTimeline(themeData);
+            
             // Render themes
-            let html = '';
             Object.entries(THEMES).forEach(([themeName, config]) => {
                 const initiatives = themeData[themeName] || {};
                 const allTasks = Object.values(initiatives).flat();
@@ -1266,6 +1411,7 @@
                             </div>
                         </div>
                         <div class="theme-timeline" id="timeline-${themeId}">
+                            ${generateCategoryTimeline(allTasks, themeName, config)}
                 `;
                 
                 // Consolidate initiatives by category/OKR
@@ -1589,6 +1735,151 @@
         function capitalizeFirstLetter(str) {
             if (!str) return str;
             return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        
+        function generateCategoryTimeline(tasks, themeName, config) {
+            // Get unique sprint sets and their date ranges
+            const sprintMap = {};
+            tasks.forEach(task => {
+                const sprint = task['Sprint Set'] || 'Ongoing';
+                const date = task['Date'];
+                const status = normalizeStatus(task['Status']);
+                
+                if (!sprintMap[sprint]) {
+                    sprintMap[sprint] = {
+                        dates: [],
+                        tasks: [],
+                        statuses: []
+                    };
+                }
+                
+                if (date) sprintMap[sprint].dates.push(new Date(date));
+                sprintMap[sprint].tasks.push(task);
+                sprintMap[sprint].statuses.push(status);
+            });
+            
+            // Calculate timeline bars
+            const sprints = Object.entries(sprintMap).map(([name, data]) => {
+                const completedTasks = data.statuses.filter(s => s === 'Complete').length;
+                const inProgressTasks = data.statuses.filter(s => s === 'In Progress').length;
+                const totalTasks = data.tasks.length;
+                
+                let status = 'planned';
+                if (completedTasks === totalTasks) status = 'complete';
+                else if (inProgressTasks > 0 || completedTasks > 0) status = 'in-progress';
+                
+                const startDate = data.dates.length > 0 ? new Date(Math.min(...data.dates)) : new Date();
+                const endDate = data.dates.length > 0 ? new Date(Math.max(...data.dates)) : new Date();
+                
+                return {
+                    name,
+                    startDate,
+                    endDate,
+                    status,
+                    completed: completedTasks,
+                    total: totalTasks,
+                    progress: totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0
+                };
+            });
+            
+            // Sort by start date
+            sprints.sort((a, b) => a.startDate - b.startDate);
+            
+            if (sprints.length === 0) return '';
+            
+            // Determine overall date range (now to Feb 1, 2027)
+            const projectStart = new Date('2024-09-01');
+            const projectEnd = new Date('2027-02-01');
+            const totalDays = (projectEnd - projectStart) / (1000 * 60 * 60 * 24);
+            
+            // Build timeline HTML
+            let html = `
+                <div class="category-timeline">
+                    <div class="timeline-header">
+                        <div class="timeline-title">📅 ${themeName} Timeline to Day 1 Close</div>
+                        <div class="timeline-date-range">Now → February 1, 2027</div>
+                    </div>
+                    <div class="timeline-grid">
+                        <div class="timeline-bars">
+            `;
+            
+            sprints.forEach(sprint => {
+                const startOffset = ((sprint.startDate - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
+                const duration = ((sprint.endDate - sprint.startDate) / (1000 * 60 * 60 * 24) / totalDays) * 100;
+                const width = Math.max(duration, 5); // Minimum 5% width for visibility
+                
+                html += `
+                    <div class="timeline-bar-row">
+                        <div class="timeline-bar-label">${sprint.name}</div>
+                        <div class="timeline-bar-track">
+                            <div class="timeline-bar-fill ${sprint.status}" 
+                                 style="left: ${startOffset.toFixed(1)}%; width: ${width.toFixed(1)}%;"
+                                 title="${sprint.completed}/${sprint.total} tasks complete">
+                                ${sprint.name}: ${sprint.progress.toFixed(0)}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function generateMasterTimeline(themeData) {
+            let html = `
+                <div class="master-timeline">
+                    <div class="master-timeline-title">🎯 Master Timeline - All Close Categories</div>
+                    <div class="master-timeline-grid">
+            `;
+            
+            Object.entries(THEMES).forEach(([themeName, config]) => {
+                const initiatives = themeData[themeName] || {};
+                const allTasks = Object.values(initiatives).flat();
+                
+                if (allTasks.length === 0) return;
+                
+                const completed = allTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                const progress = (completed / allTasks.length) * 100;
+                
+                html += `
+                    <div class="master-row">
+                        <div class="master-category-name">
+                            <span>${config.icon}</span>
+                            <span>${themeName}</span>
+                        </div>
+                        <div class="master-timeline-track">
+                            <div class="master-timeline-fill ${config.class}" 
+                                 style="width: ${progress.toFixed(0)}%; background: linear-gradient(90deg, ${getColorForClass(config.class)} 0%, ${getColorForClass(config.class, true)} 100%);">
+                            </div>
+                        </div>
+                        <div class="master-progress-text">${progress.toFixed(0)}%</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function getColorForClass(className, light = false) {
+            const colors = {
+                'automation': light ? '#f093fb' : '#f5576c',
+                'process': light ? '#00f2fe' : '#4facfe',
+                'tools': light ? '#38f9d7' : '#43e97b',
+                'risk': light ? '#fee140' : '#fa709a',
+                'cash': light ? '#330867' : '#30cfd0'
+            };
+            return colors[className] || '#667eea';
         }
 
         function cleanInitiativeName(name) {

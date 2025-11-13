@@ -1796,18 +1796,13 @@
             // Q1: May-Jul, Q2: Aug-Oct, Q3: Nov-Jan, Q4: Feb-Apr
             const fiscalQuarters = [];
             
-            // Start from Nov 2025 (Q3 FY26) and show upcoming quarters
+            // Start from Nov 2025 (Q3 FY26) and show quarterly milestones only
             const quarterMarkers = [
                 { month: 'Nov 2025', quarter: 'Q3 FY26', date: new Date('2025-11-01') },
-                { month: 'Jan 2026', quarter: 'Q3 FY26', date: new Date('2026-01-01') },
                 { month: 'Feb 2026', quarter: 'Q4 FY26', date: new Date('2026-02-01') },
-                { month: 'Apr 2026', quarter: 'Q4 FY26', date: new Date('2026-04-30') },
                 { month: 'May 2026', quarter: 'Q1 FY27', date: new Date('2026-05-01') },
-                { month: 'Jul 2026', quarter: 'Q1 FY27', date: new Date('2026-07-31') },
                 { month: 'Aug 2026', quarter: 'Q2 FY27', date: new Date('2026-08-01') },
-                { month: 'Oct 2026', quarter: 'Q2 FY27', date: new Date('2026-10-31') },
                 { month: 'Nov 2026', quarter: 'Q3 FY27', date: new Date('2026-11-01') },
-                { month: 'Jan 2027', quarter: 'Q3 FY27', date: new Date('2027-01-01') },
                 { month: 'Feb 2027', quarter: 'Q4 FY27', date: new Date('2027-02-01') }
             ];
             
@@ -1830,10 +1825,10 @@
                     <div class="timeline-grid">
                         <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px;">
                             <div style="width: 150px; padding-right: 15px;"></div>
-                            <div style="flex: 1; display: flex; position: relative; height: 30px; border-bottom: 2px solid #dee2e6;">
+                            <div style="flex: 1; display: flex; position: relative; height: 35px; border-bottom: 3px solid #dee2e6;">
                                 ${months.map(month => {
                                     const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
-                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.85em; color: #2c3e50; font-weight: 700; white-space: nowrap; transform: translateX(-50%);">${month.label}</div>`;
+                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.95em; color: #1e3c72; font-weight: 700; white-space: nowrap; transform: translateX(-50%); background: white; padding: 2px 8px; border-radius: 4px;">${month.label}</div>`;
                                 }).join('')}
                             </div>
                         </div>

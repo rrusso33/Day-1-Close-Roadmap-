@@ -1792,28 +1792,42 @@
             const projectEnd = new Date('2027-02-01');
             const totalDays = (projectEnd - projectStart) / (1000 * 60 * 60 * 24);
             
-            // Generate month headers (show every 3 months to avoid crowding)
-            const months = [];
-            let currentDate = new Date(projectStart);
-            let monthCount = 0;
-            while (currentDate <= projectEnd) {
-                // Show every 3rd month to avoid overlapping
-                if (monthCount % 3 === 0) {
-                    months.push({
-                        label: currentDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' }),
-                        date: new Date(currentDate)
-                    });
+            // Generate fiscal quarter markers (FYE: April 30)
+            // Q1: May-Jul, Q2: Aug-Oct, Q3: Nov-Jan, Q4: Feb-Apr
+            const fiscalQuarters = [];
+            
+            // Define fiscal quarter end months (Jul, Oct, Jan, Apr)
+            const quarterEndMonths = [6, 9, 0, 3]; // July=6, Oct=9, Jan=0, Apr=3
+            const quarterLabels = ['Q1', 'Q2', 'Q3', 'Q4'];
+            
+            let year = 2024;
+            let currentQuarterDate = new Date(2024, 6, 31); // Start at Jul 31, 2024 (Q1 FY25 end)
+            
+            while (currentQuarterDate <= projectEnd) {
+                const month = currentQuarterDate.getMonth();
+                const quarterIndex = quarterEndMonths.indexOf(month);
+                const fiscalYear = month < 4 ? year : year + 1; // If before April, it's previous FY
+                
+                fiscalQuarters.push({
+                    label: `${currentQuarterDate.toLocaleDateString('en-US', { month: 'short', year: 'numeric' })} (${quarterLabels[quarterIndex]} FY${String(fiscalYear).slice(-2)})`,
+                    date: new Date(currentQuarterDate)
+                });
+                
+                // Move to next quarter
+                currentQuarterDate.setMonth(currentQuarterDate.getMonth() + 3);
+                if (currentQuarterDate.getMonth() === 1) { // Moved to Feb, adjust year
+                    year++;
                 }
-                currentDate.setMonth(currentDate.getMonth() + 1);
-                monthCount++;
             }
+            
+            const months = fiscalQuarters;
             
             // Build timeline HTML
             let html = `
                 <div class="category-timeline">
                     <div class="timeline-header">
                         <div class="timeline-title">📅 ${themeName} Timeline to Day 1 Close</div>
-                        <div class="timeline-date-range">September 2024 → February 2027</div>
+                        <div class="timeline-date-range">FY25 Q2 → FY27 Q4 (Target: Feb 1, 2027)</div>
                     </div>
                     <div class="timeline-grid">
                         <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px;">
@@ -1821,7 +1835,7 @@
                             <div style="flex: 1; display: flex; position: relative; height: 25px; border-bottom: 2px solid #dee2e6;">
                                 ${months.map(month => {
                                     const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
-                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.8em; color: #495057; font-weight: 700; white-space: nowrap; transform: translateX(-50%);">${month.label}</div>`;
+                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.7em; color: #495057; font-weight: 700; white-space: nowrap; transform: translateX(-50%);">${month.label}</div>`;
                                 }).join('')}
                             </div>
                         </div>

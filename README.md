@@ -12,32 +12,35 @@ Visual roadmap tracking the journey from BD5 to BD1 close by February 1, 2027.
 
 ## 🔄 How to Update the Roadmap
 
-### Option 1: Real-Time Google Sheets (Recommended) ⚡
+### ⚡ **Quick 3-Minute Update Process**
 
-**One-time setup, then updates happen automatically!**
+1. **Export** your Excel as CSV → Save as `roadmap_data.csv` in this folder
+2. **Double-click** `UPDATE_ROADMAP.bat` to deploy automatically  
+3. **Wait 2 minutes** → Refresh your live roadmap
 
-1. Follow the guide in `REAL_TIME_SETUP_GUIDE.md`
-2. Edit your Google Sheet
-3. Refresh the roadmap page - changes appear instantly!
+Your roadmap will be live with all changes! ✨
 
-**Benefits:** No manual exports, always current, CAO sees live data
+**For detailed instructions:** See `QUICK_UPDATE_GUIDE.md`
 
-### Option 2: Manual CSV Updates
+---
 
-1. **Export** your Excel/Google Sheet as CSV
-2. **Save** as `roadmap_data.csv` in this folder (overwrite the existing file)
-3. **Double-click** `UPDATE_ROADMAP.bat` to deploy automatically
+### 🚀 **Quick Access Shortcuts**
 
-Your roadmap will be live in 2-3 minutes! ✨
+- **`UPDATE_ROADMAP.bat`** - Deploy your changes to live site
+- **`OPEN_ROADMAP.bat`** - Open your live roadmap in browser
+- **Live URL:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
 
 ---
 
 ## 📁 Files in This Repository
 
-- **`BD5_to_BD1_Roadmap.html`** - Main roadmap file
-- **`roadmap_data.csv`** - Data source (135 tasks)
-- **`UPDATE_ROADMAP.bat`** - Quick update script
-- **`REAL_TIME_SETUP_GUIDE.md`** - Guide for Google Sheets real-time connection
+- **`BD5_to_BD1_Roadmap.html`** - Main roadmap file (timeline visualization)
+- **`roadmap_data.csv`** - Data source (your task data)
+- **`UPDATE_ROADMAP.bat`** - Quick update script (one-click deploy)
+- **`OPEN_ROADMAP.bat`** - Quick shortcut to open live roadmap
+- **`QUICK_UPDATE_GUIDE.md`** - Step-by-step update instructions
+- **`CHANGES_SUMMARY.md`** - Summary of recent changes
+- **`REAL_TIME_SETUP_GUIDE.md`** - Google Sheets setup (if company allows)
 - **`README.md`** - This file
 
 ---

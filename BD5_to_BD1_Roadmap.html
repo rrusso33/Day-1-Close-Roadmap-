@@ -1996,7 +1996,19 @@
         }
 
         function collapseAll() {
-            // Collapse all initiative cards
+            // Collapse all theme sections
+            const allThemeTimelines = document.querySelectorAll('.theme-timeline');
+            const allThemeHeaders = document.querySelectorAll('.theme-header-bar');
+            
+            allThemeTimelines.forEach(timeline => {
+                timeline.classList.add('collapsed');
+            });
+            
+            allThemeHeaders.forEach(header => {
+                header.classList.add('collapsed');
+            });
+            
+            // Also collapse all initiative cards within
             const allInitiativeCards = document.querySelectorAll('.initiative-cards');
             const allArrows = document.querySelectorAll('.collapse-arrow');
             
@@ -2010,7 +2022,19 @@
         }
 
         function expandAll() {
-            // Expand all initiative cards
+            // Expand all theme sections
+            const allThemeTimelines = document.querySelectorAll('.theme-timeline');
+            const allThemeHeaders = document.querySelectorAll('.theme-header-bar');
+            
+            allThemeTimelines.forEach(timeline => {
+                timeline.classList.remove('collapsed');
+            });
+            
+            allThemeHeaders.forEach(header => {
+                header.classList.remove('collapsed');
+            });
+            
+            // Also expand all initiative cards within
             const allInitiativeCards = document.querySelectorAll('.initiative-cards');
             const allArrows = document.querySelectorAll('.collapse-arrow');
             

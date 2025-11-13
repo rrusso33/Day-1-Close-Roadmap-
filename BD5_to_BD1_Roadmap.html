@@ -255,6 +255,7 @@
             padding: 30px;
             background: #f8f9fa;
             border-radius: 12px;
+            overflow: visible;
         }
         .timeline-header {
             display: flex;
@@ -275,6 +276,7 @@
         .timeline-grid {
             position: relative;
             min-height: 100px;
+            overflow: visible;
         }
         .timeline-months {
             display: grid;
@@ -312,7 +314,7 @@
             border-radius: 8px;
             position: relative;
             border: 2px solid #e9ecef;
-            margin-right: 120px;
+            margin-right: 200px;
         }
         .timeline-bar-fill {
             position: absolute;
@@ -1824,12 +1826,12 @@
                         <div class="timeline-date-range">Nov 2025 (Q3 FY26) → Feb 2027 (Q4 FY27)</div>
                     </div>
                     <div class="timeline-grid">
-                        <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px;">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px; overflow: visible;">
                             <div style="width: 150px; padding-right: 15px;"></div>
-                            <div style="flex: 1; display: flex; position: relative; height: 35px; border-bottom: 3px solid #dee2e6; padding-right: 120px;">
+                            <div style="flex: 1; display: flex; position: relative; height: 35px; border-bottom: 3px solid #dee2e6; margin-right: 200px; overflow: visible;">
                                 ${months.map(month => {
                                     const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
-                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.95em; color: #1e3c72; font-weight: 700; white-space: nowrap; transform: translateX(-50%); background: white; padding: 2px 8px; border-radius: 4px;">${month.label}</div>`;
+                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.95em; color: #1e3c72; font-weight: 700; white-space: nowrap; transform: translateX(-50%); background: white; padding: 2px 8px; border-radius: 4px; z-index: 10;">${month.label}</div>`;
                                 }).join('')}
                             </div>
                         </div>

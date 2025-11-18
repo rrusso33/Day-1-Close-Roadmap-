@@ -342,6 +342,123 @@
             transform: scaleY(1.1);
         }
         
+        /* Multi-Quarter Executive Roadmap */
+        .multi-quarter-roadmap {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 50px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            color: white;
+        }
+        .multi-quarter-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .multi-quarter-subtitle {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .quarters-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .quarter-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 25px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+        }
+        .quarter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-color: #ffd700;
+        }
+        .quarter-card.current-quarter {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, white 100%);
+        }
+        .quarter-card.target-quarter {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #fff3cd 0%, white 100%);
+        }
+        .quarter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 3px solid #e9ecef;
+        }
+        .quarter-name {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #1e3c72;
+        }
+        .quarter-date {
+            font-size: 0.9em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .quarter-milestones {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .milestone-item {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 6px;
+            font-size: 0.95em;
+            line-height: 1.6;
+            transition: all 0.2s ease;
+        }
+        .milestone-item:hover {
+            background: #e9ecef;
+            border-left-width: 6px;
+        }
+        .milestone-category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+        .quarter-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .quarter-badge.current {
+            background: #28a745;
+            color: white;
+        }
+        .quarter-badge.upcoming {
+            background: #007bff;
+            color: white;
+        }
+        .quarter-badge.target {
+            background: #ffc107;
+            color: #2c3e50;
+        }
+        
         /* Master Timeline */
         .master-timeline {
             background: white;
@@ -1201,6 +1318,88 @@
             }
         };
 
+        async function loadMultiQuarterData() {
+            try {
+                const response = await fetch('future_milestones.csv');
+                const csvText = await response.text();
+                const data = parseCSV(csvText);
+                return data;
+            } catch (error) {
+                console.warn('⚠️ Could not load future milestones:', error);
+                return [];
+            }
+        }
+        
+        function renderMultiQuarterRoadmap(milestones) {
+            if (!milestones || milestones.length === 0) return '';
+            
+            // Group by quarter
+            const quarters = {};
+            milestones.forEach(item => {
+                const quarter = item['Quarter'];
+                if (!quarters[quarter]) quarters[quarter] = [];
+                quarters[quarter].push(item);
+            });
+            
+            // Define quarter order and details
+            const quarterInfo = {
+                "Q4'26": { fullName: "Q4 FY26", endDate: "April 30, 2026", badge: "current", description: "Foundation Complete" },
+                "Q1'27": { fullName: "Q1 FY27", endDate: "July 31, 2026", badge: "upcoming", description: "Optimization Phase" },
+                "Q2'27": { fullName: "Q2 FY27", endDate: "October 31, 2026", badge: "upcoming", description: "Acceleration Phase" },
+                "Q3'27": { fullName: "Q3 FY27", endDate: "January 31, 2027", badge: "target", description: "🎯 BD1 TARGET!" }
+            };
+            
+            let html = `
+                <div class="multi-quarter-roadmap">
+                    <div class="multi-quarter-title">📅 Multi-Quarter Executive Roadmap</div>
+                    <div class="multi-quarter-subtitle">Strategic Milestones from Q4 FY26 → Q3 FY27 (Day 1 Close)</div>
+                    <div class="quarters-grid">
+            `;
+            
+            Object.keys(quarterInfo).forEach(quarterKey => {
+                const info = quarterInfo[quarterKey];
+                const quarterMilestones = quarters[quarterKey] || [];
+                const cardClass = quarterKey === "Q3'27" ? 'target-quarter' : quarterKey === "Q4'26" ? 'current-quarter' : '';
+                
+                html += `
+                    <div class="quarter-card ${cardClass}">
+                        <span class="quarter-badge ${info.badge}">${info.description}</span>
+                        <div class="quarter-header">
+                            <div class="quarter-name">${info.fullName}</div>
+                            <div class="quarter-date">${info.endDate}</div>
+                        </div>
+                        <ul class="quarter-milestones">
+                `;
+                
+                if (quarterMilestones.length > 0) {
+                    quarterMilestones.forEach(milestone => {
+                        const category = milestone['Close Category'] || 'General';
+                        const description = milestone['End of Week Deliverable / Milestone'] || '';
+                        html += `
+                            <li class="milestone-item">
+                                ${description}
+                                <span class="milestone-category">${category}</span>
+                            </li>
+                        `;
+                    });
+                } else {
+                    html += `<li class="milestone-item">Detailed planning in progress...</li>`;
+                }
+                
+                html += `
+                        </ul>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+
         async function loadData() {
             try {
                 const isLocal = window.location.protocol === 'file:';
@@ -1219,6 +1418,9 @@
                     `;
                     return;
                 }
+                
+                // Load multi-quarter milestones
+                const milestones = await loadMultiQuarterData();
                 
                 let data;
                 
@@ -1258,7 +1460,7 @@
                     console.log(`✅ Loaded ${data.length} tasks from CSV`);
                 }
                 
-                renderRoadmap(data);
+                renderRoadmap(data, milestones);
                 
             } catch (error) {
                 console.error('❌ Error:', error);
@@ -1329,7 +1531,7 @@
             return data;
         }
 
-        function renderRoadmap(data) {
+        function renderRoadmap(data, milestones) {
             // Update dashboard
             const completed = data.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
             const inProgress = data.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
@@ -1373,8 +1575,11 @@
                 themeData[theme][groupKey].push(task);
             });
             
-            // Generate master timeline first
-            let html = generateMasterTimeline(themeData);
+            // Generate multi-quarter executive roadmap first
+            let html = renderMultiQuarterRoadmap(milestones);
+            
+            // Then generate master timeline
+            html += generateMasterTimeline(themeData);
             
             // Render themes
             Object.entries(THEMES).forEach(([themeName, config]) => {

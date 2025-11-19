@@ -1688,14 +1688,19 @@
                 }, 300);
             }
             
-            // Clear the detailed section - ready for rebuild
-            document.getElementById('themeContainer').innerHTML = `
-                <div style="text-align: center; padding: 60px; color: #6c757d;">
+            // Render Multi-Quarter Executive Roadmap first
+            let html = renderMultiQuarterRoadmap(milestones, data);
+            
+            // Add cleared section message for detailed roadmap area
+            html += `
+                <div style="text-align: center; padding: 60px; color: #6c757d; margin-top: 40px;">
                     <div style="font-size: 2em; margin-bottom: 20px;">✅</div>
-                    <div style="font-size: 1.3em; margin-bottom: 15px;">Section cleared - ready to rebuild!</div>
-                    <div style="font-size: 1em; color: #999;">Multi-Quarter Executive Roadmap above is still active</div>
+                    <div style="font-size: 1.3em; margin-bottom: 15px;">Detailed Roadmap Section - Ready to Rebuild!</div>
+                    <div style="font-size: 1em; color: #999;">Multi-Quarter Executive Roadmap above is active</div>
                 </div>
             `;
+            
+            document.getElementById('themeContainer').innerHTML = html;
         }
 
         function categorizeTask(task) {

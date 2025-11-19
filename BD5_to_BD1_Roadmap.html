@@ -1413,9 +1413,16 @@
                     
                     goalsList.forEach((goal, idx) => {
                         const goalInitiatives = goalsData[goal] || [];
+                        const themeId = 'theme-detail-' + goal.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
                         html += `
-                            <li style="margin-bottom: 8px; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #667eea;">
-                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em;">${goal}</div>
+                            <li onclick="scrollToTheme('${themeId}')" 
+                                style="margin-bottom: 8px; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #667eea; cursor: pointer; transition: all 0.2s;"
+                                onmouseover="this.style.background='#e3f2fd'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.background='#f8f9fa'; this.style.transform='translateX(0)'">
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
+                                    ${goal}
+                                    <span style="font-size: 0.8em; color: #667eea;">→</span>
+                                </div>
                                 <div style="font-size: 0.8em; color: #6c757d; margin-top: 4px;">${goalInitiatives.length} initiatives</div>
                             </li>
                         `;
@@ -1532,7 +1539,8 @@
                     return sum + (isNaN(h) ? 0 : h);
                 }, 0);
                 
-                const themeId = `theme-detail-${idx}`;
+                // Use theme name for ID to match multi-quarter links
+                const themeId = 'theme-detail-' + themeName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
                 
                 // Determine status color based on progress
                 let statusColor = '#6c757d';
@@ -1546,15 +1554,15 @@
                 }
                 
                 html += `
-                    <div style="border: 2px solid #e9ecef; border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
-                        <div onclick="toggleGoalDetail('${themeId}')" 
+                    <div id="${themeId}" style="border: 2px solid #e9ecef; border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                        <div onclick="toggleGoalDetail('${themeId}-details')" 
                              style="cursor: pointer; padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;"
                              onmouseover="this.style.background='linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)'"
                              onmouseout="this.style.background='linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'">
                             
                             <div style="flex: 1;">
                                 <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
-                                    <span id="arrow-${themeId}" style="font-size: 1.2em; transition: transform 0.3s;">▶</span>
+                                    <span id="arrow-${themeId}-details" style="font-size: 1.2em; transition: transform 0.3s;">▶</span>
                                     <h3 style="margin: 0; color: #2c3e50; font-size: 1.3em; font-weight: 700;">🎯 ${themeName}</h3>
                                     <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600;">${statusText}</span>
                                 </div>
@@ -1603,7 +1611,7 @@
                             </div>
                         </div>
                         
-                        <div id="${themeId}" style="display: none; padding: 25px; background: white;">
+                        <div id="${themeId}-details" style="display: none; padding: 25px; background: white;">
                             <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">🎯 OKRs & Key Results</h4>
                             <div style="display: grid; gap: 20px;">
                                 ${Object.entries(okrs).map(([okr, keyResults]) => {
@@ -1787,6 +1795,39 @@
                     arrow.style.transform = 'rotate(0deg)';
                     arrow.textContent = '▶';
                 }
+            }
+        }
+
+        function scrollToTheme(themeId) {
+            const themeElement = document.getElementById(themeId);
+            if (themeElement) {
+                // First, auto-expand the theme if it's collapsed
+                const detailsDiv = document.getElementById(`${themeId}-details`);
+                const arrow = document.getElementById(`arrow-${themeId}-details`);
+                
+                if (detailsDiv && (detailsDiv.style.display === 'none' || !detailsDiv.style.display)) {
+                    detailsDiv.style.display = 'block';
+                    if (arrow) {
+                        arrow.style.transform = 'rotate(90deg)';
+                        arrow.textContent = '▼';
+                    }
+                }
+                
+                // Smooth scroll to the theme with offset for better visibility
+                const elementPosition = themeElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - 100; // 100px offset from top
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Add a brief highlight effect
+                themeElement.style.transition = 'all 0.3s';
+                themeElement.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.5)';
+                setTimeout(() => {
+                    themeElement.style.boxShadow = '';
+                }, 2000);
             }
         }
 

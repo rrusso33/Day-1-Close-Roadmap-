@@ -556,7 +556,7 @@
         }
         .quarters-grid {
             display: grid;
-            grid-template-columns: repeat(6, 1fr);
+            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
             gap: 20px;
             max-width: 100%;
             margin: 0 auto;
@@ -1533,7 +1533,7 @@
                     }
                     
                     // Only process quarters we're displaying
-                    if (quarter && ['Q2\'26', 'Q3\'26', 'Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27'].includes(quarter)) {
+                    if (quarter && ['Q2\'26', 'Q3\'26', 'Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27', 'Q4\'27'].includes(quarter)) {
                         if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);
                         
@@ -1561,13 +1561,14 @@
                 "Q4'26": { fullName: "Q4 FY26", endDate: "April 30, 2026", badge: "upcoming", description: "Optimization Phase" },
                 "Q1'27": { fullName: "Q1 FY27", endDate: "July 31, 2026", badge: "upcoming", description: "Acceleration Phase" },
                 "Q2'27": { fullName: "Q2 FY27", endDate: "October 31, 2026", badge: "upcoming", description: "Scale Phase" },
-                "Q3'27": { fullName: "Q3 FY27", endDate: "January 31, 2027", badge: "target", description: "🎯 BD1 TARGET!" }
+                "Q3'27": { fullName: "Q3 FY27", endDate: "January 31, 2027", badge: "upcoming", description: "Refinement Phase" },
+                "Q4'27": { fullName: "Q4 FY27", endDate: "February 28, 2027", badge: "target", description: "🎯 BD1 TARGET!" }
             };
             
             let html = `
                 <div class="multi-quarter-roadmap">
                     <div class="multi-quarter-title">📅 Multi-Quarter Executive Roadmap</div>
-                    <div class="multi-quarter-subtitle">Strategic Milestones from Q2 FY26 → Q3 FY27 (Day 1 Close)</div>
+                    <div class="multi-quarter-subtitle">Strategic Milestones from Q2 FY26 → Q4 FY27 (Day 1 Close)</div>
                     <div class="quarters-grid">
             `;
             
@@ -1576,7 +1577,7 @@
                 const quarterData = quarters[quarterKey] || { milestones: [], initiatives: [] };
                 const quarterMilestones = quarterData.milestones || [];
                 const quarterInitiatives = quarterData.initiatives || [];
-                const cardClass = quarterKey === "Q3'27" ? 'target-quarter' : quarterKey === "Q4'26" ? 'current-quarter' : '';
+                const cardClass = quarterKey === "Q4'27" ? 'target-quarter' : quarterKey === "Q4'26" ? 'current-quarter' : '';
                 const quarterId = quarterKey.replace(/'/g, '');
                 
                 // Count initiatives by status
@@ -1722,7 +1723,7 @@
             
             // Sort themes by quarter
             const sortedThemes = Object.entries(themeGroups).sort((a, b) => {
-                const quarterOrder = ["Q2'26", "Q3'26", "Q4'26", "Q1'27", "Q2'27", "Q3'27"];
+                const quarterOrder = ["Q2'26", "Q3'26", "Q4'26", "Q1'27", "Q2'27", "Q3'27", "Q4'27"];
                 return quarterOrder.indexOf(a[1].quarter) - quarterOrder.indexOf(b[1].quarter);
             });
             

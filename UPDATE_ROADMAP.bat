@@ -4,7 +4,7 @@ echo ========================================
 echo   Day 1 Close Roadmap - Quick Update
 echo ========================================
 echo.
-echo Checking for roadmap_data.csv...
+echo Checking for CSV files...
 if not exist "roadmap_data.csv" (
     echo ERROR: roadmap_data.csv not found!
     echo Please export your Excel file as CSV first.
@@ -12,9 +12,19 @@ if not exist "roadmap_data.csv" (
     exit /b 1
 )
 
-echo Found roadmap_data.csv!
+echo [OK] Found roadmap_data.csv
+
+if exist "future_milestones.csv" (
+    echo [OK] Found future_milestones.csv
+) else (
+    echo [WARNING] future_milestones.csv not found - this is optional
+)
+
 echo.
-echo [Step 1/4] Adding changes to git...
+echo [Step 1/4] Adding ALL changes to git...
+echo  - roadmap_data.csv
+echo  - future_milestones.csv (if changed)
+echo  - Any HTML/config changes
 git add .
 
 echo.

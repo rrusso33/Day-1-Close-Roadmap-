@@ -1081,37 +1081,37 @@
         <div class="strategy-section">
             <div class="strategy-title">📖 Our Day 1 Close Strategy by Functional Area</div>
             <div class="strategy-content">
-                We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. Track progress by functional area to see exactly how each accounting process is accelerating toward Day 1.
+                We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. The hours shown below represent <strong>time savings that enable BD1 close</strong> - each functional area's contribution to reducing our overall close timeline.
             </div>
             <div class="strategy-grid">
                 <div class="strategy-card">
                     <div class="strategy-card-title">📊 Accruals</div>
-                    <div class="strategy-card-impact">~35 Hours</div>
+                    <div class="strategy-card-impact">~35 Hours Saved</div>
                     <div class="strategy-card-desc">AI-powered accruals via WiseLayer eliminate manual vendor analysis and automate prepaid tracking</div>
                 </div>
                 <div class="strategy-card">
                     <div class="strategy-card-title">💰 Cash & Intercompany</div>
-                    <div class="strategy-card-impact">~13 Hours</div>
+                    <div class="strategy-card-impact">~13 Hours Saved</div>
                     <div class="strategy-card-desc">Automated I/C settlement, cash reconciliation, and TP module reduce end-of-month bottlenecks</div>
                 </div>
                 <div class="strategy-card">
                     <div class="strategy-card-title">🏢 Leases & Fixed Assets</div>
-                    <div class="strategy-card-impact">~4 Hours</div>
+                    <div class="strategy-card-impact">~4 Hours Saved</div>
                     <div class="strategy-card-desc">Spacebase automation and NetSuite FAM integration eliminate manual journal entries</div>
                 </div>
                 <div class="strategy-card">
                     <div class="strategy-card-title">💼 Payroll & Commissions</div>
-                    <div class="strategy-card-impact">~19 Hours</div>
+                    <div class="strategy-card-impact">~19 Hours Saved</div>
                     <div class="strategy-card-desc">Automated reconciliations and Xactly integration streamline payroll and sales comp processes</div>
                 </div>
                 <div class="strategy-card">
                     <div class="strategy-card-title">⚡ Close Management</div>
-                    <div class="strategy-card-impact">~4 Hours</div>
+                    <div class="strategy-card-impact">~4 Hours Saved</div>
                     <div class="strategy-card-desc">Numeric AI flux tools, monitors, and process enhancements accelerate overall close cycle</div>
                 </div>
                 <div class="strategy-card">
                     <div class="strategy-card-title">🤝 Acquisitions & Other</div>
-                    <div class="strategy-card-impact">Integration</div>
+                    <div class="strategy-card-impact">Scalable Growth</div>
                     <div class="strategy-card-desc">Guideline integration and PEO entity setup ensure scalable growth without slowing close</div>
                 </div>
             </div>
@@ -1462,6 +1462,176 @@
             return html;
         }
 
+        function renderDay1GoalsDetail(data) {
+            if (!data || data.length === 0) return '';
+            
+            // Group all initiatives by Day 1 Goal
+            const goalGroups = {};
+            data.forEach(task => {
+                const goal = (task['Day 1 Goal'] || '').trim();
+                if (goal && goal.toLowerCase() !== 'n/a') {
+                    if (!goalGroups[goal]) {
+                        goalGroups[goal] = {
+                            initiatives: [],
+                            quarter: task['Quarter'] || '',
+                            category: task['Close Category'] || 'General'
+                        };
+                    }
+                    goalGroups[goal].initiatives.push(task);
+                }
+            });
+            
+            if (Object.keys(goalGroups).length === 0) return '';
+            
+            let html = `
+                <div style="margin-top: 50px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+                    <div style="text-align: center; margin-bottom: 30px;">
+                        <h2 style="color: #1e3c72; font-size: 2em; margin-bottom: 10px;">🎯 Day 1 Goals - Detailed View</h2>
+                        <p style="color: #6c757d; font-size: 1.1em;">Click any goal to see supporting initiatives and progress</p>
+                    </div>
+                    
+                    <div style="display: grid; gap: 20px;">
+            `;
+            
+            // Sort goals by quarter
+            const sortedGoals = Object.entries(goalGroups).sort((a, b) => {
+                const quarterOrder = ["Q2'26", "Q3'26", "Q4'26", "Q1'27", "Q2'27", "Q3'27"];
+                return quarterOrder.indexOf(a[1].quarter) - quarterOrder.indexOf(b[1].quarter);
+            });
+            
+            sortedGoals.forEach(([goal, data], idx) => {
+                const initiatives = data.initiatives;
+                const completed = initiatives.filter(i => normalizeStatus(i['Status']) === 'Complete').length;
+                const inProgress = initiatives.filter(i => normalizeStatus(i['Status']) === 'In Progress').length;
+                const total = initiatives.length;
+                const progressPct = total > 0 ? (completed / total) * 100 : 0;
+                
+                const totalHours = initiatives.reduce((sum, i) => {
+                    const h = parseFloat(i['Hours Saved'] || 0);
+                    return sum + (isNaN(h) ? 0 : h);
+                }, 0);
+                
+                const goalId = `goal-detail-${idx}`;
+                
+                // Determine status color based on progress
+                let statusColor = '#6c757d';
+                let statusText = 'Not Started';
+                if (progressPct === 100) {
+                    statusColor = '#28a745';
+                    statusText = 'Complete';
+                } else if (inProgress > 0 || completed > 0) {
+                    statusColor = '#007bff';
+                    statusText = 'In Progress';
+                }
+                
+                html += `
+                    <div style="border: 2px solid #e9ecef; border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                        <div onclick="toggleGoalDetail('${goalId}')" 
+                             style="cursor: pointer; padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;"
+                             onmouseover="this.style.background='linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)'"
+                             onmouseout="this.style.background='linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'">
+                            
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 12px;">
+                                    <span id="arrow-${goalId}" style="font-size: 1.2em; transition: transform 0.3s;">▶</span>
+                                    <h3 style="margin: 0; color: #2c3e50; font-size: 1.3em; font-weight: 700;">${goal}</h3>
+                                    <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600;">${statusText}</span>
+                                </div>
+                                
+                                <div style="display: flex; gap: 25px; align-items: center; margin-left: 40px;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em; color: #6c757d;">📊</span>
+                                        <span style="font-weight: 600; color: #2c3e50;">${completed}/${total}</span>
+                                        <span style="color: #6c757d; font-size: 0.9em;">complete</span>
+                                    </div>
+                                    
+                                    ${totalHours > 0 ? `
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 0.9em;">⏱️</span>
+                                            <span style="font-weight: 600; color: #2c3e50;">${Math.round(totalHours)}h</span>
+                                            <span style="color: #6c757d; font-size: 0.9em;">saved</span>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em;">📅</span>
+                                        <span style="font-weight: 600; color: #667eea;">${data.quarter}</span>
+                                    </div>
+                                    
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em;">📂</span>
+                                        <span style="color: #6c757d; font-size: 0.9em;">${data.category}</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 12px; margin-left: 40px; background: white; border-radius: 8px; padding: 8px; max-width: 400px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                        <span style="font-size: 0.85em; color: #6c757d; font-weight: 600;">Progress</span>
+                                        <span style="font-size: 0.85em; font-weight: 700; color: ${statusColor};">${Math.round(progressPct)}%</span>
+                                    </div>
+                                    <div style="background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                        <div style="background: ${statusColor}; height: 100%; width: ${progressPct}%; transition: width 0.5s ease;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="${goalId}" style="display: none; padding: 25px; background: white;">
+                            <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">📋 Supporting Initiatives</h4>
+                            <div style="display: grid; gap: 12px;">
+                                ${initiatives.map(initiative => {
+                                    const status = normalizeStatus(initiative['Status']);
+                                    const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
+                                    const owner = initiative['Owner(s)'] || 'TBD';
+                                    const hours = parseFloat(initiative['Hours Saved'] || 0);
+                                    const okr = initiative['OKR'] || 'Initiative';
+                                    
+                                    return `
+                                        <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid ${statusColor};">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                                <div style="flex: 1;">
+                                                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 6px; font-size: 1em;">${okr}</div>
+                                                </div>
+                                                <span style="background: ${statusColor}; color: white; padding: 4px 10px; border-radius: 6px; font-size: 0.8em; font-weight: 600; white-space: nowrap; margin-left: 15px;">${status}</span>
+                                            </div>
+                                            <div style="display: flex; gap: 20px; flex-wrap: wrap; font-size: 0.9em; color: #6c757d;">
+                                                <div><strong>👤 Owner:</strong> ${owner}</div>
+                                                ${hours > 0 ? `<div><strong>⏱️ Impact:</strong> ${Math.round(hours)} hours</div>` : ''}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function toggleGoalDetail(goalId) {
+            const detailsDiv = document.getElementById(goalId);
+            const arrow = document.getElementById(`arrow-${goalId}`);
+            
+            if (detailsDiv && arrow) {
+                if (detailsDiv.style.display === 'none' || !detailsDiv.style.display) {
+                    detailsDiv.style.display = 'block';
+                    arrow.style.transform = 'rotate(90deg)';
+                    arrow.textContent = '▼';
+                } else {
+                    detailsDiv.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                    arrow.textContent = '▶';
+                }
+            }
+        }
+
         async function loadData() {
             try {
                 const isLocal = window.location.protocol === 'file:';
@@ -1625,14 +1795,8 @@
             // Render Multi-Quarter Executive Roadmap first
             let html = renderMultiQuarterRoadmap(milestones, data);
             
-            // Add cleared section message for detailed roadmap area
-                html += `
-                <div style="text-align: center; padding: 60px; color: #6c757d; margin-top: 40px;">
-                    <div style="font-size: 2em; margin-bottom: 20px;">✅</div>
-                    <div style="font-size: 1.3em; margin-bottom: 15px;">Detailed Roadmap Section - Ready to Rebuild!</div>
-                    <div style="font-size: 1em; color: #999;">Multi-Quarter Executive Roadmap above is active</div>
-                            </div>
-            `;
+            // Add Day 1 Goals Detail Section
+            html += renderDay1GoalsDetail(data);
             
             document.getElementById('themeContainer').innerHTML = html;
         }

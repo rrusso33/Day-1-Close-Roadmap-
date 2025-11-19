@@ -1,16 +1,21 @@
 Quarter,Day 1 Close Theme,Day 1 Close Target End Date,Close Category
+Q3'26,Close by BD6,1/31/2026,Close Management
 Q4'26,Close Corporate Cash by BD1,4/30/2026,Cash & Cash Equivalents
 Q4'26,Automation of entire accrual process,4/30/2026,Accruals
 Q4'26,All domestic payroll reconciliations fully automated,4/30/2026,Payroll
+Q4'26,Close by BD5,4/30/2026,Close Management
 Q1'27,Launch Gusto PEO for a single customer,7/31/2026,PEO
 Q1'27,Complete FY26 Audit,7/31/2026,Audit
 Q1'27,Trial balance build in Numeric,7/31/2026,Financial Reporting
 Q1'27,Pull forward Symmetry close to BD1,7/31/2026,Financial Reporting
 Q1'27,Pull forward Mexico and Turkey close to BD1,7/31/2026,Financial Reporting
 Q1'27,Pull forward payroll reconciliatons to BD 0,7/31/2026,Payroll
+Q1'27,Close by BD4,7/31/2026,Close Management
 Q2'27,Finalize PEO set up for future customers,10/31/2026,PEO
 Q2'27,Close Corporate Cash by BD 0,10/31/2026,Cash & Cash Equivalents
 Q2'27,All Tax accruals recorded BD 0,10/31/2026,Tax
 Q2'27,All Revenue accounting recorded BD 0,10/31/2026,Revenue
 Q2'27,All Platform accounting recorded BD 0,10/31/2026,Platform
-Q3'27,Close books by end of BD1,1/31/2027,Close Management
+Q2'27,Close by BD3,10/31/2026,Close Management
+Q3'27,Close by BD2,1/31/2027,Close Management
+Q4'27,Close books by end of BD1,2/28/2027,Close Management

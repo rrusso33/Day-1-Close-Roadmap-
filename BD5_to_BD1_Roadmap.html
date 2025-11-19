@@ -2286,8 +2286,12 @@
         }
 
         function updateJourneyTimeline(progress) {
+            // For now, we're still at BD5 (no days reduced yet)
+            // Force progress to be capped at 15% until we actually move to BD4
+            const currentPhaseProgress = Math.min(progress, 15);
+            
             // Update progress bar
-            document.getElementById('journeyProgress').style.width = progress + '%';
+            document.getElementById('journeyProgress').style.width = currentPhaseProgress + '%';
             
             // Update phase states
             const phases = [
@@ -2305,10 +2309,10 @@
                 element.classList.remove('complete', 'active');
                 
                 // Determine phase state
-                if (progress >= phases[index + 1]?.threshold || (index === phases.length - 1 && progress >= 95)) {
+                if (currentPhaseProgress >= phases[index + 1]?.threshold || (index === phases.length - 1 && currentPhaseProgress >= 95)) {
                     // Completed phases
                     element.classList.add('complete');
-                } else if (progress >= phase.threshold) {
+                } else if (currentPhaseProgress >= phase.threshold) {
                     // Currently active phase
                     element.classList.add('active');
                 }

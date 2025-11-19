@@ -78,7 +78,7 @@
             overflow-wrap: break-word;
             line-height: 1.4;
         }
-
+        
         /* Monthly Summary */
         .monthly-summary {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1491,7 +1491,9 @@
 
         async function loadMultiQuarterData() {
             try {
-                const response = await fetch('future_milestones.csv');
+                // Add timestamp to bust cache
+                const timestamp = new Date().getTime();
+                const response = await fetch(`future_milestones.csv?v=${timestamp}`);
                 const csvText = await response.text();
                 const data = parseCSV(csvText);
                 return data;
@@ -2079,11 +2081,13 @@
                 if (!data) {
                     console.log('📄 Loading data from CSV file...');
                     let csvText;
+                    // Add timestamp to bust cache
+                    const timestamp = new Date().getTime();
                     try {
-                        const response = await fetch(SHEET_URL);
+                        const response = await fetch(`${SHEET_URL}?v=${timestamp}`);
                         csvText = await response.text();
                     } catch (err) {
-                        const response = await fetch(GITHUB_URL);
+                        const response = await fetch(`${GITHUB_URL}?v=${timestamp}`);
                         csvText = await response.text();
                     }
                     
@@ -2220,22 +2224,22 @@
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                     <div class="monthly-summary-title">
                         📊 ${currentMonth} ${currentYear} Progress Update
-                    </div>
+                            </div>
                     <div style="display: flex; gap: 10px;">
                         <button onclick="saveMonthlySummary()" style="padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">💾 Save Changes</button>
                         <button onclick="resetMonthlySummary()" style="padding: 8px 16px; background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.5); color: white; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.2)'" onmouseout="this.style.background='rgba(255,255,255,0.1)'">🔄 Reset to Data</button>
-                    </div>
-                </div>
+                                </div>
+                                </div>
                 <div class="monthly-summary-date">
                     Last updated: ${now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
-                </div>
+                                </div>
                 <div class="monthly-grid">
                     <div class="monthly-card">
                         <div class="monthly-card-title">🎉 Recent Wins</div>
                         <div class="monthly-card-content" id="winsContent" contenteditable="true" style="outline: none; min-height: 100px; cursor: text; padding: 10px; border-radius: 6px; transition: background 0.2s;" onfocus="this.style.background='rgba(255,255,255,0.05)'" onblur="this.style.background='transparent'">
                             ${winsContent}
+                            </div>
                         </div>
-                    </div>
                     <div class="monthly-card">
                         <div class="monthly-card-title">⚡ In Progress Now</div>
                         <div class="monthly-card-content" id="inProgressContent" contenteditable="true" style="outline: none; min-height: 100px; cursor: text; padding: 10px; border-radius: 6px; transition: background 0.2s;" onfocus="this.style.background='rgba(255,255,255,0.05)'" onblur="this.style.background='transparent'">
@@ -2302,21 +2306,21 @@
             const html = `
                 <div class="risk-title">
                     🚨 Risk & Blocker Dashboard
-                </div>
+                                </div>
                 <div class="risk-summary">
                     <div class="risk-stat">
                         <div class="risk-stat-number">${atRisk.length}</div>
                         <div class="risk-stat-label">At Risk</div>
-                    </div>
+                            </div>
                     <div class="risk-stat">
                         <div class="risk-stat-number">${blocked.length}</div>
                         <div class="risk-stat-label">Blocked/Waiting</div>
-                    </div>
+                                        </div>
                     <div class="risk-stat">
                         <div class="risk-stat-number">${atRisk.length + blocked.length}</div>
                         <div class="risk-stat-label">Needs Attention</div>
-                    </div>
-                </div>
+                                    </div>
+                                        </div>
                 ${atRisk.length > 0 || blocked.length > 0 ? `
                     <div class="risk-items">
                         ${atRisk.map(t => `
@@ -2328,9 +2332,9 @@
                                         <span>👤 ${t['Owner(s)'] || 'TBD'}</span>
                                         <span>📅 ${t['Target End Date'] || 'TBD'}</span>
                                         <span>📂 ${t['Close Category'] || 'General'}</span>
-                                    </div>
-                                </div>
-                            </div>
+                                        </div>
+                                        </div>
+                                            </div>
                         `).join('')}
                         ${blocked.map(t => `
                             <div class="risk-item">
@@ -2341,12 +2345,12 @@
                                         <span>👤 ${t['Owner(s)'] || 'TBD'}</span>
                                         <span>📅 ${t['Target End Date'] || 'TBD'}</span>
                                         <span>📂 ${t['Close Category'] || 'General'}</span>
+                                            </div>
                                     </div>
-                                </div>
-                            </div>
+                                            </div>
                         `).join('')}
-                    </div>
-                ` : ''}
+                                        </div>
+                                    ` : ''}
             `;
             
             document.getElementById('riskDashboard').innerHTML = html;
@@ -2398,25 +2402,25 @@
                     <div class="on-track-metric">
                         <div class="on-track-metric-value" style="color: #667eea;">${daysRemaining}</div>
                         <div class="on-track-metric-label">Days Until Feb 1, 2027</div>
-                    </div>
+                                        </div>
                     <div class="on-track-metric">
                         <div class="on-track-metric-value" style="color: #28a745;">${actualProgress.toFixed(0)}%</div>
                         <div class="on-track-metric-label">Initiatives Complete</div>
-                    </div>
+                                </div>
                     <div class="on-track-metric">
                         <div class="on-track-metric-value" style="color: #2c3e50;">${currentBD}</div>
                         <div class="on-track-metric-label">Current Close Time</div>
-                    </div>
+                            </div>
                     <div class="on-track-metric">
                         <div class="on-track-metric-value" style="color: #dc3545;">${daysToSave}</div>
                         <div class="on-track-metric-label">Days Still to Save</div>
-                    </div>
-                </div>
+                        </div>
+                        </div>
                 <div class="on-track-status ${statusClass}">
                     ${statusText}
                     <div style="font-size: 0.8em; font-weight: 500; margin-top: 10px; opacity: 0.9;">${statusDetail}</div>
-                </div>
-            `;
+                    </div>
+                `;
             
             document.getElementById('onTrackIndicator').innerHTML = html;
         }

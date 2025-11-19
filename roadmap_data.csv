@@ -29,7 +29,7 @@ https://gustohq.atlassian.net/browse/FNT-3393 "
 Corporate Accounting,Set 1,Q2'26,9/22/2025,1,1/31/2025,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,"1. Regroup w/ team, discuss last week action items, align on next steps
 2. Status update on integration
 3. Team to align on timeline",1. John has NetSuite access credentials for build,0,Selena Ochoa,"John Barsoum (Ackle Consulting), FNT",Complete,"John has been unresponsive to our requests or a no-show during scheduled calls. This has pushed back our progress by a week. In addition, he is having NS connection issues which due to his delayed response is contributing to the delay. ",
-Corporate Accounting,Set 2,Q2'26,11/17/2025,3,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"Focus: Work on proprietary build of a webpage
+Corporate Accounting,Set 2,Q3'26,11/17/2025,3,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"Focus: Work on proprietary build of a webpage
 Tasks:
 1. Work on the ""bills processed"" page in Bolt webpage design
 2. Work on the ""pending invoices"" page in Bolt webpage design","- Completed ""bills processed"" and ""pending invoices"" tabs in Bolt webpage for accruals process. Working on this as an option if accruals.ai does not perform as we would like. ",35,Justine O'Sullivan,,In-Progress,,
@@ -63,7 +63,7 @@ KR 5 : Close Cash on BD 2",Execution of initial changes designed to expedite pro
 Cross-functional partners
 AI quick wins",Complete,Done,Close Cash Faster est. 09/2025
 Corporate Accounting,Set 1,Q2'26,9/29/2025,2,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,FNT tool modifications,Usage of TP tool for entities (min 1) that didn't use in prev month,2,Charles Sikazwe,FNT support,Complete,Done,https://gustohq.atlassian.net/browse/FNT-3368
-Corporate Accounting,Set 2,Q2'26,11/24/2025,4,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[Thanksgiving break] - Rollover for Aileen to work on
+Corporate Accounting,Set 2,Q3'26,11/24/2025,4,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[Thanksgiving break] - Rollover for Aileen to work on
 Focus: Work on proprietary build of a webpage
 Tasks:
 1. Work on the ""vendor configuration"" page in Bolt webpage design
@@ -80,19 +80,19 @@ Corporate Accounting,Set 1,Q2'26,9/29/2025,2,9/30/2026,Sales Commission,Automate
 2. Status update on integration, unblock any blockers",1. Unblock any potential blockers for John and team,1,Selena Ochoa,"John Barsoum (Ackle Consulting), FNT",Complete,"John continues to be having NS access issues. Ravi + Isik workin on resolving. 
 
 As of 10/03 - Ravi was able to identify the issue John was having getting access and resolve. I followed up with John Monday on timeline and when we can expect to start testing EE data.",
-Corporate Accounting,Set 2,Q2'26,12/8/2025,6,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
+Corporate Accounting,Set 2,Q3'26,12/8/2025,6,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
 Focus: Work on proprietary build of a webpage
 Tasks:
 1. Work on the ""vendor configuration"" page in Bolt webpage design
 2. Work on the ""vendor estimates"" page in Bolt webpage design","[close week]
 - Completed ""vendor configuration"" and ""vendor estimates"" tabs in Bolt webpage for accruals process. Working on this as an option if accruals.ai does not perform as we would like. ",35,Justine O'Sullivan,,Not Started,,
 Corporate Accounting,Set 1,Q2'26,9/29/2025,2,9/30/2026,Payroll,Build out assistant for payroll fluxes,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 7: AI Assistant for payroll fluxes,1. Iterate prompts for Payroll Template,1. Finalize payroll template,5+,Selena Ochoa,,Complete,,
-Corporate Accounting,Set 2,Q2'26,11/17/2025,3,1/31/2026,Close Management,Build out Numeric instance,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 1: Confluence Guide,"Focus: Create short form videos and pages to reference for all things Numeric
+Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Close Management,Build out Numeric instance,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 1: Confluence Guide,"Focus: Create short form videos and pages to reference for all things Numeric
 Tasks: 
 1. Create a google sheet gameplan outlining the different core areas to focus on and what content each area needs (header page, subsequent pages, videos, pictures, etc)
 2. Complete checklist, recons, and flux analysis sections fully as these are the most used","- Checklist, reconciliations, and flux analysis confluence pages are fully complete. Stocked with tips, tricks, how to videos, written instructions, and more
 - Google sheet confluence page game plan is created and filled out",0,Justine O'Sullivan,,Not Started,,
-Corporate Accounting,Set 2,Q2'26,11/24/2025,4,1/31/2026,Close Management,Build out Numeric instance,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 1: Confluence Guide,"[Thanksgiving Break] Charmane to work on
+Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Close Management,Build out Numeric instance,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 1: Confluence Guide,"[Thanksgiving Break] Charmane to work on
 Focus: Create confluence pages for sub sections of Numeric 
 Tasks: 
 1. Follow the google sheet game plan and create all pages required for Numeric topics. 
@@ -232,13 +232,13 @@ Next Steps:
 1. Developer to work on posting date edits (expected completion 11/5)
 2. Selena has reached out the Christian (SB Eng) to help with the JE differences
 3. Selena has reached out to Christian (SB Eng) to grant developer SFTP credentials and any IPWhitelisted addresses to connect to SB platform for JE automation",
-Corporate Accounting,Set 2,Q2'26,11/17/2025,3,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"[close week]
+Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"[close week]
 Focus: Constant monitoring of coding errors and correcting the root issue (PO or cash coding incorrect)
 Tasks:
 1. Clear all monitors in Numeric CCR mointor for the week
 2. Create reclass entries as needed and post","[close week]
 - Zero alerts by EOW",1,Justine O'Sullivan,,Not Started,,
-Corporate Accounting,Set 2,Q2'26,11/24/2025,4,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"[close week]
+Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"[close week]
 Focus: Constant monitoring of coding errors and correcting the root issue (PO or cash coding incorrect)
 Tasks:
 1. Clear all monitors in Numeric CCR mointor for the week

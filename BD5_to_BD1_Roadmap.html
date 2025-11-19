@@ -1477,45 +1477,6 @@
                 
                 html += `
                         </div>
-                        
-                        ${quarterInitiatives.length > 0 ? `
-                            <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 2px solid #e9ecef;">
-                                <button onclick="toggleQuarterDetails('${quarterId}')" 
-                                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; padding: 10px 20px; border-radius: 8px; font-weight: 700; cursor: pointer; font-size: 0.9em; transition: all 0.3s ease;"
-                                        onmouseover="this.style.transform='scale(1.05)'"
-                                        onmouseout="this.style.transform='scale(1)'">
-                                    📋 View ${quarterInitiatives.length} Detailed Initiatives
-                                </button>
-                            </div>
-                            
-                            <div id="quarter-details-${quarterId}" style="display: none; margin-top: 15px; padding: 15px; background: #f8f9fa; border-radius: 8px; max-height: 400px; overflow-y: auto;">
-                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
-                                    <h4 style="margin: 0; color: #1e3c72;">Detailed Initiatives</h4>
-                                    <button onclick="toggleQuarterDetails('${quarterId}')" 
-                                            style="background: #6c757d; color: white; border: none; padding: 5px 12px; border-radius: 6px; cursor: pointer; font-size: 0.85em;">
-                                        Close
-                                    </button>
-                                </div>
-                                ${quarterInitiatives.map(initiative => {
-                                    const status = normalizeStatus(initiative['Status']);
-                                    const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
-                                    const category = initiative['Close Category'] || 'General';
-                                    const title = initiative['Week Focus and Tasks'] || initiative['OKR'] || 'Unnamed Initiative';
-                                    const hours = parseFloat(initiative['Hours Saved'] || 0);
-                                    
-                                    return `
-                                        <div style="background: white; padding: 12px; margin-bottom: 10px; border-radius: 6px; border-left: 4px solid ${statusColor};">
-                                            <div style="font-weight: 700; color: #2c3e50; margin-bottom: 5px; font-size: 0.9em;">${title.substring(0, 80)}${title.length > 80 ? '...' : ''}</div>
-                                            <div style="display: flex; gap: 8px; flex-wrap: wrap; font-size: 0.8em;">
-                                                <span style="background: ${statusColor}; color: white; padding: 3px 8px; border-radius: 4px; font-weight: 600;">${status}</span>
-                                                <span style="background: #667eea; color: white; padding: 3px 8px; border-radius: 4px;">${category}</span>
-                                                ${hours > 0 ? `<span style="background: #28a745; color: white; padding: 3px 8px; border-radius: 4px;">💰 ${hours}h saved</span>` : ''}
-                                            </div>
-                                        </div>
-                                    `;
-                                }).join('')}
-                            </div>
-                        ` : ''}
                     </div>
                 `;
             });

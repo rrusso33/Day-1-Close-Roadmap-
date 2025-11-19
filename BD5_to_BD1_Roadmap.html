@@ -1212,7 +1212,7 @@
                 <div class="section-title">📅 Detailed Roadmap</div>
                 <div class="section-subtitle">Coming soon - under reconstruction</div>
             </div>
-            
+
             <div id="themeContainer">
                 <div style="text-align: center; padding: 60px; color: #6c757d;">
                     <div style="font-size: 2em; margin-bottom: 20px;">🚧</div>
@@ -1333,7 +1333,7 @@
                     }
                     
                     // Only process quarters we're displaying
-                    if (quarter && ['Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27'].includes(quarter)) {
+                    if (quarter && ['Q2\'26', 'Q3\'26', 'Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27'].includes(quarter)) {
                         if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);
                         
@@ -1353,16 +1353,18 @@
             
             // Define quarter order and details
             const quarterInfo = {
-                "Q4'26": { fullName: "Q4 FY26", endDate: "April 30, 2026", badge: "current", description: "Foundation Complete" },
-                "Q1'27": { fullName: "Q1 FY27", endDate: "July 31, 2026", badge: "upcoming", description: "Optimization Phase" },
-                "Q2'27": { fullName: "Q2 FY27", endDate: "October 31, 2026", badge: "upcoming", description: "Acceleration Phase" },
+                "Q2'26": { fullName: "Q2 FY26", endDate: "October 31, 2025", badge: "current", description: "Foundation Phase" },
+                "Q3'26": { fullName: "Q3 FY26", endDate: "January 31, 2026", badge: "upcoming", description: "Build Phase" },
+                "Q4'26": { fullName: "Q4 FY26", endDate: "April 30, 2026", badge: "upcoming", description: "Optimization Phase" },
+                "Q1'27": { fullName: "Q1 FY27", endDate: "July 31, 2026", badge: "upcoming", description: "Acceleration Phase" },
+                "Q2'27": { fullName: "Q2 FY27", endDate: "October 31, 2026", badge: "upcoming", description: "Scale Phase" },
                 "Q3'27": { fullName: "Q3 FY27", endDate: "January 31, 2027", badge: "target", description: "🎯 BD1 TARGET!" }
             };
             
             let html = `
                 <div class="multi-quarter-roadmap">
                     <div class="multi-quarter-title">📅 Multi-Quarter Executive Roadmap</div>
-                    <div class="multi-quarter-subtitle">Strategic Milestones from Q4 FY26 → Q3 FY27 (Day 1 Close)</div>
+                    <div class="multi-quarter-subtitle">Strategic Milestones from Q2 FY26 → Q3 FY27 (Day 1 Close)</div>
                     <div class="quarters-grid">
             `;
             
@@ -1644,12 +1646,12 @@
             let html = renderMultiQuarterRoadmap(milestones, data);
             
             // Add cleared section message for detailed roadmap area
-            html += `
+                html += `
                 <div style="text-align: center; padding: 60px; color: #6c757d; margin-top: 40px;">
                     <div style="font-size: 2em; margin-bottom: 20px;">✅</div>
                     <div style="font-size: 1.3em; margin-bottom: 15px;">Detailed Roadmap Section - Ready to Rebuild!</div>
                     <div style="font-size: 1em; color: #999;">Multi-Quarter Executive Roadmap above is active</div>
-                </div>
+                            </div>
             `;
             
             document.getElementById('themeContainer').innerHTML = html;

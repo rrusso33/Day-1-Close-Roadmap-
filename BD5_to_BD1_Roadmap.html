@@ -1334,16 +1334,16 @@
                         if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);
                         
-                        // Group initiatives by Day 1 Goal
-                        const day1Goal = task['Day 1 Goal'];
-                        if (day1Goal && day1Goal.trim() && day1Goal.toLowerCase() !== 'n/a') {
-                            const goalKey = day1Goal.trim();
-                            if (!quarters[quarter].goals[goalKey]) {
-                                quarters[quarter].goals[goalKey] = [];
-                                quarters[quarter].goalsList.push(goalKey);
-                                console.log(`  ✅ Added goal "${goalKey}" to ${quarter}`);
+                        // Group initiatives by Theme
+                        const theme = task['Theme'];
+                        if (theme && theme.trim() && theme.toLowerCase() !== 'n/a') {
+                            const themeKey = theme.trim();
+                            if (!quarters[quarter].goals[themeKey]) {
+                                quarters[quarter].goals[themeKey] = [];
+                                quarters[quarter].goalsList.push(themeKey);
+                                console.log(`  ✅ Added theme "${themeKey}" to ${quarter}`);
                             }
-                            quarters[quarter].goals[goalKey].push(task);
+                            quarters[quarter].goals[themeKey].push(task);
                         }
                     }
                 });
@@ -1408,7 +1408,7 @@
                 console.log(`Quarter ${quarterKey}: ${goalsList.length} goals found`, goalsList);
                 
                 if (goalsList.length > 0) {
-                    html += `<div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 0.95em;">🎯 Day 1 Goals:</div>`;
+                    html += `<div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 0.95em;">🎯 Themes:</div>`;
                     html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
                     
                     goalsList.forEach((goal, idx) => {
@@ -1460,13 +1460,13 @@
         function renderDay1GoalsDetail(data) {
             if (!data || data.length === 0) return '';
             
-            // First, group by Day 1 Goal (theme)
+            // First, group by Theme
             const themeGroups = {};
             data.forEach(task => {
-                const day1Goal = (task['Day 1 Goal'] || '').trim();
-                if (day1Goal && day1Goal.toLowerCase() !== 'n/a') {
-                    if (!themeGroups[day1Goal]) {
-                        themeGroups[day1Goal] = {
+                const theme = (task['Theme'] || '').trim();
+                if (theme && theme.toLowerCase() !== 'n/a') {
+                    if (!themeGroups[theme]) {
+                        themeGroups[theme] = {
                             deliverables: {},
                             quarter: task['Quarter'] || '',
                             category: task['Close Category'] || 'General',
@@ -1474,15 +1474,15 @@
                         };
                     }
                     
-                    // Group deliverables under this Day 1 Goal
+                    // Group deliverables under this Theme
                     const deliverable = (task['End of Week Deliverable / Milestone'] || '').trim();
                     if (deliverable && deliverable.toLowerCase() !== 'n/a') {
-                        if (!themeGroups[day1Goal].deliverables[deliverable]) {
-                            themeGroups[day1Goal].deliverables[deliverable] = [];
+                        if (!themeGroups[theme].deliverables[deliverable]) {
+                            themeGroups[theme].deliverables[deliverable] = [];
                         }
-                        themeGroups[day1Goal].deliverables[deliverable].push(task);
+                        themeGroups[theme].deliverables[deliverable].push(task);
                     }
-                    themeGroups[day1Goal].allInitiatives.push(task);
+                    themeGroups[theme].allInitiatives.push(task);
                 }
             });
             
@@ -1491,8 +1491,8 @@
             let html = `
                 <div style="margin-top: 50px; padding: 30px; background: white; border-radius: 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
                     <div style="text-align: center; margin-bottom: 30px;">
-                        <h2 style="color: #1e3c72; font-size: 2em; margin-bottom: 10px;">🎯 Day 1 Goals - Detailed View</h2>
-                        <p style="color: #6c757d; font-size: 1.1em;">Organized by strategic goal with key deliverables and milestones</p>
+                        <h2 style="color: #1e3c72; font-size: 2em; margin-bottom: 10px;">🎯 Themes - Detailed View</h2>
+                        <p style="color: #6c757d; font-size: 1.1em;">Organized by strategic theme with key deliverables and milestones</p>
                     </div>
                     
                     <div style="display: grid; gap: 20px;">

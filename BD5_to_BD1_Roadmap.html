@@ -1313,14 +1313,16 @@
             if (milestones) {
                 milestones.forEach(item => {
                     const quarter = item['Quarter'];
-                    if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [] };
+                    if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                     quarters[quarter].milestones.push(item);
                 });
             }
             
             // Group roadmap data initiatives by quarter using the "Quarter" column from CSV
             // Also extract unique "Day 1 Goal" values and group initiatives by goal
-            if (roadmapData) {
+            console.log('📊 Processing roadmap data:', roadmapData ? roadmapData.length : 0, 'tasks');
+            
+            if (roadmapData && roadmapData.length > 0) {
                 roadmapData.forEach(task => {
                     // Use the Quarter column directly from CSV
                     let quarter = (task['Quarter'] || '').trim();
@@ -1344,11 +1346,14 @@
                             if (!quarters[quarter].goals[goalKey]) {
                                 quarters[quarter].goals[goalKey] = [];
                                 quarters[quarter].goalsList.push(goalKey);
+                                console.log(`  ✅ Added goal "${goalKey}" to ${quarter}`);
                             }
                             quarters[quarter].goals[goalKey].push(task);
                         }
                     }
                 });
+                
+                console.log('📋 Final quarters data:', quarters);
             }
             
             // Define quarter order and details

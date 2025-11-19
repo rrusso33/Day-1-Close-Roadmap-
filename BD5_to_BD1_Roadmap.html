@@ -365,8 +365,8 @@
         }
         .quarters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 20px;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 15px;
             max-width: 1400px;
             margin: 0 auto;
         }
@@ -1401,7 +1401,7 @@
                         <div class="quarter-goals-section" style="margin-top: 15px;">
                 `;
                 
-                // Display Themes as simple list items without "Themes:" label
+                // Display Day 1 Close Themes from roadmap data
                 const goalsList = quarterData.goalsList || [];
                 const goalsData = quarterData.goals || {};
                 
@@ -1421,7 +1421,28 @@
                     });
                     
                     html += `</ul>`;
-                } else {
+                }
+                
+                // Also display future milestones if they exist
+                if (quarterMilestones.length > 0) {
+                    if (goalsList.length > 0) {
+                        html += `<div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #e9ecef;"></div>`;
+                    }
+                    html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
+                    
+                    quarterMilestones.forEach(milestone => {
+                        const description = milestone['End of Week Deliverable / Milestone'] || '';
+                        html += `
+                            <li style="margin-bottom: 8px; padding: 8px 12px; background: #fff8e1; border-radius: 6px; border-left: 3px solid #ffc107;">
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em;">${description}</div>
+                            </li>
+                        `;
+                    });
+                    
+                    html += `</ul>`;
+                }
+                
+                if (goalsList.length === 0 && quarterMilestones.length === 0) {
                     html += `<div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic;">Planning in progress...</div>`;
                 }
                 

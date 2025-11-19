@@ -1398,74 +1398,49 @@
                             ${plannedCount > 0 ? `<div style="background: #f8f9fa; padding: 8px 12px; border-radius: 8px; font-size: 0.85em; font-weight: 600;">○ ${plannedCount} planned</div>` : ''}
                         </div>
                         
-                        <div class="quarter-goals-section">
+                        <div class="quarter-goals-section" style="margin-top: 15px;">
                 `;
                 
-                // Display Day 1 Goals as clickable items with drill-down
+                // Display Day 1 Goals as simple list items
                 const goalsList = quarterData.goalsList || [];
                 const goalsData = quarterData.goals || {};
                 
+                console.log(`Quarter ${quarter}: ${goalsList.length} goals found`, goalsList);
+                
                 if (goalsList.length > 0) {
+                    html += `<div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 0.95em;">🎯 Day 1 Goals:</div>`;
+                    html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
+                    
                     goalsList.forEach((goal, idx) => {
                         const goalInitiatives = goalsData[goal] || [];
-                        const goalId = `goal-${quarter.replace(/'/g, '')}-${idx}`;
-                        
-                        // Calculate stats for this goal
-                        const completedGoalInitiatives = goalInitiatives.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
-                        const inProgressGoalInitiatives = goalInitiatives.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
-                        const totalHoursGoal = goalInitiatives.reduce((sum, t) => {
-                            const h = parseFloat(t['Hours Saved'] || 0);
-                            return sum + (isNaN(h) ? 0 : h);
-                        }, 0);
-                        
                         html += `
-                            <div class="goal-item">
-                                <div class="goal-header" onclick="toggleGoalDetails('${goalId}')" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 8px; transition: background 0.2s;">
-                                    <div style="display: flex; align-items: center; gap: 10px; flex: 1;">
-                                        <span class="goal-arrow" id="arrow-${goalId}" style="font-size: 0.8em; transition: transform 0.2s;">▶</span>
-                                        <span style="font-weight: 600; color: #2c3e50;">🎯 ${goal}</span>
-                                    </div>
-                                    <div style="display: flex; gap: 12px; align-items: center; font-size: 0.85em;">
-                                        <span style="background: white; padding: 4px 10px; border-radius: 6px; font-weight: 600; color: #28a745;">✓ ${completedGoalInitiatives}</span>
-                                        <span style="background: white; padding: 4px 10px; border-radius: 6px; font-weight: 600; color: #007bff;">⟳ ${inProgressGoalInitiatives}</span>
-                                        ${totalHoursGoal > 0 ? `<span style="background: white; padding: 4px 10px; border-radius: 6px; font-weight: 600; color: #6c757d;">💾 ${Math.round(totalHoursGoal)}h</span>` : ''}
-                                        <span style="color: #999; font-size: 0.9em;">${goalInitiatives.length} initiatives</span>
-                                    </div>
-                                </div>
-                                <div class="goal-details" id="${goalId}" style="display: none; padding: 15px; background: white; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #007bff;">
-                                    ${goalInitiatives.map(initiative => {
-                                        const status = normalizeStatus(initiative['Status']);
-                                        const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
-                                        const hours = parseFloat(initiative['Hours Saved'] || 0);
-                                        const owner = initiative['Owner'] || 'TBD';
-                                        const okr = initiative['OKR'] || '';
-                                        const category = initiative['Close Category'] || '';
-                                        
-                                        return `
-                                            <div style="padding: 12px; margin-bottom: 8px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid ${statusColor};">
-                                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
-                                                    <div style="flex: 1;">
-                                                        <div style="font-weight: 600; color: #2c3e50; margin-bottom: 4px;">${okr || 'Untitled Initiative'}</div>
-                                                        ${category ? `<div style="font-size: 0.85em; color: #6c757d; margin-bottom: 4px;">📂 ${category}</div>` : ''}
-                                                    </div>
-                                                    <div style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.85em; font-weight: 600; white-space: nowrap; margin-left: 10px;">
-                                                        ${status}
-                                                    </div>
-                                                </div>
-                                                <div style="display: flex; gap: 15px; font-size: 0.85em; color: #6c757d; flex-wrap: wrap;">
-                                                    <div><strong>Owner:</strong> ${owner}</div>
-                                                    ${hours > 0 ? `<div><strong>Impact:</strong> ${Math.round(hours)} hours saved</div>` : ''}
-                                                    ${initiative['Day 1 Close Target End Date'] ? `<div><strong>Target:</strong> ${new Date(initiative['Day 1 Close Target End Date']).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>` : ''}
-                                                </div>
-                                            </div>
-                                        `;
-                                    }).join('')}
-                                </div>
-                            </div>
+                            <li style="margin-bottom: 8px; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #667eea;">
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em;">${goal}</div>
+                                <div style="font-size: 0.8em; color: #6c757d; margin-top: 4px;">${goalInitiatives.length} initiatives</div>
+                            </li>
                         `;
                     });
+                    
+                    html += `</ul>`;
                 } else {
                     html += `<div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic;">Planning in progress...</div>`;
+                }
+                
+                // Also display future milestones if they exist
+                if (quarterMilestones.length > 0) {
+                    html += `<div style="font-weight: 600; color: #2c3e50; margin: 15px 0 10px 0; font-size: 0.95em;">📋 Future Milestones:</div>`;
+                    html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
+                    
+                    quarterMilestones.forEach(milestone => {
+                        const description = milestone['End of Week Deliverable / Milestone'] || '';
+                        html += `
+                            <li style="margin-bottom: 8px; padding: 8px 12px; background: #fff8e1; border-radius: 6px; border-left: 3px solid #ffc107;">
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em;">${description}</div>
+                            </li>
+                        `;
+                    });
+                    
+                    html += `</ul>`;
                 }
                 
                 html += `

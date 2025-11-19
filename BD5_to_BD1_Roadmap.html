@@ -1318,30 +1318,21 @@
                 });
             }
             
-            // Group roadmap data initiatives by quarter based on target date
+            // Group roadmap data initiatives by quarter using the "Quarter" column from CSV
             // Also extract unique "Day 1 Goal" values and group initiatives by goal
             if (roadmapData) {
                 roadmapData.forEach(task => {
-                    const targetDate = task['Day 1 Close Target End Date'];
-                    if (!targetDate) return;
+                    // Use the Quarter column directly from CSV
+                    let quarter = (task['Quarter'] || '').trim();
                     
-                    const date = new Date(targetDate);
-                    let quarter = '';
-                    
-                    // Map to fiscal quarters (FYE: April 30)
-                    const year = date.getFullYear();
-                    const month = date.getMonth(); // 0-based
-                    
-                    if (month >= 1 && month <= 3) { // Feb, Mar, Apr = Q4
-                        quarter = `Q4'${String(year).slice(-2)}`;
-                    } else if (month >= 4 && month <= 6) { // May, Jun, Jul = Q1
-                        quarter = `Q1'${String(year).slice(-2)}`;
-                    } else if (month >= 7 && month <= 9) { // Aug, Sep, Oct = Q2
-                        quarter = `Q2'${String(year).slice(-2)}`;
-                    } else if (month >= 10 || month === 0) { // Nov, Dec, Jan = Q3
-                        quarter = month === 0 ? `Q3'${String(year - 1).slice(-2)}` : `Q3'${String(year).slice(-2)}`;
+                    // Normalize quarter format (handle variations like "Q4'26", "Q4 '26", "Q4 26", etc.)
+                    quarter = quarter.replace(/\s+/g, '');  // Remove spaces
+                    if (!quarter.includes("'")) {
+                        // If no apostrophe, add it (e.g., "Q426" -> "Q4'26")
+                        quarter = quarter.replace(/^(Q\d)(\d{2})$/, "$1'$2");
                     }
                     
+                    // Only process quarters we're displaying
                     if (quarter && ['Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27'].includes(quarter)) {
                         if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);

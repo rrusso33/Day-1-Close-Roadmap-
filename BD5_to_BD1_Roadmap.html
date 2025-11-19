@@ -1460,28 +1460,37 @@
         function renderDay1GoalsDetail(data) {
             if (!data || data.length === 0) return '';
             
-            // First, group by Theme
+            // First, group by Theme → OKR → Key Result
             const themeGroups = {};
             data.forEach(task => {
                 const theme = (task['Theme'] || '').trim();
                 if (theme && theme.toLowerCase() !== 'n/a') {
                     if (!themeGroups[theme]) {
                         themeGroups[theme] = {
-                            deliverables: {},
+                            okrs: {},
                             quarter: task['Quarter'] || '',
                             category: task['Close Category'] || 'General',
                             allInitiatives: []
                         };
                     }
                     
-                    // Group deliverables under this Theme
-                    const deliverable = (task['End of Week Deliverable / Milestone'] || '').trim();
-                    if (deliverable && deliverable.toLowerCase() !== 'n/a') {
-                        if (!themeGroups[theme].deliverables[deliverable]) {
-                            themeGroups[theme].deliverables[deliverable] = [];
+                    // Group by OKR under this Theme
+                    const okr = (task['OKR'] || '').trim();
+                    if (okr && okr.toLowerCase() !== 'n/a') {
+                        if (!themeGroups[theme].okrs[okr]) {
+                            themeGroups[theme].okrs[okr] = {};
                         }
-                        themeGroups[theme].deliverables[deliverable].push(task);
+                        
+                        // Group by Key Result under this OKR
+                        const keyResult = (task['Key Result'] || '').trim();
+                        if (keyResult && keyResult.toLowerCase() !== 'n/a') {
+                            if (!themeGroups[theme].okrs[okr][keyResult]) {
+                                themeGroups[theme].okrs[okr][keyResult] = [];
+                            }
+                            themeGroups[theme].okrs[okr][keyResult].push(task);
+                        }
                     }
+                    
                     themeGroups[theme].allInitiatives.push(task);
                 }
             });
@@ -1506,8 +1515,8 @@
             
             sortedThemes.forEach(([themeName, themeData], idx) => {
                 const initiatives = themeData.allInitiatives;
-                const deliverables = themeData.deliverables;
-                const deliverableCount = Object.keys(deliverables).length;
+                const okrs = themeData.okrs;
+                const okrCount = Object.keys(okrs).length;
                 
                 const completed = initiatives.filter(i => normalizeStatus(i['Status']) === 'Complete').length;
                 const inProgress = initiatives.filter(i => normalizeStatus(i['Status']) === 'In Progress').length;
@@ -1548,9 +1557,9 @@
                                 
                                 <div style="display: flex; gap: 25px; align-items: center; margin-left: 40px; flex-wrap: wrap;">
                                     <div style="display: flex; align-items: center; gap: 8px;">
-                                        <span style="font-size: 0.9em; color: #6c757d;">📋</span>
-                                        <span style="font-weight: 600; color: #2c3e50;">${deliverableCount}</span>
-                                        <span style="color: #6c757d; font-size: 0.9em;">deliverables</span>
+                                        <span style="font-size: 0.9em; color: #6c757d;">🎯</span>
+                                        <span style="font-weight: 600; color: #2c3e50;">${okrCount}</span>
+                                        <span style="color: #6c757d; font-size: 0.9em;">OKRs</span>
                                     </div>
                                     
                                     <div style="display: flex; align-items: center; gap: 8px;">
@@ -1591,36 +1600,60 @@
                         </div>
                         
                         <div id="${themeId}" style="display: none; padding: 25px; background: white;">
-                            <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">📋 Key Deliverables & Milestones</h4>
-                            <div style="display: grid; gap: 15px;">
-                                ${Object.entries(deliverables).map(([deliverable, tasks]) => {
-                                    const delivCompleted = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
-                                    const delivTotal = tasks.length;
-                                    const delivPct = delivTotal > 0 ? (delivCompleted / delivTotal) * 100 : 0;
-                                    const delivStatusColor = delivPct === 100 ? '#28a745' : delivPct > 0 ? '#007bff' : '#6c757d';
+                            <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">🎯 OKRs & Key Results</h4>
+                            <div style="display: grid; gap: 20px;">
+                                ${Object.entries(okrs).map(([okr, keyResults]) => {
+                                    // Calculate OKR-level stats
+                                    const allOkrTasks = Object.values(keyResults).flat();
+                                    const okrCompleted = allOkrTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                                    const okrTotal = allOkrTasks.length;
+                                    const okrPct = okrTotal > 0 ? (okrCompleted / okrTotal) * 100 : 0;
+                                    const okrStatusColor = okrPct === 100 ? '#28a745' : okrPct > 0 ? '#007bff' : '#6c757d';
                                     
                                     return `
-                                        <div style="padding: 15px; background: #f8f9fa; border-radius: 8px; border-left: 4px solid ${delivStatusColor};">
-                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 10px;">
+                                        <div style="padding: 18px; background: #f0f4ff; border-radius: 10px; border-left: 5px solid ${okrStatusColor};">
+                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
                                                 <div style="flex: 1;">
-                                                    <div style="font-weight: 600; color: #2c3e50; margin-bottom: 8px; font-size: 1em;">📦 ${deliverable}</div>
-                                                    <div style="display: flex; gap: 15px; align-items: center; font-size: 0.85em;">
-                                                        <span style="color: #6c757d;"><strong>${delivCompleted}/${delivTotal}</strong> tasks complete</span>
-                                                        <div style="flex: 1; max-width: 200px; background: #e9ecef; height: 6px; border-radius: 3px; overflow: hidden;">
-                                                            <div style="background: ${delivStatusColor}; height: 100%; width: ${delivPct}%; transition: width 0.3s;"></div>
+                                                    <div style="font-weight: 700; color: #1e3c72; margin-bottom: 8px; font-size: 1.05em;">🎯 ${okr}</div>
+                                                    <div style="display: flex; gap: 15px; align-items: center; font-size: 0.9em;">
+                                                        <span style="color: #6c757d;"><strong>${okrCompleted}/${okrTotal}</strong> tasks complete</span>
+                                                        <div style="flex: 1; max-width: 250px; background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                                            <div style="background: ${okrStatusColor}; height: 100%; width: ${okrPct}%; transition: width 0.3s;"></div>
                                                         </div>
-                                                        <span style="font-weight: 600; color: ${delivStatusColor};">${Math.round(delivPct)}%</span>
+                                                        <span style="font-weight: 700; color: ${okrStatusColor};">${Math.round(okrPct)}%</span>
                                                     </div>
                                                 </div>
                                             </div>
-                                            <div style="margin-top: 10px; padding-top: 10px; border-top: 1px solid #dee2e6; display: flex; gap: 15px; flex-wrap: wrap; font-size: 0.85em; color: #6c757d;">
-                                                ${tasks.map((t, ti) => {
-                                                    const status = normalizeStatus(t['Status']);
-                                                    const statusIcon = status === 'Complete' ? '✓' : status === 'In Progress' ? '⟳' : '○';
-                                                    const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
-                                                    const owner = t['Owner(s)'] || 'TBD';
-                                                    return `<span style="color: ${statusColor};">${statusIcon} ${owner}</span>`;
-                                                }).join(' • ')}
+                                            
+                                            <div style="margin-top: 15px; padding-left: 15px; border-left: 3px solid #dee2e6; display: grid; gap: 12px;">
+                                                ${Object.entries(keyResults).map(([keyResult, tasks]) => {
+                                                    const krCompleted = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                                                    const krTotal = tasks.length;
+                                                    const krPct = krTotal > 0 ? (krCompleted / krTotal) * 100 : 0;
+                                                    const krStatusColor = krPct === 100 ? '#28a745' : krPct > 0 ? '#007bff' : '#6c757d';
+                                                    
+                                                    return `
+                                                        <div style="padding: 12px; background: white; border-radius: 6px; border-left: 3px solid ${krStatusColor};">
+                                                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 8px; font-size: 0.95em;">📊 ${keyResult}</div>
+                                                            <div style="display: flex; gap: 12px; align-items: center; font-size: 0.85em; margin-bottom: 8px;">
+                                                                <span style="color: #6c757d;"><strong>${krCompleted}/${krTotal}</strong> complete</span>
+                                                                <div style="flex: 1; max-width: 180px; background: #e9ecef; height: 5px; border-radius: 3px; overflow: hidden;">
+                                                                    <div style="background: ${krStatusColor}; height: 100%; width: ${krPct}%; transition: width 0.3s;"></div>
+                                                                </div>
+                                                                <span style="font-weight: 600; color: ${krStatusColor};">${Math.round(krPct)}%</span>
+                                                            </div>
+                                                            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8em; color: #6c757d;">
+                                                                ${tasks.map(t => {
+                                                                    const status = normalizeStatus(t['Status']);
+                                                                    const statusIcon = status === 'Complete' ? '✓' : status === 'In Progress' ? '⟳' : '○';
+                                                                    const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
+                                                                    const owner = t['Owner(s)'] || 'TBD';
+                                                                    return `<span style="color: ${statusColor};">${statusIcon} ${owner}</span>`;
+                                                                }).join(' • ')}
+                                                            </div>
+                                                        </div>
+                                                    `;
+                                                }).join('')}
                                             </div>
                                         </div>
                                     `;

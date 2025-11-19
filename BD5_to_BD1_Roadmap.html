@@ -1401,14 +1401,13 @@
                         <div class="quarter-goals-section" style="margin-top: 15px;">
                 `;
                 
-                // Display Day 1 Goals as simple list items
+                // Display Themes as simple list items without "Themes:" label
                 const goalsList = quarterData.goalsList || [];
                 const goalsData = quarterData.goals || {};
                 
-                console.log(`Quarter ${quarterKey}: ${goalsList.length} goals found`, goalsList);
+                console.log(`Quarter ${quarterKey}: ${goalsList.length} themes found`, goalsList);
                 
                 if (goalsList.length > 0) {
-                    html += `<div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 0.95em;">🎯 Themes:</div>`;
                     html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
                     
                     goalsList.forEach((goal, idx) => {
@@ -1424,23 +1423,6 @@
                     html += `</ul>`;
                 } else {
                     html += `<div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic;">Planning in progress...</div>`;
-                }
-                
-                // Also display future milestones if they exist
-                if (quarterMilestones.length > 0) {
-                    html += `<div style="font-weight: 600; color: #2c3e50; margin: 15px 0 10px 0; font-size: 0.95em;">📋 Future Milestones:</div>`;
-                    html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
-                    
-                    quarterMilestones.forEach(milestone => {
-                        const description = milestone['End of Week Deliverable / Milestone'] || '';
-                        html += `
-                            <li style="margin-bottom: 8px; padding: 8px 12px; background: #fff8e1; border-radius: 6px; border-left: 3px solid #ffc107;">
-                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em;">${description}</div>
-                            </li>
-                        `;
-                    });
-                    
-                    html += `</ul>`;
                 }
                 
                 html += `

@@ -1206,42 +1206,17 @@
             </div>
         </div>
 
-        <!-- Timeline Content -->
+        <!-- Timeline Content - CLEARED FOR REBUILD -->
         <div class="timeline-section">
             <div class="section-header">
-                <div class="section-title">📅 Close Category Timelines to BD1</div>
-                <div class="section-subtitle">Master timeline + detailed sprint progress by functional area</div>
+                <div class="section-title">📅 Detailed Roadmap</div>
+                <div class="section-subtitle">Coming soon - under reconstruction</div>
             </div>
             
-            <div class="legend">
-                <div class="legend-item">
-                    <div class="legend-icon complete">✓</div>
-                    <span>Completed</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-icon progress">⟳</div>
-                    <span>In Progress</span>
-                </div>
-                <div class="legend-item">
-                    <div class="legend-icon planned">○</div>
-                    <span>Planned</span>
-                </div>
-            </div>
-
-            <!-- Collapse/Expand All Controls -->
-            <div class="collapse-controls">
-                <button class="collapse-btn" onclick="collapseAll()">
-                    <span>▲</span> Collapse All Initiatives
-                </button>
-                <button class="collapse-btn expand-btn" onclick="expandAll()">
-                    <span>▼</span> Expand All Initiatives
-                </button>
-            </div>
-
             <div id="themeContainer">
                 <div style="text-align: center; padding: 60px; color: #6c757d;">
-                    <div style="font-size: 2em; margin-bottom: 20px;">📊</div>
-                    <div style="font-size: 1.3em;">Loading roadmap data...</div>
+                    <div style="font-size: 2em; margin-bottom: 20px;">🚧</div>
+                    <div style="font-size: 1.3em;">Section cleared - ready to rebuild!</div>
                 </div>
             </div>
         </div>
@@ -1344,6 +1319,7 @@
             }
             
             // Group roadmap data initiatives by quarter based on target date
+            // Also extract unique "Day 1 Goal" values for each quarter
             if (roadmapData) {
                 roadmapData.forEach(task => {
                     const targetDate = task['Day 1 Close Target End Date'];
@@ -1367,8 +1343,14 @@
                     }
                     
                     if (quarter && ['Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27'].includes(quarter)) {
-                        if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [] };
+                        if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: new Set() };
                         quarters[quarter].initiatives.push(task);
+                        
+                        // Add Day 1 Goal if it exists
+                        const day1Goal = task['Day 1 Goal'];
+                        if (day1Goal && day1Goal.trim() && day1Goal.toLowerCase() !== 'n/a') {
+                            quarters[quarter].goals.add(day1Goal.trim());
+                        }
                     }
                 });
             }
@@ -1421,6 +1403,19 @@
                         <ul class="quarter-milestones">
                 `;
                 
+                // Display Day 1 Goals from roadmap data
+                const goals = Array.from(quarterData.goals || []);
+                if (goals.length > 0) {
+                    goals.forEach(goal => {
+                        html += `
+                            <li class="milestone-item">
+                                🎯 ${goal}
+                            </li>
+                        `;
+                    });
+                }
+                
+                // Also display future milestones if they exist
                 if (quarterMilestones.length > 0) {
                     quarterMilestones.forEach(milestone => {
                         const category = milestone['Close Category'] || 'General';
@@ -1432,8 +1427,11 @@
                             </li>
                         `;
                     });
-                } else {
-                    html += `<li class="milestone-item">Detailed planning in progress...</li>`;
+                }
+                
+                // If no goals or milestones
+                if (goals.length === 0 && quarterMilestones.length === 0) {
+                    html += `<li class="milestone-item">Planning in progress...</li>`;
                 }
                 
                 html += `
@@ -1649,168 +1647,14 @@
                 }, 300);
             }
             
-            // Group by theme, then consolidate by OKR/Category
-            const themeData = {};
-            data.forEach(task => {
-                const theme = categorizeTask(task);
-                if (!themeData[theme]) themeData[theme] = {};
-                
-                // Group by OKR + Close Category for more specific consolidation
-                const okr = task['OKR'] || 'Other';
-                const category = task['Close Category'] || 'General';
-                const groupKey = `${okr} - ${category}`;
-                
-                if (!themeData[theme][groupKey]) themeData[theme][groupKey] = [];
-                themeData[theme][groupKey].push(task);
-            });
-            
-            // Generate multi-quarter executive roadmap first (with both data sources)
-            let html = renderMultiQuarterRoadmap(milestones, data);
-            
-            // Then generate master timeline
-            html += generateMasterTimeline(themeData);
-            
-            // Render themes
-            Object.entries(THEMES).forEach(([themeName, config]) => {
-                const initiatives = themeData[themeName] || {};
-                const allTasks = Object.values(initiatives).flat();
-                if (allTasks.length === 0) return;
-                
-                const themeCompleted = allTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
-                const themeProgress = allTasks.length > 0 ? (themeCompleted / allTasks.length) * 100 : 0;
-                const themeHours = allTasks.reduce((sum, t) => {
-                    const h = parseFloat(t['Hours Saved'] || 0);
-                    return sum + (isNaN(h) ? 0 : h);
-                }, 0);
-                
-                const themeId = themeName.toLowerCase().replace(/[^a-z]/g, '-');
-                
-                html += `
-                    <div class="theme-section">
-                        <div class="theme-header-bar ${config.class}" onclick="toggleTheme('${themeId}')">
-                            <div class="theme-title-group">
-                                <span class="theme-icon">${config.icon}</span>
-                                <span class="theme-name">${themeName}</span>
-                            </div>
-                            <div class="theme-stats-group">
-                                <div class="theme-stat">
-                                    <div class="theme-stat-value">${themeCompleted}/${allTasks.length}</div>
-                                    <div class="theme-stat-label">Complete</div>
-                                </div>
-                                <div class="theme-stat">
-                                    <div class="theme-stat-value">${Math.round(themeProgress)}%</div>
-                                    <div class="theme-stat-label">Progress</div>
-                                </div>
-                                <div class="theme-stat">
-                                    <div class="theme-stat-value">${Math.round(themeHours)}</div>
-                                    <div class="theme-stat-label">Hours</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="theme-timeline" id="timeline-${themeId}">
-                            ${generateCategoryTimeline(allTasks, themeName, config)}
-                `;
-                
-                // Consolidate initiatives by category/OKR
-                Object.entries(initiatives).forEach(([initiativeName, tasks], idx) => {
-                    const consolidated = consolidateInitiative(tasks, initiativeName);
-                    const statusClass = consolidated.status.toLowerCase().replace(/\s+/g, '-');
-                    const initiativeId = `initiative-${themeId}-${idx}`;
-                    
-                    html += `
-                        <div class="sprint-group">
-                            <div class="sprint-marker ${consolidated.markerClass}"></div>
-                            <div class="sprint-header collapsible-header" onclick="toggleInitiative('${initiativeId}')">
-                                <div class="sprint-title-wrapper">
-                                    <span class="collapse-arrow" id="arrow-${initiativeId}">▼</span>
-                                    <div class="sprint-title">${cleanInitiativeName(initiativeName)}</div>
-                                </div>
-                                <div class="sprint-date">Target: ${consolidated.targetDate}</div>
-                            </div>
-                            <div class="initiative-cards" id="${initiativeId}">
-                                <div class="initiative-card ${statusClass}">
-                                    <div class="initiative-header">
-                                        <div class="initiative-title-group">
-                                            <div class="initiative-title">${consolidated.summary}</div>
-                                        </div>
-                                        <div class="initiative-status ${statusClass}">${consolidated.status}</div>
-                                    </div>
-                                    
-                                    ${consolidated.hours > 0 ? `
-                                        <div class="impact-badge">
-                                            <span class="impact-badge-icon">📈</span>
-                                            <span>Day 1 Impact: ${consolidated.hours} hours saved = ${(consolidated.hours / 8).toFixed(1)} days reduced → Accelerates BD${Math.max(1, 5 - Math.floor(consolidated.hours / 40))} close</span>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    <div class="initiative-details">
-                                        <div class="detail-item">
-                                            <div class="detail-label">Sprint Sets</div>
-                                            <div class="detail-value">${consolidated.sprints}</div>
-                                        </div>
-                                        <div class="detail-item">
-                                            <div class="detail-label">Tasks</div>
-                                            <div class="detail-value">${consolidated.completed}/${consolidated.total} Complete</div>
-                                        </div>
-                                        ${consolidated.owners.length > 0 ? `
-                                            <div class="detail-item">
-                                                <div class="detail-label">Owners</div>
-                                                <div class="detail-value">${consolidated.owners.join(', ')}</div>
-                                            </div>
-                                        ` : ''}
-                                        ${consolidated.hours > 0 ? `
-                                            <div class="detail-item">
-                                                <div class="detail-label">Time Impact</div>
-                                                <div class="detail-value">${consolidated.hours} hours saved</div>
-                                            </div>
-                                        ` : ''}
-                                    </div>
-                                    
-                                    ${consolidated.tools.length > 0 ? `
-                                        <div class="tech-stack">
-                                            <div class="tech-label">🔧 Tech Stack & Automation:${consolidated.totalTools > 5 ? ` <span style="font-weight: normal; font-size: 0.9em; opacity: 0.8;">(showing 5 of ${consolidated.totalTools})</span>` : ''}</div>
-                                            <div class="tech-tags">
-                                                ${consolidated.tools.map(tool => `<span class="tech-tag ${tool.isAutomation ? 'automation' : ''}">${tool.name}</span>`).join('')}
-                                            </div>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${consolidated.dependencies.length > 0 ? `
-                                        <div class="dependencies">
-                                            <div class="dependencies-label">⚠️ Key Dependencies:</div>
-                                            <ul class="info-list">
-                                                ${consolidated.dependencies.map(dep => `<li>${dep}</li>`).join('')}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${consolidated.deliverables.length > 0 ? `
-                                        <div class="deliverable">
-                                            <div class="deliverable-label">📦 Key Deliverables:</div>
-                                            <ul class="info-list">
-                                                ${consolidated.deliverables.map(del => `<li>${del}</li>`).join('')}
-                                            </ul>
-                                        </div>
-                                    ` : ''}
-                                    
-                                    ${consolidated.tools.length === 0 && consolidated.dependencies.length === 0 && consolidated.deliverables.length === 0 ? `
-                                        <div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic; background: #f8f9fa; border-radius: 8px; margin-top: 15px;">
-                                            📋 Additional details to be defined
-                                        </div>
-                                    ` : ''}
-                                </div>
-                            </div>
-                        </div>
-                    `;
-                });
-                
-                html += `
-                        </div>
-                    </div>
-                `;
-            });
-            
-            document.getElementById('themeContainer').innerHTML = html;
+            // Clear the detailed section - ready for rebuild
+            document.getElementById('themeContainer').innerHTML = `
+                <div style="text-align: center; padding: 60px; color: #6c757d;">
+                    <div style="font-size: 2em; margin-bottom: 20px;">✅</div>
+                    <div style="font-size: 1.3em; margin-bottom: 15px;">Section cleared - ready to rebuild!</div>
+                    <div style="font-size: 1em; color: #999;">Multi-Quarter Executive Roadmap above is still active</div>
+                </div>
+            `;
         }
 
         function categorizeTask(task) {

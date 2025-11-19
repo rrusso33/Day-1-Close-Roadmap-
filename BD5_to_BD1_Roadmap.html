@@ -1334,8 +1334,8 @@
                         if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);
                         
-                        // Group initiatives by Day 1 Goal Theme
-                        const theme = task['Day 1 Goal Theme'];
+                        // Group initiatives by Day 1 Close Theme
+                        const theme = task['Day 1 Close Theme'];
                         if (theme && theme.trim() && theme.toLowerCase() !== 'n/a') {
                             const themeKey = theme.trim();
                             if (!quarters[quarter].goals[themeKey]) {

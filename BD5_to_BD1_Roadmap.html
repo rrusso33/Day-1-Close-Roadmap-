@@ -1359,9 +1359,6 @@
             </div>
         </div>
 
-        <!-- Risk & Blocker Dashboard -->
-        <div class="risk-dashboard" id="riskDashboard"></div>
-
         <!-- On Track Indicator -->
         <div class="on-track-indicator" id="onTrackIndicator"></div>
 
@@ -2384,7 +2381,7 @@
             
             // Render new executive sections
             renderMonthlySummary(data);
-            renderRiskDashboard(data);
+            // renderRiskDashboard(data); // Removed per user request
             renderOnTrackIndicator(data, progress);
             
             // Update journey timeline

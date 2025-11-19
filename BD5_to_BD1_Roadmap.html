@@ -1269,6 +1269,9 @@
             <div class="meta">Fiscal Year End: April 30 | Target: February 1, 2027</div>
         </div>
 
+        <!-- Multi-Quarter Executive Roadmap -->
+        <div id="multiQuarterContainer" style="margin-bottom: 40px;"></div>
+
         <!-- Monthly Summary -->
         <div class="monthly-summary" id="monthlySummary"></div>
 
@@ -2452,13 +2455,13 @@
                 }, 300);
             }
             
-            // Render Multi-Quarter Executive Roadmap first
-            let html = renderMultiQuarterRoadmap(milestones, data);
+            // Render Multi-Quarter Executive Roadmap in its own container (top of page)
+            const multiQuarterHtml = renderMultiQuarterRoadmap(milestones, data);
+            document.getElementById('multiQuarterContainer').innerHTML = multiQuarterHtml;
             
-            // Add Day 1 Goals Detail Section
-            html += renderDay1GoalsDetail(data);
-            
-            document.getElementById('themeContainer').innerHTML = html;
+            // Render Day 1 Goals Detail Section in the theme container
+            const detailHtml = renderDay1GoalsDetail(data);
+            document.getElementById('themeContainer').innerHTML = detailHtml;
         }
 
         function categorizeTask(task) {

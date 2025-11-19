@@ -1319,7 +1319,7 @@
             }
             
             // Group roadmap data initiatives by quarter based on target date
-            // Also extract unique "Day 1 Goal" values for each quarter
+            // Also extract unique "Day 1 Goal" values and group initiatives by goal
             if (roadmapData) {
                 roadmapData.forEach(task => {
                     const targetDate = task['Day 1 Close Target End Date'];
@@ -1343,13 +1343,18 @@
                     }
                     
                     if (quarter && ['Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27'].includes(quarter)) {
-                        if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: new Set() };
+                        if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);
                         
-                        // Add Day 1 Goal if it exists
+                        // Group initiatives by Day 1 Goal
                         const day1Goal = task['Day 1 Goal'];
                         if (day1Goal && day1Goal.trim() && day1Goal.toLowerCase() !== 'n/a') {
-                            quarters[quarter].goals.add(day1Goal.trim());
+                            const goalKey = day1Goal.trim();
+                            if (!quarters[quarter].goals[goalKey]) {
+                                quarters[quarter].goals[goalKey] = [];
+                                quarters[quarter].goalsList.push(goalKey);
+                            }
+                            quarters[quarter].goals[goalKey].push(task);
                         }
                     }
                 });
@@ -1400,42 +1405,78 @@
                             ${plannedCount > 0 ? `<div style="background: #f8f9fa; padding: 8px 12px; border-radius: 8px; font-size: 0.85em; font-weight: 600;">○ ${plannedCount} planned</div>` : ''}
                         </div>
                         
-                        <ul class="quarter-milestones">
+                        <div class="quarter-goals-section">
                 `;
                 
-                // Display Day 1 Goals from roadmap data
-                const goals = Array.from(quarterData.goals || []);
-                if (goals.length > 0) {
-                    goals.forEach(goal => {
+                // Display Day 1 Goals as clickable items with drill-down
+                const goalsList = quarterData.goalsList || [];
+                const goalsData = quarterData.goals || {};
+                
+                if (goalsList.length > 0) {
+                    goalsList.forEach((goal, idx) => {
+                        const goalInitiatives = goalsData[goal] || [];
+                        const goalId = `goal-${quarter.replace(/'/g, '')}-${idx}`;
+                        
+                        // Calculate stats for this goal
+                        const completedGoalInitiatives = goalInitiatives.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                        const inProgressGoalInitiatives = goalInitiatives.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
+                        const totalHoursGoal = goalInitiatives.reduce((sum, t) => {
+                            const h = parseFloat(t['Hours Saved'] || 0);
+                            return sum + (isNaN(h) ? 0 : h);
+                        }, 0);
+                        
                         html += `
-                            <li class="milestone-item">
-                                🎯 ${goal}
-                            </li>
+                            <div class="goal-item">
+                                <div class="goal-header" onclick="toggleGoalDetails('${goalId}')" style="cursor: pointer; display: flex; align-items: center; justify-content: space-between; padding: 12px; background: #f8f9fa; border-radius: 8px; margin-bottom: 8px; transition: background 0.2s;">
+                                    <div style="display: flex; align-items: center; gap: 10px; flex: 1;">
+                                        <span class="goal-arrow" id="arrow-${goalId}" style="font-size: 0.8em; transition: transform 0.2s;">▶</span>
+                                        <span style="font-weight: 600; color: #2c3e50;">🎯 ${goal}</span>
+                                    </div>
+                                    <div style="display: flex; gap: 12px; align-items: center; font-size: 0.85em;">
+                                        <span style="background: white; padding: 4px 10px; border-radius: 6px; font-weight: 600; color: #28a745;">✓ ${completedGoalInitiatives}</span>
+                                        <span style="background: white; padding: 4px 10px; border-radius: 6px; font-weight: 600; color: #007bff;">⟳ ${inProgressGoalInitiatives}</span>
+                                        ${totalHoursGoal > 0 ? `<span style="background: white; padding: 4px 10px; border-radius: 6px; font-weight: 600; color: #6c757d;">💾 ${Math.round(totalHoursGoal)}h</span>` : ''}
+                                        <span style="color: #999; font-size: 0.9em;">${goalInitiatives.length} initiatives</span>
+                                    </div>
+                                </div>
+                                <div class="goal-details" id="${goalId}" style="display: none; padding: 15px; background: white; border-radius: 8px; margin-bottom: 10px; border-left: 4px solid #007bff;">
+                                    ${goalInitiatives.map(initiative => {
+                                        const status = normalizeStatus(initiative['Status']);
+                                        const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
+                                        const hours = parseFloat(initiative['Hours Saved'] || 0);
+                                        const owner = initiative['Owner'] || 'TBD';
+                                        const okr = initiative['OKR'] || '';
+                                        const category = initiative['Close Category'] || '';
+                                        
+                                        return `
+                                            <div style="padding: 12px; margin-bottom: 8px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid ${statusColor};">
+                                                <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 8px;">
+                                                    <div style="flex: 1;">
+                                                        <div style="font-weight: 600; color: #2c3e50; margin-bottom: 4px;">${okr || 'Untitled Initiative'}</div>
+                                                        ${category ? `<div style="font-size: 0.85em; color: #6c757d; margin-bottom: 4px;">📂 ${category}</div>` : ''}
+                                                    </div>
+                                                    <div style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 6px; font-size: 0.85em; font-weight: 600; white-space: nowrap; margin-left: 10px;">
+                                                        ${status}
+                                                    </div>
+                                                </div>
+                                                <div style="display: flex; gap: 15px; font-size: 0.85em; color: #6c757d; flex-wrap: wrap;">
+                                                    <div><strong>Owner:</strong> ${owner}</div>
+                                                    ${hours > 0 ? `<div><strong>Impact:</strong> ${Math.round(hours)} hours saved</div>` : ''}
+                                                    ${initiative['Day 1 Close Target End Date'] ? `<div><strong>Target:</strong> ${new Date(initiative['Day 1 Close Target End Date']).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</div>` : ''}
+                                                </div>
+                                            </div>
+                                        `;
+                                    }).join('')}
+                                </div>
+                            </div>
                         `;
                     });
-                }
-                
-                // Also display future milestones if they exist
-                if (quarterMilestones.length > 0) {
-                    quarterMilestones.forEach(milestone => {
-                        const category = milestone['Close Category'] || 'General';
-                        const description = milestone['End of Week Deliverable / Milestone'] || '';
-                        html += `
-                            <li class="milestone-item">
-                                ${description}
-                                <span class="milestone-category">${category}</span>
-                            </li>
-                        `;
-                    });
-                }
-                
-                // If no goals or milestones
-                if (goals.length === 0 && quarterMilestones.length === 0) {
-                    html += `<li class="milestone-item">Planning in progress...</li>`;
+                } else {
+                    html += `<div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic;">Planning in progress...</div>`;
                 }
                 
                 html += `
-                        </ul>
+                        </div>
                         
                         ${quarterInitiatives.length > 0 ? `
                             <div style="text-align: center; margin-top: 15px; padding-top: 15px; border-top: 2px solid #e9ecef;">
@@ -2140,6 +2181,23 @@
                     detailsDiv.style.display = 'block';
                 } else {
                     detailsDiv.style.display = 'none';
+                }
+            }
+        }
+        
+        function toggleGoalDetails(goalId) {
+            const detailsDiv = document.getElementById(goalId);
+            const arrow = document.getElementById(`arrow-${goalId}`);
+            
+            if (detailsDiv && arrow) {
+                if (detailsDiv.style.display === 'none' || !detailsDiv.style.display) {
+                    detailsDiv.style.display = 'block';
+                    arrow.style.transform = 'rotate(90deg)';
+                    arrow.textContent = '▼';
+                } else {
+                    detailsDiv.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                    arrow.textContent = '▶';
                 }
             }
         }

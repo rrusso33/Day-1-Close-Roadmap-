@@ -1614,14 +1614,19 @@
                                     const okrPct = okrTotal > 0 ? (okrCompleted / okrTotal) * 100 : 0;
                                     const okrStatusColor = okrPct === 100 ? '#28a745' : okrPct > 0 ? '#007bff' : '#6c757d';
                                     
+                                    // Get unique owners for this OKR
+                                    const owners = [...new Set(allOkrTasks.map(t => t['Owner(s)'] || 'TBD').filter(o => o))];
+                                    const ownerText = owners.length > 0 ? owners.join(', ') : 'TBD';
+                                    
                                     return `
                                         <div style="padding: 18px; background: #f0f4ff; border-radius: 10px; border-left: 5px solid ${okrStatusColor};">
                                             <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
                                                 <div style="flex: 1;">
                                                     <div style="font-weight: 700; color: #1e3c72; margin-bottom: 8px; font-size: 1.05em;">🎯 ${okr}</div>
-                                                    <div style="display: flex; gap: 15px; align-items: center; font-size: 0.9em;">
-                                                        <span style="color: #6c757d;"><strong>${okrCompleted}/${okrTotal}</strong> tasks complete</span>
-                                                        <div style="flex: 1; max-width: 250px; background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                                    <div style="display: flex; gap: 15px; align-items: center; font-size: 0.9em; flex-wrap: wrap;">
+                                                        <span style="color: #6c757d;">👤 <strong>${ownerText}</strong></span>
+                                                        <span style="color: #6c757d;"><strong>${okrCompleted}/${okrTotal}</strong> deliverables complete</span>
+                                                        <div style="flex: 1; min-width: 150px; max-width: 250px; background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
                                                             <div style="background: ${okrStatusColor}; height: 100%; width: ${okrPct}%; transition: width 0.3s;"></div>
                                                         </div>
                                                         <span style="font-weight: 700; color: ${okrStatusColor};">${Math.round(okrPct)}%</span>
@@ -1638,22 +1643,33 @@
                                                     
                                                     return `
                                                         <div style="padding: 12px; background: white; border-radius: 6px; border-left: 3px solid ${krStatusColor};">
-                                                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 8px; font-size: 0.95em;">📊 ${keyResult}</div>
-                                                            <div style="display: flex; gap: 12px; align-items: center; font-size: 0.85em; margin-bottom: 8px;">
+                                                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 0.95em;">📊 ${keyResult}</div>
+                                                            <div style="display: flex; gap: 12px; align-items: center; font-size: 0.85em; margin-bottom: 12px;">
                                                                 <span style="color: #6c757d;"><strong>${krCompleted}/${krTotal}</strong> complete</span>
                                                                 <div style="flex: 1; max-width: 180px; background: #e9ecef; height: 5px; border-radius: 3px; overflow: hidden;">
                                                                     <div style="background: ${krStatusColor}; height: 100%; width: ${krPct}%; transition: width 0.3s;"></div>
                                                                 </div>
                                                                 <span style="font-weight: 600; color: ${krStatusColor};">${Math.round(krPct)}%</span>
                                                             </div>
-                                                            <div style="display: flex; gap: 12px; flex-wrap: wrap; font-size: 0.8em; color: #6c757d;">
+                                                            <div style="margin-left: 10px; display: grid; gap: 6px;">
                                                                 ${tasks.map(t => {
                                                                     const status = normalizeStatus(t['Status']);
                                                                     const statusIcon = status === 'Complete' ? '✓' : status === 'In Progress' ? '⟳' : '○';
                                                                     const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
-                                                                    const owner = t['Owner(s)'] || 'TBD';
-                                                                    return `<span style="color: ${statusColor};">${statusIcon} ${owner}</span>`;
-                                                                }).join(' • ')}
+                                                                    const deliverable = t['End of Week Deliverable / Milestone'] || 'Deliverable TBD';
+                                                                    const targetDate = t['Target End Date'] || '';
+                                                                    const dateText = targetDate ? ` • ${targetDate}` : '';
+                                                                    
+                                                                    return `
+                                                                        <div style="display: flex; align-items: start; gap: 8px; font-size: 0.85em; padding: 6px; background: #f8f9fa; border-radius: 4px;">
+                                                                            <span style="color: ${statusColor}; font-weight: bold; font-size: 1.1em; line-height: 1.2;">${statusIcon}</span>
+                                                                            <span style="flex: 1; color: #2c3e50; line-height: 1.4;">
+                                                                                ${deliverable}
+                                                                                ${dateText ? `<span style="color: #6c757d; font-size: 0.9em;">${dateText}</span>` : ''}
+                                                                            </span>
+                                                                        </div>
+                                                                    `;
+                                                                }).join('')}
                                                             </div>
                                                         </div>
                                                     `;

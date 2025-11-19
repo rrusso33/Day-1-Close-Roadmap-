@@ -1652,24 +1652,105 @@
                                                                 <span style="font-weight: 600; color: ${krStatusColor};">${Math.round(krPct)}%</span>
                                                             </div>
                                                             <div style="margin-left: 10px; display: grid; gap: 6px;">
-                                                                ${tasks.map(t => {
-                                                                    const status = normalizeStatus(t['Status']);
-                                                                    const statusIcon = status === 'Complete' ? '✓' : status === 'In Progress' ? '⟳' : '○';
-                                                                    const statusColor = status === 'Complete' ? '#28a745' : status === 'In Progress' ? '#007bff' : '#6c757d';
-                                                                    const deliverable = t['End of Week Deliverable / Milestone'] || 'Deliverable TBD';
-                                                                    const targetDate = t['Target End Date'] || '';
-                                                                    const dateText = targetDate ? ` • ${targetDate}` : '';
+                                                                ${(() => {
+                                                                    // Consolidate and summarize deliverables
+                                                                    const deliverableGroups = {};
                                                                     
-                                                                    return `
-                                                                        <div style="display: flex; align-items: start; gap: 8px; font-size: 0.85em; padding: 6px; background: #f8f9fa; border-radius: 4px;">
-                                                                            <span style="color: ${statusColor}; font-weight: bold; font-size: 1.1em; line-height: 1.2;">${statusIcon}</span>
-                                                                            <span style="flex: 1; color: #2c3e50; line-height: 1.4;">
-                                                                                ${deliverable}
-                                                                                ${dateText ? `<span style="color: #6c757d; font-size: 0.9em;">${dateText}</span>` : ''}
-                                                                            </span>
-                                                                        </div>
-                                                                    `;
-                                                                }).join('')}
+                                                                    tasks.forEach(t => {
+                                                                        const rawDeliverable = t['End of Week Deliverable / Milestone'] || 'Deliverable TBD';
+                                                                        const status = normalizeStatus(t['Status']);
+                                                                        
+                                                                        // Clean up and shorten deliverable text
+                                                                        let cleanDeliverable = rawDeliverable
+                                                                            .replace(/\[close week\]/gi, '')
+                                                                            .replace(/\[thanksgiving break\]/gi, '')
+                                                                            .replace(/\[Aileen to do.*?\]/gi, '')
+                                                                            .replace(/- Perform /gi, '')
+                                                                            .replace(/- Complete /gi, '')
+                                                                            .replace(/- Completed /gi, '')
+                                                                            .replace(/- Review /gi, '')
+                                                                            .replace(/- Meet with /gi, 'Meet ')
+                                                                            .replace(/- Demo of tool/gi, 'Demo')
+                                                                            .replace(/- Working session/gi, 'Session')
+                                                                            .replace(/- Rollover for Aileen to work on/gi, 'Continue work')
+                                                                            .replace(/- ROI plan filled out for expectations around/gi, 'ROI plan for')
+                                                                            .replace(/if needed - /gi, '')
+                                                                            .replace(/as an option if accruals\.ai does not perform as we would like\.?/gi, 'as backup option')
+                                                                            .replace(/Working on this as an option if accruals\.ai does not perform as we would like\.?/gi, 'Backup option development')
+                                                                            .trim();
+                                                                        
+                                                                        // Further simplification for CFO level
+                                                                        cleanDeliverable = cleanDeliverable
+                                                                            .replace(/noting items for accruals\.ai AI bot prep\.?/gi, '')
+                                                                            .replace(/fill out onboarding forms from the vendor\.?/gi, 'Vendor onboarding')
+                                                                            .replace(/\(pending scheduling\)/gi, '')
+                                                                            .replace(/Connect to Netsuite and Zip platforms, and /gi, '')
+                                                                            .replace(/normal September close activities,? /gi, 'September close activities')
+                                                                            .replace(/Perform working sessions to address vendor specific preferences in the system and overall understanding of tool\.? /gi, 'Vendor configuration sessions')
+                                                                            .replace(/Create loose timeline and correct order of accrual tasks for October close based on progress of implementation/gi, 'October close timeline planning')
+                                                                            .replace(/Inform teams who recieve deliverable requests from us of new method in accruals\.ai /gi, 'Team communication')
+                                                                            .replace(/Clean up Numeric tasks to accomodate new items from accruals\.ai/gi, 'Numeric cleanup')
+                                                                            .trim();
+                                                                        
+                                                                        // Remove leading/trailing punctuation
+                                                                        cleanDeliverable = cleanDeliverable.replace(/^[,\-•\s]+|[,\-•\s]+$/g, '').trim();
+                                                                        
+                                                                        // Capitalize first letter
+                                                                        if (cleanDeliverable) {
+                                                                            cleanDeliverable = cleanDeliverable.charAt(0).toUpperCase() + cleanDeliverable.slice(1);
+                                                                        }
+                                                                        
+                                                                        // Group similar deliverables
+                                                                        if (!deliverableGroups[cleanDeliverable]) {
+                                                                            deliverableGroups[cleanDeliverable] = {
+                                                                                statuses: [],
+                                                                                dates: [],
+                                                                                tasks: []
+                                                                            };
+                                                                        }
+                                                                        
+                                                                        deliverableGroups[cleanDeliverable].statuses.push(status);
+                                                                        if (t['Target End Date']) {
+                                                                            deliverableGroups[cleanDeliverable].dates.push(t['Target End Date']);
+                                                                        }
+                                                                        deliverableGroups[cleanDeliverable].tasks.push(t);
+                                                                    });
+                                                                    
+                                                                    // Render consolidated deliverables
+                                                                    return Object.entries(deliverableGroups).map(([deliverable, group]) => {
+                                                                        // Determine overall status for this deliverable group
+                                                                        const allComplete = group.statuses.every(s => s === 'Complete');
+                                                                        const anyInProgress = group.statuses.some(s => s === 'In Progress');
+                                                                        
+                                                                        let status, statusIcon, statusColor;
+                                                                        if (allComplete) {
+                                                                            status = 'Complete';
+                                                                            statusIcon = '✓';
+                                                                            statusColor = '#28a745';
+                                                                        } else if (anyInProgress) {
+                                                                            status = 'In Progress';
+                                                                            statusIcon = '⟳';
+                                                                            statusColor = '#007bff';
+                                                                        } else {
+                                                                            status = 'Planned';
+                                                                            statusIcon = '○';
+                                                                            statusColor = '#6c757d';
+                                                                        }
+                                                                        
+                                                                        // Get earliest date if multiple
+                                                                        const dateText = group.dates.length > 0 ? ` • ${group.dates[0]}` : '';
+                                                                        
+                                                                        return `
+                                                                            <div style="display: flex; align-items: start; gap: 8px; font-size: 0.85em; padding: 6px; background: #f8f9fa; border-radius: 4px;">
+                                                                                <span style="color: ${statusColor}; font-weight: bold; font-size: 1.1em; line-height: 1.2;">${statusIcon}</span>
+                                                                                <span style="flex: 1; color: #2c3e50; line-height: 1.4;">
+                                                                                    ${deliverable}
+                                                                                    ${dateText ? `<span style="color: #6c757d; font-size: 0.9em;">${dateText}</span>` : ''}
+                                                                                </span>
+                                                                            </div>
+                                                                        `;
+                                                                    }).join('');
+                                                                })()}
                                                             </div>
                                                         </div>
                                                     `;

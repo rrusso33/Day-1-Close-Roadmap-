@@ -1334,8 +1334,8 @@
                         if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
                         quarters[quarter].initiatives.push(task);
                         
-                        // Group initiatives by Theme
-                        const theme = task['Theme'];
+                        // Group initiatives by Day 1 Goal Theme
+                        const theme = task['Day 1 Goal Theme'];
                         if (theme && theme.trim() && theme.toLowerCase() !== 'n/a') {
                             const themeKey = theme.trim();
                             if (!quarters[quarter].goals[themeKey]) {
@@ -1442,10 +1442,10 @@
         function renderDay1GoalsDetail(data) {
             if (!data || data.length === 0) return '';
             
-            // First, group by Theme → OKR → Key Result
+            // First, group by Day 1 Goal Theme → OKR → Key Result
             const themeGroups = {};
             data.forEach(task => {
-                const theme = (task['Theme'] || '').trim();
+                const theme = (task['Day 1 Goal Theme'] || '').trim();
                 if (theme && theme.toLowerCase() !== 'n/a') {
                     if (!themeGroups[theme]) {
                         themeGroups[theme] = {

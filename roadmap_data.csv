@@ -613,16 +613,16 @@ Corporate Accounting,Set 2,Q3'26,12/8/2025,6,4/30/2026,Intercompany,Establish sy
 I/C Customers & Vendors",Support FNT execution,3,Charles Sikazwe,"FNT support
 D&V capacity",In-Progress,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT-3393 "
-Corporate Accounting,Set 2,Q3'26,11/24/2025,3,9/30/2026,Leases,,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Deploy integration to production ,1. Automation complete,2,Selena Ochoa,"Corp Acct agreement on who should prepare, review and approve leases",,,
-Corporate Accounting,Set 2,Q3'26,12/1/2025,3,9/30/2026,Leases,,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Train IT on Finance Lease creation (handoff)
+Corporate Accounting,Set 2,Q3'26,11/24/2025,3,9/30/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Deploy integration to production ,1. Automation complete,2,Selena Ochoa,"Corp Acct agreement on who should prepare, review and approve leases",,,
+Corporate Accounting,Set 2,Q3'26,12/1/2025,3,9/30/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Train IT on Finance Lease creation (handoff)
 2. Update Leases Confluence page","1. Go live with JE automation for November close
 2. Finance lease creation handoff to IT",2,Selena Ochoa,"Corp Acct agreement on who should prepare, review and approve leases",,,
-Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Prepaids,,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 8: Automate the prepaid usage process via proprietary programming,"[close week]
+Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Prepaids,Fully automate prepaid accounting,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 8: Automate the prepaid usage process via proprietary programming,"[close week]
 Focus: Continue working on prepaid usage in bolt.new
 Tasks:
 1. Finalize Bugcrowd vendor calculation start to end
 2. Finalize Impact vendor calculation start to end",- Finalize setup for 2 complex vendors in testing,3,Justine O'Sullivan,,At-Risk/Missed,Did not have time to do this,
-Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Prepaids,,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 5: Absorb GE reconciliations into current leadsheets,"Focus: Meet with Florence to go over Prepaids SL and Usage
+Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Prepaids,Fully automate prepaid accounting,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 5: Absorb GE reconciliations into current leadsheets,"Focus: Meet with Florence to go over Prepaids SL and Usage
 Tasks:
 1. Meet with Florence to review
 2. Create timelined gameplan for SL and Usage vendors

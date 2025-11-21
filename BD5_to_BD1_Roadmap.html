@@ -556,7 +556,7 @@
         }
         .quarters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
             gap: 20px;
             max-width: 100%;
             margin: 0 auto;
@@ -565,10 +565,12 @@
         .quarter-card {
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
-            padding: 25px;
+            padding: 20px;
             color: #2c3e50;
             transition: all 0.3s ease;
             border: 3px solid transparent;
+            min-width: 240px;
+            overflow: visible;
         }
         .quarter-card:hover {
             transform: translateY(-5px);
@@ -617,6 +619,8 @@
             align-items: center;
             font-size: 0.85em;
             margin-top: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
         .quarter-stat-item {
             display: flex;
@@ -660,20 +664,24 @@
         .quarter-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            margin-bottom: 20px;
-            padding-bottom: 15px;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
             border-bottom: 3px solid #e9ecef;
+            gap: 10px;
+            flex-wrap: wrap;
         }
         .quarter-name {
-            font-size: 1.8em;
+            font-size: 1.5em;
             font-weight: 700;
             color: #1e3c72;
+            line-height: 1.2;
         }
         .quarter-date {
-            font-size: 0.9em;
+            font-size: 0.8em;
             color: #6c757d;
             font-weight: 600;
+            margin-top: 4px;
         }
         .quarter-milestones {
             list-style: none;

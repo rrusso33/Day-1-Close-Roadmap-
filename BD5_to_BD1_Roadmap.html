@@ -1911,6 +1911,11 @@
                                                                             cleanDeliverable = cleanDeliverable.charAt(0).toUpperCase() + cleanDeliverable.slice(1);
                                                                         }
                                                                         
+                                                                        // Skip empty deliverables (after cleaning)
+                                                                        if (!cleanDeliverable || cleanDeliverable.length === 0) {
+                                                                            return;
+                                                                        }
+                                                                        
                                                                         // Group similar deliverables
                                                                         if (!deliverableGroups[cleanDeliverable]) {
                                                                             deliverableGroups[cleanDeliverable] = {
@@ -1928,7 +1933,9 @@
                                                                     });
                                                                     
                                                                     // Render consolidated deliverables
-                                                                    return Object.entries(deliverableGroups).map(([deliverable, group]) => {
+                                                                    return Object.entries(deliverableGroups)
+                                                                        .filter(([deliverable]) => deliverable && deliverable.trim().length > 0)
+                                                                        .map(([deliverable, group]) => {
                                                                         // Determine overall status for this deliverable group
                                                                         const allComplete = group.statuses.every(s => s === 'Complete');
                                                                         const anyInProgress = group.statuses.some(s => s === 'In Progress');

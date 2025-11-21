@@ -1065,6 +1065,24 @@
             font-weight: 700;
             margin-bottom: 20px;
             text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .strategy-title:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .strategy-title .collapse-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .strategy-title.collapsed .collapse-icon {
+            transform: rotate(-90deg);
         }
         .strategy-content {
             font-size: 1.1em;
@@ -1115,6 +1133,36 @@
             text-align: center;
             margin-bottom: 30px;
             color: #2c3e50;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .tracker-title:hover {
+            background: rgba(102, 126, 234, 0.1);
+        }
+        .tracker-title .collapse-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .tracker-title.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+        .collapsible-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
         }
         .tracker-visual {
             max-width: 1200px;
@@ -1319,8 +1367,12 @@
 
         <!-- Executive Strategy Section -->
         <div class="strategy-section">
-            <div class="strategy-title">📖 Our Day 1 Close Strategy by Functional Area</div>
-            <div class="strategy-content">
+            <div class="strategy-title" onclick="toggleSection('strategyContent', this)">
+                <span>📖 Our Day 1 Close Strategy by Functional Area</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div id="strategyContent" class="collapsible-content">
+                <div class="strategy-content">
                 We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. The hours shown below represent <strong>time savings that enable BD1 close</strong> - each functional area's contribution to reducing our overall close timeline.
             </div>
             <div class="strategy-grid">
@@ -1355,12 +1407,17 @@
                     <div class="strategy-card-desc">Guideline integration and PEO entity setup ensure scalable growth without slowing close</div>
                 </div>
             </div>
+            </div>
         </div>
 
         <!-- Progress Tracker -->
         <div class="progress-tracker">
-            <div class="tracker-title">🎯 Close Time Reduction Progress</div>
-            <div class="tracker-visual">
+            <div class="tracker-title" onclick="toggleSection('trackerContent', this)">
+                <span>🎯 Close Time Reduction Progress</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div id="trackerContent" class="collapsible-content">
+                <div class="tracker-visual">
                 <div class="tracker-box current">
                     <div class="tracker-label">Current State</div>
                     <div class="tracker-value">BD5</div>
@@ -1377,6 +1434,7 @@
                 <div class="tracker-progress-fill" id="trackerProgressFill" style="width: 0%">
                     <span id="trackerProgressText">0% Complete</span>
                 </div>
+            </div>
             </div>
         </div>
 
@@ -2981,6 +3039,15 @@
                     arrow.style.transform = 'rotate(0deg)';
                     arrow.textContent = '▶';
                 }
+            }
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(contentId, titleElement) {
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.toggle('collapsed');
+                titleElement.classList.toggle('collapsed');
             }
         }
 

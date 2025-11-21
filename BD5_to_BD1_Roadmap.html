@@ -583,6 +583,80 @@
             border-color: #ffd700;
             background: linear-gradient(135deg, #fff3cd 0%, white 100%);
         }
+        .quarter-progress-section {
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+        }
+        .quarter-progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .quarter-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        .quarter-progress-fill.high-progress {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+        }
+        .quarter-progress-fill.medium-progress {
+            background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+        }
+        .quarter-progress-fill.low-progress {
+            background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
+        }
+        .quarter-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            margin-top: 8px;
+        }
+        .quarter-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .quarter-completion {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #667eea;
+        }
+        .quarter-countdown {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255, 193, 7, 0.15);
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #856404;
+            margin-top: 8px;
+        }
+        .quarter-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-current {
+            background: #28a745;
+            color: white;
+        }
+        .badge-upcoming {
+            background: #667eea;
+            color: white;
+        }
+        .badge-target {
+            background: #ffd700;
+            color: #856404;
+        }
         .quarter-header {
             display: flex;
             justify-content: space-between;
@@ -1643,22 +1717,57 @@
                 const inProgressCount = quarterInitiatives.filter(i => normalizeStatus(i['Status']) === 'In Progress').length;
                 const plannedCount = quarterInitiatives.filter(i => normalizeStatus(i['Status']) === 'Planned').length;
                 
+                // Calculate progress percentage
+                const totalInitiatives = quarterInitiatives.length;
+                const progressPercent = totalInitiatives > 0 ? Math.round((completedCount / totalInitiatives) * 100) : 0;
+                
+                // Determine progress bar color
+                let progressClass = 'low-progress';
+                if (progressPercent >= 70) progressClass = 'high-progress';
+                else if (progressPercent >= 40) progressClass = 'medium-progress';
+                
+                // Calculate days until quarter end
+                const endDate = new Date(info.endDate);
+                const today = new Date();
+                const daysUntil = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+                const isPast = daysUntil < 0;
+                const daysText = isPast ? `${Math.abs(daysUntil)} days ago` : `${daysUntil} days away`;
+                
+                // Badge styling
+                let badgeClass = 'badge-upcoming';
+                if (info.badge === 'current') badgeClass = 'badge-current';
+                else if (info.badge === 'target') badgeClass = 'badge-target';
+                
                 html += `
                     <div class="quarter-card ${cardClass}">
-                        <span class="quarter-badge ${info.badge}">${info.description}</span>
                         <div class="quarter-header">
-                            <div class="quarter-name">${info.fullName}</div>
-                            <div class="quarter-date">${info.endDate}</div>
+                            <div>
+                                <div class="quarter-name">${info.fullName}</div>
+                                <div class="quarter-date">${info.endDate}</div>
+                            </div>
+                            <span class="quarter-badge ${badgeClass}">${info.badge === 'current' ? 'NOW' : info.badge === 'target' ? 'TARGET' : 'FUTURE'}</span>
                         </div>
                         
-                        <div style="display: flex; gap: 10px; margin-bottom: 15px; flex-wrap: wrap;">
-                            <div style="background: #e7f3ff; padding: 8px 12px; border-radius: 8px; font-size: 0.85em; font-weight: 600;">
-                                ${quarterInitiatives.length} initiatives
+                        ${totalInitiatives > 0 ? `
+                        <div class="quarter-progress-section">
+                            <div class="quarter-stats">
+                                <div class="quarter-stat-item">
+                                    <span style="color: #6c757d;">Progress:</span>
+                                    <span class="quarter-completion">${progressPercent}%</span>
+                                </div>
+                                <div class="quarter-stat-item">
+                                    <span style="color: #28a745;">✓ ${completedCount}</span>
+                                    <span style="color: #007bff;">⟳ ${inProgressCount}</span>
+                                    <span style="color: #6c757d;">○ ${plannedCount}</span>
+                                </div>
                             </div>
-                            ${completedCount > 0 ? `<div style="background: #d4edda; padding: 8px 12px; border-radius: 8px; font-size: 0.85em; font-weight: 600;">✓ ${completedCount} complete</div>` : ''}
-                            ${inProgressCount > 0 ? `<div style="background: #cce5ff; padding: 8px 12px; border-radius: 8px; font-size: 0.85em; font-weight: 600;">⟳ ${inProgressCount} in progress</div>` : ''}
-                            ${plannedCount > 0 ? `<div style="background: #f8f9fa; padding: 8px 12px; border-radius: 8px; font-size: 0.85em; font-weight: 600;">○ ${plannedCount} planned</div>` : ''}
+                            <div class="quarter-progress-bar">
+                                <div class="quarter-progress-fill ${progressClass}" style="width: ${progressPercent}%"></div>
+                            </div>
                         </div>
+                        ` : ''}
+                        
+                        ${!isPast ? `<div class="quarter-countdown">⏰ ${daysText}</div>` : ''}
                         
                         <div class="quarter-goals-section" style="margin-top: 15px;">
                 `;

@@ -541,6 +541,21 @@
             border-radius: 15px;
             box-shadow: 0 5px 20px rgba(0,0,0,0.08);
             color: white;
+            overflow-x: auto;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar {
+            height: 10px;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
         }
         .multi-quarter-title {
             font-size: 2.5em;
@@ -556,20 +571,19 @@
         }
         .quarters-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 20px;
-            max-width: 100%;
+            grid-template-columns: repeat(7, minmax(220px, 1fr));
+            gap: 16px;
             margin: 0 auto;
-            padding: 0 20px;
+            padding-bottom: 10px;
         }
         .quarter-card {
             background: rgba(255,255,255,0.95);
             border-radius: 12px;
-            padding: 20px;
+            padding: 18px;
             color: #2c3e50;
             transition: all 0.3s ease;
             border: 3px solid transparent;
-            min-width: 240px;
+            min-width: 220px;
             overflow: visible;
         }
         .quarter-card:hover {

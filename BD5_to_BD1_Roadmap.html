@@ -1217,6 +1217,37 @@
             line-height: 1.6;
         }
         
+        /* Detailed Themes Section */
+        .detailed-themes-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 50px;
+        }
+        .detailed-themes-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .detailed-themes-title:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .detailed-themes-title .collapse-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .detailed-themes-title.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+        
         /* Progress Tracker */
         .progress-tracker {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
@@ -1468,7 +1499,7 @@
                 <span class="collapse-icon">▼</span>
             </div>
             <div id="strategyContent" class="collapsible-content">
-                <div class="strategy-content">
+            <div class="strategy-content">
                 We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. The hours shown below represent <strong>time savings that enable BD1 close</strong> - each functional area's contribution to reducing our overall close timeline.
             </div>
             <div class="strategy-grid">
@@ -1502,7 +1533,7 @@
                     <div class="strategy-card-impact">Scalable Growth</div>
                     <div class="strategy-card-desc">Guideline integration and PEO entity setup ensure scalable growth without slowing close</div>
                 </div>
-            </div>
+                </div>
             </div>
         </div>
 
@@ -1513,7 +1544,7 @@
                 <span class="collapse-icon">▼</span>
             </div>
             <div id="trackerContent" class="collapsible-content">
-                <div class="tracker-visual">
+            <div class="tracker-visual">
                 <div class="tracker-box current">
                     <div class="tracker-label">Current State</div>
                     <div class="tracker-value">BD5</div>
@@ -1529,8 +1560,8 @@
             <div class="tracker-progress-bar">
                 <div class="tracker-progress-fill" id="trackerProgressFill" style="width: 0%">
                     <span id="trackerProgressText">0% Complete</span>
-                </div>
             </div>
+        </div>
 
         <!-- Dashboard -->
         <div class="dashboard" id="dashboard">
@@ -1901,29 +1932,13 @@
             if (Object.keys(themeGroups).length === 0) return '';
             
             let html = `
-                <div style="margin-top: 50px;">
-                    <!-- Collapsible Header -->
-                    <div onclick="toggleDetailedView()" 
-                         style="cursor: pointer; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); padding: 25px 35px; border-radius: 16px; box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3); display: flex; align-items: center; justify-content: space-between; transition: all 0.3s ease; margin-bottom: 0;"
-                         onmouseover="this.style.transform='translateY(-2px)'; this.style.boxShadow='0 12px 28px rgba(102, 126, 234, 0.4)'"
-                         onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='0 8px 20px rgba(102, 126, 234, 0.3)'">
-                        
-                        <div style="flex: 1;">
-                            <div style="display: flex; align-items: center; gap: 15px;">
-                                <span id="detailed-view-arrow" style="font-size: 1.5em; color: white; transition: transform 0.3s; font-weight: bold;">▼</span>
-                                <h2 style="color: white; font-size: 2em; margin: 0; font-weight: 700;">🎯 Day 1 Themes - Detailed View</h2>
-                            </div>
-                            <p style="color: rgba(255,255,255,0.9); font-size: 1em; margin: 8px 0 0 48px;">Click to expand/collapse • Organized by strategic theme with key deliverables and milestones</p>
-                        </div>
-                        
-                        <div style="background: rgba(255,255,255,0.2); padding: 8px 16px; border-radius: 8px; font-weight: 600; color: white; font-size: 0.9em;">
-                            ${Object.keys(themeGroups).length} Themes
-                        </div>
+                <div class="detailed-themes-section">
+                    <div class="detailed-themes-title" onclick="toggleDetailedView()">
+                        <span>🎯 Day 1 Themes - Detailed View</span>
+                        <span class="collapse-icon" id="detailed-view-arrow">▼</span>
                     </div>
-                    
-                    <!-- Collapsible Content -->
-                    <div id="detailed-view-content" style="transition: all 0.3s ease; overflow: hidden;">
-                        <div style="padding: 30px; background: white; border-radius: 0 0 16px 16px; box-shadow: 0 4px 6px rgba(0,0,0,0.1); margin-top: 0;">
+                    <div id="detailed-view-content" class="collapsible-content">
+                        <div style="padding: 40px 50px; background: white;">
                             <div style="display: grid; gap: 20px;">
             `;
             
@@ -2218,20 +2233,10 @@
         
         function toggleDetailedView() {
             const content = document.getElementById('detailed-view-content');
-            const arrow = document.getElementById('detailed-view-arrow');
-            
-            if (content && arrow) {
-                if (content.style.display === 'none') {
-                    // Expand
-                    content.style.display = 'block';
-                    arrow.style.transform = 'rotate(0deg)';
-                    arrow.textContent = '▼';
-                } else {
-                    // Collapse
-                    content.style.display = 'none';
-                    arrow.style.transform = 'rotate(-90deg)';
-                    arrow.textContent = '▶';
-                }
+            const titleElement = document.querySelector('.detailed-themes-title');
+            if (content && titleElement) {
+                content.classList.toggle('collapsed');
+                titleElement.classList.toggle('collapsed');
             }
         }
 

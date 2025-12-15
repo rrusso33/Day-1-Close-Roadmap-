@@ -2415,13 +2415,13 @@
 
         // Google Sheet ID for Progress Updates
         const PROGRESS_SHEET_ID = '1hB8YHv3RoA2OwdI_wQJWhpEucnga86uMu2Wlc7DwVaw';
-        const PROGRESS_SHEET_URL = `https://docs.google.com/spreadsheets/d/${PROGRESS_SHEET_ID}/gviz/tq?tqx=out:csv`;
+        const PROGRESS_SHEET_URL = `https://docs.google.com/spreadsheets/d/${PROGRESS_SHEET_ID}/pub?output=csv`;
         const PROGRESS_SHEET_EDIT_URL = `https://docs.google.com/spreadsheets/d/${PROGRESS_SHEET_ID}/edit`;
         
         // Fetch progress updates from Google Sheets
         async function fetchProgressUpdates() {
             try {
-                const response = await fetch(PROGRESS_SHEET_URL);
+                const response = await fetch(PROGRESS_SHEET_URL, { cache: 'no-store' });
                 if (!response.ok) throw new Error('Failed to fetch');
                 const csvText = await response.text();
                 

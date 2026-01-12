@@ -2174,6 +2174,7 @@
                                                                     // Render consolidated deliverables
                                                                     return Object.entries(deliverableGroups)
                                                                         .filter(([deliverable]) => deliverable && deliverable.trim().length > 0)
+                                                                        .filter(([deliverable]) => !deliverable.includes('#NAME') && !deliverable.includes('#REF') && !deliverable.includes('#VALUE'))
                                                                         .map(([deliverable, group]) => {
                                                                         // Determine overall status for this deliverable group
                                                                         const allComplete = group.statuses.every(s => s === 'Complete');

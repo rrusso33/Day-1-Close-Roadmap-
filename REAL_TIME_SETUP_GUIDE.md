@@ -110,7 +110,7 @@ function doGet(e) {
 
 ### **Step 4: Connect to Your Roadmap**
 
-1. Open `BD5_to_BD1_Roadmap.html` in a text editor (Notepad, VS Code, etc.)
+1. Open `BD6_to_BD1_Roadmap.html` in a text editor (Notepad, VS Code, etc.)
 2. Find line 984 (near the top of the JavaScript section):
    ```javascript
    const APPS_SCRIPT_URL = ''; // Paste your Web App URL here
@@ -131,7 +131,7 @@ function doGet(e) {
 
 **Option B: Using Git Commands**
 ```bash
-git add BD5_to_BD1_Roadmap.html
+git add BD6_to_BD1_Roadmap.html
 git commit -m "Connect real-time data from Google Sheets"
 git push origin main
 ```
@@ -141,7 +141,7 @@ git push origin main
 ## ✅ Testing Your Connection
 
 1. Wait 2-3 minutes for GitHub Pages to update
-2. Open your live roadmap: https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+2. Open your live roadmap: https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 3. Open your browser console (F12 → Console tab)
 4. You should see:
    ```

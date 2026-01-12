@@ -48,9 +48,9 @@ echo   SUCCESS! Roadmap Updated
 echo ========================================
 echo.
 echo Your roadmap will be live in 1-2 minutes at:
-echo https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+echo https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 echo.
 echo Opening roadmap in browser...
-start https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+start https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 echo.
 pause

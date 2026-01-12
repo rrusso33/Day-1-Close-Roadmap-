@@ -17,7 +17,7 @@
 
 ### **Step 3: View Live** (2 minutes)
 1. Wait 2 minutes for GitHub Pages to update
-2. Go to: https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+2. Go to: https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 3. Press `Ctrl + Shift + R` to hard refresh
 
 ---
@@ -95,7 +95,7 @@ git checkout main
 
 ## 🚀 Your Live Roadmap
 
-**URL:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+**URL:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 
 **Share with:**
 - CAO (view-only access)

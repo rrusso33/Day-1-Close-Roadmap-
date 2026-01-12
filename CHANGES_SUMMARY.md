@@ -76,7 +76,7 @@ git commit -m "Reorganize roadmap by Close Category for CAO visibility"
 git push origin main
 ```
 
-Wait 2-3 minutes, then view: https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+Wait 2-3 minutes, then view: https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 
 ### Option 2: Set Up Real-Time Google Sheets Connection
 

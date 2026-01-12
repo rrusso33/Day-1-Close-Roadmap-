@@ -6,7 +6,7 @@ Visual roadmap tracking the journey from BD5 to BD1 close by February 1, 2027.
 
 ## 📊 Live Roadmap
 
-**View Live:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+**View Live:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 
 ---
 
@@ -28,13 +28,13 @@ Your roadmap will be live with all changes! ✨
 
 - **`UPDATE_ROADMAP.bat`** - Deploy your changes to live site
 - **`OPEN_ROADMAP.bat`** - Open your live roadmap in browser
-- **Live URL:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html
+- **Live URL:** https://rrusso33.github.io/Day-1-Close-Roadmap-/BD6_to_BD1_Roadmap.html
 
 ---
 
 ## 📁 Files in This Repository
 
-- **`BD5_to_BD1_Roadmap.html`** - Main roadmap file (timeline visualization)
+- **`BD6_to_BD1_Roadmap.html`** - Main roadmap file (timeline visualization)
 - **`roadmap_data.csv`** - Data source (your task data)
 - **`UPDATE_ROADMAP.bat`** - Quick update script (one-click deploy)
 - **`OPEN_ROADMAP.bat`** - Quick shortcut to open live roadmap

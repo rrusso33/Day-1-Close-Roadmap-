@@ -1453,14 +1453,14 @@
 
         <!-- Journey Timeline Visual -->
         <div class="journey-timeline">
-            <div class="journey-title">📍 Our Journey from BD5 to BD1</div>
+            <div class="journey-title">📍 Our Journey from BD6 to BD1</div>
             <div class="timeline-visual">
                 <div class="timeline-track">
                     <div class="timeline-progress" id="journeyProgress"></div>
                 </div>
                 <div class="timeline-phases">
                     <div class="timeline-phase" id="phase-bd5">
-                        <div class="phase-circle">BD5</div>
+                        <div class="phase-circle">BD6</div>
                         <div class="phase-label">Starting Point</div>
                         <div class="phase-date">Q3 FY26</div>
                         <div class="phase-description">Current close process</div>
@@ -1507,7 +1507,7 @@
             </div>
             <div id="strategyContent" class="collapsible-content">
             <div class="strategy-content">
-                We're currently on a <strong>BD5 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. The hours shown below represent <strong>time savings that enable BD1 close</strong> - each functional area's contribution to reducing our overall close timeline.
+                We're currently on a <strong>BD6 close</strong> (5 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. The hours shown below represent <strong>time savings that enable BD1 close</strong> - each functional area's contribution to reducing our overall close timeline.
             </div>
             <div class="strategy-grid">
                 <div class="strategy-card">
@@ -1554,8 +1554,8 @@
             <div class="tracker-visual">
                 <div class="tracker-box current">
                     <div class="tracker-label">Current State</div>
-                    <div class="tracker-value">BD5</div>
-                    <div class="tracker-desc">5 Business Days</div>
+                    <div class="tracker-value">BD6</div>
+                    <div class="tracker-desc">6 Business Days</div>
                 </div>
                 <div class="tracker-arrow">→</div>
                 <div class="tracker-box target">
@@ -2634,11 +2634,11 @@
                 statusDetail = `We're ${variance.toFixed(0)}% ahead of expected progress!`;
             }
             
-            // Current BD level (still at BD5)
-            const currentBD = 'BD5';
+            // Current BD level (still at BD6)
+            const currentBD = 'BD6';
             const targetBD = 'BD1';
-            const daysSaved = 0; // Still at BD5, so 0 days saved
-            const daysToSave = 4; // Need to save 4 days total (BD5 to BD1)
+            const daysSaved = 0; // Still at BD6, so 0 days saved
+            const daysToSave = 5; // Need to save 5 days total (BD6 to BD1)
             
             const html = `
                 <div class="on-track-title">🎯 Are We On Track for BD1?</div>
@@ -3136,7 +3136,7 @@
         }
 
         function updateJourneyTimeline(progress) {
-            // For now, we're still at BD5 (no days reduced yet)
+            // For now, we're still at BD6 (no days reduced yet)
             // Force progress to be capped at 15% until we actually move to BD4
             const currentPhaseProgress = Math.min(progress, 15);
             

@@ -2404,66 +2404,53 @@
                                                     
                                                     const renderTask = (task, statusClass, icon) => {
                                                         const isLong = task.text.length > 120;
-                                                        const taskId = Math.random().toString(36).substr(2, 9);
-                                                        return \`
-                                                            <div class="task-card">
-                                                                <div class="task-status-icon \${statusClass}">\${icon}</div>
-                                                                <div style="flex: 1;">
-                                                                    <div class="task-text \${isLong ? 'task-text-truncated' : ''}" id="task-\${taskId}">\${task.text}</div>
-                                                                    \${isLong ? \`<span class="task-expand-btn" onclick="const el=document.getElementById('task-\${taskId}'); el.classList.toggle('task-text-truncated'); this.textContent = el.classList.contains('task-text-truncated') ? 'Show more...' : 'Show less';">Show more...</span>\` : ''}
-                                                                </div>
-                                                            </div>
-                                                        \`;
+                                                        const taskId = 'task-' + Math.random().toString(36).substr(2, 9);
+                                                        let html = '<div class="task-card">';
+                                                        html += '<div class="task-status-icon ' + statusClass + '">' + icon + '</div>';
+                                                        html += '<div style="flex: 1;">';
+                                                        html += '<div class="task-text' + (isLong ? ' task-text-truncated' : '') + '" id="' + taskId + '">' + task.text + '</div>';
+                                                        if (isLong) {
+                                                            html += '<span class="task-expand-btn" onclick="var el=document.getElementById(\'' + taskId + '\'); el.classList.toggle(\'task-text-truncated\'); this.textContent = el.classList.contains(\'task-text-truncated\') ? \'Show more...\' : \'Show less\';">Show more...</span>';
+                                                        }
+                                                        html += '</div></div>';
+                                                        return html;
                                                     };
                                                     
-                                                    return \`
-                                                        <div class="kr-section">
-                                                            <div class="kr-header">
-                                                                <span class="kr-title">📊 \${keyResult}</span>
-                                                                <span class="kr-progress-info">
-                                                                    <strong>\${krCompleted}/\${krTotal}</strong> complete
-                                                                    <span style="font-weight: 600; color: \${krStatusColor};">\${Math.round(krPct)}%</span>
-                                                                </span>
-                                                            </div>
-                                                            
-                                                            \${uniqueInProgress.length > 0 ? \`
-                                                                <div class="status-group">
-                                                                    <div class="status-group-header in-progress">
-                                                                        🔄 In Progress
-                                                                        <span class="status-count-badge">\${uniqueInProgress.length}</span>
-                                                                    </div>
-                                                                    <div class="tasks-container">
-                                                                        \${uniqueInProgress.map(t => renderTask(t, 'in-progress', '⏳')).join('')}
-                                                                    </div>
-                                                                </div>
-                                                            \` : ''}
-                                                            
-                                                            \${uniqueNotStarted.length > 0 ? \`
-                                                                <div class="status-group">
-                                                                    <div class="status-group-header not-started">
-                                                                        ⏸️ Not Started
-                                                                        <span class="status-count-badge">\${uniqueNotStarted.length}</span>
-                                                                    </div>
-                                                                    <div class="tasks-container">
-                                                                        \${uniqueNotStarted.map(t => renderTask(t, 'not-started', '○')).join('')}
-                                                                    </div>
-                                                                </div>
-                                                            \` : ''}
-                                                            
-                                                            \${uniqueCompleted.length > 0 ? \`
-                                                                <div class="collapsed-completed" onclick="const el=document.getElementById('completed-\${krUniqueId}'); const isHidden = el.style.display === 'none'; el.style.display = isHidden ? 'block' : 'none'; this.querySelector('.collapsed-completed-expand').textContent = isHidden ? 'Click to collapse ▲' : 'Click to expand ▼';">
-                                                                    <span class="collapsed-completed-icon">✅</span>
-                                                                    <span class="collapsed-completed-text">\${uniqueCompleted.length} task\${uniqueCompleted.length > 1 ? 's' : ''} completed</span>
-                                                                    <span class="collapsed-completed-expand">Click to expand ▼</span>
-                                                                </div>
-                                                                <div id="completed-\${krUniqueId}" style="display: none; margin-top: 8px;">
-                                                                    <div class="tasks-container">
-                                                                        \${uniqueCompleted.map(t => renderTask(t, 'complete', '✓')).join('')}
-                                                                    </div>
-                                                                </div>
-                                                            \` : ''}
-                                                        </div>
-                                                    \`;
+                                                    let krHtml = '<div class="kr-section">';
+                                                    krHtml += '<div class="kr-header">';
+                                                    krHtml += '<span class="kr-title">📊 ' + keyResult + '</span>';
+                                                    krHtml += '<span class="kr-progress-info"><strong>' + krCompleted + '/' + krTotal + '</strong> complete ';
+                                                    krHtml += '<span style="font-weight: 600; color: ' + krStatusColor + ';">' + Math.round(krPct) + '%</span></span>';
+                                                    krHtml += '</div>';
+                                                    
+                                                    if (uniqueInProgress.length > 0) {
+                                                        krHtml += '<div class="status-group">';
+                                                        krHtml += '<div class="status-group-header in-progress">🔄 In Progress <span class="status-count-badge">' + uniqueInProgress.length + '</span></div>';
+                                                        krHtml += '<div class="tasks-container">' + uniqueInProgress.map(t => renderTask(t, 'in-progress', '⏳')).join('') + '</div>';
+                                                        krHtml += '</div>';
+                                                    }
+                                                    
+                                                    if (uniqueNotStarted.length > 0) {
+                                                        krHtml += '<div class="status-group">';
+                                                        krHtml += '<div class="status-group-header not-started">⏸️ Not Started <span class="status-count-badge">' + uniqueNotStarted.length + '</span></div>';
+                                                        krHtml += '<div class="tasks-container">' + uniqueNotStarted.map(t => renderTask(t, 'not-started', '○')).join('') + '</div>';
+                                                        krHtml += '</div>';
+                                                    }
+                                                    
+                                                    if (uniqueCompleted.length > 0) {
+                                                        const completedId = 'completed-' + krUniqueId;
+                                                        krHtml += '<div class="collapsed-completed" onclick="var el=document.getElementById(\'' + completedId + '\'); var isHidden = el.style.display === \'none\'; el.style.display = isHidden ? \'block\' : \'none\'; this.querySelector(\'.collapsed-completed-expand\').textContent = isHidden ? \'Click to collapse ▲\' : \'Click to expand ▼\';">';
+                                                        krHtml += '<span class="collapsed-completed-icon">✅</span>';
+                                                        krHtml += '<span class="collapsed-completed-text">' + uniqueCompleted.length + ' task' + (uniqueCompleted.length > 1 ? 's' : '') + ' completed</span>';
+                                                        krHtml += '<span class="collapsed-completed-expand">Click to expand ▼</span>';
+                                                        krHtml += '</div>';
+                                                        krHtml += '<div id="' + completedId + '" style="display: none; margin-top: 8px;">';
+                                                        krHtml += '<div class="tasks-container">' + uniqueCompleted.map(t => renderTask(t, 'complete', '✓')).join('') + '</div>';
+                                                        krHtml += '</div>';
+                                                    }
+                                                    
+                                                    krHtml += '</div>';
+                                                    return krHtml;
                                                 }).join('')}
                                             </div>
                                         </div>

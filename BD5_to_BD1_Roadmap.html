@@ -2419,53 +2419,45 @@
             return data;
         }
 
-        // Progress updates - NOW READS FROM GOOGLE SHEETS!
-        // Edit your progress here: https://docs.google.com/spreadsheets/d/e/2PACX-1vSZ1DX0lrUV40IDTQiZlm_HK1PsDTmaMbrKhlB6GPl0wCurno-EGArSBN0KKCKQ6-B1LHem4QYrSdcF/pub?output=csv
-        const PROGRESS_SHEET_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSZ1DX0lrUV40IDTQiZlm_HK1PsDTmaMbrKhlB6GPl0wCurno-EGArSBN0KKCKQ6-B1LHem4QYrSdcF/pub?output=csv';
+        // ╔════════════════════════════════════════════════════════════════╗
+        // ║          PROGRESS UPDATES - EDIT THIS SECTION                   ║
+        // ║                                                                  ║
+        // ║  To update: Search for "PROGRESS_DATA" (Ctrl+F)                 ║
+        // ║  Remember:  - Put each item in quotes "like this"               ║
+        // ║             - Add comma after each item EXCEPT the last one     ║
+        // ║             - Save file (Ctrl+S) then git push                  ║
+        // ╚════════════════════════════════════════════════════════════════╝
+        
+        const PROGRESS_DATA = {
+            // ──────────────────────────────────────────────────────
+            // RECENT WINS - What we've accomplished
+            // ──────────────────────────────────────────────────────
+            recentWins: [
+                "Completed Dec Close with a BD4 close deadline - 2 months in a row!"
+            ],
+            
+            // ──────────────────────────────────────────────────────
+            // IN PROGRESS - What we're working on now
+            // ──────────────────────────────────────────────────────
+            inProgressNow: [
+                "Continue scope and testing of accrual automation tool",
+                "Continue to scope and plan for reducing corporate cash to BD1 - working with Numeric and Maximor currently",
+                "Transition plans for Florence - working with her to review all monthly tasks"
+            ],
+            
+            // ──────────────────────────────────────────────────────
+            // NEXT 30 DAYS - What's coming up
+            // ──────────────────────────────────────────────────────
+            next30Days: [
+                "Close our first quarter (Q3) on reduced timeline!",
+                "Continue PEO Discussions and Scoping",
+                "Attend AFO Onsite to discuss more Day 1 planning live :)"
+            ]
+        };
 
-        // Fetch progress updates from Google Sheets
+        // Fetch progress updates - uses embedded data above
         async function fetchProgressUpdates() {
-            try {
-                const response = await fetch(PROGRESS_SHEET_URL + '&cachebust=' + Date.now());
-                const csvText = await response.text();
-                
-                // Parse CSV into progress data
-                const lines = csvText.split('\n').slice(1); // Skip header row
-                const progressData = {
-                    recentWins: [],
-                    inProgressNow: [],
-                    next30Days: []
-                };
-                
-                lines.forEach(line => {
-                    if (!line.trim()) return;
-                    
-                    // Parse CSV line (handle commas in quoted strings)
-                    const match = line.match(/^"?([^",]*)"?,\s*"?(.+?)"?\s*$/);
-                    if (match) {
-                        const section = match[1].trim();
-                        const item = match[2].trim().replace(/^"|"$/g, '');
-                        
-                        if (section === 'Recent Wins' || section === 'Recent Win') {
-                            progressData.recentWins.push(item);
-                        } else if (section === 'In Progress') {
-                            progressData.inProgressNow.push(item);
-                        } else if (section === 'Next 30 Days') {
-                            progressData.next30Days.push(item);
-                        }
-                    }
-                });
-                
-                return progressData;
-            } catch (error) {
-                console.error('Error fetching progress from Google Sheets:', error);
-                // Fallback data if fetch fails
-                return {
-                    recentWins: ["Check Google Sheet connection"],
-                    inProgressNow: ["Unable to load progress data"],
-                    next30Days: ["Please refresh the page"]
-                };
-            }
+            return PROGRESS_DATA;
         }
 
         async function renderMonthlySummary(data) {

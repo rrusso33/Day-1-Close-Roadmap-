@@ -1683,9 +1683,14 @@
 
         async function loadMultiQuarterData() {
             try {
+                const isLocal = window.location.protocol === 'file:';
                 // Add timestamp to bust cache
                 const timestamp = new Date().getTime();
-                const response = await fetch(`future_milestones.csv?v=${timestamp}`);
+                // Use GitHub URL when viewing locally
+                const url = isLocal 
+                    ? `https://rrusso33.github.io/Day-1-Close-Roadmap-/future_milestones.csv?v=${timestamp}`
+                    : `future_milestones.csv?v=${timestamp}`;
+                const response = await fetch(url);
                 const csvText = await response.text();
                 const data = parseCSV(csvText);
                 return data;
@@ -2283,21 +2288,7 @@
         async function loadData() {
             try {
                 const isLocal = window.location.protocol === 'file:';
-                
-                if (isLocal) {
-                    document.getElementById('themeContainer').innerHTML = `
-                        <div style="text-align: center; padding: 60px;">
-                            <div style="font-size: 3em; margin-bottom: 25px;">🌐</div>
-                            <div style="font-size: 2em; margin-bottom: 20px; color: #1e3c72;">Please Use the Live URL</div>
-                            <a href="https://rrusso33.github.io/Day-1-Close-Roadmap-/BD5_to_BD1_Roadmap.html" 
-                               style="display: inline-block; padding: 20px 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); 
-                                      color: white; text-decoration: none; border-radius: 10px; font-size: 1.3em; font-weight: 700;">
-                                🚀 Open Live Roadmap
-                            </a>
-                        </div>
-                    `;
-                    return;
-                }
+                // Local viewing is now enabled - no redirect needed
                 
                 // Load multi-quarter milestones
                 const milestones = await loadMultiQuarterData();
@@ -2330,12 +2321,20 @@
                     let csvText;
                     // Add timestamp to bust cache
                     const timestamp = new Date().getTime();
-                    try {
-                        const response = await fetch(`${SHEET_URL}?v=${timestamp}`);
-                        csvText = await response.text();
-                    } catch (err) {
+                    
+                    // When viewing locally (file://), use GitHub URL; otherwise try local first
+                    if (isLocal) {
+                        console.log('📡 Local viewing - fetching from GitHub...');
                         const response = await fetch(`${GITHUB_URL}?v=${timestamp}`);
                         csvText = await response.text();
+                    } else {
+                        try {
+                            const response = await fetch(`${SHEET_URL}?v=${timestamp}`);
+                            csvText = await response.text();
+                        } catch (err) {
+                            const response = await fetch(`${GITHUB_URL}?v=${timestamp}`);
+                            csvText = await response.text();
+                        }
                     }
                     
                     data = parseCSV(csvText);
@@ -2413,16 +2412,28 @@
             return data;
         }
 
-        // Fetch progress updates from JSON file
+        // Progress updates data - EDIT THIS SECTION TO UPDATE THE PROGRESS PANEL
+        // ============================================================================
+        const PROGRESS_DATA = {
+            recentWins: [
+                "Completed Dec Close with a BD4 first close deadline!"
+            ],
+            inProgressNow: [
+                "Continue scope and testing of accrual automation tool",
+                "Continue to scope and plan for reducing corporate cash to BD1 - working with Numeric and Maximor currently",
+                "Transition plans for Florence - working with her to review all monthly tasks"
+            ],
+            next30Days: [
+                "Close our first quarter (Q3) on reduced timeline!",
+                "Continue PEO Discussions and Scoping",
+                "Prepare for FY26 Interim Audit"
+            ]
+        };
+        // ============================================================================
+
+        // Fetch progress updates - now uses embedded data above
         async function fetchProgressUpdates() {
-            try {
-                const response = await fetch('progress_updates.json?' + Date.now(), { cache: 'no-store' });
-                if (!response.ok) throw new Error('Failed to fetch');
-                return await response.json();
-            } catch (error) {
-                console.log('Could not fetch progress updates:', error);
-                return null;
-            }
+            return PROGRESS_DATA;
         }
 
         async function renderMonthlySummary(data) {

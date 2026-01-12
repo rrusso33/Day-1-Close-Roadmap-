@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OKR Section - Design Preview</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: white;
+            text-align: center;
+            margin-bottom: 30px;
+            font-size: 1.8em;
+        }
+        .section-label {
+            color: white;
+            font-size: 1.2em;
+            margin: 30px 0 15px 0;
+            padding: 10px 15px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 8px;
+            display: inline-block;
+        }
+        
+        /* OKR Card */
+        .okr-card {
+            background: white;
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        }
+        .okr-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .okr-icon {
+            font-size: 1.5em;
+        }
+        .okr-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #1e3c72;
+            flex: 1;
+        }
+        .okr-meta {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #e9ecef;
+        }
+        .owner-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #f0f4ff;
+            padding: 6px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #1e3c72;
+        }
+        .progress-container {
+            flex: 1;
+            max-width: 300px;
+        }
+        .progress-bar-bg {
+            background: #e9ecef;
+            border-radius: 10px;
+            height: 10px;
+            overflow: hidden;
+        }
+        .progress-bar-fill {
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            height: 100%;
+            border-radius: 10px;
+            transition: width 0.3s;
+        }
+        .progress-text {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 4px;
+        }
+        .progress-percent {
+            font-weight: 700;
+            color: #667eea;
+            font-size: 1.1em;
+        }
+        
+        /* Key Result */
+        .kr-section {
+            background: #f8f9ff;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 12px;
+            border-left: 4px solid #667eea;
+        }
+        .kr-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+        }
+        .kr-title {
+            font-weight: 600;
+            color: #1e3c72;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .kr-progress {
+            font-size: 0.85em;
+            color: #666;
+        }
+        .kr-progress strong {
+            color: #667eea;
+        }
+        
+        /* Status Sections */
+        .status-section {
+            margin-top: 12px;
+        }
+        .status-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.2s;
+            font-weight: 600;
+            font-size: 0.9em;
+        }
+        .status-header:hover {
+            background: rgba(0,0,0,0.05);
+        }
+        .status-header.in-progress {
+            color: #f59e0b;
+        }
+        .status-header.completed {
+            color: #10b981;
+        }
+        .status-header.not-started {
+            color: #6b7280;
+        }
+        .status-count {
+            background: currentColor;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 10px;
+            font-size: 0.8em;
+            margin-left: auto;
+        }
+        .status-header.in-progress .status-count { background: #f59e0b; }
+        .status-header.completed .status-count { background: #10b981; }
+        .status-header.not-started .status-count { background: #6b7280; }
+        
+        /* Task Items */
+        .tasks-list {
+            padding: 8px 0 8px 20px;
+        }
+        .task-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            background: white;
+            border-radius: 8px;
+            margin-bottom: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .task-item:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.12);
+        }
+        .task-status {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .task-status.complete {
+            background: #d1fae5;
+            color: #059669;
+        }
+        .task-status.in-progress {
+            background: #fef3c7;
+            color: #d97706;
+        }
+        .task-status.not-started {
+            background: #f3f4f6;
+            color: #9ca3af;
+            border: 2px solid #e5e7eb;
+        }
+        .task-content {
+            flex: 1;
+        }
+        .task-text {
+            color: #374151;
+            font-size: 0.9em;
+            line-height: 1.4;
+        }
+        .task-text.truncated {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .task-expand {
+            color: #667eea;
+            font-size: 0.8em;
+            cursor: pointer;
+            margin-top: 4px;
+        }
+        .task-expand:hover {
+            text-decoration: underline;
+        }
+        
+        /* Collapsed section */
+        .collapsed-section {
+            background: #f0fdf4;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 8px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .collapsed-section:hover {
+            background: #dcfce7;
+        }
+        .collapsed-icon {
+            font-size: 1.2em;
+        }
+        .collapsed-text {
+            color: #166534;
+            font-weight: 600;
+        }
+        .collapsed-expand {
+            margin-left: auto;
+            color: #166534;
+            font-size: 0.85em;
+        }
+        
+        .comparison {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        @media (max-width: 900px) {
+            .comparison { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>📊 OKR Section - Design Preview</h1>
+        
+        <div class="section-label">✨ NEW DESIGN (Recommended)</div>
+        
+        <div class="okr-card">
+            <div class="okr-header">
+                <span class="okr-icon">🎯</span>
+                <span class="okr-title">C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation</span>
+            </div>
+            
+            <div class="okr-meta">
+                <div class="owner-badge">
+                    👤 Justine O'Sullivan
+                </div>
+                <div class="progress-container">
+                    <div class="progress-bar-bg">
+                        <div class="progress-bar-fill" style="width: 65%"></div>
+                    </div>
+                    <div class="progress-text">11/17 deliverables complete</div>
+                </div>
+                <span class="progress-percent">65%</span>
+            </div>
+            
+            <!-- Key Result 1 -->
+            <div class="kr-section">
+                <div class="kr-header">
+                    <span class="kr-title">📊 KR 1: Onboard WiseLayer accruals.ai by October close</span>
+                    <span class="kr-progress"><strong>6/6</strong> complete • <strong style="color: #10b981;">100%</strong></span>
+                </div>
+                
+                <div class="collapsed-section">
+                    <span class="collapsed-icon">✅</span>
+                    <span class="collapsed-text">6 tasks completed</span>
+                    <span class="collapsed-expand">Click to expand ▼</span>
+                </div>
+            </div>
+            
+            <!-- Key Result 2 -->
+            <div class="kr-section">
+                <div class="kr-header">
+                    <span class="kr-title">📊 KR 1: Automate the accrual process for a Day 1 close</span>
+                    <span class="kr-progress"><strong>5/11</strong> complete • <strong>45%</strong></span>
+                </div>
+                
+                <!-- In Progress Section -->
+                <div class="status-section">
+                    <div class="status-header in-progress">
+                        🔄 In Progress
+                        <span class="status-count">3</span>
+                    </div>
+                    <div class="tasks-list">
+                        <div class="task-item">
+                            <div class="task-status in-progress">⏳</div>
+                            <div class="task-content">
+                                <div class="task-text truncated">Begin outlining to Cursor what the estimates tab should look like. During close, dig into configurations set up in our current manual workpapers to compare.</div>
+                                <div class="task-expand">Show more...</div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-status in-progress">⏳</div>
+                            <div class="task-content">
+                                <div class="task-text truncated">Finalize outlining to Cursor what the estimates tab should look like. Structure of what I would need to do in order to actually use this tool in production</div>
+                                <div class="task-expand">Show more...</div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-status in-progress">⏳</div>
+                            <div class="task-content">
+                                <div class="task-text">Completed "bills processed" and "pending invoices" tabs in Bolt webpage for accruals process</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Not Started Section -->
+                <div class="status-section">
+                    <div class="status-header not-started">
+                        ⏸️ Not Started
+                        <span class="status-count">3</span>
+                    </div>
+                    <div class="tasks-list">
+                        <div class="task-item">
+                            <div class="task-status not-started">○</div>
+                            <div class="task-content">
+                                <div class="task-text">Completed log of variances between platforms. Completed log of 15 vendor tests</div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-status not-started">○</div>
+                            <div class="task-content">
+                                <div class="task-text">Completed ROI sheet filled out and completed in it's entirety</div>
+                            </div>
+                        </div>
+                        <div class="task-item">
+                            <div class="task-status not-started">○</div>
+                            <div class="task-content">
+                                <div class="task-text">Ended testing estimates tab, this tab should now be complete and operable</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Completed Section (Collapsed) -->
+                <div class="collapsed-section">
+                    <span class="collapsed-icon">✅</span>
+                    <span class="collapsed-text">5 tasks completed</span>
+                    <span class="collapsed-expand">Click to expand ▼</span>
+                </div>
+            </div>
+        </div>
+        
+        <div style="background: rgba(255,255,255,0.95); border-radius: 12px; padding: 20px; margin-top: 30px;">
+            <h2 style="color: #1e3c72; margin-bottom: 15px;">🎨 Key Improvements:</h2>
+            <ul style="color: #374151; line-height: 2; padding-left: 20px;">
+                <li><strong>Cleaner visual hierarchy</strong> - Easy to scan at a glance</li>
+                <li><strong>Status grouping</strong> - In Progress shown first (most important)</li>
+                <li><strong>Collapsed completed tasks</strong> - Less clutter, expand if needed</li>
+                <li><strong>Truncated long text</strong> - Click "Show more" for full details</li>
+                <li><strong>Visual status indicators</strong> - Color-coded badges</li>
+                <li><strong>Card-based layout</strong> - Clear separation between tasks</li>
+                <li><strong>Hover effects</strong> - Interactive feedback</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>
+

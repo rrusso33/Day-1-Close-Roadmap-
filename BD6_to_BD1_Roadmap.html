@@ -1440,6 +1440,171 @@
             color: white;
             box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
         }
+        
+        /* OKR Section Improved Styles */
+        .okr-card {
+            padding: 18px;
+            background: #f0f4ff;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        .okr-header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+        .okr-title-text {
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        .okr-meta-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9em;
+            flex-wrap: wrap;
+        }
+        .okr-owner-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #e0e7ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #1e3c72;
+        }
+        .kr-section {
+            background: white;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .kr-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .kr-title {
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 0.95em;
+        }
+        .kr-progress-info {
+            font-size: 0.85em;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-group {
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .status-group-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: background 0.2s;
+        }
+        .status-group-header:hover {
+            background: rgba(0,0,0,0.05);
+        }
+        .status-group-header.in-progress { color: #d97706; }
+        .status-group-header.not-started { color: #6b7280; }
+        .status-group-header.completed { color: #059669; }
+        .status-count-badge {
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: auto;
+            color: white;
+        }
+        .status-group-header.in-progress .status-count-badge { background: #f59e0b; }
+        .status-group-header.not-started .status-count-badge { background: #9ca3af; }
+        .status-group-header.completed .status-count-badge { background: #10b981; }
+        .tasks-container {
+            padding: 8px 0 8px 12px;
+        }
+        .task-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+        .task-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .task-status-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .task-status-icon.complete { background: #d1fae5; color: #059669; }
+        .task-status-icon.in-progress { background: #fef3c7; color: #d97706; }
+        .task-status-icon.not-started { background: #f3f4f6; color: #9ca3af; border: 2px solid #e5e7eb; }
+        .task-text {
+            flex: 1;
+            color: #374151;
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+        .task-text-truncated {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .task-expand-btn {
+            color: #667eea;
+            font-size: 0.8em;
+            cursor: pointer;
+            margin-top: 4px;
+            display: inline-block;
+        }
+        .task-expand-btn:hover { text-decoration: underline; }
+        .collapsed-completed {
+            background: #ecfdf5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #d1fae5;
+        }
+        .collapsed-completed:hover { background: #d1fae5; }
+        .collapsed-completed-icon { font-size: 1.2em; }
+        .collapsed-completed-text { color: #065f46; font-weight: 600; font-size: 0.9em; }
+        .collapsed-completed-expand { margin-left: auto; color: #065f46; font-size: 0.85em; }
+        .completed-tasks-hidden { display: none; }
+        .completed-tasks-visible { display: block; }
     </style>
 </head>
 <body>
@@ -2162,169 +2327,143 @@
                         
                         <div id="${themeId}-details" style="display: none; padding: 25px; background: white;">
                             <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">🎯 OKRs & Key Results</h4>
-                            <div style="display: grid; gap: 20px;">
+                            <div style="display: grid; gap: 16px;">
                                 ${Object.entries(okrs).map(([okr, keyResults]) => {
                                     // Calculate OKR-level stats
                                     const allOkrTasks = Object.values(keyResults).flat();
                                     const okrCompleted = allOkrTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
                                     const okrTotal = allOkrTasks.length;
                                     const okrPct = okrTotal > 0 ? (okrCompleted / okrTotal) * 100 : 0;
-                                    const okrStatusColor = okrPct === 100 ? '#28a745' : okrPct > 0 ? '#007bff' : '#6c757d';
+                                    const okrStatusColor = okrPct === 100 ? '#10b981' : okrPct > 0 ? '#667eea' : '#6c757d';
                                     
                                     // Get unique owners for this OKR
                                     const owners = [...new Set(allOkrTasks.map(t => t['Owner(s)'] || 'TBD').filter(o => o))];
                                     const ownerText = owners.length > 0 ? owners.join(', ') : 'TBD';
                                     
                                     return `
-                                        <div style="padding: 18px; background: #f0f4ff; border-radius: 10px; border-left: 5px solid ${okrStatusColor};">
-                                            <div style="display: flex; justify-content: space-between; align-items: start; margin-bottom: 12px;">
+                                        <div class="okr-card" style="border-left: 5px solid ${okrStatusColor};">
+                                            <div class="okr-header-section">
                                                 <div style="flex: 1;">
-                                                    <div style="font-weight: 700; color: #1e3c72; margin-bottom: 8px; font-size: 1.05em;">🎯 ${okr}</div>
-                                                    <div style="display: flex; gap: 15px; align-items: center; font-size: 0.9em; flex-wrap: wrap;">
-                                                        <span style="color: #6c757d;">👤 <strong>${ownerText}</strong></span>
-                                                        <span style="color: #6c757d;"><strong>${okrCompleted}/${okrTotal}</strong> deliverables complete</span>
-                                                        <div style="flex: 1; min-width: 150px; max-width: 250px; background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
-                                                            <div style="background: ${okrStatusColor}; height: 100%; width: ${okrPct}%; transition: width 0.3s;"></div>
+                                                    <div class="okr-title-text">🎯 ${okr}</div>
+                                                    <div class="okr-meta-row">
+                                                        <span class="okr-owner-badge">👤 ${ownerText}</span>
+                                                        <span style="color: #6c757d;"><strong>${okrCompleted}/${okrTotal}</strong> deliverables</span>
+                                                        <div style="flex: 1; min-width: 120px; max-width: 200px; background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                                            <div style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: ${okrPct}%; transition: width 0.3s;"></div>
                                                         </div>
                                                         <span style="font-weight: 700; color: ${okrStatusColor};">${Math.round(okrPct)}%</span>
                                                     </div>
                                                 </div>
                                             </div>
                                             
-                                            <div style="margin-top: 15px; padding-left: 15px; border-left: 3px solid #dee2e6; display: grid; gap: 12px;">
-                                                ${Object.entries(keyResults).map(([keyResult, tasks]) => {
+                                            <div style="margin-top: 12px; display: grid; gap: 10px;">
+                                                ${Object.entries(keyResults).map(([keyResult, tasks], krIndex) => {
                                                     const krCompleted = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                                                    const krInProgress = tasks.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
+                                                    const krNotStarted = tasks.filter(t => normalizeStatus(t['Status']) !== 'Complete' && normalizeStatus(t['Status']) !== 'In Progress').length;
                                                     const krTotal = tasks.length;
                                                     const krPct = krTotal > 0 ? (krCompleted / krTotal) * 100 : 0;
-                                                    const krStatusColor = krPct === 100 ? '#28a745' : krPct > 0 ? '#007bff' : '#6c757d';
+                                                    const krStatusColor = krPct === 100 ? '#10b981' : krPct > 0 ? '#667eea' : '#6c757d';
+                                                    const krUniqueId = themeId + '-kr-' + krIndex;
                                                     
-                                                    return `
-                                                        <div style="padding: 12px; background: white; border-radius: 6px; border-left: 3px solid ${krStatusColor};">
-                                                            <div style="font-weight: 600; color: #2c3e50; margin-bottom: 10px; font-size: 0.95em;">📊 ${keyResult}</div>
-                                                            <div style="display: flex; gap: 12px; align-items: center; font-size: 0.85em; margin-bottom: 12px;">
-                                                                <span style="color: #6c757d;"><strong>${krCompleted}/${krTotal}</strong> complete</span>
-                                                                <div style="flex: 1; max-width: 180px; background: #e9ecef; height: 5px; border-radius: 3px; overflow: hidden;">
-                                                                    <div style="background: ${krStatusColor}; height: 100%; width: ${krPct}%; transition: width 0.3s;"></div>
+                                                    // Group tasks by status
+                                                    const inProgressTasks = [];
+                                                    const notStartedTasks = [];
+                                                    const completedTasks = [];
+                                                    
+                                                    tasks.forEach(t => {
+                                                        const rawDeliverable = t['End of Week Deliverable / Milestone'] || 'Task';
+                                                        if (rawDeliverable.includes('#NAME') || rawDeliverable.includes('#REF')) return;
+                                                        
+                                                        let cleanText = rawDeliverable
+                                                            .replace(/\[close week\]/gi, '')
+                                                            .replace(/\[thanksgiving break\]/gi, '')
+                                                            .replace(/\[Aileen to do.*?\]/gi, '')
+                                                            .replace(/^- /g, '')
+                                                            .trim();
+                                                        cleanText = cleanText.replace(/^[,\-•\s]+|[,\-•\s]+$/g, '').trim();
+                                                        if (cleanText) cleanText = cleanText.charAt(0).toUpperCase() + cleanText.slice(1);
+                                                        if (!cleanText) return;
+                                                        
+                                                        const status = normalizeStatus(t['Status']);
+                                                        const taskObj = { text: cleanText, status: status };
+                                                        
+                                                        if (status === 'Complete') {
+                                                            completedTasks.push(taskObj);
+                                                        } else if (status === 'In Progress') {
+                                                            inProgressTasks.push(taskObj);
+                                                        } else {
+                                                            notStartedTasks.push(taskObj);
+                                                        }
+                                                    });
+                                                    
+                                                    // Remove duplicates
+                                                    const uniqueInProgress = [...new Map(inProgressTasks.map(t => [t.text, t])).values()];
+                                                    const uniqueNotStarted = [...new Map(notStartedTasks.map(t => [t.text, t])).values()];
+                                                    const uniqueCompleted = [...new Map(completedTasks.map(t => [t.text, t])).values()];
+                                                    
+                                                    const renderTask = (task, statusClass, icon) => {
+                                                        const isLong = task.text.length > 120;
+                                                        const taskId = Math.random().toString(36).substr(2, 9);
+                                                        return \`
+                                                            <div class="task-card">
+                                                                <div class="task-status-icon \${statusClass}">\${icon}</div>
+                                                                <div style="flex: 1;">
+                                                                    <div class="task-text \${isLong ? 'task-text-truncated' : ''}" id="task-\${taskId}">\${task.text}</div>
+                                                                    \${isLong ? \`<span class="task-expand-btn" onclick="const el=document.getElementById('task-\${taskId}'); el.classList.toggle('task-text-truncated'); this.textContent = el.classList.contains('task-text-truncated') ? 'Show more...' : 'Show less';">Show more...</span>\` : ''}
                                                                 </div>
-                                                                <span style="font-weight: 600; color: ${krStatusColor};">${Math.round(krPct)}%</span>
                                                             </div>
-                                                            <div style="margin-left: 10px; display: grid; gap: 6px;">
-                                                                ${(() => {
-                                                                    // Consolidate and summarize deliverables
-                                                                    const deliverableGroups = {};
-                                                                    
-                                                                    tasks.forEach(t => {
-                                                                        const rawDeliverable = t['End of Week Deliverable / Milestone'] || 'Deliverable TBD';
-                                                                        
-                                                                        // Skip Excel error values
-                                                                        if (rawDeliverable.includes('#NAME') || rawDeliverable.includes('#REF') || rawDeliverable.includes('#VALUE') || rawDeliverable.includes('#N/A')) {
-                                                                            return;
-                                                                        }
-                                                                        
-                                                                        const status = normalizeStatus(t['Status']);
-                                                                        
-                                                                        // Clean up and shorten deliverable text
-                                                                        let cleanDeliverable = rawDeliverable
-                                                                            .replace(/\[close week\]/gi, '')
-                                                                            .replace(/\[thanksgiving break\]/gi, '')
-                                                                            .replace(/\[Aileen to do.*?\]/gi, '')
-                                                                            .replace(/- Perform /gi, '')
-                                                                            .replace(/- Complete /gi, '')
-                                                                            .replace(/- Completed /gi, '')
-                                                                            .replace(/- Review /gi, '')
-                                                                            .replace(/- Meet with /gi, 'Meet ')
-                                                                            .replace(/- Demo of tool/gi, 'Demo')
-                                                                            .replace(/- Working session/gi, 'Session')
-                                                                            .replace(/- Rollover for Aileen to work on/gi, 'Continue work')
-                                                                            .replace(/- ROI plan filled out for expectations around/gi, 'ROI plan for')
-                                                                            .replace(/if needed - /gi, '')
-                                                                            .replace(/as an option if accruals\.ai does not perform as we would like\.?/gi, 'as backup option')
-                                                                            .replace(/Working on this as an option if accruals\.ai does not perform as we would like\.?/gi, 'Backup option development')
-                                                                            .trim();
-                                                                        
-                                                                        // Further simplification for CFO level
-                                                                        cleanDeliverable = cleanDeliverable
-                                                                            .replace(/noting items for accruals\.ai AI bot prep\.?/gi, '')
-                                                                            .replace(/fill out onboarding forms from the vendor\.?/gi, 'Vendor onboarding')
-                                                                            .replace(/\(pending scheduling\)/gi, '')
-                                                                            .replace(/Connect to Netsuite and Zip platforms, and /gi, '')
-                                                                            .replace(/normal September close activities,? /gi, 'September close activities')
-                                                                            .replace(/Perform working sessions to address vendor specific preferences in the system and overall understanding of tool\.? /gi, 'Vendor configuration sessions')
-                                                                            .replace(/Create loose timeline and correct order of accrual tasks for October close based on progress of implementation/gi, 'October close timeline planning')
-                                                                            .replace(/Inform teams who recieve deliverable requests from us of new method in accruals\.ai /gi, 'Team communication')
-                                                                            .replace(/Clean up Numeric tasks to accomodate new items from accruals\.ai/gi, 'Numeric cleanup')
-                                                                            .trim();
-                                                                        
-                                                                        // Remove leading/trailing punctuation
-                                                                        cleanDeliverable = cleanDeliverable.replace(/^[,\-•\s]+|[,\-•\s]+$/g, '').trim();
-                                                                        
-                                                                        // Capitalize first letter
-                                                                        if (cleanDeliverable) {
-                                                                            cleanDeliverable = cleanDeliverable.charAt(0).toUpperCase() + cleanDeliverable.slice(1);
-                                                                        }
-                                                                        
-                                                                        // Skip empty deliverables (after cleaning)
-                                                                        if (!cleanDeliverable || cleanDeliverable.length === 0) {
-                                                                            return;
-                                                                        }
-                                                                        
-                                                                        // Group similar deliverables
-                                                                        if (!deliverableGroups[cleanDeliverable]) {
-                                                                            deliverableGroups[cleanDeliverable] = {
-                                                                                statuses: [],
-                                                                                dates: [],
-                                                                                tasks: []
-                                                                            };
-                                                                        }
-                                                                        
-                                                                        deliverableGroups[cleanDeliverable].statuses.push(status);
-                                                                        if (t['Target End Date']) {
-                                                                            deliverableGroups[cleanDeliverable].dates.push(t['Target End Date']);
-                                                                        }
-                                                                        deliverableGroups[cleanDeliverable].tasks.push(t);
-                                                                    });
-                                                                    
-                                                                    // Render consolidated deliverables
-                                                                    return Object.entries(deliverableGroups)
-                                                                        .filter(([deliverable]) => deliverable && deliverable.trim().length > 0)
-                                                                        .filter(([deliverable]) => !deliverable.includes('#NAME') && !deliverable.includes('#REF') && !deliverable.includes('#VALUE'))
-                                                                        .map(([deliverable, group]) => {
-                                                                        // Determine overall status for this deliverable group
-                                                                        const allComplete = group.statuses.every(s => s === 'Complete');
-                                                                        const anyInProgress = group.statuses.some(s => s === 'In Progress');
-                                                                        
-                                                                        let status, statusIcon, statusColor;
-                                                                        if (allComplete) {
-                                                                            status = 'Complete';
-                                                                            statusIcon = '✓';
-                                                                            statusColor = '#28a745';
-                                                                        } else if (anyInProgress) {
-                                                                            status = 'In Progress';
-                                                                            statusIcon = '⟳';
-                                                                            statusColor = '#007bff';
-                                                                        } else {
-                                                                            status = 'Planned';
-                                                                            statusIcon = '○';
-                                                                            statusColor = '#6c757d';
-                                                                        }
-                                                                        
-                                                                        // Get earliest date if multiple
-                                                                        const dateText = group.dates.length > 0 ? ` • ${group.dates[0]}` : '';
-                                                                        
-                                                                        return `
-                                                                            <div style="display: flex; align-items: start; gap: 8px; font-size: 0.85em; padding: 6px; background: #f8f9fa; border-radius: 4px;">
-                                                                                <span style="color: ${statusColor}; font-weight: bold; font-size: 1.1em; line-height: 1.2;">${statusIcon}</span>
-                                                                                <span style="flex: 1; color: #2c3e50; line-height: 1.4;">
-                                                                                    ${deliverable}
-                                                                                    ${dateText ? `<span style="color: #6c757d; font-size: 0.9em;">${dateText}</span>` : ''}
-                                                                                </span>
-                                                                            </div>
-                                                                        `;
-                                                                    }).join('');
-                                                                })()}
+                                                        \`;
+                                                    };
+                                                    
+                                                    return \`
+                                                        <div class="kr-section">
+                                                            <div class="kr-header">
+                                                                <span class="kr-title">📊 \${keyResult}</span>
+                                                                <span class="kr-progress-info">
+                                                                    <strong>\${krCompleted}/\${krTotal}</strong> complete
+                                                                    <span style="font-weight: 600; color: \${krStatusColor};">\${Math.round(krPct)}%</span>
+                                                                </span>
                                                             </div>
+                                                            
+                                                            \${uniqueInProgress.length > 0 ? \`
+                                                                <div class="status-group">
+                                                                    <div class="status-group-header in-progress">
+                                                                        🔄 In Progress
+                                                                        <span class="status-count-badge">\${uniqueInProgress.length}</span>
+                                                                    </div>
+                                                                    <div class="tasks-container">
+                                                                        \${uniqueInProgress.map(t => renderTask(t, 'in-progress', '⏳')).join('')}
+                                                                    </div>
+                                                                </div>
+                                                            \` : ''}
+                                                            
+                                                            \${uniqueNotStarted.length > 0 ? \`
+                                                                <div class="status-group">
+                                                                    <div class="status-group-header not-started">
+                                                                        ⏸️ Not Started
+                                                                        <span class="status-count-badge">\${uniqueNotStarted.length}</span>
+                                                                    </div>
+                                                                    <div class="tasks-container">
+                                                                        \${uniqueNotStarted.map(t => renderTask(t, 'not-started', '○')).join('')}
+                                                                    </div>
+                                                                </div>
+                                                            \` : ''}
+                                                            
+                                                            \${uniqueCompleted.length > 0 ? \`
+                                                                <div class="collapsed-completed" onclick="const el=document.getElementById('completed-\${krUniqueId}'); const isHidden = el.style.display === 'none'; el.style.display = isHidden ? 'block' : 'none'; this.querySelector('.collapsed-completed-expand').textContent = isHidden ? 'Click to collapse ▲' : 'Click to expand ▼';">
+                                                                    <span class="collapsed-completed-icon">✅</span>
+                                                                    <span class="collapsed-completed-text">\${uniqueCompleted.length} task\${uniqueCompleted.length > 1 ? 's' : ''} completed</span>
+                                                                    <span class="collapsed-completed-expand">Click to expand ▼</span>
+                                                                </div>
+                                                                <div id="completed-\${krUniqueId}" style="display: none; margin-top: 8px;">
+                                                                    <div class="tasks-container">
+                                                                        \${uniqueCompleted.map(t => renderTask(t, 'complete', '✓')).join('')}
+                                                                    </div>
+                                                                </div>
+                                                            \` : ''}
                                                         </div>
-                                                    `;
+                                                    \`;
                                                 }).join('')}
                                             </div>
                                         </div>

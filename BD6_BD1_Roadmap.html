@@ -1,0 +1,3545 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Cache Control - Forces browsers to always load fresh content -->
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <title>Journey to Day 1 Close | Executive Roadmap v2.1</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { 
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            padding: 20px;
+            color: #333;
+        }
+        .container { 
+            max-width: 1800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            overflow: hidden;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            color: white;
+            padding: 40px 50px;
+            text-align: center;
+        }
+        .header h1 { 
+            font-size: 3em; 
+            margin-bottom: 15px; 
+            font-weight: 700; 
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .header .subtitle { 
+            font-size: 1.2em; 
+            opacity: 0.95; 
+            margin-bottom: 10px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .header .meta { 
+            font-size: 1em; 
+            opacity: 0.85; 
+            font-style: italic;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        /* Dashboard */
+        .dashboard {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 0;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        .dash-item {
+            padding: 30px;
+            text-align: center;
+            color: white;
+            border-right: 1px solid rgba(255,255,255,0.2);
+        }
+        .dash-item:last-child { border-right: none; }
+        .dash-number { 
+            font-size: 3em; 
+            font-weight: 700; 
+            margin-bottom: 8px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .dash-label { 
+            font-size: 1em; 
+            opacity: 0.95;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.4;
+        }
+        
+        /* Monthly Summary */
+        .monthly-summary {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            margin-bottom: 40px;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(102, 126, 234, 0.3);
+        }
+        .monthly-summary-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .monthly-summary-date {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 25px;
+        }
+        .monthly-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-top: 25px;
+        }
+        .monthly-card {
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 20px;
+            border-radius: 12px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        .monthly-card-title {
+            font-size: 1.1em;
+            font-weight: 600;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .monthly-card-content {
+            font-size: 0.95em;
+            line-height: 1.6;
+        }
+        .monthly-card-content li {
+            margin-bottom: 8px;
+            padding-left: 5px;
+        }
+
+        /* Risk Dashboard */
+        .risk-dashboard {
+            background: white;
+            padding: 35px;
+            margin-bottom: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border-left: 6px solid #dc3545;
+        }
+        .risk-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .risk-summary {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+        .risk-stat {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 4px solid #dc3545;
+        }
+        .risk-stat-number {
+            font-size: 2.5em;
+            font-weight: 700;
+            color: #dc3545;
+            margin-bottom: 5px;
+        }
+        .risk-stat-label {
+            font-size: 0.9em;
+            color: #6c757d;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .risk-items {
+            display: grid;
+            gap: 12px;
+        }
+        .risk-item {
+            background: #fff5f5;
+            border: 1px solid #fecaca;
+            border-left: 4px solid #dc3545;
+            padding: 15px 20px;
+            border-radius: 8px;
+            display: flex;
+            align-items: start;
+            gap: 15px;
+        }
+        .risk-item-icon {
+            font-size: 1.5em;
+            flex-shrink: 0;
+        }
+        .risk-item-content {
+            flex: 1;
+        }
+        .risk-item-title {
+            font-weight: 600;
+            color: #2c3e50;
+            margin-bottom: 5px;
+        }
+        .risk-item-details {
+            font-size: 0.9em;
+            color: #6c757d;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        /* On Track Indicator */
+        .on-track-indicator {
+            background: white;
+            padding: 35px;
+            margin-bottom: 40px;
+            border-radius: 16px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .on-track-title {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .on-track-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 25px;
+            margin-top: 20px;
+        }
+        .on-track-metric {
+            text-align: center;
+            padding: 25px;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 12px;
+            border: 2px solid #dee2e6;
+        }
+        .on-track-metric-value {
+            font-size: 2.5em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .on-track-metric-label {
+            font-size: 1em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .on-track-status {
+            text-align: center;
+            padding: 30px;
+            border-radius: 12px;
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-top: 20px;
+        }
+        .on-track-status.green {
+            background: linear-gradient(135deg, #d4edda 0%, #c3e6cb 100%);
+            color: #155724;
+            border: 2px solid #28a745;
+        }
+        .on-track-status.yellow {
+            background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+            color: #856404;
+            border: 2px solid #ffc107;
+        }
+        .on-track-status.red {
+            background: linear-gradient(135deg, #f8d7da 0%, #f5c6cb 100%);
+            color: #721c24;
+            border: 2px solid #dc3545;
+        }
+        
+        /* High-Level Timeline Visual */
+        .journey-timeline {
+            padding: 30px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+        }
+        .journey-title {
+            text-align: center;
+            font-size: 1.8em;
+            font-weight: 700;
+            margin-bottom: 30px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.3;
+        }
+        .timeline-visual {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            padding: 20px 0;
+        }
+        .timeline-track {
+            position: absolute;
+            top: 70px;
+            left: 5%;
+            right: 5%;
+            height: 6px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 3px;
+        }
+        .timeline-progress {
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            background: white;
+            border-radius: 4px;
+            transition: width 1.5s ease;
+        }
+        .timeline-phases {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+            z-index: 1;
+        }
+        .timeline-phase {
+            flex: 1;
+            text-align: center;
+            position: relative;
+        }
+        .phase-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.2);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8em;
+            font-weight: 700;
+            border: 4px solid transparent;
+            transition: all 0.5s ease;
+            position: relative;
+        }
+        .timeline-phase.complete .phase-circle {
+            background: white;
+            color: #667eea;
+            border-color: white;
+            box-shadow: 0 10px 30px rgba(255,255,255,0.4);
+        }
+        .timeline-phase.active .phase-circle {
+            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+            color: white;
+            border-color: #f5576c;
+            transform: scale(1.15);
+            box-shadow: 0 15px 40px rgba(245,87,108,0.6);
+            animation: pulse-phase 2s infinite;
+        }
+        @keyframes pulse-phase {
+            0%, 100% { transform: scale(1.15); }
+            50% { transform: scale(1.2); }
+        }
+        .phase-label {
+            font-size: 1.1em;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+        .phase-date {
+            font-size: 0.9em;
+            opacity: 0.9;
+            margin-bottom: 8px;
+        }
+        .phase-description {
+            font-size: 0.8em;
+            opacity: 0.85;
+            line-height: 1.4;
+        }
+        
+        /* Timeline Section */
+        .timeline-section {
+            padding: 50px;
+            background: #f8f9fa;
+        }
+        .section-header {
+            text-align: center;
+            margin-bottom: 50px;
+        }
+        .section-title {
+            font-size: 2.5em;
+            color: #1e3c72;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .section-subtitle {
+            font-size: 1.2em;
+            color: #6c757d;
+        }
+        
+        /* Legend */
+        .legend {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 20px;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        .legend-icon {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            font-size: 0.9em;
+        }
+        .legend-icon.complete { background: #28a745; color: white; }
+        .legend-icon.progress { background: #007bff; color: white; }
+        .legend-icon.planned { background: #6c757d; color: white; }
+        
+        /* Theme Sections */
+        .theme-section {
+            background: white;
+            border-radius: 15px;
+            margin-bottom: 30px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        
+        .theme-header-bar {
+            padding: 25px 35px;
+            color: white;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+        
+        /* Timeline Gantt Chart */
+        .category-timeline {
+            margin: 30px 0;
+            padding: 30px;
+            background: #f8f9fa;
+            border-radius: 12px;
+            overflow: visible;
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .timeline-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .timeline-date-range {
+            font-size: 0.95em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .timeline-grid {
+            position: relative;
+            min-height: 100px;
+            overflow: visible;
+        }
+        .timeline-months {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(80px, 1fr));
+            border-bottom: 2px solid #dee2e6;
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        .timeline-month {
+            text-align: center;
+            font-size: 0.85em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        .timeline-bars {
+            position: relative;
+        }
+        .timeline-bar-row {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            position: relative;
+        }
+        .timeline-bar-label {
+            width: 150px;
+            font-size: 0.9em;
+            font-weight: 600;
+            color: #2c3e50;
+            padding-right: 15px;
+        }
+        .timeline-bar-track {
+            flex: 1;
+            height: 36px;
+            background: white;
+            border-radius: 8px;
+            position: relative;
+            border: 2px solid #e9ecef;
+            margin-right: 200px;
+        }
+        .timeline-bar-fill {
+            position: absolute;
+            height: 100%;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            font-size: 0.8em;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        .timeline-bar-fill.complete {
+            background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
+        }
+        .timeline-bar-fill.in-progress {
+            background: linear-gradient(135deg, #007bff 0%, #00c6ff 100%);
+        }
+        .timeline-bar-fill.planned {
+            background: linear-gradient(135deg, #6c757d 0%, #95a5a6 100%);
+        }
+        .timeline-bar-fill:hover {
+            filter: brightness(1.1);
+            transform: scaleY(1.1);
+        }
+        
+        /* Multi-Quarter Executive Roadmap */
+        .multi-quarter-roadmap {
+            background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+            padding: 50px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+            color: white;
+            overflow-x: auto;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar {
+            height: 10px;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar-track {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar-thumb {
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 10px;
+        }
+        .multi-quarter-roadmap::-webkit-scrollbar-thumb:hover {
+            background: rgba(255, 255, 255, 0.5);
+        }
+        .multi-quarter-title {
+            font-size: 2.5em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        .multi-quarter-subtitle {
+            font-size: 1.2em;
+            text-align: center;
+            margin-bottom: 40px;
+            opacity: 0.9;
+        }
+        .quarters-grid {
+            display: grid;
+            grid-template-columns: repeat(7, minmax(220px, 1fr));
+            gap: 16px;
+            margin: 0 auto;
+            padding-bottom: 10px;
+        }
+        .quarter-card {
+            background: rgba(255,255,255,0.95);
+            border-radius: 12px;
+            padding: 18px;
+            color: #2c3e50;
+            transition: all 0.3s ease;
+            border: 3px solid transparent;
+            min-width: 220px;
+            overflow: visible;
+        }
+        .quarter-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            border-color: #ffd700;
+        }
+        .quarter-card.current-quarter {
+            border-color: #28a745;
+            background: linear-gradient(135deg, #d4edda 0%, white 100%);
+        }
+        .quarter-card.target-quarter {
+            border-color: #ffd700;
+            background: linear-gradient(135deg, #fff3cd 0%, white 100%);
+        }
+        .quarter-progress-section {
+            margin: 15px 0;
+            padding: 12px;
+            background: rgba(102, 126, 234, 0.05);
+            border-radius: 8px;
+        }
+        .quarter-progress-bar {
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 10px;
+            overflow: hidden;
+            margin: 8px 0;
+        }
+        .quarter-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 0.5s ease;
+            border-radius: 10px;
+        }
+        .quarter-progress-fill.high-progress {
+            background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+        }
+        .quarter-progress-fill.medium-progress {
+            background: linear-gradient(90deg, #ffc107 0%, #ff9800 100%);
+        }
+        .quarter-progress-fill.low-progress {
+            background: linear-gradient(90deg, #dc3545 0%, #c82333 100%);
+        }
+        .quarter-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85em;
+            margin-top: 8px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .quarter-stat-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .quarter-completion {
+            font-weight: 700;
+            font-size: 1.1em;
+            color: #667eea;
+        }
+        .quarter-countdown {
+            display: inline-block;
+            padding: 4px 10px;
+            background: rgba(255, 193, 7, 0.15);
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+            color: #856404;
+            margin-top: 8px;
+        }
+        .quarter-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 0.7em;
+            font-weight: 700;
+            text-transform: uppercase;
+        }
+        .badge-current {
+            background: #28a745;
+            color: white;
+        }
+        .badge-upcoming {
+            background: #667eea;
+            color: white;
+        }
+        .badge-target {
+            background: #ffd700;
+            color: #856404;
+        }
+        .quarter-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            padding-bottom: 12px;
+            border-bottom: 3px solid #e9ecef;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        .quarter-name {
+            font-size: 1.5em;
+            font-weight: 700;
+            color: #1e3c72;
+            line-height: 1.2;
+        }
+        .quarter-date {
+            font-size: 0.8em;
+            color: #6c757d;
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        .quarter-milestones {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+        .milestone-item {
+            padding: 12px 15px;
+            margin-bottom: 10px;
+            background: #f8f9fa;
+            border-left: 4px solid #667eea;
+            border-radius: 6px;
+            font-size: 0.95em;
+            line-height: 1.6;
+            transition: all 0.2s ease;
+        }
+        .milestone-item:hover {
+            background: #e9ecef;
+            border-left-width: 6px;
+        }
+        .milestone-category {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 3px 10px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 700;
+            margin-left: 8px;
+        }
+        .quarter-badge {
+            display: inline-block;
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            margin-bottom: 15px;
+        }
+        .quarter-badge.current {
+            background: #28a745;
+            color: white;
+        }
+        .quarter-badge.upcoming {
+            background: #007bff;
+            color: white;
+        }
+        .quarter-badge.target {
+            background: #ffc107;
+            color: #2c3e50;
+        }
+        
+        /* Master Timeline */
+        .master-timeline {
+            background: white;
+            padding: 40px;
+            margin: 30px 0;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.08);
+        }
+        .master-timeline-title {
+            font-size: 2em;
+            font-weight: 700;
+            color: #1e3c72;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .master-timeline-grid {
+            display: grid;
+            gap: 12px;
+        }
+        .master-row {
+            display: grid;
+            grid-template-columns: 200px 1fr 100px;
+            gap: 15px;
+            align-items: center;
+        }
+        .master-category-name {
+            font-size: 1em;
+            font-weight: 700;
+            color: #2c3e50;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .master-timeline-track {
+            height: 40px;
+            background: #f8f9fa;
+            border-radius: 8px;
+            position: relative;
+            overflow: hidden;
+        }
+        .master-timeline-fill {
+            height: 100%;
+            border-radius: 8px;
+            position: relative;
+            transition: width 0.5s ease;
+        }
+        .master-progress-text {
+            text-align: center;
+            font-size: 0.9em;
+            font-weight: 700;
+            color: #2c3e50;
+        }
+        .theme-header-bar:hover { filter: brightness(1.1); }
+        .theme-header-bar::after {
+            content: '▼';
+            position: absolute;
+            right: 35px;
+            font-size: 1.2em;
+            transition: transform 0.3s ease;
+        }
+        .theme-header-bar.collapsed::after {
+            transform: rotate(-90deg);
+        }
+        .theme-header-bar.automation { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        .theme-header-bar.process { background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%); }
+        .theme-header-bar.tools { background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%); }
+        .theme-header-bar.risk { background: linear-gradient(135deg, #fa709a 0%, #fee140 100%); }
+        .theme-header-bar.cash { background: linear-gradient(135deg, #30cfd0 0%, #330867 100%); }
+        
+        .theme-title-group {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .theme-icon { font-size: 2.5em; }
+        .theme-name { 
+            font-size: 1.8em; 
+            font-weight: 700;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.3;
+        }
+        
+        .theme-stats-group {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .theme-stat {
+            text-align: center;
+            padding: 8px 16px;
+            background: rgba(255,255,255,0.2);
+            border-radius: 10px;
+        }
+        .theme-stat-value { 
+            font-size: 1.6em; 
+            font-weight: 700;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .theme-stat-label { 
+            font-size: 0.85em; 
+            opacity: 0.95;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.3;
+        }
+        
+        /* Timeline Content */
+        .theme-timeline {
+            padding: 35px;
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, padding 0.4s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+        .theme-timeline.collapsed {
+            max-height: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+            opacity: 0;
+        }
+        
+        .sprint-group {
+            margin-bottom: 40px;
+            position: relative;
+            padding-left: 40px;
+            border-left: 4px solid #e9ecef;
+            min-height: fit-content;
+            overflow: visible;
+        }
+        .sprint-group:last-child { margin-bottom: 0; }
+        
+        .sprint-marker {
+            position: absolute;
+            left: -14px;
+            top: 5px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: #667eea;
+            border: 4px solid white;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+        .sprint-marker.complete { background: #28a745; }
+        .sprint-marker.progress { background: #007bff; }
+        
+        .sprint-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+        .sprint-header.collapsible-header {
+            cursor: pointer;
+            padding: 10px 15px;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+        .sprint-header.collapsible-header:hover {
+            background-color: rgba(102, 126, 234, 0.05);
+        }
+        .sprint-title-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+        .collapse-arrow {
+            font-size: 1em;
+            color: #667eea;
+            transition: transform 0.3s ease;
+            display: inline-block;
+            min-width: 20px;
+        }
+        .collapse-arrow.collapsed {
+            transform: rotate(-90deg);
+        }
+        .sprint-title {
+            font-size: 1.4em;
+            font-weight: 700;
+            color: #2c3e50;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.4;
+        }
+        .sprint-date {
+            font-size: 1em;
+            color: #6c757d;
+            font-weight: 600;
+        }
+        
+        .initiative-cards {
+            display: grid;
+            gap: 20px;
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.4s ease, opacity 0.3s ease, padding 0.3s ease;
+            opacity: 1;
+        }
+        .initiative-cards.collapsed {
+            max-height: 0;
+            opacity: 0;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        
+        .initiative-card {
+            background: white;
+            border: 2px solid #e9ecef;
+            border-radius: 12px;
+            padding: 25px;
+            transition: all 0.3s ease;
+            max-width: 100%;
+            overflow: visible;
+            box-sizing: border-box;
+            min-height: fit-content;
+        }
+        .initiative-card:hover {
+            border-color: #667eea;
+            box-shadow: 0 8px 25px rgba(102, 126, 234, 0.15);
+            transform: translateX(5px);
+        }
+        .initiative-card.complete { 
+            border-color: #28a745; 
+            background: linear-gradient(to right, #f8fff9 0%, white 30%);
+        }
+        .initiative-card.in-progress { 
+            border-color: #007bff;
+            background: linear-gradient(to right, #f0f8ff 0%, white 30%);
+        }
+        
+        .initiative-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 15px;
+            gap: 15px;
+        }
+        .initiative-title-group { flex: 1; }
+        .initiative-status {
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            font-weight: 700;
+            white-space: nowrap;
+        }
+        .initiative-status.complete { background: #d4edda; color: #155724; }
+        .initiative-status.in-progress { background: #cce5ff; color: #004085; }
+        .initiative-status.planned { background: #f8f9fa; color: #6c757d; }
+        
+        .initiative-title {
+            font-size: 1.2em;
+            font-weight: 700;
+            color: #2c3e50;
+            margin-bottom: 8px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .initiative-okr {
+            font-size: 0.9em;
+            color: #667eea;
+            font-weight: 600;
+            margin-bottom: 12px;
+            line-height: 1.5;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .initiative-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            margin: 20px 0;
+            padding: 20px;
+            background: #f8f9fa;
+            border-radius: 10px;
+            min-height: fit-content;
+            overflow: visible;
+        }
+        .detail-item {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+        }
+        .detail-label {
+            font-size: 0.8em;
+            color: #6c757d;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .detail-value {
+            font-size: 1em;
+            color: #2c3e50;
+            font-weight: 600;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .tech-stack {
+            margin-top: 15px;
+            min-height: fit-content;
+            overflow: visible;
+        }
+        .tech-label {
+            font-size: 0.85em;
+            color: #6c757d;
+            font-weight: 600;
+            margin-bottom: 8px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            line-height: 1.4;
+            white-space: normal;
+        }
+        .tech-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+        .tech-tag {
+            padding: 5px 12px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border-radius: 15px;
+            font-size: 0.85em;
+            font-weight: 600;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        .tech-tag.automation { background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%); }
+        
+        .dependencies {
+            margin-top: 15px;
+            padding: 15px;
+            background: #fff3cd;
+            border-left: 4px solid #ffc107;
+            border-radius: 8px;
+            max-width: 100%;
+            overflow: visible;
+            min-height: fit-content;
+        }
+        .dependencies-label {
+            font-weight: 700;
+            color: #856404;
+            margin-bottom: 10px;
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        
+        .deliverable {
+            margin-top: 15px;
+            padding: 15px;
+            background: #e7f3ff;
+            border-left: 4px solid #007bff;
+            border-radius: 8px;
+            max-width: 100%;
+            overflow: visible;
+            min-height: fit-content;
+        }
+        .deliverable-label {
+            font-weight: 700;
+            color: #004085;
+            margin-bottom: 10px;
+            display: block;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+        }
+        
+        .info-list {
+            margin: 0;
+            padding-left: 20px;
+            list-style-type: disc;
+            max-width: 100%;
+        }
+        .dependencies .info-list {
+            color: #856404;
+        }
+        .deliverable .info-list {
+            color: #004085;
+        }
+        .info-list li {
+            font-size: 0.95em;
+            line-height: 1.8;
+            margin-bottom: 12px;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+            white-space: normal;
+            padding-left: 8px;
+            padding-right: 15px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            max-width: 100%;
+            hyphens: auto;
+            min-height: fit-content;
+        }
+        .info-list li:last-child {
+            margin-bottom: 0;
+        }
+        
+        /* Executive Strategy Section */
+        .strategy-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 50px;
+            margin-bottom: 40px;
+        }
+        .strategy-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .strategy-title:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .strategy-title .collapse-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .strategy-title.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+        .strategy-content {
+            font-size: 1.1em;
+            line-height: 1.8;
+            max-width: 1200px;
+            margin: 0 auto 30px;
+        }
+        .strategy-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        .strategy-card {
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 25px;
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+        .strategy-card-title {
+            font-size: 1.3em;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+        .strategy-card-impact {
+            font-size: 1.8em;
+            font-weight: 700;
+            color: #ffd700;
+            margin: 10px 0;
+        }
+        .strategy-card-desc {
+            font-size: 0.95em;
+            opacity: 0.95;
+            line-height: 1.6;
+        }
+        
+        /* Detailed Themes Section */
+        .detailed-themes-section {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 50px;
+            margin-bottom: 40px;
+        }
+        .detailed-themes-title {
+            font-size: 2em;
+            font-weight: 700;
+            margin-bottom: 20px;
+            text-align: center;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .detailed-themes-title:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .detailed-themes-title .collapse-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .detailed-themes-title.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+        
+        /* Progress Tracker */
+        .progress-tracker {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px 50px;
+            margin-bottom: 40px;
+        }
+        .tracker-title {
+            font-size: 2em;
+            font-weight: 700;
+            text-align: center;
+            margin-bottom: 20px;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            transition: all 0.3s ease;
+            padding: 10px;
+            border-radius: 8px;
+        }
+        .tracker-title:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+        .tracker-title .collapse-icon {
+            font-size: 0.8em;
+            transition: transform 0.3s ease;
+        }
+        .tracker-title.collapsed .collapse-icon {
+            transform: rotate(-90deg);
+        }
+        .collapsible-content {
+            max-height: 5000px;
+            overflow: hidden;
+            transition: max-height 0.5s ease, opacity 0.3s ease;
+            opacity: 1;
+        }
+        .collapsible-content.collapsed {
+            max-height: 0;
+            opacity: 0;
+            margin: 0;
+            padding: 0;
+        }
+        .tracker-visual {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 30px;
+            align-items: center;
+        }
+        .tracker-box {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            border-radius: 15px;
+            padding: 30px;
+            text-align: center;
+            border: 3px solid #e9ecef;
+        }
+        .tracker-box.current {
+            background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+            border-color: #fa709a;
+        }
+        .tracker-box.target {
+            background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);
+            border-color: #30cfd0;
+            color: white;
+        }
+        .tracker-label {
+            font-size: 0.9em;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            opacity: 0.8;
+        }
+        .tracker-value {
+            font-size: 3em;
+            font-weight: 700;
+            margin: 10px 0;
+        }
+        .tracker-desc {
+            font-size: 0.95em;
+            margin-top: 10px;
+        }
+        .tracker-arrow {
+            font-size: 3em;
+            color: #667eea;
+        }
+        .tracker-progress-bar {
+            max-width: 1200px;
+            margin: 30px auto 0;
+            background: #e9ecef;
+            height: 40px;
+            border-radius: 20px;
+            overflow: hidden;
+            position: relative;
+        }
+        .tracker-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+            transition: width 1s ease;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            padding-right: 15px;
+            color: white;
+            font-weight: 700;
+        }
+        
+        /* Impact Badge in Cards */
+        .impact-badge {
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+            color: white;
+            padding: 12px 20px;
+            border-radius: 10px;
+            margin: 15px 0;
+            font-weight: 600;
+            font-size: 0.95em;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .impact-badge-icon {
+            font-size: 1.3em;
+        }
+
+        @media print {
+            body { background: white; padding: 0; }
+            .theme-section { page-break-inside: avoid; }
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .dashboard { grid-template-columns: repeat(2, 1fr); }
+            .journey-timeline { padding: 30px 20px; }
+            .journey-title { font-size: 1.8em; }
+            .timeline-phases { flex-direction: column; gap: 30px; }
+            .timeline-track { display: none; }
+            .phase-circle { width: 100px; height: 100px; font-size: 2em; }
+            .timeline-section { padding: 30px 20px; }
+            .theme-timeline { padding: 20px; }
+            .initiative-details { grid-template-columns: 1fr; }
+        }
+        
+        /* Collapse/Expand All Controls */
+        .collapse-controls {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin: 30px 0;
+            padding: 20px;
+            background: linear-gradient(135deg, rgba(102, 126, 234, 0.05) 0%, rgba(118, 75, 162, 0.05) 100%);
+            border-radius: 12px;
+        }
+        .collapse-btn {
+            padding: 12px 28px;
+            font-size: 1em;
+            font-weight: 600;
+            border: 2px solid #667eea;
+            border-radius: 8px;
+            background: white;
+            color: #667eea;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .collapse-btn:hover {
+            background: #667eea;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);
+        }
+        .collapse-btn span {
+            font-size: 1.2em;
+        }
+        .collapse-btn.expand-btn {
+            border-color: #28a745;
+            color: #28a745;
+        }
+        .collapse-btn.expand-btn:hover {
+            background: #28a745;
+            color: white;
+            box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
+        }
+        
+        /* OKR Section Improved Styles */
+        .okr-card {
+            padding: 18px;
+            background: #f0f4ff;
+            border-radius: 12px;
+            margin-bottom: 16px;
+        }
+        .okr-header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 12px;
+        }
+        .okr-title-text {
+            font-weight: 700;
+            color: #1e3c72;
+            margin-bottom: 8px;
+            font-size: 1.05em;
+        }
+        .okr-meta-row {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            font-size: 0.9em;
+            flex-wrap: wrap;
+        }
+        .okr-owner-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: #e0e7ff;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.85em;
+            color: #1e3c72;
+        }
+        .kr-section {
+            background: white;
+            border-radius: 10px;
+            padding: 14px;
+            margin-bottom: 10px;
+            border-left: 4px solid #667eea;
+        }
+        .kr-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .kr-title {
+            font-weight: 600;
+            color: #1e3c72;
+            font-size: 0.95em;
+        }
+        .kr-progress-info {
+            font-size: 0.85em;
+            color: #666;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .status-group {
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        .status-group-header {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.85em;
+            transition: background 0.2s;
+        }
+        .status-group-header:hover {
+            background: rgba(0,0,0,0.05);
+        }
+        .status-group-header.in-progress { color: #d97706; }
+        .status-group-header.not-started { color: #6b7280; }
+        .status-group-header.completed { color: #059669; }
+        .status-count-badge {
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.8em;
+            margin-left: auto;
+            color: white;
+        }
+        .status-group-header.in-progress .status-count-badge { background: #f59e0b; }
+        .status-group-header.not-started .status-count-badge { background: #9ca3af; }
+        .status-group-header.completed .status-count-badge { background: #10b981; }
+        .tasks-container {
+            padding: 8px 0 8px 12px;
+        }
+        .task-card {
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            padding: 10px 12px;
+            background: #f8fafc;
+            border-radius: 8px;
+            margin-bottom: 6px;
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid #e2e8f0;
+        }
+        .task-card:hover {
+            transform: translateX(4px);
+            box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+        }
+        .task-status-icon {
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7em;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+        .task-status-icon.complete { background: #d1fae5; color: #059669; }
+        .task-status-icon.in-progress { background: #fef3c7; color: #d97706; }
+        .task-status-icon.not-started { background: #f3f4f6; color: #9ca3af; border: 2px solid #e5e7eb; }
+        .task-text {
+            flex: 1;
+            color: #374151;
+            font-size: 0.88em;
+            line-height: 1.5;
+        }
+        .task-text-truncated {
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .task-expand-btn {
+            color: #667eea;
+            font-size: 0.8em;
+            cursor: pointer;
+            margin-top: 4px;
+            display: inline-block;
+        }
+        .task-expand-btn:hover { text-decoration: underline; }
+        .collapsed-completed {
+            background: #ecfdf5;
+            border-radius: 8px;
+            padding: 12px 16px;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            cursor: pointer;
+            transition: background 0.2s;
+            border: 1px solid #d1fae5;
+        }
+        .collapsed-completed:hover { background: #d1fae5; }
+        .collapsed-completed-icon { font-size: 1.2em; }
+        .collapsed-completed-text { color: #065f46; font-weight: 600; font-size: 0.9em; }
+        .collapsed-completed-expand { margin-left: auto; color: #065f46; font-size: 0.85em; }
+        .completed-tasks-hidden { display: none; }
+        .completed-tasks-visible { display: block; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="header">
+            <h1>🚀 Journey to Day 1 Close</h1>
+            <div class="subtitle">Strategic Transformation Roadmap | Corporate Accounting</div>
+            <div class="meta">Fiscal Year End: April 30 | Target: February 1, 2027</div>
+        </div>
+
+        <!-- Journey Timeline & Close Schedule -->
+        <div class="journey-timeline">
+            <div class="journey-title">📍 Our Journey from BD6 to BD1</div>
+            <p style="text-align: center; margin: 5px 0 20px 0; opacity: 0.9; font-size: 1.1em;">Close Schedule & BD Goals by Quarter</p>
+            
+            <!-- Close Schedule Chart -->
+            <div style="margin: 0 auto; max-width: 1300px; padding: 0 10px;">
+                <div style="background: white; border-radius: 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.2); overflow: hidden;">
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse; font-size: 0.9em;">
+                        <thead>
+                            <tr style="background: #f8f9fa;">
+                                <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">Quarter</th>
+                                <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">Close Period</th>
+                                <th style="padding: 14px 12px; text-align: center; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">BD Goal</th>
+                                <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">JE Cutoff</th>
+                                <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">First Close in NS</th>
+                                <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">Reopen</th>
+                                <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: #1e3c72; border-bottom: 2px solid #e9ecef;">Final Close in NS</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="background: #c8e6c9;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Q3'26</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Jan 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #c62828; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">BD6</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">EOD BD4 local time</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">6 am PST BD5</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">6am PST BD6</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #c62828;">12pm PST BD6</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q4'26</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Feb 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">EOD BD3 local time</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">2 pm PST BD4</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">9 am PST BD5</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">9am PST BD6</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q4'26</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Mar 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">EOD BD3 local time</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">12pm PST BD4</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">9 am PST BD5</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">12pm PST BD5</td>
+                            </tr>
+                            <tr style="background: #c8e6c9;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Q4'26</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Apr 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #e65100; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">BD5</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">EOD BD3 local time</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">9 am PST BD4</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">9 am PST BD5</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #e65100;">9am PST BD5</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q1'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">May 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">EOD PST BD4</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q1'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Jun 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">12pm PST BD4</td>
+                            </tr>
+                            <tr style="background: #c8e6c9;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Q1'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Jul 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #f9a825; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">BD4</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #b8860b;">9am PST BD4</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q2'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Aug 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">EOD PST BD3</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q2'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Sep 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">12pm PST BD3</td>
+                            </tr>
+                            <tr style="background: #c8e6c9;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Q2'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Oct 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #7cb342; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">BD3</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #2e7d32;">9am PST BD3</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q3'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Nov 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">EOD PST BD2</td>
+                            </tr>
+                            <tr style="background: #f5f5f5;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Q3'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">Dec 2026</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #6c757d; color: white; padding: 4px 12px; border-radius: 12px;">-</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 500;">12pm PST BD2</td>
+                            </tr>
+                            <tr style="background: #c8e6c9;">
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Q3'27</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #1a1a1a;">Jan 2027</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; text-align: center;"><span style="background: #43a047; color: white; padding: 4px 12px; border-radius: 12px; font-weight: 600;">BD2</span></td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; color: #1a1a1a; font-weight: 600;">n/a</td>
+                                <td style="padding: 12px; border-bottom: 1px solid #e9ecef; font-weight: 700; color: #2e7d32;">9am PST BD2</td>
+                            </tr>
+                            <tr style="background: linear-gradient(135deg, #1b5e20 0%, #2e7d32 100%); color: white;">
+                                <td style="padding: 16px 12px; font-weight: 700; font-size: 1.1em;">🌟 NORTH STAR</td>
+                                <td style="padding: 16px 12px; font-weight: 700; font-size: 1.1em;">February 2027</td>
+                                <td style="padding: 16px 12px; text-align: center;"><span style="background: white; color: #1b5e20; padding: 6px 16px; border-radius: 12px; font-weight: 700; font-size: 1.1em;">BD1</span></td>
+                                <td style="padding: 16px 12px; font-weight: 600;">NONE</td>
+                                <td style="padding: 16px 12px; font-weight: 600;">n/a</td>
+                                <td style="padding: 16px 12px; font-weight: 600;">n/a</td>
+                                <td style="padding: 16px 12px; font-weight: 700; font-size: 1.1em;">EOD PST BD1 🎯</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Monthly Summary -->
+        <div class="monthly-summary" id="monthlySummary"></div>
+
+        <!-- Multi-Quarter Executive Roadmap -->
+        <div id="multiQuarterContainer" style="margin-bottom: 40px;"></div>
+
+        <!-- Executive Strategy Section -->
+        <div class="strategy-section">
+            <div class="strategy-title" onclick="toggleSection('strategyContent', this)">
+                <span>📖 Our Day 1 Close Strategy by Functional Area</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div id="strategyContent" class="collapsible-content">
+            <div class="strategy-content">
+                We're currently on a <strong>BD6 close</strong> (6 business days). To reach <strong>BD1 by February 1, 2027</strong>, we're transforming every major close category through automation, process optimization, and systems integration. The hours shown below represent <strong>time savings that enable BD1 close</strong> - each functional area's contribution to reducing our overall close timeline.
+            </div>
+            <div class="strategy-grid">
+                <div class="strategy-card">
+                    <div class="strategy-card-title">📊 Accruals</div>
+                    <div class="strategy-card-impact">~35 Hours Saved</div>
+                    <div class="strategy-card-desc">AI-powered accruals via WiseLayer eliminate manual vendor analysis and automate prepaid tracking</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">💰 Cash & Intercompany</div>
+                    <div class="strategy-card-impact">~13 Hours Saved</div>
+                    <div class="strategy-card-desc">Automated I/C settlement, cash reconciliation, and TP module reduce end-of-month bottlenecks</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">🏢 Leases & Fixed Assets</div>
+                    <div class="strategy-card-impact">~4 Hours Saved</div>
+                    <div class="strategy-card-desc">Spacebase automation and NetSuite FAM integration eliminate manual journal entries</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">💼 Payroll & Commissions</div>
+                    <div class="strategy-card-impact">~19 Hours Saved</div>
+                    <div class="strategy-card-desc">Automated reconciliations and Xactly integration streamline payroll and sales comp processes</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">⚡ Close Management</div>
+                    <div class="strategy-card-impact">~4 Hours Saved</div>
+                    <div class="strategy-card-desc">Numeric AI flux tools, monitors, and process enhancements accelerate overall close cycle</div>
+                </div>
+                <div class="strategy-card">
+                    <div class="strategy-card-title">🤝 Acquisitions & Other</div>
+                    <div class="strategy-card-impact">Scalable Growth</div>
+                    <div class="strategy-card-desc">Guideline integration and PEO entity setup ensure scalable growth without slowing close</div>
+                </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Progress Tracker -->
+        <div class="progress-tracker">
+            <div class="tracker-title" onclick="toggleSection('trackerContent', this)">
+                <span>🎯 Close Time Reduction Progress</span>
+                <span class="collapse-icon">▼</span>
+            </div>
+            <div id="trackerContent" class="collapsible-content">
+            <div class="tracker-visual">
+                <div class="tracker-box current">
+                    <div class="tracker-label">Current State</div>
+                    <div class="tracker-value">BD6</div>
+                    <div class="tracker-desc">6 Business Days</div>
+                </div>
+                <div class="tracker-arrow">→</div>
+                <div class="tracker-box target">
+                    <div class="tracker-label">Target State</div>
+                    <div class="tracker-value">BD1</div>
+                    <div class="tracker-desc">February 1, 2027</div>
+                </div>
+            </div>
+            <div class="tracker-progress-bar">
+                <div class="tracker-progress-fill" id="trackerProgressFill" style="width: 0%">
+                    <span id="trackerProgressText">0% Complete</span>
+            </div>
+        </div>
+
+        <!-- Dashboard -->
+        <div class="dashboard" id="dashboard">
+            <div class="dash-item">
+                <div class="dash-number" id="totalTasks">0</div>
+                <div class="dash-label">Total Initiatives</div>
+            </div>
+            <div class="dash-item">
+                <div class="dash-number" id="completedTasks">0</div>
+                <div class="dash-label">Completed</div>
+            </div>
+            <div class="dash-item">
+                <div class="dash-number" id="progressTasks">0</div>
+                <div class="dash-label">In Progress</div>
+            </div>
+            <div class="dash-item">
+                <div class="dash-number" id="progressPercent">0%</div>
+                <div class="dash-label">Overall Progress</div>
+            </div>
+            <div class="dash-item">
+                <div class="dash-number" id="hoursSaved">0</div>
+                <div class="dash-label">Hours to Save</div>
+            </div>
+        </div>
+
+        <!-- On Track Indicator -->
+        <div class="on-track-indicator" id="onTrackIndicator"></div>
+            </div>
+        </div>
+
+        <!-- Timeline Content -->
+        <div class="timeline-section">
+            <div id="themeContainer">
+                <div style="text-align: center; padding: 60px; color: #6c757d;">
+                    <div style="font-size: 2em; margin-bottom: 20px;">🚧</div>
+                    <div style="font-size: 1.3em;">Loading roadmap data...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ⚙️ CONFIGURATION - UPDATE THIS WITH YOUR GOOGLE APPS SCRIPT URL
+        const APPS_SCRIPT_URL = ''; // Paste your Web App URL here after deploying the Apps Script
+        
+        // Fallback URLs (used if Apps Script URL is not set)
+        const SHEET_URL = 'roadmap_data.csv';
+        const GITHUB_URL = 'https://raw.githubusercontent.com/rrusso33/Day-1-Close-Roadmap-/gh-pages/roadmap_data.csv';
+
+        const THEMES = {
+            'Accruals': {
+                icon: '📊',
+                class: 'automation',
+                keywords: ['accruals']
+            },
+            'Cash & Cash Equivalents': {
+                icon: '💰',
+                class: 'cash',
+                keywords: ['cash']
+            },
+            'Intercompany': {
+                icon: '🔄',
+                class: 'process',
+                keywords: ['intercompany']
+            },
+            'Leases': {
+                icon: '🏢',
+                class: 'tools',
+                keywords: ['leases']
+            },
+            'Payroll': {
+                icon: '💼',
+                class: 'automation',
+                keywords: ['payroll']
+            },
+            'Sales Commissions': {
+                icon: '💵',
+                class: 'process',
+                keywords: ['sales commission']
+            },
+            'Close Management': {
+                icon: '⚡',
+                class: 'risk',
+                keywords: ['close management']
+            },
+            'Financial Reporting': {
+                icon: '📈',
+                class: 'tools',
+                keywords: ['financial reporting']
+            },
+            'Acquisition': {
+                icon: '🤝',
+                class: 'tools',
+                keywords: ['acquisition']
+            },
+            'Prepaids': {
+                icon: '📋',
+                class: 'automation',
+                keywords: ['prepaids']
+            },
+            'Fixed Assets': {
+                icon: '🏗️',
+                class: 'process',
+                keywords: ['fixed assets']
+            },
+            'PEO': {
+                icon: '🌐',
+                class: 'cash',
+                keywords: ['peo']
+            }
+        };
+
+        async function loadMultiQuarterData() {
+            try {
+                const isLocal = window.location.protocol === 'file:';
+                // Add timestamp to bust cache
+                const timestamp = new Date().getTime();
+                // Use GitHub URL when viewing locally
+                const url = isLocal 
+                    ? `https://rrusso33.github.io/Day-1-Close-Roadmap-/future_milestones.csv?v=${timestamp}`
+                    : `future_milestones.csv?v=${timestamp}`;
+                const response = await fetch(url);
+                const csvText = await response.text();
+                const data = parseCSV(csvText);
+                return data;
+            } catch (error) {
+                console.warn('⚠️ Could not load future milestones:', error);
+                return [];
+            }
+        }
+        
+        function renderMultiQuarterRoadmap(milestones, roadmapData) {
+            if ((!milestones || milestones.length === 0) && (!roadmapData || roadmapData.length === 0)) return '';
+            
+            // Group milestones by quarter
+            const quarters = {};
+            if (milestones) {
+                milestones.forEach(item => {
+                    const quarter = item['Quarter'];
+                    if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
+                    quarters[quarter].milestones.push(item);
+                });
+            }
+            
+            // Group roadmap data initiatives by quarter using the "Quarter" column from CSV
+            // Also extract unique "Day 1 Goal" values and group initiatives by goal
+            console.log('📊 Processing roadmap data:', roadmapData ? roadmapData.length : 0, 'tasks');
+            
+            if (roadmapData && roadmapData.length > 0) {
+                roadmapData.forEach(task => {
+                    // Use the Quarter column directly from CSV
+                    let quarter = (task['Quarter'] || '').trim();
+                    
+                    // Normalize quarter format (handle variations like "Q4'26", "Q4 '26", "Q4 26", etc.)
+                    quarter = quarter.replace(/\s+/g, '');  // Remove spaces
+                    if (!quarter.includes("'")) {
+                        // If no apostrophe, add it (e.g., "Q426" -> "Q4'26")
+                        quarter = quarter.replace(/^(Q\d)(\d{2})$/, "$1'$2");
+                    }
+                    
+                    // Only process quarters we're displaying
+                    if (quarter && ['Q2\'26', 'Q3\'26', 'Q4\'26', 'Q1\'27', 'Q2\'27', 'Q3\'27', 'Q4\'27'].includes(quarter)) {
+                        if (!quarters[quarter]) quarters[quarter] = { milestones: [], initiatives: [], goals: {}, goalsList: [] };
+                        quarters[quarter].initiatives.push(task);
+                        
+                        // Group initiatives by Day 1 Close Theme
+                        const theme = task['Day 1 Close Theme'];
+                        if (theme && theme.trim() && theme.toLowerCase() !== 'n/a') {
+                            const themeKey = theme.trim();
+                            if (!quarters[quarter].goals[themeKey]) {
+                                quarters[quarter].goals[themeKey] = [];
+                                quarters[quarter].goalsList.push(themeKey);
+                                console.log(`  ✅ Added theme "${themeKey}" to ${quarter}`);
+                            }
+                            quarters[quarter].goals[themeKey].push(task);
+                        }
+                    }
+                });
+                
+                console.log('📋 Final quarters data:', quarters);
+            }
+            
+            // Define quarter order and details
+            const quarterInfo = {
+                "Q2'26": { fullName: "Q2 FY26", endDate: "October 31, 2025", badge: "current", description: "Foundation Phase" },
+                "Q3'26": { fullName: "Q3 FY26", endDate: "January 31, 2026", badge: "upcoming", description: "Build Phase" },
+                "Q4'26": { fullName: "Q4 FY26", endDate: "April 30, 2026", badge: "upcoming", description: "Optimization Phase" },
+                "Q1'27": { fullName: "Q1 FY27", endDate: "July 31, 2026", badge: "upcoming", description: "Acceleration Phase" },
+                "Q2'27": { fullName: "Q2 FY27", endDate: "October 31, 2026", badge: "upcoming", description: "Scale Phase" },
+                "Q3'27": { fullName: "Q3 FY27", endDate: "January 31, 2027", badge: "upcoming", description: "Refinement Phase" },
+                "Q4'27": { fullName: "Q4 FY27", endDate: "February 28, 2027", badge: "target", description: "🎯 BD1 TARGET!" }
+            };
+            
+            let html = `
+                <div class="multi-quarter-roadmap">
+                    <div class="multi-quarter-title">📅 Multi-Quarter Executive Roadmap</div>
+                    <div class="multi-quarter-subtitle">Strategic Milestones from Q2 FY26 → Q4 FY27 (Day 1 Close)</div>
+                    <div class="quarters-grid">
+            `;
+            
+            Object.keys(quarterInfo).forEach(quarterKey => {
+                const info = quarterInfo[quarterKey];
+                const quarterData = quarters[quarterKey] || { milestones: [], initiatives: [] };
+                const quarterMilestones = quarterData.milestones || [];
+                const quarterInitiatives = quarterData.initiatives || [];
+                const cardClass = quarterKey === "Q4'27" ? 'target-quarter' : quarterKey === "Q4'26" ? 'current-quarter' : '';
+                const quarterId = quarterKey.replace(/'/g, '');
+                
+                // Count initiatives by status
+                const completedCount = quarterInitiatives.filter(i => normalizeStatus(i['Status']) === 'Complete').length;
+                const inProgressCount = quarterInitiatives.filter(i => normalizeStatus(i['Status']) === 'In Progress').length;
+                const plannedCount = quarterInitiatives.filter(i => normalizeStatus(i['Status']) === 'Planned').length;
+                
+                // Calculate progress percentage
+                const totalInitiatives = quarterInitiatives.length;
+                const progressPercent = totalInitiatives > 0 ? Math.round((completedCount / totalInitiatives) * 100) : 0;
+                
+                // Determine progress bar color
+                let progressClass = 'low-progress';
+                if (progressPercent >= 70) progressClass = 'high-progress';
+                else if (progressPercent >= 40) progressClass = 'medium-progress';
+                
+                // Calculate days until quarter end
+                const endDate = new Date(info.endDate);
+                const today = new Date();
+                const daysUntil = Math.ceil((endDate - today) / (1000 * 60 * 60 * 24));
+                const isPast = daysUntil < 0;
+                const daysText = isPast ? `${Math.abs(daysUntil)} days ago` : `${daysUntil} days away`;
+                
+                // Badge styling
+                let badgeClass = 'badge-upcoming';
+                if (info.badge === 'current') badgeClass = 'badge-current';
+                else if (info.badge === 'target') badgeClass = 'badge-target';
+                
+                html += `
+                    <div class="quarter-card ${cardClass}">
+                        <div class="quarter-header">
+                            <div>
+                                <div class="quarter-name">${info.fullName}</div>
+                                <div class="quarter-date">${info.endDate}</div>
+                            </div>
+                            <span class="quarter-badge ${badgeClass}">${info.badge === 'current' ? 'NOW' : info.badge === 'target' ? 'TARGET' : 'FUTURE'}</span>
+                        </div>
+                        
+                        ${totalInitiatives > 0 ? `
+                        <div class="quarter-progress-section">
+                            <div class="quarter-stats">
+                                <div class="quarter-stat-item">
+                                    <span style="color: #6c757d;">Progress:</span>
+                                    <span class="quarter-completion">${progressPercent}%</span>
+                                </div>
+                                <div class="quarter-stat-item">
+                                    <span style="color: #28a745;">✓ ${completedCount}</span>
+                                    <span style="color: #007bff;">⟳ ${inProgressCount}</span>
+                                    <span style="color: #6c757d;">○ ${plannedCount}</span>
+                                </div>
+                            </div>
+                            <div class="quarter-progress-bar">
+                                <div class="quarter-progress-fill ${progressClass}" style="width: ${progressPercent}%"></div>
+                            </div>
+                        </div>
+                        ` : ''}
+                        
+                        ${!isPast ? `<div class="quarter-countdown">⏰ ${daysText}</div>` : ''}
+                        
+                        <div class="quarter-goals-section" style="margin-top: 15px;">
+                `;
+                
+                // Display Day 1 Close Themes from roadmap data
+                const goalsList = quarterData.goalsList || [];
+                const goalsData = quarterData.goals || {};
+                
+                console.log(`Quarter ${quarterKey}: ${goalsList.length} themes found`, goalsList);
+                
+                if (goalsList.length > 0) {
+                    html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
+                    
+                    goalsList.forEach((goal, idx) => {
+                        const goalInitiatives = goalsData[goal] || [];
+                        const themeId = 'theme-detail-' + goal.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                        html += `
+                            <li onclick="scrollToTheme('${themeId}')" 
+                                style="margin-bottom: 8px; padding: 8px 12px; background: #f8f9fa; border-radius: 6px; border-left: 3px solid #667eea; cursor: pointer; transition: all 0.2s;"
+                                onmouseover="this.style.background='#e3f2fd'; this.style.transform='translateX(5px)'"
+                                onmouseout="this.style.background='#f8f9fa'; this.style.transform='translateX(0)'">
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em; display: flex; align-items: center; gap: 8px;">
+                                    ${goal}
+                                    <span style="font-size: 0.8em; color: #667eea;">→</span>
+                                </div>
+                                <div style="font-size: 0.8em; color: #6c757d; margin-top: 4px;">${goalInitiatives.length} initiatives</div>
+                            </li>
+                        `;
+                    });
+                    
+                    html += `</ul>`;
+                }
+                
+                // Also display future milestones if they exist
+                if (quarterMilestones.length > 0) {
+                    if (goalsList.length > 0) {
+                        html += `<div style="margin-top: 15px; padding-top: 10px; border-top: 1px solid #e9ecef;"></div>`;
+                    }
+                    html += `<ul style="margin: 0; padding-left: 20px; list-style: none;">`;
+                    
+                    quarterMilestones.forEach(milestone => {
+                        const description = milestone['Day 1 Close Theme'] || '';
+                        html += `
+                            <li style="margin-bottom: 8px; padding: 8px 12px; background: #fff8e1; border-radius: 6px; border-left: 3px solid #ffc107;">
+                                <div style="font-weight: 600; color: #2c3e50; font-size: 0.9em;">${description}</div>
+                            </li>
+                        `;
+                    });
+                    
+                    html += `</ul>`;
+                }
+                
+                if (goalsList.length === 0 && quarterMilestones.length === 0) {
+                    html += `<div style="padding: 20px; text-align: center; color: #6c757d; font-style: italic;">Planning in progress...</div>`;
+                }
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+
+        function renderDay1GoalsDetail(data) {
+            if (!data || data.length === 0) return '';
+            
+            // First, group by Day 1 Close Theme → OKR → Key Result
+            const themeGroups = {};
+            data.forEach(task => {
+                const theme = (task['Day 1 Close Theme'] || '').trim();
+                if (theme && theme.toLowerCase() !== 'n/a') {
+                    if (!themeGroups[theme]) {
+                        themeGroups[theme] = {
+                            okrs: {},
+                            quarter: task['Quarter'] || '',
+                            category: task['Close Category'] || 'General',
+                            allInitiatives: []
+                        };
+                    }
+                    
+                    // Group by OKR under this Theme
+                    const okr = (task['OKR'] || '').trim();
+                    if (okr && okr.toLowerCase() !== 'n/a') {
+                        if (!themeGroups[theme].okrs[okr]) {
+                            themeGroups[theme].okrs[okr] = {};
+                        }
+                        
+                        // Group by Key Result under this OKR
+                        const keyResult = (task['Key Result'] || '').trim();
+                        if (keyResult && keyResult.toLowerCase() !== 'n/a') {
+                            if (!themeGroups[theme].okrs[okr][keyResult]) {
+                                themeGroups[theme].okrs[okr][keyResult] = [];
+                            }
+                            themeGroups[theme].okrs[okr][keyResult].push(task);
+                        }
+                    }
+                    
+                    themeGroups[theme].allInitiatives.push(task);
+                }
+            });
+            
+            if (Object.keys(themeGroups).length === 0) return '';
+            
+            let html = `
+                <div class="detailed-themes-section">
+                    <div class="detailed-themes-title" onclick="toggleDetailedView()">
+                        <span>🎯 Day 1 Themes - Detailed View</span>
+                        <span class="collapse-icon" id="detailed-view-arrow">▼</span>
+                    </div>
+                    <div id="detailed-view-content" class="collapsible-content">
+                        <div style="padding: 40px 50px; background: white;">
+                            <div style="display: grid; gap: 20px;">
+            `;
+            
+            // Sort themes by quarter
+            const sortedThemes = Object.entries(themeGroups).sort((a, b) => {
+                const quarterOrder = ["Q2'26", "Q3'26", "Q4'26", "Q1'27", "Q2'27", "Q3'27", "Q4'27"];
+                return quarterOrder.indexOf(a[1].quarter) - quarterOrder.indexOf(b[1].quarter);
+            });
+            
+            sortedThemes.forEach(([themeName, themeData], idx) => {
+                const initiatives = themeData.allInitiatives;
+                const okrs = themeData.okrs;
+                const okrCount = Object.keys(okrs).length;
+                
+                const completed = initiatives.filter(i => normalizeStatus(i['Status']) === 'Complete').length;
+                const inProgress = initiatives.filter(i => normalizeStatus(i['Status']) === 'In Progress').length;
+                const total = initiatives.length;
+                const progressPct = total > 0 ? (completed / total) * 100 : 0;
+                
+                const totalHours = initiatives.reduce((sum, i) => {
+                    const h = parseFloat(i['Hours Saved'] || 0);
+                    return sum + (isNaN(h) ? 0 : h);
+                }, 0);
+                
+                // Use theme name for ID to match multi-quarter links
+                const themeId = 'theme-detail-' + themeName.replace(/[^a-zA-Z0-9]/g, '-').toLowerCase();
+                
+                // Determine status color based on progress
+                let statusColor = '#6c757d';
+                let statusText = 'Not Started';
+                if (progressPct === 100) {
+                    statusColor = '#28a745';
+                    statusText = 'Complete';
+                } else if (inProgress > 0 || completed > 0) {
+                    statusColor = '#007bff';
+                    statusText = 'In Progress';
+                }
+                
+                html += `
+                    <div id="${themeId}" style="border: 2px solid #e9ecef; border-radius: 12px; overflow: hidden; transition: all 0.3s ease;">
+                        <div onclick="toggleGoalDetail('${themeId}-details')" 
+                             style="cursor: pointer; padding: 20px; background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%); display: flex; align-items: center; justify-content: space-between; transition: background 0.2s;"
+                             onmouseover="this.style.background='linear-gradient(135deg, #e9ecef 0%, #dee2e6 100%)'"
+                             onmouseout="this.style.background='linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%)'">
+                            
+                            <div style="flex: 1;">
+                                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 8px;">
+                                    <span id="arrow-${themeId}-details" style="font-size: 1.2em; transition: transform 0.3s;">▶</span>
+                                    <h3 style="margin: 0; color: #2c3e50; font-size: 1.3em; font-weight: 700;">🎯 ${themeName}</h3>
+                                    <span style="background: ${statusColor}; color: white; padding: 4px 12px; border-radius: 20px; font-size: 0.85em; font-weight: 600;">${statusText}</span>
+                                </div>
+                                
+                                <div style="display: flex; gap: 25px; align-items: center; margin-left: 40px; flex-wrap: wrap;">
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em; color: #6c757d;">🎯</span>
+                                        <span style="font-weight: 600; color: #2c3e50;">${okrCount}</span>
+                                        <span style="color: #6c757d; font-size: 0.9em;">OKRs</span>
+                                    </div>
+                                    
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em; color: #6c757d;">📊</span>
+                                        <span style="font-weight: 600; color: #2c3e50;">${completed}/${total}</span>
+                                        <span style="color: #6c757d; font-size: 0.9em;">tasks complete</span>
+                                    </div>
+                                    
+                                    ${totalHours > 0 ? `
+                                        <div style="display: flex; align-items: center; gap: 8px;">
+                                            <span style="font-size: 0.9em;">⏱️</span>
+                                            <span style="font-weight: 600; color: #2c3e50;">${Math.round(totalHours)}h</span>
+                                            <span style="color: #6c757d; font-size: 0.9em;">saved</span>
+                                        </div>
+                                    ` : ''}
+                                    
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em;">📅</span>
+                                        <span style="font-weight: 600; color: #667eea;">${themeData.quarter}</span>
+                                    </div>
+                                    
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        <span style="font-size: 0.9em;">📂</span>
+                                        <span style="color: #6c757d; font-size: 0.9em;">${themeData.category}</span>
+                                    </div>
+                                </div>
+                                
+                                <div style="margin-top: 12px; margin-left: 40px; background: white; border-radius: 8px; padding: 8px; max-width: 400px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                                        <span style="font-size: 0.85em; color: #6c757d; font-weight: 600;">Progress</span>
+                                        <span style="font-size: 0.85em; font-weight: 700; color: ${statusColor};">${Math.round(progressPct)}%</span>
+                                    </div>
+                                    <div style="background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                        <div style="background: ${statusColor}; height: 100%; width: ${progressPct}%; transition: width 0.5s ease;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div id="${themeId}-details" style="display: none; padding: 25px; background: white;">
+                            <h4 style="color: #2c3e50; margin-bottom: 15px; font-size: 1.1em;">🎯 OKRs & Key Results</h4>
+                            <div style="display: grid; gap: 16px;">
+                                ${Object.entries(okrs).map(([okr, keyResults]) => {
+                                    // Calculate OKR-level stats
+                                    const allOkrTasks = Object.values(keyResults).flat();
+                                    const okrCompleted = allOkrTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                                    const okrTotal = allOkrTasks.length;
+                                    const okrPct = okrTotal > 0 ? (okrCompleted / okrTotal) * 100 : 0;
+                                    const okrStatusColor = okrPct === 100 ? '#10b981' : okrPct > 0 ? '#667eea' : '#6c757d';
+                                    
+                                    // Get unique owners for this OKR
+                                    const owners = [...new Set(allOkrTasks.map(t => t['Owner(s)'] || 'TBD').filter(o => o))];
+                                    const ownerText = owners.length > 0 ? owners.join(', ') : 'TBD';
+                                    
+                                    return `
+                                        <div class="okr-card" style="border-left: 5px solid ${okrStatusColor};">
+                                            <div class="okr-header-section">
+                                                <div style="flex: 1;">
+                                                    <div class="okr-title-text">🎯 ${okr}</div>
+                                                    <div class="okr-meta-row">
+                                                        <span class="okr-owner-badge">👤 ${ownerText}</span>
+                                                        <span style="color: #6c757d;"><strong>${okrCompleted}/${okrTotal}</strong> deliverables</span>
+                                                        <div style="flex: 1; min-width: 120px; max-width: 200px; background: #e9ecef; height: 8px; border-radius: 4px; overflow: hidden;">
+                                                            <div style="background: linear-gradient(90deg, #667eea, #764ba2); height: 100%; width: ${okrPct}%; transition: width 0.3s;"></div>
+                                                        </div>
+                                                        <span style="font-weight: 700; color: ${okrStatusColor};">${Math.round(okrPct)}%</span>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div style="margin-top: 12px; display: grid; gap: 10px;">
+                                                ${Object.entries(keyResults).map(([keyResult, tasks], krIndex) => {
+                                                    const krCompleted = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                                                    const krInProgress = tasks.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
+                                                    const krNotStarted = tasks.filter(t => normalizeStatus(t['Status']) !== 'Complete' && normalizeStatus(t['Status']) !== 'In Progress').length;
+                                                    const krTotal = tasks.length;
+                                                    const krPct = krTotal > 0 ? (krCompleted / krTotal) * 100 : 0;
+                                                    const krStatusColor = krPct === 100 ? '#10b981' : krPct > 0 ? '#667eea' : '#6c757d';
+                                                    const krUniqueId = themeId + '-kr-' + krIndex;
+                                                    
+                                                    // Group ALL tasks by deliverable text first, then pick best status
+                                                    const tasksByText = {};
+                                                    
+                                                    tasks.forEach(t => {
+                                                        const rawDeliverable = t['End of Week Deliverable / Milestone'] || 'Task';
+                                                        if (rawDeliverable.includes('#NAME') || rawDeliverable.includes('#REF')) return;
+                                                        
+                                                        let cleanText = rawDeliverable
+                                                            .replace(/\[close week\]/gi, '')
+                                                            .replace(/\[thanksgiving break\]/gi, '')
+                                                            .replace(/\[Aileen to do.*?\]/gi, '')
+                                                            .replace(/^- /g, '')
+                                                            .replace(/\s+/g, ' ')
+                                                            .trim();
+                                                        cleanText = cleanText.replace(/^[,\-•\s]+|[,\-•\s]+$/g, '').trim();
+                                                        if (cleanText) cleanText = cleanText.charAt(0).toUpperCase() + cleanText.slice(1);
+                                                        if (!cleanText) return;
+                                                        
+                                                        const status = normalizeStatus(t['Status']);
+                                                        
+                                                        // If we haven't seen this text, or if new status is "better"
+                                                        // Priority: Complete > In Progress > Planned
+                                                        if (!tasksByText[cleanText]) {
+                                                            tasksByText[cleanText] = status;
+                                                        } else {
+                                                            const current = tasksByText[cleanText];
+                                                            if (status === 'Complete') {
+                                                                tasksByText[cleanText] = 'Complete';
+                                                            } else if (status === 'In Progress' && current !== 'Complete') {
+                                                                tasksByText[cleanText] = 'In Progress';
+                                                            }
+                                                        }
+                                                    });
+                                                    
+                                                    // Now group by final status
+                                                    const uniqueCompleted = [];
+                                                    const uniqueInProgress = [];
+                                                    const uniqueNotStarted = [];
+                                                    
+                                                    Object.entries(tasksByText).forEach(([text, status]) => {
+                                                        const taskObj = { text: text, status: status };
+                                                        if (status === 'Complete') {
+                                                            uniqueCompleted.push(taskObj);
+                                                        } else if (status === 'In Progress') {
+                                                            uniqueInProgress.push(taskObj);
+                                                        } else {
+                                                            uniqueNotStarted.push(taskObj);
+                                                        }
+                                                    });
+                                                    
+                                                    const renderTask = (task, statusClass, icon) => {
+                                                        const isLong = task.text.length > 120;
+                                                        const taskId = 'task-' + Math.random().toString(36).substr(2, 9);
+                                                        let html = '<div class="task-card">';
+                                                        html += '<div class="task-status-icon ' + statusClass + '">' + icon + '</div>';
+                                                        html += '<div style="flex: 1;">';
+                                                        html += '<div class="task-text' + (isLong ? ' task-text-truncated' : '') + '" id="' + taskId + '">' + task.text + '</div>';
+                                                        if (isLong) {
+                                                            html += '<span class="task-expand-btn" onclick="var el=document.getElementById(\'' + taskId + '\'); el.classList.toggle(\'task-text-truncated\'); this.textContent = el.classList.contains(\'task-text-truncated\') ? \'Show more...\' : \'Show less\';">Show more...</span>';
+                                                        }
+                                                        html += '</div></div>';
+                                                        return html;
+                                                    };
+                                                    
+                                                    let krHtml = '<div class="kr-section">';
+                                                    krHtml += '<div class="kr-header">';
+                                                    krHtml += '<span class="kr-title">📊 ' + keyResult + '</span>';
+                                                    krHtml += '<span class="kr-progress-info"><strong>' + krCompleted + '/' + krTotal + '</strong> complete ';
+                                                    krHtml += '<span style="font-weight: 600; color: ' + krStatusColor + ';">' + Math.round(krPct) + '%</span></span>';
+                                                    krHtml += '</div>';
+                                                    
+                                                    if (uniqueInProgress.length > 0) {
+                                                        krHtml += '<div class="status-group">';
+                                                        krHtml += '<div class="status-group-header in-progress">🔄 In Progress <span class="status-count-badge">' + uniqueInProgress.length + '</span></div>';
+                                                        krHtml += '<div class="tasks-container">' + uniqueInProgress.map(t => renderTask(t, 'in-progress', '⏳')).join('') + '</div>';
+                                                        krHtml += '</div>';
+                                                    }
+                                                    
+                                                    if (uniqueNotStarted.length > 0) {
+                                                        krHtml += '<div class="status-group">';
+                                                        krHtml += '<div class="status-group-header not-started">⏸️ Not Started <span class="status-count-badge">' + uniqueNotStarted.length + '</span></div>';
+                                                        krHtml += '<div class="tasks-container">' + uniqueNotStarted.map(t => renderTask(t, 'not-started', '○')).join('') + '</div>';
+                                                        krHtml += '</div>';
+                                                    }
+                                                    
+                                                    if (uniqueCompleted.length > 0) {
+                                                        const completedId = 'completed-' + krUniqueId;
+                                                        krHtml += '<div class="collapsed-completed" onclick="var el=document.getElementById(\'' + completedId + '\'); var isHidden = el.style.display === \'none\'; el.style.display = isHidden ? \'block\' : \'none\'; this.querySelector(\'.collapsed-completed-expand\').textContent = isHidden ? \'Click to collapse ▲\' : \'Click to expand ▼\';">';
+                                                        krHtml += '<span class="collapsed-completed-icon">✅</span>';
+                                                        krHtml += '<span class="collapsed-completed-text">' + uniqueCompleted.length + ' task' + (uniqueCompleted.length > 1 ? 's' : '') + ' completed</span>';
+                                                        krHtml += '<span class="collapsed-completed-expand">Click to expand ▼</span>';
+                                                        krHtml += '</div>';
+                                                        krHtml += '<div id="' + completedId + '" style="display: none; margin-top: 8px;">';
+                                                        krHtml += '<div class="tasks-container">' + uniqueCompleted.map(t => renderTask(t, 'complete', '✓')).join('') + '</div>';
+                                                        krHtml += '</div>';
+                                                    }
+                                                    
+                                                    krHtml += '</div>';
+                                                    return krHtml;
+                                                }).join('')}
+                                            </div>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function toggleGoalDetail(goalId) {
+            const detailsDiv = document.getElementById(goalId);
+            const arrow = document.getElementById(`arrow-${goalId}`);
+            
+            if (detailsDiv && arrow) {
+                if (detailsDiv.style.display === 'none' || !detailsDiv.style.display) {
+                    detailsDiv.style.display = 'block';
+                    arrow.style.transform = 'rotate(90deg)';
+                    arrow.textContent = '▼';
+                } else {
+                    detailsDiv.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                    arrow.textContent = '▶';
+                }
+            }
+        }
+        
+        function toggleDetailedView() {
+            const content = document.getElementById('detailed-view-content');
+            const titleElement = document.querySelector('.detailed-themes-title');
+            if (content && titleElement) {
+                content.classList.toggle('collapsed');
+                titleElement.classList.toggle('collapsed');
+            }
+        }
+
+        function scrollToTheme(themeId) {
+            const themeElement = document.getElementById(themeId);
+            if (themeElement) {
+                // First, auto-expand the theme if it's collapsed
+                const detailsDiv = document.getElementById(`${themeId}-details`);
+                const arrow = document.getElementById(`arrow-${themeId}-details`);
+                
+                if (detailsDiv && (detailsDiv.style.display === 'none' || !detailsDiv.style.display)) {
+                    detailsDiv.style.display = 'block';
+                    if (arrow) {
+                        arrow.style.transform = 'rotate(90deg)';
+                        arrow.textContent = '▼';
+                    }
+                }
+                
+                // Smooth scroll to the theme with offset for better visibility
+                const elementPosition = themeElement.getBoundingClientRect().top + window.pageYOffset;
+                const offsetPosition = elementPosition - 100; // 100px offset from top
+                
+                window.scrollTo({
+                    top: offsetPosition,
+                    behavior: 'smooth'
+                });
+                
+                // Add a brief highlight effect
+                themeElement.style.transition = 'all 0.3s';
+                themeElement.style.boxShadow = '0 0 20px rgba(102, 126, 234, 0.5)';
+                setTimeout(() => {
+                    themeElement.style.boxShadow = '';
+                }, 2000);
+            }
+        }
+
+        async function loadData() {
+            try {
+                const isLocal = window.location.protocol === 'file:';
+                // Local viewing is now enabled - no redirect needed
+                
+                // Load multi-quarter milestones
+                const milestones = await loadMultiQuarterData();
+                
+                let data;
+                
+                // Try Google Apps Script first (real-time from Google Sheets)
+                if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.trim() !== '') {
+                    try {
+                        console.log('📡 Fetching real-time data from Google Sheets...');
+                        const response = await fetch(APPS_SCRIPT_URL);
+                        const jsonData = await response.json();
+                        
+                        if (jsonData.success && jsonData.data) {
+                            data = jsonData.data;
+                            console.log(`✅ Loaded ${data.length} tasks from Google Sheets (Live)`);
+                            console.log(`🕒 Last updated: ${jsonData.lastUpdated}`);
+                        } else {
+                            throw new Error('Invalid response from Apps Script');
+                        }
+                    } catch (err) {
+                        console.warn('⚠️ Apps Script failed, falling back to CSV:', err.message);
+                        // Fall through to CSV fallback
+                    }
+                }
+                
+                // Fallback to CSV if Apps Script not configured or failed
+                if (!data) {
+                    console.log('📄 Loading data from CSV file...');
+                    let csvText;
+                    // Add timestamp to bust cache
+                    const timestamp = new Date().getTime();
+                    
+                    // When viewing locally (file://), use GitHub URL; otherwise try local first
+                    if (isLocal) {
+                        console.log('📡 Local viewing - fetching from GitHub...');
+                        const response = await fetch(`${GITHUB_URL}?v=${timestamp}`);
+                        csvText = await response.text();
+                    } else {
+                        try {
+                            const response = await fetch(`${SHEET_URL}?v=${timestamp}`);
+                            csvText = await response.text();
+                        } catch (err) {
+                            const response = await fetch(`${GITHUB_URL}?v=${timestamp}`);
+                            csvText = await response.text();
+                        }
+                    }
+                    
+                    data = parseCSV(csvText);
+                    console.log(`✅ Loaded ${data.length} tasks from CSV`);
+                }
+                
+                renderRoadmap(data, milestones);
+                
+            } catch (error) {
+                console.error('❌ Error:', error);
+                document.getElementById('themeContainer').innerHTML = `
+                    <div style="text-align: center; padding: 60px; color: #dc3545;">
+                        <div style="font-size: 3em; margin-bottom: 25px;">⚠️</div>
+                        <div style="font-size: 1.5em; margin-bottom: 15px;">Error loading data</div>
+                        <div style="font-size: 1em; color: #6c757d;">${error.message}</div>
+                    </div>
+                `;
+            }
+        }
+
+        function parseCSV(csv) {
+            const rows = [];
+            let currentRow = [];
+            let currentField = '';
+            let inQuotes = false;
+            
+            for (let i = 0; i < csv.length; i++) {
+                const char = csv[i];
+                const nextChar = csv[i + 1];
+                
+                if (char === '"') {
+                    if (inQuotes && nextChar === '"') {
+                        currentField += '"';
+                        i++;
+                    } else {
+                        inQuotes = !inQuotes;
+                    }
+                } else if (char === ',' && !inQuotes) {
+                    currentRow.push(currentField.trim());
+                    currentField = '';
+                } else if ((char === '\n' || char === '\r') && !inQuotes) {
+                    if (char === '\r' && nextChar === '\n') i++;
+                    if (currentField || currentRow.length > 0) {
+                        currentRow.push(currentField.trim());
+                        if (currentRow.some(field => field)) {
+                            rows.push(currentRow);
+                        }
+                        currentRow = [];
+                        currentField = '';
+                    }
+                } else {
+                    currentField += char;
+                }
+            }
+            
+            if (currentField || currentRow.length > 0) {
+                currentRow.push(currentField.trim());
+                if (currentRow.some(field => field)) {
+                    rows.push(currentRow);
+                }
+            }
+            
+            if (rows.length === 0) return [];
+            
+            const headers = rows[0].map(h => h.replace(/^"|"$/g, '').trim());
+            const data = [];
+            for (let i = 1; i < rows.length; i++) {
+                const row = {};
+                headers.forEach((header, index) => {
+                    row[header] = (rows[i][index] || '').replace(/^"|"$/g, '').trim();
+                });
+                data.push(row);
+            }
+            
+            return data;
+        }
+
+        // ╔════════════════════════════════════════════════════════════════╗
+        // ║          PROGRESS UPDATES - EDIT THIS SECTION                   ║
+        // ║                                                                  ║
+        // ║  To update: Search for "PROGRESS_DATA" (Ctrl+F)                 ║
+        // ║  Remember:  - Put each item in quotes "like this"               ║
+        // ║             - Add comma after each item EXCEPT the last one     ║
+        // ║             - Save file (Ctrl+S) then git push                  ║
+        // ╚════════════════════════════════════════════════════════════════╝
+        
+        const PROGRESS_DATA = {
+            // ──────────────────────────────────────────────────────
+            // RECENT WINS - What we've accomplished
+            // ──────────────────────────────────────────────────────
+            recentWins: [
+                "Completed Dec Close with a BD4 close deadline - 2 months in a row!"
+            ],
+            
+            // ──────────────────────────────────────────────────────
+            // IN PROGRESS - What we're working on now
+            // ──────────────────────────────────────────────────────
+            inProgressNow: [
+                "Continue scope and testing of accrual automation tool",
+                "Continue to scope and plan for reducing corporate cash to BD1 - working with Numeric and Maximor currently",
+                "Transition plans for Florence - working with her to review all monthly tasks"
+            ],
+            
+            // ──────────────────────────────────────────────────────
+            // NEXT 30 DAYS - What's coming up
+            // ──────────────────────────────────────────────────────
+            next30Days: [
+                "Close our first quarter (Q3) on reduced timeline!",
+                "Continue PEO Discussions and Scoping",
+                "Attend AFO Onsite to discuss more Day 1 planning live :)"
+            ]
+        };
+
+        // Fetch progress updates - uses embedded data above
+        async function fetchProgressUpdates() {
+            return PROGRESS_DATA;
+        }
+
+        async function renderMonthlySummary(data) {
+            const now = new Date();
+            const monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+            const currentMonth = monthNames[now.getMonth()];
+            const currentYear = now.getFullYear();
+            
+            let winsContent, inProgressContent, upcomingContent;
+            
+            // Fetch from progress_updates.json
+            const progressData = await fetchProgressUpdates();
+            
+            if (progressData) {
+                // Use JSON data
+                winsContent = (progressData.recentWins || []).length > 0 ? `
+                    <ul style="margin: 0; padding-left: 20px;">
+                        ${progressData.recentWins.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                ` : '<p style="font-style: italic; opacity: 0.8;">No recent wins listed</p>';
+                
+                inProgressContent = (progressData.inProgressNow || []).length > 0 ? `
+                    <ul style="margin: 0; padding-left: 20px;">
+                        ${progressData.inProgressNow.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                ` : '<p style="font-style: italic; opacity: 0.8;">No in-progress items listed</p>';
+                
+                upcomingContent = (progressData.next30Days || []).length > 0 ? `
+                    <ul style="margin: 0; padding-left: 20px;">
+                        ${progressData.next30Days.map(item => `<li>${item}</li>`).join('')}
+                    </ul>
+                ` : '<p style="font-style: italic; opacity: 0.8;">No upcoming items listed</p>';
+            } else {
+                // Fallback
+                winsContent = '<p style="font-style: italic; opacity: 0.8;">Loading...</p>';
+                inProgressContent = '<p style="font-style: italic; opacity: 0.8;">Loading...</p>';
+                upcomingContent = '<p style="font-style: italic; opacity: 0.8;">Loading...</p>';
+            }
+            
+            const html = `
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                    <div class="monthly-summary-title">
+                        📊 ${currentMonth} ${currentYear} Progress Update
+                    </div>
+                    <div style="display: flex; gap: 10px;">
+                        <button onclick="location.reload()" style="padding: 8px 16px; background: rgba(255,255,255,0.2); border: 1px solid white; color: white; border-radius: 6px; cursor: pointer; font-weight: 600; transition: all 0.2s;" onmouseover="this.style.background='rgba(255,255,255,0.3)'" onmouseout="this.style.background='rgba(255,255,255,0.2)'">🔄 Refresh</button>
+                    </div>
+                </div>
+                <div class="monthly-summary-date">
+                    Last updated: ${now.toLocaleDateString('en-US', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' })}
+                </div>
+                <div class="monthly-grid">
+                    <div class="monthly-card">
+                        <div class="monthly-card-title">🎉 Recent Wins</div>
+                        <div class="monthly-card-content" id="winsContent" style="min-height: 100px; padding: 10px; border-radius: 6px;">
+                            ${winsContent}
+                        </div>
+                    </div>
+                    <div class="monthly-card">
+                        <div class="monthly-card-title">⚡ In Progress Now</div>
+                        <div class="monthly-card-content" id="inProgressContent" style="min-height: 100px; padding: 10px; border-radius: 6px;">
+                            ${inProgressContent}
+                        </div>
+                    </div>
+                    <div class="monthly-card">
+                        <div class="monthly-card-title">🎯 Next 30 Days</div>
+                        <div class="monthly-card-content" id="upcomingContent" style="min-height: 100px; padding: 10px; border-radius: 6px;">
+                            ${upcomingContent}
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            document.getElementById('monthlySummary').innerHTML = html;
+        }
+
+        function renderRiskDashboard(data) {
+            const atRisk = data.filter(t => normalizeStatus(t['Status']) === 'At Risk');
+            const blocked = data.filter(t => {
+                const notes = (t['Notes'] || '').toLowerCase();
+                const tasks = (t['Week Focus and Tasks'] || '').toLowerCase();
+                return notes.includes('block') || tasks.includes('block') || notes.includes('waiting');
+            });
+            
+            if (atRisk.length === 0 && blocked.length === 0) {
+                document.getElementById('riskDashboard').style.display = 'none';
+                return;
+            }
+            
+            const html = `
+                <div class="risk-title">
+                    🚨 Risk & Blocker Dashboard
+                                </div>
+                <div class="risk-summary">
+                    <div class="risk-stat">
+                        <div class="risk-stat-number">${atRisk.length}</div>
+                        <div class="risk-stat-label">At Risk</div>
+                            </div>
+                    <div class="risk-stat">
+                        <div class="risk-stat-number">${blocked.length}</div>
+                        <div class="risk-stat-label">Blocked/Waiting</div>
+                                        </div>
+                    <div class="risk-stat">
+                        <div class="risk-stat-number">${atRisk.length + blocked.length}</div>
+                        <div class="risk-stat-label">Needs Attention</div>
+                                    </div>
+                                        </div>
+                ${atRisk.length > 0 || blocked.length > 0 ? `
+                    <div class="risk-items">
+                        ${atRisk.map(t => `
+                            <div class="risk-item">
+                                <div class="risk-item-icon">⚠️</div>
+                                <div class="risk-item-content">
+                                    <div class="risk-item-title">${t['Day 1 Close Theme'] || t['End of Week Deliverable / Milestone'] || 'At-risk item'}</div>
+                                    <div class="risk-item-details">
+                                        <span>👤 ${t['Owner(s)'] || 'TBD'}</span>
+                                        <span>📅 ${t['Target End Date'] || 'TBD'}</span>
+                                        <span>📂 ${t['Close Category'] || 'General'}</span>
+                                        </div>
+                                        </div>
+                                            </div>
+                        `).join('')}
+                        ${blocked.map(t => `
+                            <div class="risk-item">
+                                <div class="risk-item-icon">🚧</div>
+                                <div class="risk-item-content">
+                                    <div class="risk-item-title">${t['Day 1 Close Theme'] || t['End of Week Deliverable / Milestone'] || 'Blocked item'}</div>
+                                    <div class="risk-item-details">
+                                        <span>👤 ${t['Owner(s)'] || 'TBD'}</span>
+                                        <span>📅 ${t['Target End Date'] || 'TBD'}</span>
+                                        <span>📂 ${t['Close Category'] || 'General'}</span>
+                                            </div>
+                                    </div>
+                                            </div>
+                        `).join('')}
+                                        </div>
+                                    ` : ''}
+            `;
+            
+            document.getElementById('riskDashboard').innerHTML = html;
+            document.getElementById('riskDashboard').style.display = 'block';
+        }
+
+        function renderOnTrackIndicator(data, progress) {
+            // Calculate metrics
+            const targetDate = new Date('2027-02-01');
+            const startDate = new Date('2025-10-01'); // Q2 FY26 start
+            const today = new Date();
+            
+            const totalDays = Math.ceil((targetDate - startDate) / (1000 * 60 * 60 * 24));
+            const daysElapsed = Math.ceil((today - startDate) / (1000 * 60 * 60 * 24));
+            const daysRemaining = Math.ceil((targetDate - today) / (1000 * 60 * 60 * 24));
+            
+            const expectedProgress = (daysElapsed / totalDays) * 100;
+            const actualProgress = progress;
+            const variance = actualProgress - expectedProgress;
+            
+            // Determine status
+            let statusClass = 'green';
+            let statusText = '✅ On Track to Hit BD1 by Feb 2027!';
+            let statusDetail = 'Current progress is aligned with timeline expectations.';
+            
+            if (variance < -10) {
+                statusClass = 'red';
+                statusText = '🚨 Behind Schedule - Action Needed';
+                statusDetail = `We're ${Math.abs(variance).toFixed(0)}% behind where we should be at this point.`;
+            } else if (variance < -5) {
+                statusClass = 'yellow';
+                statusText = '⚠️ Slightly Behind - Monitor Closely';
+                statusDetail = `We're ${Math.abs(variance).toFixed(0)}% behind pace but can recover with focused effort.`;
+            } else if (variance > 10) {
+                statusClass = 'green';
+                statusText = '🚀 Ahead of Schedule!';
+                statusDetail = `We're ${variance.toFixed(0)}% ahead of expected progress!`;
+            }
+            
+            // Current BD level (still at BD6)
+            const currentBD = 'BD6';
+            const targetBD = 'BD1';
+            const daysSaved = 0; // Still at BD6, so 0 days saved
+            const daysToSave = 4; // Need to save 4 days total (BD6 to BD1)
+            
+            const html = `
+                <div class="on-track-title">🎯 Are We On Track for BD1?</div>
+                <div class="on-track-content">
+                    <div class="on-track-metric">
+                        <div class="on-track-metric-value" style="color: #667eea;">${daysRemaining}</div>
+                        <div class="on-track-metric-label">Days Until Feb 1, 2027</div>
+                                        </div>
+                    <div class="on-track-metric">
+                        <div class="on-track-metric-value" style="color: #28a745;">${actualProgress.toFixed(0)}%</div>
+                        <div class="on-track-metric-label">Initiatives Complete</div>
+                                </div>
+                    <div class="on-track-metric">
+                        <div class="on-track-metric-value" style="color: #2c3e50;">${currentBD}</div>
+                        <div class="on-track-metric-label">Current Close Time</div>
+                            </div>
+                    <div class="on-track-metric">
+                        <div class="on-track-metric-value" style="color: #dc3545;">${daysToSave}</div>
+                        <div class="on-track-metric-label">Days Still to Save</div>
+                        </div>
+                        </div>
+                <div class="on-track-status ${statusClass}">
+                    ${statusText}
+                    <div style="font-size: 0.8em; font-weight: 500; margin-top: 10px; opacity: 0.9;">${statusDetail}</div>
+                    </div>
+                `;
+            
+            document.getElementById('onTrackIndicator').innerHTML = html;
+        }
+
+        function renderRoadmap(data, milestones) {
+            // Update dashboard
+            const completed = data.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+            const inProgress = data.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
+            const progress = data.length > 0 ? (completed / data.length) * 100 : 0;
+            const totalHours = data.reduce((sum, t) => {
+                const h = parseFloat(t['Hours Saved'] || 0);
+                return sum + (isNaN(h) ? 0 : h);
+            }, 0);
+            
+            document.getElementById('totalTasks').textContent = data.length;
+            document.getElementById('completedTasks').textContent = completed;
+            document.getElementById('progressTasks').textContent = inProgress;
+            document.getElementById('progressPercent').textContent = progress.toFixed(0) + '%';
+            document.getElementById('hoursSaved').textContent = Math.round(totalHours);
+            
+            // Render new executive sections
+            renderMonthlySummary(data);
+            // renderRiskDashboard(data); // Removed per user request
+            renderOnTrackIndicator(data, progress);
+            
+            // Update journey timeline (disabled - timeline removed, using chart instead)
+            // updateJourneyTimeline(progress);
+            
+            // Update progress tracker
+            const progressBar = document.getElementById('trackerProgressFill');
+            const progressText = document.getElementById('trackerProgressText');
+            if (progressBar && progressText) {
+                setTimeout(() => {
+                    progressBar.style.width = progress.toFixed(0) + '%';
+                    progressText.textContent = `${progress.toFixed(0)}% Complete - ${Math.round(totalHours)} hours saved`;
+                }, 300);
+            }
+            
+            // Render Multi-Quarter Executive Roadmap in its own container (top of page)
+            const multiQuarterHtml = renderMultiQuarterRoadmap(milestones, data);
+            document.getElementById('multiQuarterContainer').innerHTML = multiQuarterHtml;
+            
+            // Render Day 1 Goals Detail Section in the theme container
+            const detailHtml = renderDay1GoalsDetail(data);
+            document.getElementById('themeContainer').innerHTML = detailHtml;
+        }
+
+        function categorizeTask(task) {
+            const category = (task['Close Category'] || '').trim();
+            
+            // Direct mapping from CSV Close Category to our THEMES
+            if (category && THEMES[category]) {
+                return category;
+            }
+            
+            // Fallback: try to match based on lowercase keywords
+            const categoryLower = category.toLowerCase();
+            for (const [theme, config] of Object.entries(THEMES)) {
+                if (config.keywords.some(keyword => categoryLower.includes(keyword))) {
+                    return theme;
+                }
+            }
+            
+            // Default to Close Management if no match
+            return 'Close Management';
+        }
+
+        function extractTools(task) {
+            const tools = [];
+            const text = (task['Week Focus and Tasks'] + ' ' + task['OKR'] + ' ' + task['Notes'] + ' ' + task['Close Category']).toLowerCase();
+            
+            const toolMap = {
+                'netsuite': 'NetSuite',
+                'numeric': 'Numeric',
+                'spacebase': 'Spacebase',
+                'wiselayer': 'WiseLayer',
+                'accruals.ai': 'Accruals.AI',
+                'xactly': 'Xactly',
+                'cursor': 'Cursor',
+                'bolt': 'Bolt.new',
+                'zip': 'Zip',
+                'guideline': 'Guideline',
+                'workday': 'Workday',
+                'asana': 'Asana',
+                'confluence': 'Confluence'
+            };
+            
+            const automationKeywords = ['ai', 'automat', 'bot'];
+            
+            Object.entries(toolMap).forEach(([key, name]) => {
+                if (text.includes(key)) {
+                    const isAutomation = automationKeywords.some(kw => text.includes(kw)) || key.includes('ai');
+                    tools.push({ name, isAutomation });
+                }
+            });
+            
+            return [...new Map(tools.map(t => [t.name, t])).values()];
+        }
+
+        function consolidateInitiative(tasks, key = '') {
+            const completed = tasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+            const inProgress = tasks.filter(t => normalizeStatus(t['Status']) === 'In Progress').length;
+            
+            // Determine overall status
+            let status = 'Planned';
+            let markerClass = 'planned';
+            if (completed === tasks.length) {
+                status = 'Complete';
+                markerClass = 'complete';
+            } else if (inProgress > 0 || completed > 0) {
+                status = `${completed}/${tasks.length} Complete`;
+                markerClass = 'progress';
+            }
+            
+            // Get unique sprint sets
+            const sprints = [...new Set(tasks.map(t => t['Sprint Set']).filter(s => s))];
+            const sprintsText = sprints.length > 0 ? sprints.join(', ') : 'Ongoing';
+            
+            // Get unique owners
+            const owners = [...new Set(tasks.map(t => t['Owner(s)']).filter(o => o).flatMap(o => o.split(/[,&]/)).map(o => o.trim()))];
+            
+            // Calculate total hours
+            const hours = tasks.reduce((sum, t) => {
+                const h = parseFloat(t['Hours Saved'] || 0);
+                return sum + (isNaN(h) ? 0 : h);
+            }, 0);
+            
+            // Get target date (latest)
+            const dates = tasks
+                .map(t => t['Day 1 Close Target End Date'])
+                .filter(d => d && d.trim())
+                .sort();
+            const targetDate = dates[dates.length - 1] || 'TBD';
+            
+            // Extract all tools
+            const allTools = [];
+            tasks.forEach(task => {
+                const tools = extractTools(task);
+                tools.forEach(tool => {
+                    if (!allTools.find(t => t.name === tool.name)) {
+                        allTools.push(tool);
+                    }
+                });
+            });
+            
+            // Get robust dependencies from "Dependencies" column
+            const dependencies = [...new Set(tasks
+                .map(t => t['Dependencies'])
+                .filter(d => d && d.trim() && d.toLowerCase() !== 'n/a' && d.toLowerCase() !== 'none' && d.toLowerCase() !== 'tbd')
+                .filter(d => !d.includes('#NAME') && !d.includes('#REF') && !d.includes('#VALUE') && !d.includes('#DIV') && !d.includes('#N/A'))
+                .map(d => {
+                    let clean = d.trim();
+                    
+                    // Take first meaningful sentence
+                    const sentences = clean.split(/[.;]/);
+                    clean = sentences[0].trim();
+                    
+                    // Make robust by adding context about criticality
+                    const lower = clean.toLowerCase();
+                    
+                    // Ensure it's a complete, robust statement
+                    if (!clean.match(/\b(required|needed|necessary|critical|essential|must|depends on)\b/i)) {
+                        // Add criticality context
+                        if (lower.includes('vendor') || lower.includes('onboard') || lower.includes('partner')) {
+                            clean += ' - critical for successful implementation';
+                        } else if (lower.includes('data') || lower.includes('integration') || lower.includes('system')) {
+                            clean += ' - essential for accurate reporting';
+                        } else if (lower.includes('approval') || lower.includes('sign-off') || lower.includes('review')) {
+                            clean += ' - required before proceeding';
+                        } else if (lower.includes('team') || lower.includes('resource') || lower.includes('capacity')) {
+                            clean += ' - necessary to execute deliverables';
+                        } else {
+                            clean += ' - required for project success';
+                        }
+                    }
+                    
+                    // Ensure proper ending
+                    if (!clean.endsWith('.')) {
+                        clean += '.';
+                    }
+                    
+                    return capitalizeFirstLetter(clean);
+                })
+            )].slice(0, 5);
+            
+            // Get robust deliverables from "Key Result" column with hours saved context
+            const deliverables = [...new Set(tasks
+                .map(t => {
+                    const kr = t['Key Result'];
+                    const hours = parseFloat(t['Hours Saved'] || 0);
+                    return { text: kr, hours: hours };
+                })
+                .filter(d => d.text && d.text.trim())
+                .filter(d => !d.text.includes('#NAME') && !d.text.includes('#REF') && !d.text.includes('#VALUE') && !d.text.includes('#DIV') && !d.text.includes('#N/A'))
+                .map(d => {
+                    let clean = d.text.trim();
+                    
+                    // Remove "KR #:" prefix
+                    clean = clean.replace(/^KR\s*\d+:\s*/i, '').trim();
+                    
+                    // Remove bullet points
+                    clean = clean.replace(/^[-•*]\s*/, '').trim();
+                    
+                    // Make robust by adding value context
+                    const lower = clean.toLowerCase();
+                    let valueAdd = '';
+                    
+                    // Add hours saved if available and meaningful
+                    if (d.hours > 0) {
+                        valueAdd = ` (saves ${d.hours} hours per close)`;
+                    }
+                    // If no hours, add qualitative value based on content
+                    else if (lower.includes('automat') || lower.includes('ai')) {
+                        valueAdd = ' to eliminate manual processes';
+                    } else if (lower.includes('accuracy') || lower.includes('quality') || lower.includes('reliability')) {
+                        valueAdd = ' to improve data quality and reduce errors';
+                    } else if (lower.includes('streamline') || lower.includes('optimi') || lower.includes('enhance')) {
+                        valueAdd = ' to accelerate close timeline';
+                    } else if (lower.includes('scalab') || lower.includes('framework') || lower.includes('standard')) {
+                        valueAdd = ' to support sustainable growth';
+                    } else if (lower.includes('monitor') || lower.includes('track') || lower.includes('visibility')) {
+                        valueAdd = ' to enable proactive issue resolution';
+                    } else {
+                        valueAdd = ' to drive Day 1 close';
+                    }
+                    
+                    clean += valueAdd;
+                    
+                    // Ensure proper ending
+                    if (!clean.endsWith('.')) {
+                        clean += '.';
+                    }
+                    
+                    return capitalizeFirstLetter(clean);
+                })
+            )].slice(0, 5);
+            
+            // Create executive summary from OKR and category
+            let summary = '';
+            if (key) {
+                // Use OKR or Category as the base
+                summary = cleanInitiativeName(key);
+            } else {
+                summary = tasks[0]['Week Focus and Tasks'] || 'Multiple initiatives';
+            }
+            
+            return {
+                total: tasks.length,
+                completed,
+                status,
+                markerClass,
+                sprints: sprintsText,
+                owners: owners.slice(0, 3), // Limit to top 3
+                hours: Math.round(hours),
+                targetDate,
+                tools: allTools.slice(0, 5), // Limit to top 5 tools
+                totalTools: allTools.length,
+                dependencies: dependencies, // Already consolidated to 5 themes
+                deliverables: deliverables, // Already consolidated to 5 themes
+                summary: summary // Let CSS handle text wrapping
+            };
+        }
+
+        function capitalizeFirstLetter(str) {
+            if (!str) return str;
+            return str.charAt(0).toUpperCase() + str.slice(1);
+        }
+        
+        function generateCategoryTimeline(tasks, themeName, config) {
+            // Get unique sprint sets and their date ranges
+            const sprintMap = {};
+            tasks.forEach(task => {
+                const sprint = task['Sprint Set'] || 'Ongoing';
+                const date = task['Date'];
+                const status = normalizeStatus(task['Status']);
+                
+                if (!sprintMap[sprint]) {
+                    sprintMap[sprint] = {
+                        dates: [],
+                        tasks: [],
+                        statuses: []
+                    };
+                }
+                
+                if (date) sprintMap[sprint].dates.push(new Date(date));
+                sprintMap[sprint].tasks.push(task);
+                sprintMap[sprint].statuses.push(status);
+            });
+            
+            // Calculate timeline bars
+            const sprints = Object.entries(sprintMap).map(([name, data]) => {
+                const completedTasks = data.statuses.filter(s => s === 'Complete').length;
+                const inProgressTasks = data.statuses.filter(s => s === 'In Progress').length;
+                const totalTasks = data.tasks.length;
+                
+                let status = 'planned';
+                if (completedTasks === totalTasks) status = 'complete';
+                else if (inProgressTasks > 0 || completedTasks > 0) status = 'in-progress';
+                
+                const startDate = data.dates.length > 0 ? new Date(Math.min(...data.dates)) : new Date();
+                const endDate = data.dates.length > 0 ? new Date(Math.max(...data.dates)) : new Date();
+                
+                return {
+                    name,
+                    startDate,
+                    endDate,
+                    status,
+                    completed: completedTasks,
+                    total: totalTasks,
+                    progress: totalTasks > 0 ? (completedTasks / totalTasks) * 100 : 0
+                };
+            });
+            
+            // Sort by start date
+            sprints.sort((a, b) => a.startDate - b.startDate);
+            
+            if (sprints.length === 0) return '';
+            
+            // Determine overall date range (Nov 2025 to Feb 1, 2027) - focus on future work
+            const projectStart = new Date('2025-11-01');
+            const projectEnd = new Date('2027-02-01');
+            const totalDays = (projectEnd - projectStart) / (1000 * 60 * 60 * 24);
+            
+            // Generate fiscal quarter markers (FYE: April 30)
+            // Q1: May-Jul, Q2: Aug-Oct, Q3: Nov-Jan, Q4: Feb-Apr
+            const fiscalQuarters = [];
+            
+            // Start from Nov 2025 (Q3 FY26) and show quarterly milestones only
+            const quarterMarkers = [
+                { month: 'Nov 2025', quarter: 'Q3 FY26', date: new Date('2025-11-01') },
+                { month: 'Feb 2026', quarter: 'Q4 FY26', date: new Date('2026-02-01') },
+                { month: 'May 2026', quarter: 'Q1 FY27', date: new Date('2026-05-01') },
+                { month: 'Aug 2026', quarter: 'Q2 FY27', date: new Date('2026-08-01') },
+                { month: 'Nov 2026', quarter: 'Q3 FY27', date: new Date('2026-11-01') },
+                { month: 'Feb 2027', quarter: 'Q4 FY27', date: new Date('2027-02-01') }
+            ];
+            
+            quarterMarkers.forEach(marker => {
+                fiscalQuarters.push({
+                    label: `${marker.month} (${marker.quarter})`,
+                    date: marker.date
+                });
+            });
+            
+            const months = fiscalQuarters;
+            
+            // Build timeline HTML
+            let html = `
+                <div class="category-timeline">
+                    <div class="timeline-header">
+                        <div class="timeline-title">📅 ${themeName} Timeline to Day 1 Close</div>
+                        <div class="timeline-date-range">Nov 2025 (Q3 FY26) → Feb 2027 (Q4 FY27)</div>
+                    </div>
+                    <div class="timeline-grid">
+                        <div style="display: flex; align-items: center; margin-bottom: 20px; min-height: 30px; overflow: visible;">
+                            <div style="width: 150px; padding-right: 15px;"></div>
+                            <div style="flex: 1; display: flex; position: relative; height: 35px; border-bottom: 3px solid #dee2e6; margin-right: 200px; overflow: visible;">
+                                ${months.map(month => {
+                                    const offset = ((month.date - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
+                                    return `<div style="position: absolute; left: ${offset.toFixed(1)}%; font-size: 0.95em; color: #1e3c72; font-weight: 700; white-space: nowrap; transform: translateX(-50%); background: white; padding: 2px 8px; border-radius: 4px; z-index: 10;">${month.label}</div>`;
+                                }).join('')}
+                            </div>
+                        </div>
+                        <div class="timeline-bars">
+            `;
+            
+            sprints.forEach(sprint => {
+                // Clamp dates to visible range (Nov 2025 - Feb 2027)
+                const visibleStart = sprint.startDate < projectStart ? projectStart : sprint.startDate;
+                const visibleEnd = sprint.endDate > projectEnd ? projectEnd : sprint.endDate;
+                
+                const startOffset = Math.max(0, ((visibleStart - projectStart) / (1000 * 60 * 60 * 24) / totalDays) * 100);
+                const duration = ((visibleEnd - visibleStart) / (1000 * 60 * 60 * 24) / totalDays) * 100;
+                const width = Math.max(duration, 5); // Minimum 5% width for visibility
+                
+                html += `
+                    <div class="timeline-bar-row">
+                        <div class="timeline-bar-label">${sprint.name}</div>
+                        <div class="timeline-bar-track">
+                            <div class="timeline-bar-fill ${sprint.status}" 
+                                 style="left: ${startOffset.toFixed(1)}%; width: ${width.toFixed(1)}%;"
+                                 title="${sprint.completed}/${sprint.total} tasks complete">
+                                ${sprint.name}: ${sprint.progress.toFixed(0)}%
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                        </div>
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function generateMasterTimeline(themeData) {
+            let html = `
+                <div class="master-timeline">
+                    <div class="master-timeline-title">🎯 Master Timeline - All Close Categories</div>
+                    <div class="master-timeline-grid">
+            `;
+            
+            Object.entries(THEMES).forEach(([themeName, config]) => {
+                const initiatives = themeData[themeName] || {};
+                const allTasks = Object.values(initiatives).flat();
+                
+                if (allTasks.length === 0) return;
+                
+                const completed = allTasks.filter(t => normalizeStatus(t['Status']) === 'Complete').length;
+                const progress = (completed / allTasks.length) * 100;
+                
+                html += `
+                    <div class="master-row">
+                        <div class="master-category-name">
+                            <span>${config.icon}</span>
+                            <span>${themeName}</span>
+                        </div>
+                        <div class="master-timeline-track">
+                            <div class="master-timeline-fill ${config.class}" 
+                                 style="width: ${progress.toFixed(0)}%; background: linear-gradient(90deg, ${getColorForClass(config.class)} 0%, ${getColorForClass(config.class, true)} 100%);">
+                            </div>
+                        </div>
+                        <div class="master-progress-text">${progress.toFixed(0)}%</div>
+                    </div>
+                `;
+            });
+            
+            html += `
+                    </div>
+                </div>
+            `;
+            
+            return html;
+        }
+        
+        function getColorForClass(className, light = false) {
+            const colors = {
+                'automation': light ? '#f093fb' : '#f5576c',
+                'process': light ? '#00f2fe' : '#4facfe',
+                'tools': light ? '#38f9d7' : '#43e97b',
+                'risk': light ? '#fee140' : '#fa709a',
+                'cash': light ? '#330867' : '#30cfd0'
+            };
+            return colors[className] || '#667eea';
+        }
+
+        function cleanInitiativeName(name) {
+            // Remove "C.A. #" prefix
+            let cleaned = name.replace(/^C\.A\.\s*\d+\s*/i, '');
+            
+            // Remove KR prefix
+            cleaned = cleaned.replace(/^KR\s*\d+:\s*/i, '');
+            
+            // Capitalize first letter
+            cleaned = capitalizeFirstLetter(cleaned);
+            
+            return cleaned || name;
+        }
+
+        function normalizeStatus(status) {
+            const s = (status || '').toLowerCase().trim();
+            if (s.includes('complete') || s.includes('done')) return 'Complete';
+            if (s.includes('progress') || s.includes('wip')) return 'In Progress';
+            if (s.includes('risk') || s.includes('missed')) return 'At Risk';
+            return 'Planned';
+        }
+
+        function updateJourneyTimeline(progress) {
+            // For now, we're still at BD6 (no days reduced yet)
+            // Force progress to be capped at 15% until we actually move to BD4
+            const currentPhaseProgress = Math.min(progress, 15);
+            
+            // Update progress bar
+            document.getElementById('journeyProgress').style.width = currentPhaseProgress + '%';
+            
+            // Update phase states
+            const phases = [
+                { id: 'bd5', threshold: 0 },
+                { id: 'bd4', threshold: 20 },
+                { id: 'bd3', threshold: 40 },
+                { id: 'bd2', threshold: 60 },
+                { id: 'bd1', threshold: 80 }
+            ];
+            
+            phases.forEach((phase, index) => {
+                const element = document.getElementById(`phase-${phase.id}`);
+                
+                // Remove all classes first
+                element.classList.remove('complete', 'active');
+                
+                // Determine phase state
+                if (currentPhaseProgress >= phases[index + 1]?.threshold || (index === phases.length - 1 && currentPhaseProgress >= 95)) {
+                    // Completed phases
+                    element.classList.add('complete');
+                } else if (currentPhaseProgress >= phase.threshold) {
+                    // Currently active phase
+                    element.classList.add('active');
+                }
+            });
+        }
+
+        function toggleTheme(themeId) {
+            const timeline = document.getElementById(`timeline-${themeId}`);
+            const header = event.currentTarget;
+            
+            if (timeline && header) {
+                timeline.classList.toggle('collapsed');
+                header.classList.toggle('collapsed');
+            }
+        }
+
+        function toggleInitiative(initiativeId) {
+            const initiativeCards = document.getElementById(initiativeId);
+            const arrow = document.getElementById(`arrow-${initiativeId}`);
+            
+            if (initiativeCards) {
+                initiativeCards.classList.toggle('collapsed');
+            }
+            
+            if (arrow) {
+                arrow.classList.toggle('collapsed');
+            }
+        }
+        
+        function toggleQuarterDetails(quarterId) {
+            const detailsDiv = document.getElementById(`quarter-details-${quarterId}`);
+            if (detailsDiv) {
+                if (detailsDiv.style.display === 'none') {
+                    detailsDiv.style.display = 'block';
+                } else {
+                    detailsDiv.style.display = 'none';
+                }
+            }
+        }
+        
+        function toggleGoalDetails(goalId) {
+            const detailsDiv = document.getElementById(goalId);
+            const arrow = document.getElementById(`arrow-${goalId}`);
+            
+            if (detailsDiv && arrow) {
+                if (detailsDiv.style.display === 'none' || !detailsDiv.style.display) {
+                    detailsDiv.style.display = 'block';
+                    arrow.style.transform = 'rotate(90deg)';
+                    arrow.textContent = '▼';
+                } else {
+                    detailsDiv.style.display = 'none';
+                    arrow.style.transform = 'rotate(0deg)';
+                    arrow.textContent = '▶';
+                }
+            }
+        }
+
+        // Toggle collapsible sections
+        function toggleSection(contentId, titleElement) {
+            const content = document.getElementById(contentId);
+            if (content) {
+                content.classList.toggle('collapsed');
+                titleElement.classList.toggle('collapsed');
+            }
+        }
+
+        function collapseAll() {
+            // Collapse all theme sections
+            const allThemeTimelines = document.querySelectorAll('.theme-timeline');
+            const allThemeHeaders = document.querySelectorAll('.theme-header-bar');
+            
+            allThemeTimelines.forEach(timeline => {
+                timeline.classList.add('collapsed');
+            });
+            
+            allThemeHeaders.forEach(header => {
+                header.classList.add('collapsed');
+            });
+            
+            // Also collapse all initiative cards within
+            const allInitiativeCards = document.querySelectorAll('.initiative-cards');
+            const allArrows = document.querySelectorAll('.collapse-arrow');
+            
+            allInitiativeCards.forEach(card => {
+                card.classList.add('collapsed');
+            });
+            
+            allArrows.forEach(arrow => {
+                arrow.classList.add('collapsed');
+            });
+        }
+
+        function expandAll() {
+            // Expand all theme sections
+            const allThemeTimelines = document.querySelectorAll('.theme-timeline');
+            const allThemeHeaders = document.querySelectorAll('.theme-header-bar');
+            
+            allThemeTimelines.forEach(timeline => {
+                timeline.classList.remove('collapsed');
+            });
+            
+            allThemeHeaders.forEach(header => {
+                header.classList.remove('collapsed');
+            });
+            
+            // Also expand all initiative cards within
+            const allInitiativeCards = document.querySelectorAll('.initiative-cards');
+            const allArrows = document.querySelectorAll('.collapse-arrow');
+            
+            allInitiativeCards.forEach(card => {
+                card.classList.remove('collapsed');
+            });
+            
+            allArrows.forEach(arrow => {
+                arrow.classList.remove('collapsed');
+            });
+        }
+
+        window.addEventListener('load', loadData);
+    </script>
+</body>
+</html>
+< ! - -   C a c h e   b u s t :   2 0 2 6 - 0 1 - 1 2   1 3 : 3 2 : 0 9   - - > 
+ 
+ < ! - -   R e f r e s h   2 0 2 6 - 0 1 - 1 2   1 6 : 2 4 : 0 9   - - > 
+ 
+ 

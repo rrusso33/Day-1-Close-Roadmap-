@@ -2397,10 +2397,14 @@
                                                         }
                                                     });
                                                     
-                                                    // Remove duplicates
-                                                    const uniqueInProgress = [...new Map(inProgressTasks.map(t => [t.text, t])).values()];
-                                                    const uniqueNotStarted = [...new Map(notStartedTasks.map(t => [t.text, t])).values()];
+                                                    // Remove duplicates and prioritize Complete status
+                                                    const completedTexts = new Set(completedTasks.map(t => t.text));
                                                     const uniqueCompleted = [...new Map(completedTasks.map(t => [t.text, t])).values()];
+                                                    // Only show in In Progress if NOT already completed
+                                                    const uniqueInProgress = [...new Map(inProgressTasks.filter(t => !completedTexts.has(t.text)).map(t => [t.text, t])).values()];
+                                                    const inProgressTexts = new Set(uniqueInProgress.map(t => t.text));
+                                                    // Only show in Not Started if NOT completed and NOT in progress
+                                                    const uniqueNotStarted = [...new Map(notStartedTasks.filter(t => !completedTexts.has(t.text) && !inProgressTexts.has(t.text)).map(t => [t.text, t])).values()];
                                                     
                                                     const renderTask = (task, statusClass, icon) => {
                                                         const isLong = task.text.length > 120;

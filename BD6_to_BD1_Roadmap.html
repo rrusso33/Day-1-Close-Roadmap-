@@ -2366,10 +2366,8 @@
                                                     const krStatusColor = krPct === 100 ? '#10b981' : krPct > 0 ? '#667eea' : '#6c757d';
                                                     const krUniqueId = themeId + '-kr-' + krIndex;
                                                     
-                                                    // Group tasks by status
-                                                    const inProgressTasks = [];
-                                                    const notStartedTasks = [];
-                                                    const completedTasks = [];
+                                                    // Group ALL tasks by deliverable text first, then pick best status
+                                                    const tasksByText = {};
                                                     
                                                     tasks.forEach(t => {
                                                         const rawDeliverable = t['End of Week Deliverable / Milestone'] || 'Task';
@@ -2380,31 +2378,43 @@
                                                             .replace(/\[thanksgiving break\]/gi, '')
                                                             .replace(/\[Aileen to do.*?\]/gi, '')
                                                             .replace(/^- /g, '')
+                                                            .replace(/\s+/g, ' ')
                                                             .trim();
                                                         cleanText = cleanText.replace(/^[,\-•\s]+|[,\-•\s]+$/g, '').trim();
                                                         if (cleanText) cleanText = cleanText.charAt(0).toUpperCase() + cleanText.slice(1);
                                                         if (!cleanText) return;
                                                         
                                                         const status = normalizeStatus(t['Status']);
-                                                        const taskObj = { text: cleanText, status: status };
                                                         
-                                                        if (status === 'Complete') {
-                                                            completedTasks.push(taskObj);
-                                                        } else if (status === 'In Progress') {
-                                                            inProgressTasks.push(taskObj);
+                                                        // If we haven't seen this text, or if new status is "better"
+                                                        // Priority: Complete > In Progress > Planned
+                                                        if (!tasksByText[cleanText]) {
+                                                            tasksByText[cleanText] = status;
                                                         } else {
-                                                            notStartedTasks.push(taskObj);
+                                                            const current = tasksByText[cleanText];
+                                                            if (status === 'Complete') {
+                                                                tasksByText[cleanText] = 'Complete';
+                                                            } else if (status === 'In Progress' && current !== 'Complete') {
+                                                                tasksByText[cleanText] = 'In Progress';
+                                                            }
                                                         }
                                                     });
                                                     
-                                                    // Remove duplicates and prioritize Complete status
-                                                    const completedTexts = new Set(completedTasks.map(t => t.text));
-                                                    const uniqueCompleted = [...new Map(completedTasks.map(t => [t.text, t])).values()];
-                                                    // Only show in In Progress if NOT already completed
-                                                    const uniqueInProgress = [...new Map(inProgressTasks.filter(t => !completedTexts.has(t.text)).map(t => [t.text, t])).values()];
-                                                    const inProgressTexts = new Set(uniqueInProgress.map(t => t.text));
-                                                    // Only show in Not Started if NOT completed and NOT in progress
-                                                    const uniqueNotStarted = [...new Map(notStartedTasks.filter(t => !completedTexts.has(t.text) && !inProgressTexts.has(t.text)).map(t => [t.text, t])).values()];
+                                                    // Now group by final status
+                                                    const uniqueCompleted = [];
+                                                    const uniqueInProgress = [];
+                                                    const uniqueNotStarted = [];
+                                                    
+                                                    Object.entries(tasksByText).forEach(([text, status]) => {
+                                                        const taskObj = { text: text, status: status };
+                                                        if (status === 'Complete') {
+                                                            uniqueCompleted.push(taskObj);
+                                                        } else if (status === 'In Progress') {
+                                                            uniqueInProgress.push(taskObj);
+                                                        } else {
+                                                            uniqueNotStarted.push(taskObj);
+                                                        }
+                                                    });
                                                     
                                                     const renderTask = (task, statusClass, icon) => {
                                                         const isLong = task.text.length > 120;

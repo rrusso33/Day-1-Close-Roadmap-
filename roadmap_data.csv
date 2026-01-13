@@ -32,7 +32,7 @@ Corporate Accounting,Set 1,Q2'26,9/22/2025,1,1/31/2026,Sales Commission,Automate
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"Focus: Work on proprietary build of a webpage
 Tasks:
 1. Work on the ""bills processed"" page in Bolt webpage design
-2. Work on the ""pending invoices"" page in Bolt webpage design"," Completed ""bills processed"" and ""pending invoices"" tabs in Bolt webpage for accruals process. Working on this as an option if accruals.ai does not perform as we would like. ",35,Justine O'Sullivan,,AtRisk/Missed,Worked on potentially moving off of Bolt because we dont have licenses and figuring out how to do this in Cursor. This was not completed given I was researching how to build in Cursor and connect to Github.,
+2. Work on the ""pending invoices"" page in Bolt webpage design"," Completed ""bills processed"" and ""pending invoices"" tabs in Bolt webpage for accruals process. Working on this as an option if accruals.ai does not perform as we would like. ",35,Justine O'Sullivan,,At-Risk/Missed,Worked on potentially moving off of Bolt because we dont have licenses and figuring out how to do this in Cursor. This was not completed given I was researching how to build in Cursor and connect to Github.,
 Corporate Accounting,Set 1,Q2'26,9/22/2025,1,10/31/2025,Payroll,Build out assistant for payroll fluxes,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 7: AI Assistant for payroll fluxes,1. Iterate prompts for Payroll Template,1. First iteration of payroll template prompt,5+,Selena Ochoa,Numeric platform being sophisticated enough to understand the level of detail I want in the flux. ,Complete,,
 Corporate Accounting,Set 1,Q2'26,9/29/2025,2,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Regroup with Spacebase team, discuss last week action items, align on next steps
 2. Finalize Custom JE report + test
@@ -91,7 +91,7 @@ Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Close Management,Build o
 Tasks: 
 1. Create a google sheet gameplan outlining the different core areas to focus on and what content each area needs (header page, subsequent pages, videos, pictures, etc)
 2. Complete checklist, recons, and flux analysis sections fully as these are the most used"," Checklist, reconciliations, and flux analysis confluence pages are fully complete. Stocked with tips, tricks, how to videos, written instructions, and more
- Google sheet confluence page game plan is created and filled out",0,Justine O'Sullivan,,AtRisk/Missed,"Did not get to, will revisit in the next 6 week sprint",
+ Google sheet confluence page game plan is created and filled out",0,Justine O'Sullivan,,At-Risk/Missed,"Did not get to, will revisit in the next 6 week sprint",
 Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Close Management,Build out Numeric instance,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 1: Confluence Guide,"[Thanksgiving Break] Charmane to work on
 Focus: Create confluence pages for sub sections of Numeric 
 Tasks: 
@@ -99,7 +99,7 @@ Tasks:
 2. Finalize Monitors, Saved Search, Reporting pages besides videos.","[Thanksgiving Break] Charmane to work on
  Monitors, Saved Search, Reporting pages are completed besides video how tos. 
  Gameplan sheet is updated to reflect progress
-",0,Justine O'Sullivan,,AtRisk/Missed,Moving this to December for Charmane to complete,
+",0,Justine O'Sullivan,,At-Risk/Missed,Moving this to December for Charmane to complete,
 Corporate Accounting,Set 1,Q2'26,10/6/2025,3,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Onboard WiseLayer accruals.ai by October close,"Onboard Wiselayer's accrual.ai tool in advance of October close. Connect to Netsuite and Zip, fill out onboarding forms, and prep the AI bot within the tool to understand our use case. Then, use the tool during October close alongside our current process.","[close week] 
  Perform normal September close activities, noting items for accruals.ai AI bot prep. 
  Demo of tool",0,Justine O'Sullivan,,Complete,"Accruals.ai ROI Aileen to complete this when working through close recap
@@ -163,7 +163,7 @@ Corporate Accounting,Set 1,Q2'26,10/13/2025,4,1/31/2026,Sales Commission,Automat
 3. Validate new hire EE inputs in Xactly","1. Test and validate WD <> NS EE data
 2. Test and validate EE inputs into Xactly",1,Selena Ochoa,"John Barsoum (Ackle Consulting), FNT, need input if edits are needed/if discerpancies are found
 
-Lex Nazario & Sales Comp team for owernership going forward along with notifying Selena when her team has ran the import for new hires on 10/13.",InProgress,"Update as of 10/20:
+Lex Nazario & Sales Comp team for owernership going forward along with notifying Selena when her team has ran the import for new hires on 10/13.",In-Progress,"Update as of 10/20:
 
 On 10/14, Lex noted that the Xactly Sandbox environment is being refreshed, which has delayed testing of the integration. A followup was sent on 10/20 to confirm when testing can resume.
 
@@ -173,7 +173,7 @@ Followups have been sent to both teams. Accounting continues to experience chall
 Corporate Accounting,Set 1,Q2'26,10/20/2025,5,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Work w/ Justine to create allocation template for 3800 IT
 2. Confirm developers have started working on integration (10/22 start date)",1. Allocation schedule created for all 3800 IT coding,2,Selena Ochoa,"Timely delivery and correspondence from developer
 
-Justine having bandwidth to create allocation schedule",InProgress,"Update as of 10/22:
+Justine having bandwidth to create allocation schedule",In-Progress,"Update as of 10/22:
 
 Creation of allocation schedule for finance lease JE's has been pushed till after October close to avoid any issues. Per Justine, this should be quick and can be done before November close. 
 
@@ -195,7 +195,7 @@ Corporate Accounting,Set 1,Q2'26,10/20/2025,5,1/31/2026,Sales Commission,Automat
 
 2. FinTech and Sales Comp have communicated and decided on next steps to fixing the data error Accounting identified and shared from last week",1,Selena Ochoa,"Lex and team are up to speed on what needs to happen to correct Xactly data, have taken ownership
 
-FinTech has bandwidth to resolve WD > NS ee data errors",InProgress,"Update as of 10/22:
+FinTech has bandwidth to resolve WD > NS ee data errors",In-Progress,"Update as of 10/22:
 
 On 10/21, Lex noted testing of the integration is delayed due to the team prioritizing data corrections in SFDC following an internal audit that impacted September commissions. Additionally, progress has also been delayed developer availability — JB is out on work travel and Nilesh has been out due to illness and Diwali.
 
@@ -224,7 +224,7 @@ KR 5 : Close Cash on BD 2",Oct close readiness," BD 3 Cash cutoff
 Crossfunctional partners
 AI quick wins",Complete,,Close Cash Faster est. 09/2025
 Corporate Accounting,Set 1,Q2'26,10/27/2025,6,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,FNT TP tool modifications,All entities use TP tool for Oct close,2,Charles Sikazwe,FNT support,Complete,,https://gustohq.atlassian.net/browse/FNT3368
-Corporate Accounting,Set 1,Q2'26,10/27/2025,6,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Status check in with team, every Thursday",1. Developers have started on the integration and are on track for a 11/14 completion date,2,Selena Ochoa,Timely delivery and correspondence from developer,InProgress,"Update as of 10/30:
+Corporate Accounting,Set 1,Q2'26,10/27/2025,6,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Status check in with team, every Thursday",1. Developers have started on the integration and are on track for a 11/14 completion date,2,Selena Ochoa,Timely delivery and correspondence from developer,In-Progress,"Update as of 10/30:
 
 Developer is 80% done with automation. The team met today and there are some edits that need to occur: 1) Developer needs to edit code for JE to be posted on JE file DATE not when the job is ran. 2) Spacebase needs to edit JE file because Drs and Crs do not match, off by .01. 
 
@@ -251,7 +251,7 @@ Corporate Accounting,Set 1,Q2'26,10/27/2025,6,1/31/2026,Sales Commission,Automat
 2. Retest WD + NS > Xactly integration output","1. Automation edits/corrections done
 2. Accounting has retested the integration",1,Selena Ochoa,"Sales comp team bandwidth to test integration is working
 
-John responsiveness to changes if needed",InProgress,"Update as of 10/30:
+John responsiveness to changes if needed",In-Progress,"Update as of 10/30:
 
 Theresa has tested the job and she encountered some errors — these were communicated to John for editing. John is suppose to resolve issues today and handoff to Theresa for Round 2 of testing. 
 
@@ -281,7 +281,7 @@ Tasks:
  Full gameplan working doc created complete with time savings goals
  Templates refined and tested in Numeric",2,Justine O'Sullivan,,Complete,,
 Corporate Accounting,Set 2,Q3'26,11/3/2025,1,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Status check in with team, every Thursday
-2. Complete JE automation build in Sandbox",1. JE testing performed,2,Selena Ochoa,Timely delivery and correspondence from developer,InProgress,"As of 11/7/25:
+2. Complete JE automation build in Sandbox",1. JE testing performed,2,Selena Ochoa,Timely delivery and correspondence from developer,In-Progress,"As of 11/7/25:
 
 Developer still needs to edit the JE date logic. API key has been shared with Spacebase. Next steps are to fix the JE date issue and developer to advise on what else is needed to make the connection. ",
 Corporate Accounting,Set 2,Q3'26,11/3/2025,1,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,"Continuation from prior week given the setback from Lex's departure, reprioritization from Lex's team, Johns OOO and developers Diwali Holiday. 
@@ -290,7 +290,7 @@ Corporate Accounting,Set 2,Q3'26,11/3/2025,1,1/31/2026,Sales Commission,Automate
 2. Retest WD + NS > Xactly integration output","1. Automation edits/corrections done
 2. Accounting has retested the integration",1,Selena Ochoa,"Sales comp team bandwidth to test integration is working
 
-John responsiveness to changes if needed",InProgress,"As of 11/4/25: 
+John responsiveness to changes if needed",In-Progress,"As of 11/4/25: 
 
 Isik has been out sick this week which has delayed our progress on getting John updated NS Saved Searches for the integration. It is unknown when she will be back. 
 
@@ -309,20 +309,20 @@ Corporate Accounting,Set 2,Q3'26,11/3/2025,1,7/31/2026,Payroll,Automate all dome
 
 FBOS responsiveness on approval of coding changes if any
 
-Accounting bandwidth given qtr end close deadlines",InProgress,,
+Accounting bandwidth given qtr end close deadlines",In-Progress,,
 Corporate Accounting,Set 2,Q3'26,11/3/2025,1,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,"NetSuite Capabilities Exploration
 
 1. Document capabilities
 2. Document FinTech Business Requirements","1. Capability matrix of NetSuite/FAM functions
-2. Send FinTech automation requirements",,Selena Ochoa,Accounting bandwidth given qtr end close deadlines,InProgress,,
+2. Send FinTech automation requirements",,Selena Ochoa,Accounting bandwidth given qtr end close deadlines,In-Progress,,
 Corporate Accounting,Set 2,Q3'26,11/3/2025,1,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. Inquire w. Will Ott re: revaluation of Guideline's PPE,2,Selena Ochoa,,Complete,,
 Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Status check in with team, every Thursday
-2. Complete JE automation build in Sandbox",1. JE testing performed,2,Selena Ochoa,Timely delivery and correspondence from developer,AtRisk/Missed,"Update as of 11/14:
+2. Complete JE automation build in Sandbox",1. JE testing performed,2,Selena Ochoa,Timely delivery and correspondence from developer,At-Risk/Missed,"Update as of 11/14:
 
 Developer is having issues making connection with Spacebase for integration. Additionally, some edits to integration are still necessary. I'm pushing for end of next week as a hard deadline. ",
 Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,1. Automation needs to be working in Sandbox,1. Automation has been retested and it is working correctly in Sandbox,1,Selena Ochoa,"Sales comp team bandwidth to test integration is working
 
-John responsiveness to changes if needed",InProgress,"Update as of 11/14:
+John responsiveness to changes if needed",In-Progress,"Update as of 11/14:
 
 John has been able to make the connection between NS and Xactly. We are waiting for him to resend for testing. ",
 Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,"1. Check in with Environment regarding validation of GE leases in Spacebase.  (due 11/15)
@@ -331,12 +331,12 @@ Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Acquistion,Integrate Gui
 2. Keep minerva.suarez@gustocare.com on track
 3. Update IBR rates for GE leases in Spacebase",n/a,Selena Ochoa,"Environment teams responsiveness
 
-minerva.suarez@gustocare.com bandwidth",InProgress,"Update as of 11/14:
+minerva.suarez@gustocare.com bandwidth",In-Progress,"Update as of 11/14:
 
 Will had a conflict this week, meeting Monday to discuss IBR for GE",
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,Buffer Week: Continuation from last week,Buffer Week: Continuation from last week,n/a,Selena Ochoa,"Environment teams responsiveness
 
-minerva.suarez@gustocare.com bandwidth",InProgress,,
+minerva.suarez@gustocare.com bandwidth",In-Progress,,
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Draft Procedures/Control Documentation
 
 1a. Establish workflow controls/edit user access
@@ -346,7 +346,7 @@ Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Leases,Automate lease jo
 2. Test finance JEs
 3. Establish SB connection","1. User settings and workflow established for appropriate controls
 2. Documentation updated
-3. Establish Spacebase connection",2,Selena Ochoa,"Corp Acct agreement on who should prepare, review and approve leases",InProgress,"Schedule WT with Rachele Russo KC Deatsch
+3. Establish Spacebase connection",2,Selena Ochoa,"Corp Acct agreement on who should prepare, review and approve leases",In-Progress,"Schedule WT with Rachele Russo KC Deatsch
 
 Update as of 11/18:
 Developer continues to be unresponsive/not understand requirements for finance leases journal entries. Continue to encounter errors. Feedback has been provided. 
@@ -363,19 +363,19 @@ FBOS responsiveness on approval of coding changes if any
 
 Benefits team resonsiveness/availability
 
-Accounting bandwidth given qtr end close deadlines",AtRisk/Missed,"Update as of 11/14:
+Accounting bandwidth given qtr end close deadlines",At-Risk/Missed,"Update as of 11/14:
 
 Progress/milestone was missed due to qtr end priorities, OOO. Will pick up next week/adjust sprint accordingly.
 
 Connecting live with Benefits team next week to start documenting process. 
 
 Met w. Ravi to discuss this project as well, we will circle back next week on who will own this 'build' and best approach. He wante to understand requirements and check back in with Rahul on approach. ",
-Corporate Accounting,Set 2,Q3'26,11/10/2025,2,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,Continuation from last week,Continuation from last week,,Selena Ochoa,Accounting bandwidth given qtr end close deadlines,AtRisk/Missed,"Update as of 11/14:
+Corporate Accounting,Set 2,Q3'26,11/10/2025,2,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,Continuation from last week,Continuation from last week,,Selena Ochoa,Accounting bandwidth given qtr end close deadlines,At-Risk/Missed,"Update as of 11/14:
 
 Progress/milestone was missed due to qtr end priorities, OOO. Will pick up next week/adjust sprint accordingly.
 
 Meeting with Noah Sullivans from IT Monday to start documenting process/understand what if any OKRs IT Team has around asset tracking. ",
-Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. Task minerva.suarez@gustocare.com with creating CSV upload of GE assets,2,Selena Ochoa,,InProgress,"Update as of 11/14:
+Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. Task minerva.suarez@gustocare.com with creating CSV upload of GE assets,2,Selena Ochoa,,In-Progress,"Update as of 11/14:
 
 Will had a conflict this week, meeting Monday to discuss an PPE revaluations",
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Check in with Ravi re: availability/discussion with Rahul for team to take this on. ,"1. Decision on whether this is something FinTech can take on. If so, when?",2,Selena Ochoa,Project dependent on FinTechs availability,Complete,,
@@ -383,7 +383,7 @@ Corporate Accounting,Set 2,Q3'26,11/17/2025,3,7/31/2026,Payroll,Automate all dom
 
 1. Evaluate automation options (Cursor, Bolt, Other)
 2. Define data inputs, required outputs, and reconciliation requirements","1. Jade Global requirements meeting to begin POC on automation
-2. Finalize Payroll Master Matrix to confirm correct GL coding",n/a,Selena Ochoa,,InProgress,"Update as of 11/17: 
+2. Finalize Payroll Master Matrix to confirm correct GL coding",n/a,Selena Ochoa,,In-Progress,"Update as of 11/17: 
 
 Benefits process narrative
 
@@ -395,7 +395,7 @@ Corporate Accounting,Set 2,Q3'26,11/17/2025,3,9/30/2026,Fixed Assets,Automate fi
 1. Connect live w. IT to understand process
 2. Document process",1. Documented process narrative of current IT PPE tracking process.,,Selena Ochoa,,Complete,,Fixed Assets Tracking Enhancements
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Prepare Guideline PPE new asset listing for month end,"1. Understand GE asset process
-2. Finalize new asset listing for GE for NS upload",2,Selena Ochoa,,InProgress,"Update as of 11/18:
+2. Finalize new asset listing for GE for NS upload",2,Selena Ochoa,,In-Progress,"Update as of 11/18:
 
 GE asset listing to be prepped by EOW. Holding off on creation of any new GE assets untill we get confirmation from TA + CA opening balances are final and PPE matches that. ",
 Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,"1. Create accounting lease schedules in EXCEL and Spacebase, if possible given commencement date
@@ -405,14 +405,14 @@ Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Acquistion,Integrate Gui
 
 Assuming I am able to edit the commencement date of the lease to be 11/1/25 in SB for amort. start date. 
 
-minerva.suarez@gustocare.com out of office all week",InProgress,,
+minerva.suarez@gustocare.com out of office all week",In-Progress,,
 Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Confirmed this is something Ravi can take on. He will reach out to me first week of Dec to discuss timelines. ,1. Confirmed,2,Selena Ochoa,,Complete,,
 Corporate Accounting,Set 2,Q3'26,11/24/2025,4,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,"Automation Research & Design
 
 1. Send Payroll Matrix to FBOS for any edits needed
-2. Try to reconcile FSA, HSA, 401k accounts (Need Colins expertise here)",,4+,Selena Ochoa,Short week given holidays,AtRisk/Missed,This was missed due to prioritization of adding Guideline leases into Spacebase. Significant of time spent iterating how to add them in correctly. Payroll matrix was also delayed.,
-Corporate Accounting,Set 2,Q3'26,11/24/2025,4,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,1. Updates on this being prioritized,,,Selena Ochoa,,AtRisk/Missed,,
-Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. Create GE assets in FAM,2,Selena Ochoa,Out of office dependencies given holiday,InProgress,,
+2. Try to reconcile FSA, HSA, 401k accounts (Need Colins expertise here)",,4+,Selena Ochoa,Short week given holidays,At-Risk/Missed,This was missed due to prioritization of adding Guideline leases into Spacebase. Significant of time spent iterating how to add them in correctly. Payroll matrix was also delayed.,
+Corporate Accounting,Set 2,Q3'26,11/24/2025,4,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,1. Updates on this being prioritized,,,Selena Ochoa,,At-Risk/Missed,,
+Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. Create GE assets in FAM,2,Selena Ochoa,Out of office dependencies given holiday,In-Progress,,
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,"1. GE accouning leases approved
 2. Ensure new leases are included in Custom JE Reporting
 3. Ensure amortization schedules are correct and JE's are correct",1. GE accounting leases approved,2,Selena Ochoa,,Complete,,
@@ -423,12 +423,12 @@ Corporate Accounting,Set 2,Q3'26,12/1/2025,5,7/31/2026,Payroll,Automate all dome
 
 1. Partner with FinTech or internal automation resources to build prototype.
 2. Test logic for one payroll cycle (e.g., US biweekly run).
-3. Validate output against manual reconciliation",1. Working prototype with accuracy within acceptable threshold,4+,Selena Ochoa,,AtRisk/Missed,This was missed due to close/acceleration of close. ,
-Corporate Accounting,Set 2,Q3'26,12/1/2025,5,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,Continuation from last week,Continuation from last week,,Selena Ochoa,,AtRisk/Missed,,
+3. Validate output against manual reconciliation",1. Working prototype with accuracy within acceptable threshold,4+,Selena Ochoa,,At-Risk/Missed,This was missed due to close/acceleration of close. ,
+Corporate Accounting,Set 2,Q3'26,12/1/2025,5,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,Continuation from last week,Continuation from last week,,Selena Ochoa,,At-Risk/Missed,,
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. GE PPE fully incorporated to Gusto Inc for Nov close,2,Selena Ochoa,,Complete,,
-Corporate Accounting,Set 2,Q3'26,12/8/2025,6,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,Feasibility Validation & Stakeholder Review,,,Selena Ochoa,,AtRisk/Missed,,"Last I heard from Noah Sullins, is this work has been deprioritized."
-Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,"1. Establish start, testing, completion timeline with Ravi",1. Timeline agreed to/established,2,Selena Ochoa,,InProgress,,
-Corporate Accounting,Set 2,Q3'26,12/8/2025,6,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,Continuation from last week,Continuation from last week,4+,Selena Ochoa,,InProgress,,
+Corporate Accounting,Set 2,Q3'26,12/8/2025,6,9/30/2026,Fixed Assets,Automate fixed assets endtoend process,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 8: Automate fixed assets endtoend process,Feasibility Validation & Stakeholder Review,,,Selena Ochoa,,At-Risk/Missed,,"Last I heard from Noah Sullins, is this work has been deprioritized."
+Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,"1. Establish start, testing, completion timeline with Ravi",1. Timeline agreed to/established,2,Selena Ochoa,,In-Progress,,
+Corporate Accounting,Set 2,Q3'26,12/8/2025,6,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,Continuation from last week,Continuation from last week,4+,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. Integrate Guideline PPE to Gusto,1. Wrap up any loose ends,2,Selena Ochoa,,Complete,,
 Corporate Accounting,Set 2,Q3'26,11/10/2025,2,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
  Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
@@ -451,12 +451,12 @@ Tasks:
 3. Research and understand ""publishing"" a bolt.new program and what that would look like in terms of hosting this page long term for multiple people to use.
 4. Ask Financetech about licensing"," Finalize setup for 2 complex vendors in testing
  Understand what it would take to launch the tool on a webpage that multiple people can use at the same time
- Get answer from FinanceTech on licenses for continuing to build",3,Justine O'Sullivan,,AtRisk/Missed,Worked on potentially moving off of Bolt because we dont have licenses and figuring out how to do this in Cursor. This was not completed given I was researching how to build in Cursor and connect to Github.,
+ Get answer from FinanceTech on licenses for continuing to build",3,Justine O'Sullivan,,At-Risk/Missed,Worked on potentially moving off of Bolt because we dont have licenses and figuring out how to do this in Cursor. This was not completed given I was researching how to build in Cursor and connect to Github.,
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
  Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
  Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
   System Intercompany Settlement",FNT touchbase based on FH walkthrough,Project plan for I/C invoicing implementation,3,Charles Sikazwe,"FNT support
-D&V capacity",AtRisk/Missed,Progress: Created ticket with FNT (FNT3486) to kickoff project planning with FNT,"Intercompany Improvements est. 10/2025
+D&V capacity",At-Risk/Missed,Progress: Created ticket with FNT (FNT3486) to kickoff project planning with FNT,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Prepaids,Fully automate prepaid accounting,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 8: Automate the prepaid usage process for a Day 1 close,"[close week]
 Focus: Continue working on prepaid usage in bolt.new
@@ -487,14 +487,14 @@ Tasks:
 2. Create reclass entries as needed and post","[close week]
  Zero alerts by EOW",1,Justine O'Sullivan,,Complete,,
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,"1. Move Sandbox env to Production
-2. Test integration in Production",1. Integration is in Production and working properly,1,Selena Ochoa,John availability to push this through to Production,InProgress,"Update as of 11/18:
+2. Test integration in Production",1. Integration is in Production and working properly,1,Selena Ochoa,John availability to push this through to Production,In-Progress,"Update as of 11/18:
 
 John has transitioned this job to another developer. The developer is having issues matching Company WD naming convension to that in NS. We are exploring solutions. This is the last peice for the integration to work, so we are told. Expect to have further updates later this week. ",
-Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,1. Sales comp team is using integration weekoverweek,1. Integration complete,1,Selena Ochoa,John/Developer availability to push this through to Production,AtRisk/Missed,,
+Corporate Accounting,Set 2,Q3'26,11/24/2025,4,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,1. Sales comp team is using integration weekoverweek,1. Integration complete,1,Selena Ochoa,John/Developer availability to push this through to Production,At-Risk/Missed,,
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,"1. Update Commission confluence pages, if any","1. Project complete, automation is working
-2. Update any documentation needed",1,Selena Ochoa,John to provide the Xactly Operations Guide for work performed,AtRisk/Missed,,
+2. Update any documentation needed",1,Selena Ochoa,John to provide the Xactly Operations Guide for work performed,At-Risk/Missed,,
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Sales Commission,Automate EE data from NS into Xactly,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 6: Automate EE data from NS into Xactly,"1. Update Commission confluence pages, if any","1. Project complete, automation is working
-2. Update any documentation needed",1,Selena Ochoa,John to provide the Xactly Operations Guide for work performed,AtRisk/Missed,"Update as of 12/12/25:
+2. Update any documentation needed",1,Selena Ochoa,John to provide the Xactly Operations Guide for work performed,At-Risk/Missed,"Update as of 12/12/25:
 
 I've sent weekly messages to Theresa and John on whether they have an update for us and they either do not respond or are vague on progress. FinTech and I have provided everything they need to make the integration work. It is unclear what the blocker is. KC Deatsch Rachele Russo  to move this forward I need further support to obtain responses from them.",
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Acquistion,Integrate Guideline accounting operations,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 4: Review close checklist and identify how we will incorporate their activities into our monthly close and/or who is owning the processes,1. GE completely embedded into Gusto Inc workstream,"1. Integration complete
@@ -511,7 +511,7 @@ Tasks:
 1. Complete manual close process and trial 15 key vendors in the accruals.ai space for accuracy and consistency across systems
 2. Complete a log of variances and trouble spots for WiseLayer review","[close week]
  Completed log of variances between platforms
- Completed log of 15 vendor tests",35,Justine O'Sullivan,deliverables from accruals.ai need to be worked on by WiseLayer in order to use the product,AtRisk/Missed,"This was missed due to WiseLayer not pushing out all the updates we needed before close started. Because of this, we did not start testing and instead, relied on our current process to complete October close.",
+ Completed log of 15 vendor tests",35,Justine O'Sullivan,deliverables from accruals.ai need to be worked on by WiseLayer in order to use the product,At-Risk/Missed,"This was missed due to WiseLayer not pushing out all the updates we needed before close started. Because of this, we did not start testing and instead, relied on our current process to complete October close.",
 Corporate Accounting,Set 2,Q3'26,11/10/2025,2,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
 Focus: Trial run WiseLayer accrual functionality alongside our current manual process
 Tasks:
@@ -523,7 +523,7 @@ Tasks:
 Trial Testing",
 Corporate Accounting,Set 1,Q3'26,10/6/2025,3,1/31/2026,Leases,Automate lease journal entries into NS,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Regroup with Spacebase team, discuss last week action items, align on next steps
 2. Align with FNT if this will be a push through process or an auto run on specific dates/times?","1. Custom JE report + entries created correctly
-2. Set up automation cadence/approach",2,Selena Ochoa,,InProgress,"As of 10/10  Custom JE report completed and One Penn and 1515 Arapahoe added in SB.
+2. Set up automation cadence/approach",2,Selena Ochoa,,In-Progress,"As of 10/10  Custom JE report completed and One Penn and 1515 Arapahoe added in SB.
 
 Potential Blocker: FinTech wanted to know if there was an OutOfBox Connector Spacebase offered (this would be a quick and easy lift for the team), upon asking SB, they do not. That being said, FinTech needs to go back to Rahul and see if we can then get a developer allocated to this project since it won't be a simple connection. Selena is waiting to hear from Isik on this. Followed up on 10/10.",
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"Focus: Work on prepping for November close actually using accruals.ai
@@ -536,7 +536,7 @@ Corporate Accounting,Set 2,Q3'26,12/8/2025,6,9/30/2026,Accruals,Scope and testin
 Focus: Test out accruals.ai for November close
 Tasks:
 1. Complete the ROI sheet and determine if we want to move forward with vendor","[close week]
- Completed ROI sheet filled out and completed in it's entirety to determine if we want to move forward with the tool or find a new tool/continue to build in house",35,Justine O'Sullivan,,AtRisk/Missed,"Did not complete bc accruals.ai did not meet deadlines for deliverables, so we do not have all the info needed to make a determination. Will revisit in Jan",
+ Completed ROI sheet filled out and completed in it's entirety to determine if we want to move forward with the tool or find a new tool/continue to build in house",35,Justine O'Sullivan,,At-Risk/Missed,"Did not complete bc accruals.ai did not meet deadlines for deliverables, so we do not have all the info needed to make a determination. Will revisit in Jan",
 Corporate Accounting,Set 2,Q3'26,11/3/2025,1,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",Continued execution of improvements,Close Cash on BD 3,8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
@@ -565,18 +565,18 @@ GL + department logic",Support FNT on execution,2,Charles Sikazwe,FNT support,Co
 Corporate Accounting,Set 2,Q3'26,11/24/2025,4,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",N/A  out of office for the whole week,<<<<,8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
-AI quick wins",InProgress,,Close Cash Faster est. 09/2025
+AI quick wins",In-Progress,,Close Cash Faster est. 09/2025
 Corporate Accounting,Set 2,Q3'26,11/24/2025,4,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
  Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
  Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
   System Intercompany Settlement",N/A  out of office for the whole week,<<<<,3,Charles Sikazwe,"FNT support
-D&V capacity",InProgress,,"Intercompany Improvements est. 10/2025
+D&V capacity",In-Progress,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",Intro to FNT for NS tagging for Cash accounts,"Close Cash on BD 3
 Roadmap for project to introduce COA tagging for Cash accounts",8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
-AI quick wins",InProgress,"No Progress  blocked by demands of faster close, Guideline OBS recording, GDL close support, KPMG walkthrough",Close Cash Faster est. 09/2025
+AI quick wins",In-Progress,"No Progress  blocked by demands of faster close, Guideline OBS recording, GDL close support, KPMG walkthrough",Close Cash Faster est. 09/2025
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,"Netsuite Invoicing
 GL + department logic",Support FNT on execution,2,Charles Sikazwe,FNT support,Complete,"No Progress  blocked by demands of faster close, Guideline OBS recording, GDL close support, KPMG walkthrough",https://gustohq.atlassian.net/browse/FNT3368
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
@@ -589,36 +589,36 @@ https://gustohq.atlassian.net/browse/FNT3393 "
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",Connect with FNT for NS C&CCE tagging,CA <> FNT roadmap for C&CCE tagging,8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
-AI quick wins",InProgress,,Close Cash Faster est. 09/2025
+AI quick wins",In-Progress,,Close Cash Faster est. 09/2025
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,"Netsuite Invoicing
-GL + department logic",Support FNT on execution,2,Charles Sikazwe,FNT support,InProgress,,https://gustohq.atlassian.net/browse/FNT3368
+GL + department logic",Support FNT on execution,2,Charles Sikazwe,FNT support,In-Progress,,https://gustohq.atlassian.net/browse/FNT3368
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
  Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
  Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
   System Intercompany Settlement","I/C Invoicing
 I/C Customers & Vendors",Support FNT execution,3,Charles Sikazwe,"FNT support
-D&V capacity",InProgress,,"Intercompany Improvements est. 10/2025
+D&V capacity",In-Progress,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
 Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Leases, Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Deploy integration to production ,"1. Automation complete
 2. Go live with JE automation for November close",2,Selena Ochoa,"Corp Acct agreement on who should prepare, review and approve leases",Complete,"Guideline leases were added for Nov close, when integration was ran for this, Guideline entries were not picked up as the developer did not add this into the logic. This raised the issue on how the integration was built. While the integration is set up to post to existing Subsidiaries, the development team needs to enhance login to make the connection dynamic, meaning if at any point in time we decide to add new leases for other subsidiaries, the logic should be able to pick this up and post without errors. In light of this, a second phase of this work will need to be done. This is listed in the next set of sprints and is pending a Jan completion date. ",
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Leases, Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,"1. Implement control changes in Spacebase
-2. Inquire w. Maggie what selections should be made in Spacebase to establish these controls",1. Control environment established in Spacebase,2,Selena Ochoa,,InProgress,,
+2. Inquire w. Maggie what selections should be made in Spacebase to establish these controls",1. Control environment established in Spacebase,2,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 2,Q3'26,11/10/2025,2,1/31/2026,Prepaids,Fully automate prepaid accounting,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 8: Automate the prepaid usage process via proprietary programming,"[close week]
 Focus: Continue working on prepaid usage in bolt.new
 Tasks:
 1. Finalize Bugcrowd vendor calculation start to end
-2. Finalize Impact vendor calculation start to end", Finalize setup for 2 complex vendors in testing,3,Justine O'Sullivan,,AtRisk/Missed,Did not have time to do this,
+2. Finalize Impact vendor calculation start to end", Finalize setup for 2 complex vendors in testing,3,Justine O'Sullivan,,At-Risk/Missed,Did not have time to do this,
 Corporate Accounting,Set 2,Q3'26,11/17/2025,3,1/31/2026,Prepaids,Fully automate prepaid accounting,C.A. 6 Integrate Guideline acquisition into our Corporate accounting operations by Q3,KR 5: Absorb GE reconciliations into current leadsheets,"Focus: Meet with Florence to go over Prepaids SL and Usage
 Tasks:
 1. Meet with Florence to review
 2. Create timelined gameplan for SL and Usage vendors
 3. Post JE to start GE SL schedules in NS
 4. Edit leadsheet for GE tabs and vendors"," NS schedules are up to date for November close
- Leadsheets are updated to have GE data in them",35,Justine O'Sullivan,GE schedules being easy to migrate. We may need further months to understand usage vendors and what the processes would be MoM,InProgress,"Some of this will carry over into the next week, however we have met with Guideline team and received deliverables as it relates to merging prepaids and accruals workflow.",
+ Leadsheets are updated to have GE data in them",35,Justine O'Sullivan,GE schedules being easy to migrate. We may need further months to understand usage vendors and what the processes would be MoM,In-Progress,"Some of this will carry over into the next week, however we have met with Guideline team and received deliverables as it relates to merging prepaids and accruals workflow.",
 Corporate Accounting,Set 2,Q3'26,11/17/2025,4,1/31/2026,Close Management,Reduce close by 1 BD by end of Q3'26,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 11: Close books by BD1 in Feb 2027,Prepare timeline and communications for a trial Nov close by BD4.,Sent out communications and timeline for a BD4 Nov Close to accounting team,8,Rachele Russo,,Complete,,
-Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Close Management,Reduce close by 1 BD by end of Q3'26,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 11: Close books by BD1 in Feb 2027,Monitor and track progress of JEs for Nov close and understand blockers for a BD4 close in real time,Have a complete list of JEs that were posted after BD4 to review in a debrief and plan how to prioritize for next close.,8,Rachele Russo,Crossfunctional teams not being able to move up JEs,InProgress,,
+Corporate Accounting,Set 2,Q3'26,12/1/2025,5,1/31/2026,Close Management,Reduce close by 1 BD by end of Q3'26,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 11: Close books by BD1 in Feb 2027,Monitor and track progress of JEs for Nov close and understand blockers for a BD4 close in real time,Have a complete list of JEs that were posted after BD4 to review in a debrief and plan how to prioritize for next close.,8,Rachele Russo,Crossfunctional teams not being able to move up JEs,Complete,,
 Corporate Accounting,Set 2,Q3'26,12/8/2025,6,1/31/2026,Close Management,Reduce close by 1 BD by end of Q3'26,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 11: Close books by BD1 in Feb 2027,Hold Nov postclose debrief to review pain points and areas for opportunities for Dec close,Address areas with the team on items to pull forward for Dec close and/or address absolute blockers.,8,Rachele Russo,"Crossfunctional teams not being able to move up JEs, lack of automation, lack of resources etc",Complete,,
-Corporate Accounting,Set 3,Q3'26,12/15/2025,1,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,Meeting with PEO broader group; discuss COA and determine what Gusto's COA needs to look like based on crossfunctional teams,n/a,Rachele Russo,,InProgress,,
+Corporate Accounting,Set 3,Q3'26,12/15/2025,1,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,Meeting with PEO broader group; discuss COA and determine what Gusto's COA needs to look like based on crossfunctional teams,n/a,Rachele Russo,,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/15/2025,1,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"Focus: Work on proprietary build of a webpage
 Tasks:
 1. Complete testing of November pending invoices
@@ -637,12 +637,12 @@ Corporate Accounting,Set 3,Q3'26,12/15/2025,1,1/31/2026,Leases, Automate lease j
 3. Update Leases Confluence page
 4. Establish timeline w. Developer on Enhancement phase of project","1. Finance lease creation handoff to IT
 2. Environment/TA is aware of control changes
-3. Agree to timeline with developers on Phase II.",2,Selena Ochoa,Control functionality doable in Spacebase. Meeting w. Maggie mid Jan to discuss this. ,InProgress,,
+3. Agree to timeline with developers on Phase II.",2,Selena Ochoa,Control functionality doable in Spacebase. Meeting w. Maggie mid Jan to discuss this. ,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/15/2025,1,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,"1. Review Payroll Matrix
 2. Ask Kevin Hamilton for FSA, HSA, 401k reporting
 3. Payroll WT w. KC + Colin (Automation brain storming)","1. Send Payroll Matrix to FBOS/Colin
 2. Task Ample Pesquesa with reconciling 401k",4+,Selena Ochoa,Appropriate reporting/understanding,Complete,,
-Corporate Accounting,Set 3,Q3'26,12/15/2025,1,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Initial start of build,1. Begin logic build,2,Selena Ochoa,Bandwidth from Ravi + team,InProgress,,
+Corporate Accounting,Set 3,Q3'26,12/15/2025,1,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Initial start of build,1. Begin logic build,2,Selena Ochoa,Bandwidth from Ravi + team,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/15/2025,1,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2","November retro & December go forward
 Numeric Cash tool testing
@@ -658,24 +658,24 @@ Corporate Accounting,Set 3,Q3'26,12/15/2025,1,4/30/2026,Intercompany,Establish s
   System Intercompany Settlement",Address open items on tickets,Support FNT on execution,3,Charles Sikazwe,"FNT support
 D&V capacity",Complete,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
-Corporate Accounting,Set 3,Q3'26,12/22/2025,2,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,N/A  OOO/Holiday,n/a,Rachele Russo,,InProgress,,
+Corporate Accounting,Set 3,Q3'26,12/22/2025,2,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,N/A  OOO/Holiday,n/a,Rachele Russo,,Complete,,
 Corporate Accounting,Set 3,Q3'26,12/22/2025,2,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"Focus: Constant monitoring of coding errors and correcting the root issue (PO or cash coding incorrect)
 Tasks:
 1. Clear all monitors in Numeric CCR mointor for the week
 2. Create reclass entries as needed and post","[Aileen to complete]
  Zero alerts by EOW
  New vendors added to monitor",1,Justine O'Sullivan,,Complete,,
-Corporate Accounting,Set 3,Q3'26,12/22/2025,2,1/31/2026,Leases, Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,Out of Office 12/22  01/02,Out of Office 12/22  01/02,2,Selena Ochoa,,InProgress,,
+Corporate Accounting,Set 3,Q3'26,12/22/2025,2,1/31/2026,Leases, Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,Out of Office 12/22  01/02,Out of Office 12/22  01/02,2,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/22/2025,2,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,"Out of Office 12/22  01/02
 
 1. Ample to dig into 401k clean up","Out of Office 12/22  01/02
 
-1. 401k clean up started",4+,Selena Ochoa,,InProgress,,
+1. 401k clean up started",4+,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/22/2025,2,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,"Out of Office 12/22  01/02
 
 1. Ravi and team to continue working on build","Out of Office 12/22  01/02
 
-1. Build in progress",2,Selena Ochoa,Ravi + team bandwidth,InProgress,,
+1. Build in progress",2,Selena Ochoa,Ravi + team bandwidth,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/22/2025,2,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",N/A  out of office for the whole week,N/A  out of office for the whole week,8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
@@ -687,7 +687,7 @@ Corporate Accounting,Set 3,Q3'26,12/22/2025,2,4/30/2026,Intercompany,Establish s
   System Intercompany Settlement",N/A  out of office for the whole week,N/A  out of office for the whole week,3,Charles Sikazwe,"FNT support
 D&V capacity",,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
-Corporate Accounting,Set 3,Q3'26,12/29/2025,3,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,N/A  OOO/Holiday,n/a,Rachele Russo,,InProgress,,
+Corporate Accounting,Set 3,Q3'26,12/29/2025,3,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,N/A  OOO/Holiday,n/a,Rachele Russo,,Complete,,
 Corporate Accounting,Set 3,Q3'26,12/29/2025,3,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"Focus: Holistic view of open POs vs Forecast vs Expense
 Tasks:
 1. Create an analysis checking on vendor expenses being in the right place
@@ -700,17 +700,17 @@ Tasks:
 2. Create reclass entries as needed and post","[Aileen to complete]
  Zero alerts by EOW
  New vendors added to monitor",1,Justine O'Sullivan,,Complete,,
-Corporate Accounting,Set 3,Q3'26,12/29/2025,3,1/31/2026,Leases, Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,Out of Office 12/22  01/02,Out of Office 12/22  01/02,2,Selena Ochoa,,InProgress,,
+Corporate Accounting,Set 3,Q3'26,12/29/2025,3,1/31/2026,Leases, Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,Out of Office 12/22  01/02,Out of Office 12/22  01/02,2,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/29/2025,3,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,"Out of Office 12/22  01/02
 
 1. Ample to dig into 401k clean up","Out of Office 12/22  01/02
 
-1. 401k clean up initial conclusions",4+,Selena Ochoa,,InProgress,,
+1. 401k clean up initial conclusions",4+,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/29/2025,3,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,"Out of Office 12/22  01/02
 
 1. Ravi and team completed build","Out of Office 12/22  01/02
 
-1. Build complete",2,Selena Ochoa,,InProgress,,
+1. Build complete",2,Selena Ochoa,,In-Progress,,
 Corporate Accounting,Set 3,Q3'26,12/29/2025,3,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",N/A  out of office for the whole week,N/A  out of office for the whole week,8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
@@ -722,88 +722,18 @@ Corporate Accounting,Set 3,Q3'26,12/29/2025,3,4/30/2026,Intercompany,Establish s
   System Intercompany Settlement",N/A  out of office for the whole week,N/A  out of office for the whole week,3,Charles Sikazwe,"FNT support
 D&V capacity",,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,[close week] ,n/a,Rachele Russo,,InProgress,,
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,[close week] ,n/a,Rachele Russo,,Complete,,
 Corporate Accounting,Set 3,Q3'26,1/5/2026,4,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
 Focus: Work on proprietary build of a webpage
 Tasks:
 1. Start build of estimates tab","[close week]
- Begin outlining to Cursor what the estimates tab should look like. During close, dig into configurations set up in our current manual workpapers to compare.",35,Justine O'Sullivan,,AtRisk/Missed,"Cursor continues to quit after inactivity and also maybe my computer clears out after a while. This causes me to have to restart downloads of certain things in order to run the website again, which causes delays. I have outlined what pieces of the estimtes tables I need, but have not brought it into Cursor yet.",
+ Begin outlining to Cursor what the estimates tab should look like. During close, dig into configurations set up in our current manual workpapers to compare.",35,Justine O'Sullivan,,At-Risk/Missed,"Cursor continues to quit after inactivity and also maybe my computer clears out after a while. This causes me to have to restart downloads of certain things in order to run the website again, which causes delays. I have outlined what pieces of the estimtes tables I need, but have not brought it into Cursor yet.",
 Corporate Accounting,Set 3,Q3'26,1/5/2026,4,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"Focus: Constant monitoring of coding errors and correcting the root issue (PO or cash coding incorrect)
 Tasks:
 1. Clear all monitors in Numeric CCR mointor for the week
 2. Create reclass entries as needed and post","[Aileen to complete]
  Zero alerts by EOW
  New vendors added to monitor",1,Justine O'Sullivan,,Complete,,
-Corporate Accounting,Set 4,Q3'26,1/26/2026,1,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. Wrap up 401k clean up for Jan close,1. 401k cleaned up for Jan close,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q4'26,2/2/2026,2,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q4'26,2/9/2026,3,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q4'26,2/16/2026,4,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q4'26,2/23/2026,5,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q4'26,3/2/2026,6,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 5,Q4'26,3/9/2026,1,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 5,Q4'26,3/16/2026,2,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 5,Q4'26,3/23/2026,3,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 5,Q4'26,3/30/2026,4,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 5,Q4'26,4/6/2026,5,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 5,Q4'26,4/13/2026,6,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q3'26,1/26/2026,1,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,Continuation from last week,Continuation from last week,2,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Check in with developer on Phase II progress,1. Conduct E2E testing on Phase II Enhancements,2,Selena Ochoa,Dependency on developer to complete project on time,InProgress,"Update as of 1/8/26:
-
-Local E2E testing done. Next steps: E2E testing in Mulesoft Sandbox before pushing to Mulesoft Production/NetSuite Production. Expecting to test early next week and move to Production by EOW.",
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,"1. Edits on payroll GL coding?
-2. Updates from Ample on reconciling 401k?",TBD ,4+,Selena Ochoa,Month end close may block any real project progress this week,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Testing week,1. Testing done,2,Selena Ochoa,,InProgress,"Update as of 1/8/26:
-
-Dev and unit testing done. Next, we'll generate these entries for all the Dec Payroll runs and share them with Selena for validation and confirmation. If everything looks good, we can proceed with deploying this for the next semimonthly run. Expecting to test Dec payroll runs next week.",
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
-KR 5 : Close Cash on BD 2","December Close
-Numeric Cash tool testing
-Netsuite Cash tagging","Cash Closed by BD2.5
-Touchpoint with Numeric on testing
-Meet with FNT re: Cash tagging",8,Charles Sikazwe,"D&V capacity
-Crossfunctional partners
-AI quick wins",InProgress,Meeting with FNT re: Cash tagging week of 1/12,Close Cash Faster est. 09/2025
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,Gusto Payroll Services Canada ULC,Netsuite set up and live ,2,Charles Sikazwe,FNT support,AtRisk/Missed,"As of 1/9 functional currency is a blocker for Netsuite set up of Gusto Payroll Services Canada ULC entity. TA has advised they need to have full understanding of how the entity's agreements with other entities.
-Legal workstreams are still a WIP as of 1/12",https://gustohq.atlassian.net/browse/FNT3368
-Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
- Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
- Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
-  System Intercompany Settlement",Address open items on tickets,Support FNT on execution,3,Charles Sikazwe,"FNT support
-D&V capacity",AtRisk/Missed,As of 1/9 AppWrap still scoping,"https://gustohq.atlassian.net/servicedesk/customer/portal/11/FNT3486
-https://gustohq.atlassian.net/servicedesk/customer/portal/11/FNT3393 "
-Corporate Accounting,Set 4,Q3'26,2/2/2026,2,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Finalize automation,TBD,2,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 4,Q3'26,2/9/2026,3,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Launch to production,1. Test for Feb close,2,Selena Ochoa,,Not Started,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,TBD,n/a,Rachele Russo,,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
-Focus: Work on proprietary build of a webpage
-Tasks:
-1. Continue build of estimates tab
-2. Meet with AIT team to go over security of tool in production","[close week]
- Finalize outlining to Cursor what the estimates tab should look like. During close, dig into configurations set up in our current manual workpapers to compare.
- Structure of what I would need to do in order to actually use this tool in production",35,Justine O'Sullivan,,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"Focus: Constant monitoring of coding errors and correcting the root issue (PO or cash coding incorrect)
-Tasks:
-1. Clear all monitors in Numeric CCR mointor for the week
-2. Create reclass entries as needed and post","[Aileen to complete]
- Zero alerts by EOW
- New vendors added to monitor",1,Justine O'Sullivan,,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Check in with developer on Phase II progress,1. Conduct E2E testing on Phase II Enhancements,2,Selena Ochoa,,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,TBD ,TBD ,4+,Selena Ochoa,,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Project done and in production,1. Project completed,2,Selena Ochoa,,InProgress,,
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
-KR 5 : Close Cash on BD 2","Numeric Cash tool testing
-Netsuite Cash tagging","Numeric <> bank feeds connection
-Netsuite Cash tagging enablement, support as needed",8,Charles Sikazwe,"D&V capacity
-Crossfunctional partners
-AI quick wins",InProgress,,Close Cash Faster est. 09/2025
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,Gusto Payroll Services Canada ULC,NovDec activity recorded in NS,2,Charles Sikazwe,FNT support,InProgress,,https://gustohq.atlassian.net/browse/FNT3368
-Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
- Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
- Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
-  System Intercompany Settlement",Address open items on tickets,Working templates in Sandbox?,3,Charles Sikazwe,"FNT support
-D&V capacity",InProgress,,"Intercompany Improvements est. 10/2025
-https://gustohq.atlassian.net/browse/FNT3393 "
-Corporate Accounting,Set 3,Q3'26,1/19/2026,6,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,TBD,n/a,Rachele Russo,,Not Started,,
 Corporate Accounting,Set 3,Q3'26,1/19/2026,6,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
 Focus: Work on proprietary build of a webpage
 Tasks:
@@ -819,14 +749,84 @@ Corporate Accounting,Set 3,Q3'26,1/19/2026,6,1/31/2026,Leases, Automate lease jo
 2. Go live for December close",2,Selena Ochoa,,Not Started,,
 Corporate Accounting,Set 3,Q3'26,1/19/2026,6,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,TBD,TBD ,4+,Selena Ochoa,,Not Started,,
 Corporate Accounting,Set 3,Q3'26,1/19/2026,6,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Project testing,TBD,2,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q3'26,1/26/2026,1,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. Wrap up 401k clean up for Jan close,1. 401k cleaned up for Jan close,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q3'26,1/26/2026,1,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,Continuation from last week,Continuation from last week,2,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q4'26,2/2/2026,2,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q3'26,2/2/2026,2,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Finalize automation,TBD,2,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q4'26,2/9/2026,3,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q3'26,2/9/2026,3,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Launch to production,1. Test for Feb close,2,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q4'26,2/16/2026,4,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 4,Q4'26,2/23/2026,5,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Check in with developer on Phase II progress,1. Conduct E2E testing on Phase II Enhancements,2,Selena Ochoa,Dependency on developer to complete project on time,In-Progress,"Update as of 1/8/26:
+
+Local E2E testing done. Next steps: E2E testing in Mulesoft Sandbox before pushing to Mulesoft Production/NetSuite Production. Expecting to test early next week and move to Production by EOW.",
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,"1. Edits on payroll GL coding?
+2. Updates from Ample on reconciling 401k?",TBD ,4+,Selena Ochoa,Month end close may block any real project progress this week,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Testing week,1. Testing done,2,Selena Ochoa,,In-Progress,"Update as of 1/8/26:
+
+Dev and unit testing done. Next, we'll generate these entries for all the Dec Payroll runs and share them with Selena for validation and confirmation. If everything looks good, we can proceed with deploying this for the next semimonthly run. Expecting to test Dec payroll runs next week.",
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
+KR 5 : Close Cash on BD 2","December Close
+Numeric Cash tool testing
+Netsuite Cash tagging","Cash Closed by BD2.5
+Touchpoint with Numeric on testing
+Meet with FNT re: Cash tagging",8,Charles Sikazwe,"D&V capacity
+Crossfunctional partners
+AI quick wins",In-Progress,Meeting with FNT re: Cash tagging week of 1/12,Close Cash Faster est. 09/2025
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,Gusto Payroll Services Canada ULC,Netsuite set up and live ,2,Charles Sikazwe,FNT support,At-Risk/Missed,"As of 1/9 functional currency is a blocker for Netsuite set up of Gusto Payroll Services Canada ULC entity. TA has advised they need to have full understanding of how the entity's agreements with other entities.
+Legal workstreams are still a WIP as of 1/12",https://gustohq.atlassian.net/browse/FNT3368
+Corporate Accounting,Set 3,Q3'26,1/5/2026,4,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
+ Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
+ Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
+  System Intercompany Settlement",Address open items on tickets,Support FNT on execution,3,Charles Sikazwe,"FNT support
+D&V capacity",At-Risk/Missed,As of 1/9 AppWrap still scoping,"https://gustohq.atlassian.net/servicedesk/customer/portal/11/FNT3486
+https://gustohq.atlassian.net/servicedesk/customer/portal/11/FNT3393 "
+Corporate Accounting,Set 4,Q4'26,3/2/2026,6,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. FSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 5,Q4'26,3/9/2026,1,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,Meeting with PEO broader group; discuss COA and determine what Gusto's COA needs to look like based on crossfunctional teams,n/a,Rachele Russo,,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,9/30/2026,Accruals,Scope and testing of accrual automation tool,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 1: Automate the accrual process for a Day 1 close,"[close week]
+Focus: Work on proprietary build of a webpage
+Tasks:
+1. Continue build of estimates tab
+2. Meet with AIT team to go over security of tool in production","[close week]
+ Finalize outlining to Cursor what the estimates tab should look like. During close, dig into configurations set up in our current manual workpapers to compare.
+ Structure of what I would need to do in order to actually use this tool in production",35,Justine O'Sullivan,,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,1/31/2026,Close Management,Build out Numeric instance,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 2: Leverage monitors to track coding changes,"Focus: Constant monitoring of coding errors and correcting the root issue (PO or cash coding incorrect)
+Tasks:
+1. Clear all monitors in Numeric CCR mointor for the week
+2. Create reclass entries as needed and post","[Aileen to complete]
+ Zero alerts by EOW
+ New vendors added to monitor",1,Justine O'Sullivan,,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,1/31/2026,Leases,Automate lease journal entries,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 5: Automate lease journal entries,1. Check in with developer on Phase II progress,1. Conduct E2E testing on Phase II Enhancements,2,Selena Ochoa,,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,Payroll,Payroll Account Clean Up,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations & Payroll Account Clean Up,TBD ,TBD ,4+,Selena Ochoa,,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,1/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,KR 9: Automate Symmetry payroll reclass from Gusto Inc > Symmetry,1. Project done and in production,1. Project completed,2,Selena Ochoa,,In-Progress,,
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
+KR 5 : Close Cash on BD 2","Numeric Cash tool testing
+Netsuite Cash tagging","Numeric <> bank feeds connection
+Netsuite Cash tagging enablement, support as needed",8,Charles Sikazwe,"D&V capacity
+Crossfunctional partners
+AI quick wins",In-Progress,,Close Cash Faster est. 09/2025
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,Gusto Payroll Services Canada ULC,NovDec activity recorded in NS,2,Charles Sikazwe,FNT support,In-Progress,,https://gustohq.atlassian.net/browse/FNT3368
+Corporate Accounting,Set 3,Q3'26,1/12/2026,5,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
+ Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
+ Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
+  System Intercompany Settlement",Address open items on tickets,Working templates in Sandbox?,3,Charles Sikazwe,"FNT support
+D&V capacity",In-Progress,,"Intercompany Improvements est. 10/2025
+https://gustohq.atlassian.net/browse/FNT3393 "
+Corporate Accounting,Set 3,Q3'26,1/19/2026,6,4/30/2026,PEO,Support PEO planning effort for 1 customer live for FY27,C.A. 7 New Entity Formations and GL accounting ,KR 1: Support PEO planning effort for 1 customer live for FY27,Support PEO planning efforts,Meeting with PEO broader group; discuss COA and determine what Gusto's COA needs to look like based on crossfunctional teams,n/a,Rachele Russo,,In-Progress,,
+Corporate Accounting,Set 5,Q4'26,3/16/2026,2,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 5,Q4'26,3/23/2026,3,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 5,Q4'26,3/30/2026,4,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 5,Q4'26,4/6/2026,5,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
+Corporate Accounting,Set 5,Q4'26,4/13/2026,6,7/31/2026,Payroll,Automate all domestic payroll reconciliations,C.A. 1 Increase OpEx Accuracy & Reliability by utilizing automation,KR 6: Automate US payroll reconciliations,1. HSA clean up,TBD,4+,Selena Ochoa,,Not Started,,
 Corporate Accounting,Set 3,Q3'26,1/19/2026,6,9/30/2026,Cash & Cash Equivalents,Scope and plan reducing corporate cash to BD1,C.A. 2 Enhance Close Optimization and Streamline Financial Processes ,"KR 4:  Close Cash on BD 3
 KR 5 : Close Cash on BD 2",TBD,TBD,8,Charles Sikazwe,"D&V capacity
 Crossfunctional partners
-AI quick wins",InProgress,,Close Cash Faster est. 09/2025
-Corporate Accounting,Set 3,Q3'26,1/19/2026,6,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,TBD,TBD,2,Charles Sikazwe,FNT support,InProgress,,https://gustohq.atlassian.net/browse/FNT3368
+AI quick wins",In-Progress,,Close Cash Faster est. 09/2025
+Corporate Accounting,Set 3,Q3'26,1/19/2026,6,4/30/2026,Intercompany,Fully automate Transfer Pricing calculations in NS,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,KR 1:  Record all International intercompany revenue and expenses with TP Automation module,TBD,TBD,2,Charles Sikazwe,FNT support,In-Progress,,https://gustohq.atlassian.net/browse/FNT3368
 Corporate Accounting,Set 3,Q3'26,1/19/2026,6,4/30/2026,Intercompany,Establish system (Netsuite) I/C Billings & Invoicing in Netsuite,C.A. 3 Build a scalable international accounting function to support Gusto's global growth.,"KR 2: 
  Launch I/C Customer/Vendor profiles for all entities that transact with I/C GL accounts
  Establish system (Netsuite) I/C Billings & Invoicing in Netsuite
   System Intercompany Settlement",TBD,TBD,3,Charles Sikazwe,"FNT support
-D&V capacity",InProgress,,"Intercompany Improvements est. 10/2025
+D&V capacity",In-Progress,,"Intercompany Improvements est. 10/2025
 https://gustohq.atlassian.net/browse/FNT3393 "
